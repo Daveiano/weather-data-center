@@ -1,4 +1,5 @@
 import { app, BrowserWindow } from 'electron';
+import path from 'path';
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -8,9 +9,17 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 
 const createWindow = (): void => {
   // Create the browser window.
+  console.log(app.getAppPath());
+
   const mainWindow = new BrowserWindow({
-    height: 600,
-    width: 800,
+    height: 800,
+    width: 1200,
+    webPreferences: {
+      nodeIntegration: false,
+      enableRemoteModule: false,
+      contextIsolation: true,
+      preload: path.join(app.getAppPath(), 'src', 'preload.js')
+    }
   });
 
   // and load the index.html of the app.
