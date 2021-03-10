@@ -1,6 +1,8 @@
-import { app, BrowserWindow } from 'electron';
-import path from 'path';
+import { app, BrowserWindow, ipcMain, dialog, remote } from 'electron';
+import fs from 'fs'
+
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
+declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: any;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -15,10 +17,10 @@ const createWindow = (): void => {
     height: 800,
     width: 1200,
     webPreferences: {
-      nodeIntegration: false,
-      enableRemoteModule: false,
+      //nodeIntegration: true,
+      enableRemoteModule: true,
       contextIsolation: true,
-      preload: path.join(app.getAppPath(), 'src', 'preload.js')
+      preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
     }
   });
 
@@ -53,3 +55,26 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+ipcMain.on('open-file-dialog', (event, arg) => {
+  dialog.showOpenDialog({
+    title: 'Select your data',
+    filters: [
+      { name: 'CSV', extensions: ['csv'] }
+    ],
+    properties: ['openFile']
+  }).then(result => {
+    console.log(result.canceled)
+    console.log(result.filePaths)
+    if (!result.canceled) {
+      fs.readFile(result.filePaths[0], 'utf8' , (err, data) => {
+        if (err) {
+          console.error(err)
+          return
+        }
+        console.log(data)
+      })
+    }
+  }).catch(err => {
+    console.log(err)
+  });
+});

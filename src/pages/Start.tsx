@@ -7,7 +7,7 @@ class Start extends Component<Props> {
   props: Props;
 
   selectFile = (): void => {
-    window.Bridge.test();
+    window.electron.openFileDialog();
   };
 
   render() {
