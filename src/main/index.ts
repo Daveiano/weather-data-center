@@ -56,6 +56,7 @@ app.on('activate', () => {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
 ipcMain.on('open-file-dialog', (event, arg) => {
+  console.log(app.getPath('userData'));
   dialog.showOpenDialog({
     title: 'Select your data',
     filters: [
@@ -63,18 +64,20 @@ ipcMain.on('open-file-dialog', (event, arg) => {
     ],
     properties: ['openFile']
   }).then(result => {
-    console.log(result.canceled)
-    console.log(result.filePaths)
     if (!result.canceled) {
       fs.readFile(result.filePaths[0], 'utf8' , (err, data) => {
         if (err) {
-          console.error(err)
+          console.error(err);
           return
         }
-        console.log(data)
+        setTimeout(function(){
+          console.log(data);
+          event.reply('loaded-raw-csv-data', data);
+          event.reply('app-is-loading', false);
+        }, 3000);
       })
     }
   }).catch(err => {
-    console.log(err)
+    console.log(err);
   });
 });

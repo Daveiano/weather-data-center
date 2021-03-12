@@ -26,11 +26,36 @@
  * ```
  */
 
-import './index.css';
+import '../index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { combineReducers, createStore } from 'redux';
+
 import App from './App';
+import { appReducerDefaultState, appReducer } from './reducer-app';
+import { isLoadingAction } from "./actions-app";
+
+const store = createStore(
+  combineReducers({
+    appState: appReducer
+  }),
+  {
+    appState: appReducerDefaultState
+  }
+);
+
+const ipcMainLoadingListener = (event: any, arg: any): void => {
+  store.dispatch(isLoadingAction(arg));
+};
+
+window.electron.IpcOn('app-is-loading', ipcMainLoadingListener);
 
 console.log('👋 This message is being logged by "renderer.js", included via webpack');
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('app')
+);
