@@ -1,5 +1,7 @@
 import { app, BrowserWindow, ipcMain, dialog, remote } from 'electron';
-import fs from 'fs'
+import fs from 'fs';
+const csv = require('csv-parser');
+const Datastore = require('nedb');
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: any;
@@ -9,10 +11,13 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
   app.quit();
 }
 
+const db = new Datastore({
+  autoload: true,
+  filename: `${app.getPath('userData')}/nedb/data`
+});
+
 const createWindow = (): void => {
   // Create the browser window.
-  console.log(app.getAppPath());
-
   const mainWindow = new BrowserWindow({
     height: 800,
     width: 1200,
@@ -55,6 +60,13 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+ipcMain.on('user-has-data',(event, arg) => {
+  console.log('was geht?');
+  db.count({}, (err: any, count: number) => {
+    event.reply('user-has-data', count);
+  });
+});
+
 ipcMain.on('open-file-dialog', (event, arg) => {
   console.log(app.getPath('userData'));
   dialog.showOpenDialog({
@@ -65,17 +77,27 @@ ipcMain.on('open-file-dialog', (event, arg) => {
     properties: ['openFile']
   }).then(result => {
     if (!result.canceled) {
-      fs.readFile(result.filePaths[0], 'utf8' , (err, data) => {
-        if (err) {
-          console.error(err);
-          return
-        }
-        setTimeout(function(){
-          console.log(data);
-          event.reply('loaded-raw-csv-data', data);
-          event.reply('app-is-loading', false);
-        }, 3000);
-      })
+      const parsedData: [any?] = [],
+        columnsToRead: string[] = ['Zeit', 'Temperatur', 'Luftfeuchtigkeit', 'Luftdruck'];
+
+      fs.createReadStream(result.filePaths[0])
+        // TODO: Create timestamp.
+        .pipe(csv({
+          separator: ',',
+          mapHeaders: ({ header}) => columnsToRead.includes(header) ? header : null
+        }))
+        .on('data', (data: any) =>  parsedData.push(data))
+        .on('end', () => {
+          console.log(parsedData);
+          db.insert(parsedData, () => {
+            event.reply('user-has-data', parsedData.length);
+            event.reply('loaded-raw-csv-data', parsedData);
+            event.reply('app-is-loading', false);
+          });
+        });
+
+    } else {
+      event.reply('app-is-loading', false);
     }
   }).catch(err => {
     console.log(err);
