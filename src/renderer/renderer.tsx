@@ -26,7 +26,7 @@
  * ```
  */
 
-import '../index.css';
+import '../index.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -50,7 +50,7 @@ const ipcMainLoadingListener = (event: any, arg: any): void => {
 };
 
 const userHasDataListener = (event: any, arg: any): void => {
-  store.dispatch(hasDataAction(Boolean(arg)));
+  store.dispatch(hasDataAction(arg));
 };
 
 window.electron.IpcOn('app-is-loading', ipcMainLoadingListener);

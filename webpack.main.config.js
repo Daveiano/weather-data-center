@@ -10,6 +10,6 @@ module.exports = {
   },
   // target: 'electron-renderer',
   resolve: {
-    extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.json']
+    extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', 'scss', 'sass', '.json']
   },
 };

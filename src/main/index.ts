@@ -1,5 +1,7 @@
 import { app, BrowserWindow, ipcMain, dialog, remote } from 'electron';
 import fs from 'fs';
+const async = require("async");
+const moment = require('moment');
 const csv = require('csv-parser');
 const Datastore = require('nedb');
 
@@ -15,6 +17,8 @@ const db = new Datastore({
   autoload: true,
   filename: `${app.getPath('userData')}/nedb/data`
 });
+
+//db.ensureIndex({ fieldName: 'Zeit' });
 
 const createWindow = (): void => {
   // Create the browser window.
@@ -61,7 +65,6 @@ app.on('activate', () => {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
 ipcMain.on('user-has-data',(event, arg) => {
-  console.log('was geht?');
   db.count({}, (err: any, count: number) => {
     event.reply('user-has-data', count);
   });
@@ -81,18 +84,43 @@ ipcMain.on('open-file-dialog', (event, arg) => {
         columnsToRead: string[] = ['Zeit', 'Temperatur', 'Luftfeuchtigkeit', 'Luftdruck'];
 
       fs.createReadStream(result.filePaths[0])
-        // TODO: Create timestamp.
         .pipe(csv({
           separator: ',',
-          mapHeaders: ({ header}) => columnsToRead.includes(header) ? header : null
+          mapHeaders: ({ header}) => columnsToRead.includes(header) ? header : null,
+          mapValues: ({ header, index, value }) => {
+            if (header === 'Zeit') {
+              return moment(value, 'YYYY/M/D k:m').unix();
+            }
+
+            return value;
+          }
         }))
         .on('data', (data: any) =>  parsedData.push(data))
         .on('end', () => {
-          console.log(parsedData);
-          db.insert(parsedData, () => {
-            event.reply('user-has-data', parsedData.length);
-            event.reply('loaded-raw-csv-data', parsedData);
-            event.reply('app-is-loading', false);
+          // Check for duplicates.
+          let duplicates = 0,
+            deDuplicatedData: any[] = [];
+
+          async.each(parsedData, (record: any, callback) => {
+            db.count({ "Zeit": record.Zeit },  (err: any, count: number)  => {
+              console.log('count', count);
+              if (count) {
+                duplicates += 1;
+              } else {
+                deDuplicatedData = [record, ...deDuplicatedData];
+              }
+              callback();
+            });
+          }, (error: any) => {
+            db.insert(deDuplicatedData, () => {
+              db.count({}, (err: any, count: number) => {
+                event.reply('user-has-data', count);
+                event.reply('loaded-raw-csv-data', deDuplicatedData);
+                event.reply('app-is-loading', false);
+                // TODO: Display in renderer.
+                event.reply('number-of-duplicates', duplicates);
+              });
+            });
           });
         });
 

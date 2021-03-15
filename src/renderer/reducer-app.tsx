@@ -1,6 +1,7 @@
 const appReducerDefaultState = {
     loading: false,
-    hasData: false
+    hasData: false,
+    numberOfDocuments: 0
   },
   appReducer = (state = appReducerDefaultState, action: any) => {
     switch (action.type) {
@@ -8,7 +9,10 @@ const appReducerDefaultState = {
         return Object.assign({}, state, { loading: action.loading });
       }
       case 'HAS_DATA': {
-        return Object.assign({}, state, { hasData: action.hasData });
+        return Object.assign({}, state, {
+          hasData: Boolean(action.hasData),
+          numberOfDocuments: action.hasData
+        });
       }
 
       default:
