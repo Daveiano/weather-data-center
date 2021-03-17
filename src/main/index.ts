@@ -1,5 +1,6 @@
 import { app, BrowserWindow, ipcMain, dialog, remote } from 'electron';
 import fs from 'fs';
+import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 const async = require("async");
 const moment = require('moment');
 const csv = require('csv-parser');
@@ -43,7 +44,15 @@ const createWindow = (): void => {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow);
+app.on('ready', () => {
+  installExtension(REACT_DEVELOPER_TOOLS)
+    .then((name: string) => {
+      console.log(`Added Extension:  ${name}`);
+      createWindow();
+    })
+    .catch((err: any) => console.log('An error occurred: ', err));
+
+});
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
@@ -70,6 +79,16 @@ ipcMain.on('user-has-data',(event, arg) => {
   });
 });
 
+ipcMain.on('query-temperature',(event, arg) => {
+  db.find({ Temperatur: { $exists: true } }, { Temperatur: 1, Zeit: 1 }).sort({ Zeit: 1 }).exec((err, docs) => {
+    event.reply(
+      'query-temperature',
+      docs
+        .map(doc => ({ ...doc, group: 'Outdoor Temperature', timeParsed: moment.unix(doc.Zeit).toISOString() }))
+    );
+  });
+});
+
 ipcMain.on('open-file-dialog', (event, arg) => {
   console.log(app.getPath('userData'));
   dialog.showOpenDialog({
@@ -81,7 +100,8 @@ ipcMain.on('open-file-dialog', (event, arg) => {
   }).then(result => {
     if (!result.canceled) {
       const parsedData: [any?] = [],
-        columnsToRead: string[] = ['Zeit', 'Temperatur', 'Luftfeuchtigkeit', 'Luftdruck'];
+        columnsToRead: string[] = ['Zeit', 'Temperatur', 'Luftfeuchtigkeit', 'Luftdruck'],
+        columnsToParseInt: string[] = ['Temperatur', 'Luftfeuchtigkeit', 'Luftdruck'];
 
       fs.createReadStream(result.filePaths[0])
         .pipe(csv({
@@ -90,6 +110,10 @@ ipcMain.on('open-file-dialog', (event, arg) => {
           mapValues: ({ header, index, value }) => {
             if (header === 'Zeit') {
               return moment(value, 'YYYY/M/D k:m').unix();
+            }
+
+            if (columnsToParseInt.includes(header)) {
+              return parseFloat(value);
             }
 
             return value;

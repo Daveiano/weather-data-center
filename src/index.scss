@@ -1,3 +1,6 @@
+@import 'carbon-components/scss/globals/scss/styles.scss';
+@import "@carbon/charts/styles/styles.scss";
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   margin: 0;
@@ -6,20 +9,17 @@ body {
   height: 100%;
 }
 
-#loading {
-  background: rgba(255,255,255,0.75);
-  z-index: 100;
-  > span {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  &.full {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+/* Start tiles */
+.start-view {
+  .start-tiles {
+    .bx--tile {
+      h2 {
+        margin-bottom: 1rem;
+        padding-left: 2rem;
+      }
+      .bx--chart-holder {
+        background-color: transparent;
+      }
+    }
   }
 }

@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import RingLoader from "react-spinners/RingLoader";
 
-import Import from './components/Import';
+import { Loading, Grid, Row, Column } from 'carbon-components-react';
+
+import AppHeader from './components/app-header';
 import Start from './pages/Start';
 
 const mapStateToProps = (state: any) =>  state;
@@ -13,30 +14,28 @@ class App extends React.Component<{ appState?: any }> {
     return (
       <main>
         {this.props.appState.loading &&
-        <div id="loading" className="full">
-          <RingLoader size={150} color={"#123abc"} loading={this.props.appState.loading} />
-        </div>
+        <Loading
+          description="Active loading indicator"
+          withOverlay={true}
+        />
         }
 
-        <div>
-          {this.props.appState.hasData &&
-          <div>
-            {this.props.appState.numberOfDocuments} records in DB
-          </div>
-          }
+        <AppHeader />
 
-          <div>
-            <Import />
-          </div>
-        </div>
-
-        <section>
-          <BrowserRouter>
-            <Switch>
-              <Route exact path="/main_window" component={Start} />
-            </Switch>
-          </BrowserRouter>
+        <section className="main bx--content">
+          <Grid>
+            <Row>
+              <Column>
+                  <BrowserRouter>
+                    <Switch>
+                      <Route exact path="/main_window" component={Start} />
+                    </Switch>
+                  </BrowserRouter>
+              </Column>
+            </Row>
+          </Grid>
         </section>
+
       </main>
     );
   }

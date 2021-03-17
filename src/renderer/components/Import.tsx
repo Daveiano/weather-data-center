@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { Button } from 'carbon-components-react';
+
 import { isLoadingAction } from '../actions-app';
 
 type Props = {
@@ -32,12 +34,9 @@ class Import extends Component<Props> {
   render() {
     return (
       <div>
-        <button
-          type="button"
-          onClick={() => this.selectFile()}
-        >
+        <Button kind='primary' onClick={() => this.selectFile()}>
           Import Data from CSV
-        </button>
+        </Button>
       </div>
     );
   }
