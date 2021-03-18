@@ -15,7 +15,8 @@ import {
   SideNavItems, SideNavLink,
   SideNavMenu,
   SideNavMenuItem,
-  SkipToContent
+  SkipToContent,
+  Column
 } from "carbon-components-react";
 import {
   AppSwitcher20,
@@ -23,7 +24,7 @@ import {
   Notification20,
   Search20,
   DocumentAdd20,
-  ChartTreemap20
+  ChartTreemap20, Fade20
 } from "@carbon/icons-react";
 
 import Import from "./Import";
@@ -78,29 +79,23 @@ class AppHeader extends React.Component<{ appState?: any }> {
                   <SideNavLink aria-current="page" renderIcon={ChartTreemap20} href="/main_window">
                     Overview
                   </SideNavLink>
-                  <SideNavMenu renderIcon={Fade16} title="Category title">
-                    <SideNavMenuItem href="#">
-                      Link
-                    </SideNavMenuItem>
-                    <SideNavMenuItem href="#">
-                      Link
-                    </SideNavMenuItem>
-                    <SideNavMenuItem href="#">
-                      Link
-                    </SideNavMenuItem>
-                  </SideNavMenu>
+                  <SideNavLink renderIcon={Fade20} href="/main_window">
+                    TODO
+                  </SideNavLink>
                 </SideNavItems>
               </SideNav>
               <HeaderPanel aria-label="Header Panel" expanded={this.state.headerPanelExpanded}>
-                <Import />
+                <Column>
+                  <Import />
 
-                <div>
-                  {this.props.appState.hasData &&
                   <div>
-                    {this.props.appState.numberOfDocuments} records in DB
+                    {this.props.appState.hasData &&
+                    <div>
+                      {this.props.appState.numberOfDocuments} records in DB
+                    </div>
+                    }
                   </div>
-                  }
-                </div>
+                </Column>
               </HeaderPanel>
             </Header>
           </>

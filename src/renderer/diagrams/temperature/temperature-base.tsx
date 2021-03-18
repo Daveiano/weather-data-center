@@ -5,13 +5,12 @@ import ReactDOMServer from 'react-dom/server';
 import { enGB } from 'date-fns/locale'
 import moment from 'moment';
 
-import {Tile} from "carbon-components-react";
 import {LineChart} from "@carbon/charts-react";
 import {Alignments, ScaleTypes} from "@carbon/charts/interfaces";
 
 const mapStateToProps = (state: any) =>  state;
 
-class TemperatureOverview extends React.Component<{ appState?: any }> {
+class TemperatureBase extends React.Component<{ appState?: any, title: string, height: string }> {
   state = {
     data: [] as any[]
   }
@@ -21,14 +20,15 @@ class TemperatureOverview extends React.Component<{ appState?: any }> {
   };
 
   componentDidMount() {
+    // TODO: Store data in redux and just query if necessary.
     window.electron.IpcSend('query-temperature', []);
     window.electron.IpcOn('query-temperature', this.getData);
   }
 
   render() {
     return (
-      <Tile>
-        <h2>Temperature</h2>
+      <>
+        <h2>{this.props.title}</h2>
         {this.state.data &&
         <LineChart
           data={this.state.data}
@@ -43,7 +43,7 @@ class TemperatureOverview extends React.Component<{ appState?: any }> {
               showTotal: false,
               groupLabel: '',
               valueFormatter: (arg: string) => {
-                 return arg;
+                return arg;
               },
               customHTML: (data: [{ Temperatur: number, Zeit: number, timeParsed: string }], html: string) => {
                 const tooltip =
@@ -56,7 +56,7 @@ class TemperatureOverview extends React.Component<{ appState?: any }> {
                     </li>
                     <li>
                       <div className="datapoint-tooltip ">
-                        <p className="label">T in °C</p>
+                        <p className="label">°C</p>
                         <p className="value">{data[0].Temperatur}</p>
                       </div>
                     </li>
@@ -105,13 +105,13 @@ class TemperatureOverview extends React.Component<{ appState?: any }> {
               }
             },
             curve: "curveMonotoneX",
-            height: "300px"
+            height: this.props.height
           }}
         />
         }
-      </Tile>
+      </>
     );
   }
 }
 
-export default connect(mapStateToProps)(TemperatureOverview);
+export default connect(mapStateToProps)(TemperatureBase);

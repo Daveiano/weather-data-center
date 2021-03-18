@@ -23,7 +23,7 @@ class App extends React.Component<{ appState?: any }> {
         <AppHeader />
 
         <section className="main bx--content">
-          <Grid>
+          <Grid fullWidth>
             <Row>
               <Column>
                   <BrowserRouter>
