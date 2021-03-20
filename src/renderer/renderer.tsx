@@ -34,7 +34,7 @@ import { combineReducers, createStore } from 'redux';
 
 import App from './App';
 import { appReducerDefaultState, appReducer } from './reducer-app';
-import { isLoadingAction, hasDataAction } from "./actions-app";
+import { isLoadingAction } from "./actions-app";
 
 const store = createStore(
   combineReducers({
@@ -49,14 +49,7 @@ const ipcMainLoadingListener = (event: any, arg: any): void => {
   store.dispatch(isLoadingAction(arg));
 };
 
-const userHasDataListener = (event: any, arg: any): void => {
-  store.dispatch(hasDataAction(arg));
-};
-
 window.electron.IpcOn('app-is-loading', ipcMainLoadingListener);
-window.electron.IpcOn('user-has-data', userHasDataListener);
-
-window.electron.IpcSend('user-has-data', []);
 
 console.log('👋 This message is being logged by "renderer.js", included via webpack');
 

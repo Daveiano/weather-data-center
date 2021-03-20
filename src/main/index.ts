@@ -34,8 +34,26 @@ const createWindow = (): void => {
     }
   });
 
-  // and load the index.html of the app.
-  mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+  async.parallel({
+      count: callback => {
+        db.count({}, (err: any, count: number) => {
+          callback(null, count);
+        });
+      },
+      start: callback => {
+        db.find({}).sort({ Zeit: 1 }).limit(1).exec((err: any, docs: any) => {
+          callback(null, moment.unix(docs[0].Zeit).format('DD-MM-YYYY'));
+        });
+      },
+      end: callback => {
+        db.find({}).sort({ Zeit: -1 }).limit(1).exec((err: any, docs: any) => {
+          callback(null, moment.unix(docs[0].Zeit).format('DD-MM-YYYY'));
+        });
+      }},
+    (error, results) => {
+      // Load the index.html of the app.
+      mainWindow.loadURL(`${MAIN_WINDOW_WEBPACK_ENTRY}?has_data=${results.count}&start=${results.start}&end=${results.end}`);
+    });
 };
 
 // This method will be called when Electron has finished
@@ -48,7 +66,6 @@ app.on('ready', () => {
       createWindow();
     })
     .catch((err: any) => console.log('An error occurred: ', err));
-
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common
@@ -70,18 +87,12 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
-ipcMain.on('user-has-data',(event, arg) => {
-  db.count({}, (err: any, count: number) => {
-    event.reply('user-has-data', count);
-  });
-});
-
 ipcMain.on('query-temperature',(event, arg) => {
   db.find({ Temperatur: { $exists: true } }, { Temperatur: 1, Zeit: 1 }).sort({ Zeit: 1 }).exec((err, docs) => {
     event.reply(
       'query-temperature',
       docs
-        .map(doc => ({ ...doc, group: 'Outdoor Temperature', timeParsed: moment.unix(doc.Zeit).toISOString() }))
+        .map(doc => ({ ...doc, group: 'Temperature', timeParsed: moment.unix(doc.Zeit).toISOString() }))
     );
   });
 });
@@ -138,7 +149,7 @@ ipcMain.on('open-file-dialog', (event, arg) => {
                 event.reply('user-has-data', count);
                 event.reply('loaded-raw-csv-data', deDuplicatedData);
                 event.reply('app-is-loading', false);
-                // TODO: Display in renderer.
+                // TODO: Display in modal in renderer.
                 event.reply('number-of-duplicates', duplicates);
               });
             });

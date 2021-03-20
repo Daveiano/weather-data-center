@@ -16,7 +16,9 @@ import {
   SideNavMenu,
   SideNavMenuItem,
   SkipToContent,
-  Column
+  Column,
+  DatePicker,
+  DatePickerInput
 } from "carbon-components-react";
 import {
   AppSwitcher20,
@@ -62,6 +64,31 @@ class AppHeader extends React.Component<{ appState?: any }> {
                   <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
                 </HeaderMenu>
               </HeaderNavigation>*/}
+              <DatePicker
+                dateFormat="d/m/Y"
+                datePickerType="range"
+                // TODO: onChange dispatch date.
+                onChange={(values) => {console.log(values);}}
+                minDate={this.props.appState.userDataDate.start}
+                maxDate={this.props.appState.userDataDate.end}
+              >
+                <DatePickerInput
+                  id="date-picker-range-start"
+                  placeholder="dd/mm/yyyy"
+                  labelText="Start date"
+                  type="text"
+                  size={"sm"}
+                  defaultValue={this.props.appState.userDataDate.start}
+                />
+                <DatePickerInput
+                  id="date-picker-range-end"
+                  placeholder="dd/mm/yyyy"
+                  labelText="End date"
+                  type="text"
+                  size={"sm"}
+                  defaultValue={this.props.appState.userDataDate.end}
+                />
+              </DatePicker>
               <HeaderGlobalBar>
                 <HeaderGlobalAction
                   aria-label="Upload Data"
@@ -76,10 +103,10 @@ class AppHeader extends React.Component<{ appState?: any }> {
                 isRail
                 expanded={isSideNavExpanded}>
                 <SideNavItems>
-                  <SideNavLink aria-current="page" renderIcon={ChartTreemap20} href="/main_window">
+                  <SideNavLink aria-current="page" renderIcon={ChartTreemap20} href="#overview">
                     Overview
                   </SideNavLink>
-                  <SideNavLink renderIcon={Fade20} href="/main_window">
+                  <SideNavLink renderIcon={Fade20} href="#overview">
                     TODO
                   </SideNavLink>
                 </SideNavItems>

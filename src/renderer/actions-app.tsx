@@ -2,9 +2,9 @@ const isLoadingAction = (loading: boolean) => ({
     loading,
     type: 'IS_LOADING'
   }),
-  hasDataAction = (hasData: boolean) => ({
-    hasData,
-    type: 'HAS_DATA'
+  dataTemperatureAction = (dataTemperature: any[]) => ({
+    dataTemperature,
+    type: 'TEMPERATURE'
   });
 
-export { isLoadingAction, hasDataAction };
+export { isLoadingAction, dataTemperatureAction };

@@ -17,7 +17,13 @@ class Start extends Component<Props> {
   render() {
     if (this.props.state.appState.hasData) {
       return (
-        <div className="start-view">
+        <div className="start-overview">
+          <Row>
+            <Column>
+              <h2 id="overview">Overview</h2>
+            </Column>
+          </Row>
+
           <Row className="start-tiles">
             <Column sm={4} md={4} lg={6} xlg={4}>
               <Tile>

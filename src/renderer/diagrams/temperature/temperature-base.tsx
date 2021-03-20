@@ -8,27 +8,39 @@ import moment from 'moment';
 import {LineChart} from "@carbon/charts-react";
 import {Alignments, ScaleTypes} from "@carbon/charts/interfaces";
 
+import { dataTemperatureAction } from "../../actions-app";
+
 const mapStateToProps = (state: any) =>  state;
 
-class TemperatureBase extends React.Component<{ appState?: any, title: string, height: string }> {
+class TemperatureBase extends React.Component<{ appState?: any, dispatch?: (arg0: any) => void, title: string, height: string }> {
   state = {
     data: [] as any[]
   }
 
-  getData = (event: any, arg: any): void => {
+  getData = (event: any, arg: any[]): void => {
+    this.props.dispatch(dataTemperatureAction(arg));
+    // TODO: Filter per time props.
     this.setState({ data: arg });
   };
 
   componentDidMount() {
-    // TODO: Store data in redux and just query if necessary.
-    window.electron.IpcSend('query-temperature', []);
-    window.electron.IpcOn('query-temperature', this.getData);
+    if (this.props.appState.dataTemperature.length) {
+      // TODO: Filter per time props.
+      this.setState({ data: this.props.appState.dataTemperature });
+    } else {
+      window.electron.IpcSend('query-temperature', []);
+      window.electron.IpcOn('query-temperature', this.getData);
+    }
+  }
+
+  // TODO: Filter items if time changed.
+  componentDidUpdate(prevProps: Readonly<{ appState?: any; dispatch?: (arg0: any) => void; title: string; height: string }>, prevState: Readonly<{}>, snapshot?: any) {
   }
 
   render() {
     return (
       <>
-        <h2>{this.props.title}</h2>
+        <h3>{this.props.title}</h3>
         {this.state.data &&
         <LineChart
           data={this.state.data}
@@ -42,9 +54,6 @@ class TemperatureBase extends React.Component<{ appState?: any, title: string, h
             tooltip: {
               showTotal: false,
               groupLabel: '',
-              valueFormatter: (arg: string) => {
-                return arg;
-              },
               customHTML: (data: [{ Temperatur: number, Zeit: number, timeParsed: string }], html: string) => {
                 const tooltip =
                   <ul className='multi-tooltip'>
@@ -99,7 +108,7 @@ class TemperatureBase extends React.Component<{ appState?: any, title: string, h
               enabled: true
             },
             color: {
-              scale: {'Outdoor Temperature': '#8B0000'},
+              scale: {'Temperature': '#8B0000'},
               gradient: {
                 enabled: true
               }
