@@ -17,6 +17,10 @@ class TemperatureBase extends React.Component<{ appState?: any, dispatch?: (arg0
     data: [] as any[]
   }
 
+  filterDataPerTime = (data: any[]): any[] => {
+    return [];
+  };
+
   getData = (event: any, arg: any[]): void => {
     this.props.dispatch(dataTemperatureAction(arg));
     // TODO: Filter per time props.
@@ -41,7 +45,7 @@ class TemperatureBase extends React.Component<{ appState?: any, dispatch?: (arg0
     return (
       <>
         <h3>{this.props.title}</h3>
-        {this.state.data &&
+        {this.state.data.length &&
         <LineChart
           data={this.state.data}
           options={{
@@ -50,29 +54,6 @@ class TemperatureBase extends React.Component<{ appState?: any, dispatch?: (arg0
               showDayName: false,
               addSpaceOnEdges: 0,
               localeObject: enGB
-            },
-            tooltip: {
-              showTotal: false,
-              groupLabel: '',
-              customHTML: (data: [{ Temperatur: number, Zeit: number, timeParsed: string }], html: string) => {
-                const tooltip =
-                  <ul className='multi-tooltip'>
-                    <li>
-                      <div className="datapoint-tooltip ">
-                        <p className="label">Date</p>
-                        <p className="value">{moment(data[0].timeParsed).format('D.M.YY HH:mm')}</p>
-                      </div>
-                    </li>
-                    <li>
-                      <div className="datapoint-tooltip ">
-                        <p className="label">°C</p>
-                        <p className="value">{data[0].Temperatur}</p>
-                      </div>
-                    </li>
-                  </ul>;
-
-                return ReactDOMServer.renderToString(tooltip);
-              }
             },
             axes: {
               bottom: {
@@ -85,11 +66,13 @@ class TemperatureBase extends React.Component<{ appState?: any, dispatch?: (arg0
                 title: "Temperature in °C",
                 scaleType: ScaleTypes.LINEAR,
                 includeZero: true,
-                // TODO: thresholds not working.
+                // @todo: thresholds not working,
+                //   It can not resolve the y values. Sandbox works
+                //   https://codesandbox.io/s/happy-forest-2ybme?file=/src/index.tsx
                 thresholds: [
                   {
-                    value: 0.0,
-                    fillColor: '#191970',
+                    value: 1,
+                    fillColor: 'blue',
                     label: '0°C'
                   }
                 ]
