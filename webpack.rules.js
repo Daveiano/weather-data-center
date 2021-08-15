@@ -36,4 +36,11 @@ module.exports = [
       "sass-loader",
     ],
   },
+  {
+    test: /\.css$/,
+    exclude: /(node_modules|\.webpack)/,
+    use: [
+      "css-loader"
+    ],
+  }
 ];

@@ -1,10 +1,14 @@
-const isLoadingAction = (loading: boolean) => ({
+const isLoadingAction = (loading: boolean): { loading: boolean, type: string } => ({
     loading,
     type: 'IS_LOADING'
   }),
-  dataTemperatureAction = (dataTemperature: any[]) => ({
-    dataTemperature,
-    type: 'TEMPERATURE'
+  dataAction = (data: any[]): { data: any[], type: string } => ({
+    data,
+    type: 'DATA'
+  }),
+  userSetDateAction = (userSetDate: Date[]): { userSetDate: Date[], type: string } => ({
+    userSetDate,
+    type: 'USER_SET_DATE'
   });
 
-export { isLoadingAction, dataTemperatureAction };
+export { isLoadingAction, dataAction, userSetDateAction };

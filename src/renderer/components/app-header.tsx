@@ -1,40 +1,41 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { connect, ConnectedProps } from 'react-redux';
 import {
   HeaderContainer,
   HeaderGlobalAction,
   HeaderGlobalBar,
   Header,
-  HeaderMenu,
   HeaderMenuButton,
-  HeaderMenuItem,
   HeaderPanel,
   HeaderName,
-  HeaderNavigation,
   SideNav,
   SideNavItems, SideNavLink,
-  SideNavMenu,
-  SideNavMenuItem,
   SkipToContent,
   Column,
   DatePicker,
   DatePickerInput
 } from "carbon-components-react";
-import {
-  AppSwitcher20,
-  Fade16,
-  Notification20,
-  Search20,
-  DocumentAdd20,
-  ChartTreemap20, Fade20
-} from "@carbon/icons-react";
+import { DocumentAdd20, ChartTreemap20, Fade20 } from "@carbon/icons-react";
 
 import Import from "./Import";
+import { userSetDateAction } from "../actions-app";
 
-const mapStateToProps = (state: any) =>  state;
+const mapStateToProps = (appState: any) =>  appState;
 
-class AppHeader extends React.Component<{ appState?: any }> {
-  state = {
+// @todo This should be required, but produces an error, refactor and follow
+//   documentation.
+// @see https://react-redux.js.org/using-react-redux/usage-with-typescript
+type Props = {
+  dispatch?: (action: any) => void,
+  appState?: any
+};
+
+type State = {
+  headerPanelExpanded: boolean
+};
+
+class AppHeader extends React.Component<Props, State> {
+  state: State = {
     headerPanelExpanded: false
   };
 
@@ -67,10 +68,9 @@ class AppHeader extends React.Component<{ appState?: any }> {
               <DatePicker
                 dateFormat="d/m/Y"
                 datePickerType="range"
-                // TODO: onChange dispatch date.
-                onChange={(values) => {console.log(values);}}
-                minDate={this.props.appState.userDataDate.start}
-                maxDate={this.props.appState.userDataDate.end}
+                onChange={(values) => this.props.dispatch(userSetDateAction(values))}
+                minDate={this.props.appState.date.start}
+                maxDate={this.props.appState.date.end}
               >
                 <DatePickerInput
                   id="date-picker-range-start"
@@ -78,7 +78,7 @@ class AppHeader extends React.Component<{ appState?: any }> {
                   labelText="Start date"
                   type="text"
                   size={"sm"}
-                  defaultValue={this.props.appState.userDataDate.start}
+                  defaultValue={this.props.appState.dateSetByUser.start}
                 />
                 <DatePickerInput
                   id="date-picker-range-end"
@@ -86,7 +86,7 @@ class AppHeader extends React.Component<{ appState?: any }> {
                   labelText="End date"
                   type="text"
                   size={"sm"}
-                  defaultValue={this.props.appState.userDataDate.end}
+                  defaultValue={this.props.appState.dateSetByUser.end}
                 />
               </DatePicker>
               <HeaderGlobalBar>
@@ -115,7 +115,7 @@ class AppHeader extends React.Component<{ appState?: any }> {
                 <Column>
                   <Import />
 
-                  <div>
+                  <div className="import-data">
                     {this.props.appState.hasData &&
                     <div>
                       {this.props.appState.numberOfDocuments} records in DB

@@ -1,13 +1,14 @@
 import queryString from 'query-string';
+import moment from "moment";
 
 const { has_data, end, start } = queryString.parse(window.location.search);
 
 const appReducerDefaultState = {
     loading: false,
-    // TODO: Silly TS workaround...
+    // @todo: Silly TS workaround.
     hasData: typeof has_data === "string" ? parseInt(has_data) > 0 : 0,
     numberOfDocuments: has_data,
-    userDataDate: {
+    dateSetByUser: {
       start: start,
       end: end
     },
@@ -15,15 +16,22 @@ const appReducerDefaultState = {
       start: start,
       end: end
     },
-    dataTemperature: [] as any[]
+    data: [] as any[]
   },
   appReducer = (state = appReducerDefaultState, action: any) => {
     switch (action.type) {
       case 'IS_LOADING': {
         return Object.assign({}, state, { loading: action.loading });
       }
-      case 'TEMPERATURE': {
-        return Object.assign({}, state, { dataTemperature: action.dataTemperature });
+      case 'DATA': {
+        return Object.assign({}, state, { data: action.data });
+      }
+      case 'USER_SET_DATE': {
+        return Object.assign({}, state, { dateSetByUser: {
+            start: moment(action.userSetDate[0]).format('DD-MM-YYYY'),
+            end: moment(action.userSetDate[1]).format('DD-MM-YYYY')
+          }
+        });
       }
 
       default:

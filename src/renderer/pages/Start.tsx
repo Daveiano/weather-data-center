@@ -1,21 +1,55 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import moment from "moment";
 
 import { Row, Column, Tile } from 'carbon-components-react';
 
-import TemperatureBase from "../diagrams/temperature/temperature-base";
+import { TemperatureBase } from '../diagrams/temperature/temperature-base';
+import { dataAction } from "../actions-app";
 
 type Props = {
-  state: any
+  appState: any,
+  dispatch: (action: any) => void
 };
 
-const mapStateToProps = (state: any) => ({ state });
+const mapStateToProps = (state: any) => ({ appState: state.appState });
 
 class Start extends Component<Props> {
   props: Props;
 
+  state = {
+    data: [] as any[]
+  }
+
+  filterDataPerTime = (): void => {
+    const startDate = moment(this.props.appState.dateSetByUser.start, 'DD-MM-YYYY').unix();
+    const endDate = moment(this.props.appState.dateSetByUser.end, 'DD-MM-YYYY').unix();
+
+    const filteredData = this.props.appState.data.filter((dataItem: any) => dataItem.Zeit >= startDate && dataItem.Zeit <= endDate);
+
+    this.setState({ data: filteredData });
+  };
+
+  getData = (event: any, arg: any[]): void => {
+    this.setState({ data: arg });
+    this.props.dispatch(dataAction(arg));
+  };
+
+  componentDidMount() {
+    if (!this.state.data.length) {
+      window.electron.IpcSend('query-data', []);
+      window.electron.IpcOn('query-data', this.getData);
+    }
+  }
+
+  componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<{}>, snapshot?: any) {
+    if (JSON.stringify(prevProps.appState.dateSetByUser) !== JSON.stringify(this.props.appState.dateSetByUser)) {
+      this.filterDataPerTime();
+    }
+  }
+
   render() {
-    if (this.props.state.appState.hasData) {
+    if (this.props.appState.hasData) {
       return (
         <div className="start-overview">
           <Row>
@@ -27,7 +61,7 @@ class Start extends Component<Props> {
           <Row className="start-tiles">
             <Column sm={4} md={4} lg={6} xlg={4}>
               <Tile>
-                <TemperatureBase title="Temperature" height="300px" />
+                <TemperatureBase data={this.state.data} title="Temperature" height="300px" />
               </Tile>
             </Column>
             <Column sm={4} md={4} lg={6} xlg={4}>

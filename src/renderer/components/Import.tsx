@@ -20,7 +20,7 @@ class Import extends Component<Props> {
     window.electron.IpcSend('open-file-dialog', []);
   };
 
-  // TODO: Display notification: xx records imported.
+  // @todo: Display notification: xx records imported.
   uploadFileListener = (event: any, arg: any): void => {
     console.log(event);
     console.log(arg);
@@ -33,7 +33,7 @@ class Import extends Component<Props> {
 
   render() {
     return (
-      <div>
+      <div className="import-action">
         <Button kind='primary' onClick={() => this.selectFile()}>
           Import Data from CSV
         </Button>

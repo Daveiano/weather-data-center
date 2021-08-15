@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, dialog, remote } from 'electron';
+import { app, BrowserWindow, ipcMain, dialog, session, protocol } from 'electron';
 import fs from 'fs';
 import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 const async = require("async");
@@ -16,16 +16,36 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 
 const db = new Datastore({
   autoload: true,
+  // On linux this is /home/{username}/.config/weather-data-center.
   filename: `${app.getPath('userData')}/nedb/data`
 });
 
 //db.ensureIndex({ fieldName: 'Zeit' });
+
+type asyncCallback = (error: any, results: any) => void;
+const count = (callback: asyncCallback) => {
+  db.count({}, (err: any, count: number) => {
+    callback(null, count);
+  });
+};
+const start = (callback: asyncCallback) => {
+  db.find({}).sort({ Zeit: 1 }).limit(1).exec((err: any, docs: any) => {
+    callback(null, moment.unix(docs[0].Zeit).format('DD-MM-YYYY'));
+  });
+};
+const end = (callback: asyncCallback) => {
+  db.find({}).sort({ Zeit: -1 }).limit(1).exec((err: any, docs: any) => {
+    callback(null, moment.unix(docs[0].Zeit).format('DD-MM-YYYY'));
+  });
+};
 
 const createWindow = (): void => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     height: 800,
     width: 1200,
+    minHeight: 600,
+    minWidth: 1200,
     webPreferences: {
       //nodeIntegration: true,
       enableRemoteModule: true,
@@ -35,24 +55,28 @@ const createWindow = (): void => {
   });
 
   async.parallel({
-      count: callback => {
-        db.count({}, (err: any, count: number) => {
-          callback(null, count);
-        });
-      },
-      start: callback => {
-        db.find({}).sort({ Zeit: 1 }).limit(1).exec((err: any, docs: any) => {
-          callback(null, moment.unix(docs[0].Zeit).format('DD-MM-YYYY'));
-        });
-      },
-      end: callback => {
-        db.find({}).sort({ Zeit: -1 }).limit(1).exec((err: any, docs: any) => {
-          callback(null, moment.unix(docs[0].Zeit).format('DD-MM-YYYY'));
-        });
-      }},
+      count,
+      start,
+      end
+    },
     (error, results) => {
       // Load the index.html of the app.
-      mainWindow.loadURL(`${MAIN_WINDOW_WEBPACK_ENTRY}?has_data=${results.count}&start=${results.start}&end=${results.end}`);
+      mainWindow.loadURL(`${MAIN_WINDOW_WEBPACK_ENTRY}?has_data=${results.count}&start=${results.start}&end=${results.end}`).then(() => {
+        // Append the basic url data parameters to every main page call.
+        session.defaultSession.webRequest.onBeforeRequest({ urls: ["*://*/main_window"] }, (details, callback) => {
+          console.log(details.url);
+          async.parallel({
+              count,
+              start,
+              end
+            },
+            (error: any, results: any) => {
+              return callback({
+                redirectURL: `${details.url}?has_data=${results.count}&start=${results.start}&end=${results.end}`
+              });
+            });
+        });
+      });
     });
 };
 
@@ -91,6 +115,16 @@ ipcMain.on('query-temperature',(event, arg) => {
   db.find({ Temperatur: { $exists: true } }, { Temperatur: 1, Zeit: 1 }).sort({ Zeit: 1 }).exec((err, docs) => {
     event.reply(
       'query-temperature',
+      docs
+        .map(doc => ({ ...doc, group: 'Data', timeParsed: moment.unix(doc.Zeit).toISOString() }))
+    );
+  });
+});
+
+ipcMain.on('query-data',(event, arg) => {
+  db.find({ Zeit: { $exists: true } }).sort({ Zeit: 1 }).exec((err, docs) => {
+    event.reply(
+      'query-data',
       docs
         .map(doc => ({ ...doc, group: 'Temperature', timeParsed: moment.unix(doc.Zeit).toISOString() }))
     );
@@ -147,9 +181,10 @@ ipcMain.on('open-file-dialog', (event, arg) => {
             db.insert(deDuplicatedData, () => {
               db.count({}, (err: any, count: number) => {
                 event.reply('user-has-data', count);
+                // @todo: Display in renderer.
                 event.reply('loaded-raw-csv-data', deDuplicatedData);
                 event.reply('app-is-loading', false);
-                // TODO: Display in modal in renderer.
+                // @todo: Display in renderer.
                 event.reply('number-of-duplicates', duplicates);
               });
             });
