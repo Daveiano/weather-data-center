@@ -5,6 +5,8 @@ import moment from "moment";
 import { Row, Column, Tile } from 'carbon-components-react';
 
 import { TemperatureBase } from '../diagrams/temperature/temperature-base';
+import { HumidityBase } from "../diagrams/humidity/humidity-base";
+import { PressureBase } from "../diagrams/pressure/pressure-base";
 import { dataAction } from "../actions-app";
 
 type Props = {
@@ -66,12 +68,12 @@ class Start extends Component<Props> {
             </Column>
             <Column sm={4} md={4} lg={6} xlg={4}>
               <Tile>
-                Humidity
+                <HumidityBase data={this.state.data} title="Humidity" height="300px" />
               </Tile>
             </Column>
             <Column sm={4} md={8} lg={6} xlg={4}>
               <Tile>
-                Pressure
+                <PressureBase data={this.state.data} title="Pressure" height="300px" />
               </Tile>
             </Column>
             <Column sm={4} md={8} lg={6} xlg={4}>

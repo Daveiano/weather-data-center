@@ -126,7 +126,7 @@ ipcMain.on('query-data',(event, arg) => {
     event.reply(
       'query-data',
       docs
-        .map(doc => ({ ...doc, group: 'Temperature', timeParsed: moment.unix(doc.Zeit).toISOString() }))
+        .map(doc => ({ ...doc, group: 'data', timeParsed: moment.unix(doc.Zeit).toISOString() }))
     );
   });
 });
@@ -143,7 +143,7 @@ ipcMain.on('open-file-dialog', (event, arg) => {
     if (!result.canceled) {
       const parsedData: [any?] = [],
         columnsToRead: string[] = ['Zeit', 'Temperatur', 'Luftfeuchtigkeit', 'Luftdruck'],
-        columnsToParseInt: string[] = ['Temperatur', 'Luftfeuchtigkeit', 'Luftdruck'];
+        columnsToParseFloat: string[] = ['Temperatur', 'Luftfeuchtigkeit', 'Luftdruck'];
 
       fs.createReadStream(result.filePaths[0])
         .pipe(csv({
@@ -154,7 +154,7 @@ ipcMain.on('open-file-dialog', (event, arg) => {
               return moment(value, 'YYYY/M/D k:m').unix();
             }
 
-            if (columnsToParseInt.includes(header)) {
+            if (columnsToParseFloat.includes(header)) {
               return parseFloat(value);
             }
 

@@ -9,10 +9,9 @@ import {Alignments, ScaleTypes} from "@carbon/charts/interfaces";
 
 import { DiagramBaseProps } from "../types";
 
-export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement =>
+export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement =>
   <>
     <h3>{props.title}</h3>
-    {props.data && props.data.length > 0 &&
     <LineChart
       data={props.data}
       options={{
@@ -32,17 +31,10 @@ export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: Diagr
             scaleType: ScaleTypes.TIME,
           },
           left: {
-            mapsTo: "Temperatur",
-            title: "Temperature in °C",
+            mapsTo: "Luftfeuchtigkeit",
+            title: "Humidity in %",
             scaleType: ScaleTypes.LINEAR,
             includeZero: true,
-            thresholds: [
-              {
-                value: 0,
-                fillColor: '#191970',
-                label: '0°C'
-              }
-            ]
           }
         },
         legend: {
@@ -55,12 +47,15 @@ export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: Diagr
           enabled: true
         },
         color: {
-          scale: { 'data': '#8B0000' }
+          scale: {'data': '#1E90FF'},
+          gradient: {
+            enabled: true
+          }
         },
         tooltip: {
           showTotal: false,
           groupLabel: '',
-          customHTML: (data: [{ Temperatur: number, Zeit: number, timeParsed: string }], html: string) => {
+          customHTML: (data: [{ Luftfeuchtigkeit: number, Zeit: number, timeParsed: string }], html: string) => {
             const tooltip =
               <ul className='multi-tooltip'>
                 <li>
@@ -71,8 +66,8 @@ export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: Diagr
                 </li>
                 <li>
                   <div className="datapoint-tooltip ">
-                    <p className="label">°C</p>
-                    <p className="value">{data[0].Temperatur}</p>
+                    <p className="label">%</p>
+                    <p className="value">{data[0].Luftfeuchtigkeit}</p>
                   </div>
                 </li>
               </ul>;
@@ -84,5 +79,4 @@ export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: Diagr
         height: props.height
       }}
     />
-    }
   </>
