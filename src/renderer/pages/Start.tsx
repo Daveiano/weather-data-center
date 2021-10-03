@@ -7,7 +7,7 @@ import { Row, Column, Tile } from 'carbon-components-react';
 import { TemperatureBase } from '../diagrams/temperature/temperature-base';
 import { HumidityBase } from "../diagrams/humidity/humidity-base";
 import { PressureBase } from "../diagrams/pressure/pressure-base";
-import { dataAction } from "../actions-app";
+import { dataAction, dateAction } from "../actions-app";
 
 type Props = {
   appState: any,
@@ -27,20 +27,23 @@ class Start extends Component<Props> {
     const startDate = moment(this.props.appState.dateSetByUser.start, 'DD-MM-YYYY').unix();
     const endDate = moment(this.props.appState.dateSetByUser.end, 'DD-MM-YYYY').unix();
 
-    const filteredData = this.props.appState.data.filter((dataItem: any) => dataItem.Zeit >= startDate && dataItem.Zeit <= endDate);
+    const filteredData = this.props.appState.data.filter((dataItem: any) => dataItem.time >= startDate && dataItem.time <= endDate);
 
     this.setState({ data: filteredData });
   };
 
   getData = (event: any, arg: any[]): void => {
+    console.log('get data', arg);
     this.setState({ data: arg });
     this.props.dispatch(dataAction(arg));
   };
 
+  // @todo Start with loading in UI and then set if data or not.
   componentDidMount() {
+    window.electron.IpcOn('query-data', this.getData);
+
     if (!this.state.data.length) {
       window.electron.IpcSend('query-data', []);
-      window.electron.IpcOn('query-data', this.getData);
     }
   }
 
@@ -51,7 +54,7 @@ class Start extends Component<Props> {
   }
 
   render() {
-    if (this.props.appState.hasData) {
+    if (this.state.data.length) {
       return (
         <div className="start-overview">
           <Row>

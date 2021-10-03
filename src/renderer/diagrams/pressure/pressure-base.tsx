@@ -31,7 +31,7 @@ export const PressureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
             scaleType: ScaleTypes.TIME,
           },
           left: {
-            mapsTo: "Luftdruck",
+            mapsTo: "pressure",
             title: "Pressure in hPa",
             scaleType: ScaleTypes.LINEAR,
             includeZero: false,
@@ -56,7 +56,7 @@ export const PressureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
         tooltip: {
           showTotal: false,
           groupLabel: '',
-          customHTML: (data: [{ Luftdruck: number, Zeit: number, timeParsed: string }], html: string) => {
+          customHTML: (data: [{ pressure: number, time: number, timeParsed: string }], html: string) => {
             const tooltip =
               <ul className='multi-tooltip'>
                 <li>
@@ -68,7 +68,7 @@ export const PressureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
                 <li>
                   <div className="datapoint-tooltip ">
                     <p className="label">hPa</p>
-                    <p className="value">{data[0].Luftdruck}</p>
+                    <p className="value">{data[0].pressure}</p>
                   </div>
                 </li>
               </ul>;

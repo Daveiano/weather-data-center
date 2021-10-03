@@ -9,6 +9,14 @@ const isLoadingAction = (loading: boolean): { loading: boolean, type: string } =
   userSetDateAction = (userSetDate: Date[]): { userSetDate: Date[], type: string } => ({
     userSetDate,
     type: 'USER_SET_DATE'
+  }),
+  dateAction = (date: Date[]): { date: Date[], type: string } => ({
+    date,
+    type: 'DATE'
+  }),
+  userHasDataAction = (userHasData: number): { userHasData: number, type: string } => ({
+    userHasData,
+    type: 'USER_HAS_DATA'
   });
 
-export { isLoadingAction, dataAction, userSetDateAction };
+export { isLoadingAction, dataAction, userSetDateAction, userHasDataAction, dateAction };

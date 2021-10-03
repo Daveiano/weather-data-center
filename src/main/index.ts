@@ -29,13 +29,21 @@ const count = (callback: asyncCallback) => {
   });
 };
 const start = (callback: asyncCallback) => {
-  db.find({}).sort({ Zeit: 1 }).limit(1).exec((err: any, docs: any) => {
-    callback(null, moment.unix(docs[0].Zeit).format('DD-MM-YYYY'));
+  db.find({}).sort({ time: 1 }).limit(1).exec((err: any, docs: any) => {
+    if (docs.length > 0) {
+      callback(null, moment.unix(docs[0].time).format('DD-MM-YYYY'));
+    }
+
+    callback(null, 0);
   });
 };
 const end = (callback: asyncCallback) => {
-  db.find({}).sort({ Zeit: -1 }).limit(1).exec((err: any, docs: any) => {
-    callback(null, moment.unix(docs[0].Zeit).format('DD-MM-YYYY'));
+  db.find({}).sort({ time: -1 }).limit(1).exec((err: any, docs: any) => {
+    if (docs.length > 0) {
+      callback(null, moment.unix(docs[0].time).format('DD-MM-YYYY'));
+    }
+
+    callback(null, 0);
   });
 };
 
@@ -112,21 +120,21 @@ app.on('activate', () => {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
 ipcMain.on('query-temperature',(event, arg) => {
-  db.find({ Temperatur: { $exists: true } }, { Temperatur: 1, Zeit: 1 }).sort({ Zeit: 1 }).exec((err, docs) => {
+  db.find({ temperature: { $exists: true } }, { temperature: 1, time: 1 }).sort({ time: 1 }).exec((err, docs) => {
     event.reply(
       'query-temperature',
       docs
-        .map(doc => ({ ...doc, group: 'Data', timeParsed: moment.unix(doc.Zeit).toISOString() }))
+        .map(doc => ({ ...doc, group: 'Data', timeParsed: moment.unix(doc.time).toISOString() }))
     );
   });
 });
 
 ipcMain.on('query-data',(event, arg) => {
-  db.find({ Zeit: { $exists: true } }).sort({ Zeit: 1 }).exec((err, docs) => {
+  db.find({ time: { $exists: true } }).sort({ time: 1 }).exec((err, docs) => {
     event.reply(
       'query-data',
       docs
-        .map(doc => ({ ...doc, group: 'data', timeParsed: moment.unix(doc.Zeit).toISOString() }))
+        .map(doc => ({ ...doc, group: 'data', timeParsed: moment.unix(doc.time).toISOString() }))
     );
   });
 });
@@ -142,15 +150,15 @@ ipcMain.on('open-file-dialog', (event, arg) => {
   }).then(result => {
     if (!result.canceled) {
       const parsedData: [any?] = [],
-        columnsToRead: string[] = ['Zeit', 'Temperatur', 'Luftfeuchtigkeit', 'Luftdruck'],
-        columnsToParseFloat: string[] = ['Temperatur', 'Luftfeuchtigkeit', 'Luftdruck'];
+        columnsToRead: string[] = ['time', 'temperature', 'humidity', 'pressure', 'rain'],
+        columnsToParseFloat: string[] = ['temperature', 'humidity', 'pressure', 'rain'];
 
       fs.createReadStream(result.filePaths[0])
         .pipe(csv({
           separator: ',',
           mapHeaders: ({ header}) => columnsToRead.includes(header) ? header : null,
           mapValues: ({ header, index, value }) => {
-            if (header === 'Zeit') {
+            if (header === 'time') {
               return moment(value, 'YYYY/M/D k:m').unix();
             }
 
@@ -168,7 +176,7 @@ ipcMain.on('open-file-dialog', (event, arg) => {
             deDuplicatedData: any[] = [];
 
           async.each(parsedData, (record: any, callback) => {
-            db.count({ "Zeit": record.Zeit },  (err: any, count: number)  => {
+            db.count({ "time": record.time },  (err: any, count: number)  => {
               console.log('count', count);
               if (count) {
                 duplicates += 1;
@@ -182,7 +190,7 @@ ipcMain.on('open-file-dialog', (event, arg) => {
               db.count({}, (err: any, count: number) => {
                 event.reply('user-has-data', count);
                 // @todo: Display in renderer.
-                event.reply('loaded-raw-csv-data', deDuplicatedData);
+                event.reply('query-data', deDuplicatedData);
                 event.reply('app-is-loading', false);
                 // @todo: Display in renderer.
                 event.reply('number-of-duplicates', duplicates);

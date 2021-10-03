@@ -9,10 +9,9 @@ import {Alignments, ScaleTypes} from "@carbon/charts/interfaces";
 
 import { DiagramBaseProps } from "../types";
 
-export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement =>
+export const RainBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement =>
   <>
     <h3>{props.title}</h3>
-    {props.data && props.data.length > 0 &&
     <LineChart
       data={props.data}
       options={{
@@ -32,17 +31,10 @@ export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: Diagr
             scaleType: ScaleTypes.TIME,
           },
           left: {
-            mapsTo: "temperature",
-            title: "Temperature in °C",
+            mapsTo: "pressure",
+            title: "Pressure in hPa",
             scaleType: ScaleTypes.LINEAR,
-            includeZero: true,
-            thresholds: [
-              {
-                value: 0,
-                fillColor: '#191970',
-                label: '0°C'
-              }
-            ]
+            includeZero: false,
           }
         },
         legend: {
@@ -55,12 +47,16 @@ export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: Diagr
           enabled: true
         },
         color: {
-          scale: { 'data': '#8B0000' }
+          // @todo Color does not work.
+          scale: { 'data': '#808080' },
+          gradient: {
+            enabled: true
+          }
         },
         tooltip: {
           showTotal: false,
           groupLabel: '',
-          customHTML: (data: [{ temperature: number, time: number, timeParsed: string }], html: string) => {
+          customHTML: (data: [{ pressure: number, time: number, timeParsed: string }], html: string) => {
             const tooltip =
               <ul className='multi-tooltip'>
                 <li>
@@ -71,8 +67,8 @@ export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: Diagr
                 </li>
                 <li>
                   <div className="datapoint-tooltip ">
-                    <p className="label">°C</p>
-                    <p className="value">{data[0].temperature}</p>
+                    <p className="label">hPa</p>
+                    <p className="value">{data[0].pressure}</p>
                   </div>
                 </li>
               </ul>;
@@ -80,9 +76,7 @@ export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: Diagr
             return ReactDOMServer.renderToString(tooltip);
           }
         },
-        curve: "curveMonotoneX",
         height: props.height
       }}
     />
-    }
   </>

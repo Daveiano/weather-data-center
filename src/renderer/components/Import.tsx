@@ -10,10 +10,18 @@ type Props = {
   state: any
 };
 
+type State = {
+  numberOfDuplicated: number
+};
+
 const mapStateToProps = (state: any) => ({ state });
 
 class Import extends Component<Props> {
   props: Props;
+
+  state: State = {
+    numberOfDuplicated: 0
+  }
 
   selectFile = (): void => {
     this.props.dispatch(isLoadingAction(true));
@@ -22,13 +30,13 @@ class Import extends Component<Props> {
 
   // @todo: Display notification: xx records imported.
   uploadFileListener = (event: any, arg: any): void => {
-    console.log(event);
     console.log(arg);
+    this.setState({ numberOfDuplicated: arg });
   }
 
   // TODO: Do we need this here? How to managed data in general?
   componentDidMount() {
-    window.electron.IpcOn('loaded-raw-csv-data', this.uploadFileListener);
+    window.electron.IpcOn('number-of-duplicates', this.uploadFileListener);
   }
 
   render() {
@@ -37,6 +45,9 @@ class Import extends Component<Props> {
         <Button kind='primary' onClick={() => this.selectFile()}>
           Import Data from CSV
         </Button>
+        {this.state.numberOfDuplicated > 0 &&
+        <>Deduplicated {this.state.numberOfDuplicated} items.</>
+        }
       </div>
     );
   }

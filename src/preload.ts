@@ -1,5 +1,5 @@
 const { contextBridge, ipcRenderer } = require('electron')
-const validChannels = ["open-file-dialog", "loaded-raw-csv-data", "app-is-loading", "user-has-data", "query-temperature", "query-data"];
+const validChannels = ["open-file-dialog", "loaded-raw-csv-data", "app-is-loading", "user-has-data", "query-temperature", "query-data", "number-of-duplicates"];
 
 declare interface Window {
   electron: {

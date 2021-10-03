@@ -65,6 +65,7 @@ class AppHeader extends React.Component<Props, State> {
                   <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
                 </HeaderMenu>
               </HeaderNavigation>*/}
+              {this.props.appState.date.start !== '0' && this.props.appState.date.end !== '0' &&
               <DatePicker
                 dateFormat="d/m/Y"
                 datePickerType="range"
@@ -89,6 +90,8 @@ class AppHeader extends React.Component<Props, State> {
                   defaultValue={this.props.appState.dateSetByUser.end}
                 />
               </DatePicker>
+              }
+
               <HeaderGlobalBar>
                 <HeaderGlobalAction
                   aria-label="Upload Data"
@@ -116,7 +119,7 @@ class AppHeader extends React.Component<Props, State> {
                   <Import />
 
                   <div className="import-data">
-                    {this.props.appState.hasData &&
+                    {this.props.appState.numberOfDocuments > 0 &&
                     <div>
                       {this.props.appState.numberOfDocuments} records in DB
                     </div>

@@ -31,7 +31,7 @@ export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
             scaleType: ScaleTypes.TIME,
           },
           left: {
-            mapsTo: "Luftfeuchtigkeit",
+            mapsTo: "humidity",
             title: "Humidity in %",
             scaleType: ScaleTypes.LINEAR,
             includeZero: true,
@@ -55,7 +55,7 @@ export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
         tooltip: {
           showTotal: false,
           groupLabel: '',
-          customHTML: (data: [{ Luftfeuchtigkeit: number, Zeit: number, timeParsed: string }], html: string) => {
+          customHTML: (data: [{ humidity: number, time: number, timeParsed: string }], html: string) => {
             const tooltip =
               <ul className='multi-tooltip'>
                 <li>
@@ -67,7 +67,7 @@ export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
                 <li>
                   <div className="datapoint-tooltip ">
                     <p className="label">%</p>
-                    <p className="value">{data[0].Luftfeuchtigkeit}</p>
+                    <p className="value">{data[0].humidity}</p>
                   </div>
                 </li>
               </ul>;
