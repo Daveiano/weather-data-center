@@ -6,7 +6,6 @@ import { Loading, Grid, Row, Column } from 'carbon-components-react';
 
 import AppHeader from './components/app-header';
 import Start from './pages/Start';
-import {userHasDataAction} from "./actions-app";
 
 const mapStateToProps = (state: any) => ({ appState: state.appState });
 
@@ -17,15 +16,6 @@ type Props = {
 
 class App extends React.Component<Props> {
   props: Props;
-
-  processUserHasData = (event: any, arg: number): void => {
-    console.log('USER HAS DATA!', arg);
-    this.props.dispatch(userHasDataAction(arg));
-  };
-
-  componentDidMount() {
-    window.electron.IpcOn('user-has-data', this.processUserHasData);
-  }
 
   render () {
     return (

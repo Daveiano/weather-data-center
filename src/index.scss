@@ -35,6 +35,14 @@ header.bx--header {
       }
     }
   }
+  .bx--header-panel--expanded {
+    width: 25rem;
+    #import {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+    }
+  }
 }
 
 /* Start tiles */

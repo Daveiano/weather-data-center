@@ -7,7 +7,7 @@ import { Row, Column, Tile } from 'carbon-components-react';
 import { TemperatureBase } from '../diagrams/temperature/temperature-base';
 import { HumidityBase } from "../diagrams/humidity/humidity-base";
 import { PressureBase } from "../diagrams/pressure/pressure-base";
-import { dataAction, dateAction } from "../actions-app";
+import { dataAction, isLoadingAction } from "../actions-app";
 
 type Props = {
   appState: any,
@@ -36,6 +36,7 @@ class Start extends Component<Props> {
     console.log('get data', arg);
     this.setState({ data: arg });
     this.props.dispatch(dataAction(arg));
+    this.props.dispatch(isLoadingAction(false));
   };
 
   // @todo Start with loading in UI and then set if data or not.
@@ -43,6 +44,7 @@ class Start extends Component<Props> {
     window.electron.IpcOn('query-data', this.getData);
 
     if (!this.state.data.length) {
+      this.props.dispatch(isLoadingAction(true));
       window.electron.IpcSend('query-data', []);
     }
   }
@@ -54,6 +56,10 @@ class Start extends Component<Props> {
   }
 
   render() {
+    if (this.props.appState.loading) {
+      return false;
+    }
+
     if (this.state.data.length) {
       return (
         <div className="start-overview">

@@ -119,9 +119,9 @@ class AppHeader extends React.Component<Props, State> {
                   <Import />
 
                   <div className="import-data">
-                    {this.props.appState.numberOfDocuments > 0 &&
+                    {this.props.appState.data.length > 0 &&
                     <div>
-                      {this.props.appState.numberOfDocuments} records in DB
+                      {this.props.appState.data.length} records in DB
                     </div>
                     }
                   </div>

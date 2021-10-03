@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Button } from 'carbon-components-react';
+import { Button, InlineNotification } from 'carbon-components-react';
 
 import { isLoadingAction } from '../actions-app';
 
@@ -42,12 +42,19 @@ class Import extends Component<Props> {
   render() {
     return (
       <div className="import-action">
-        <Button kind='primary' onClick={() => this.selectFile()}>
+        {this.state.numberOfDuplicated > 0 &&
+        <InlineNotification
+          kind={"error"}
+          iconDescription="Close"
+          subtitle={`${this.state.numberOfDuplicated} items were duplicate and are not imported.`}
+          title="There were duplicate items!"
+        />
+        }
+
+        <Button id="import" kind='primary' onClick={() => this.selectFile()}>
           Import Data from CSV
         </Button>
-        {this.state.numberOfDuplicated > 0 &&
-        <>Deduplicated {this.state.numberOfDuplicated} items.</>
-        }
+
       </div>
     );
   }

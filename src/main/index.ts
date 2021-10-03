@@ -119,16 +119,6 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
-ipcMain.on('query-temperature',(event, arg) => {
-  db.find({ temperature: { $exists: true } }, { temperature: 1, time: 1 }).sort({ time: 1 }).exec((err, docs) => {
-    event.reply(
-      'query-temperature',
-      docs
-        .map(doc => ({ ...doc, group: 'Data', timeParsed: moment.unix(doc.time).toISOString() }))
-    );
-  });
-});
-
 ipcMain.on('query-data',(event, arg) => {
   db.find({ time: { $exists: true } }).sort({ time: 1 }).exec((err, docs) => {
     event.reply(
@@ -187,12 +177,14 @@ ipcMain.on('open-file-dialog', (event, arg) => {
             });
           }, (error: any) => {
             db.insert(deDuplicatedData, () => {
-              db.count({}, (err: any, count: number) => {
-                event.reply('user-has-data', count);
-                // @todo: Display in renderer.
-                event.reply('query-data', deDuplicatedData);
+              db.find({ time: { $exists: true } }).sort({ time: 1 }).exec((err, docs) => {
+                event.reply(
+                  'query-data',
+                  docs
+                    .map(doc => ({ ...doc, group: 'data', timeParsed: moment.unix(doc.time).toISOString() }))
+                );
+
                 event.reply('app-is-loading', false);
-                // @todo: Display in renderer.
                 event.reply('number-of-duplicates', duplicates);
               });
             });
