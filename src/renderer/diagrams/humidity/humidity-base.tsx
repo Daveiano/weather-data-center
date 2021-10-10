@@ -11,6 +11,8 @@ import { DiagramBaseProps } from "../types";
 
 export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
   const [data, setData] = useState(props.data);
+  const [loading, setLoading] = useState(false);
+  const [daily, setDaily] = useState(false);
 
   const scale = () => {
     const firstDate = moment.unix(data[0].time),
@@ -21,26 +23,59 @@ export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
 
       let newData: any = [];
 
-      if (timeDifferenceInDays > 7 && timeDifferenceInDays <= 30) {
-        for (let key = 0; key < data.length; key++) {
-          if (key % 2 === 0) {
-            newData = [...newData, data[key]];
-          }
+      // Calculate daily average by summing all measurements an dividing by the
+      // number of values.
+      if (timeDifferenceInDays > 14) {
+
+        setDaily(true);
+
+        type dateTimeElement = {
+          time: string,
+          values: any[number]
         }
-        setData(newData);
+
+        interface Dates {
+          [key: string]: dateTimeElement
+        }
+
+        let dates: Dates = {};
+
+        for (let key = 0; key < data.length; key++) {
+          const date = moment.unix(data[key].time).format('DDMMYYYY');
+
+          if (!(date in dates)) {
+            dates = {
+              ...dates,
+              [date]: {
+                time: moment.unix(data[key].time).format('DD-MM-YYYY'),
+                values: []
+              }
+            };
+          }
+
+          dates[date].values = [...dates[date].values, data[key].humidity];
+        }
+
+        for (const [key, dateItem] of Object.entries(dates)) {
+          console.log(dateItem);
+
+          newData = [...newData, {
+            timeParsed: moment(dateItem.time, "DD-MM-YYYY").toISOString(),
+            humidity: Math.round(dateItem.values.reduce((a: number, b: number) => a + b, 0) / dateItem.values.length)
+          }];
+        }
+
+        newData.sort((a: { timeParsed: number }, b: { timeParsed: number }) => {
+          return (a.timeParsed < b.timeParsed) ? -1 : ((a.timeParsed > b.timeParsed) ? 1 : 0);
+        });
       }
 
-      if (timeDifferenceInDays > 30) {
-        for (let key = 0; key < data.length; key++) {
-          if (key % 20 === 0) {
-            newData = [...newData, data[key]];
-          }
-        }
-        setData(newData);
-      }
+    setData(newData);
+    setLoading(false);
   };
 
   useEffect(() => {
+    setLoading(true);
     scale();
   }, [props.data]);
 
@@ -51,7 +86,7 @@ export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
         data={data}
         options={{
           data: {
-            loading: !data || data.length === 0
+            loading: !data || data.length === 0 || loading
           },
           title: "",
           timeScale: {
@@ -97,7 +132,13 @@ export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
                     <div className="datapoint-tooltip ">
                       <p className="label">Date</p>
                       <p
-                        className="value">{moment(data[0].timeParsed).format('D.M.YY HH:mm')}</p>
+                        className="value">
+                        {daily ? (
+                          <>{moment(data[0].timeParsed).format('D.M.YY')}</>
+                        ) : (
+                          <>{moment(data[0].timeParsed).format('D.M.YY HH:mm')}</>
+                        )}
+                      </p>
                     </div>
                   </li>
                   <li>

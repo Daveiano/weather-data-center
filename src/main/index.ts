@@ -1,6 +1,7 @@
-import { app, BrowserWindow, ipcMain, dialog, session, protocol } from 'electron';
-import fs from 'fs';
+import { app, BrowserWindow, ipcMain, dialog, session } from 'electron';
 import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
+
+import fs from 'fs';
 const async = require("async");
 const moment = require('moment');
 const csv = require('csv-parser');
@@ -72,7 +73,6 @@ const createWindow = (): void => {
       mainWindow.loadURL(`${MAIN_WINDOW_WEBPACK_ENTRY}?has_data=${results.count}&start=${results.start}&end=${results.end}`).then(() => {
         // Append the basic url data parameters to every main page call.
         session.defaultSession.webRequest.onBeforeRequest({ urls: ["*://*/main_window"] }, (details, callback) => {
-          console.log(details.url);
           async.parallel({
               count,
               start,

@@ -39,13 +39,14 @@ class Start extends Component<Props> {
     this.props.dispatch(isLoadingAction(false));
   };
 
-  // @todo Start with loading in UI and then set if data or not.
   componentDidMount() {
     window.electron.IpcOn('query-data', this.getData);
+    this.props.dispatch(isLoadingAction(true));
 
     if (!this.state.data.length) {
-      this.props.dispatch(isLoadingAction(true));
       window.electron.IpcSend('query-data', []);
+    } else {
+      this.props.dispatch(isLoadingAction(false));
     }
   }
 
