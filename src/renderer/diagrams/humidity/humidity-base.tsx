@@ -8,6 +8,7 @@ import {LineChart} from "@carbon/charts-react";
 import {Alignments, ScaleTypes} from "@carbon/charts/interfaces";
 
 import { DiagramBaseProps } from "../types";
+import { getTimeDifferenceInDays, scaleAverage } from "../scaling";
 
 export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
   const [data, setData] = useState(props.data);
@@ -15,60 +16,18 @@ export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
   const [daily, setDaily] = useState(false);
 
   const scale = () => {
-    const firstDate = moment.unix(data[0].time),
-      lastDate = moment.unix(data[data.length - 1].time),
-      timeDifferenceInDays = lastDate.diff(firstDate, 'days');
+    const timeDifferenceInDays = getTimeDifferenceInDays(data);
 
-      console.log('timeDifferenceInDays', timeDifferenceInDays);
+    let newData: any = [];
 
-      let newData: any = [];
-
-      // Calculate daily average by summing all measurements an dividing by the
-      // number of values.
-      if (timeDifferenceInDays > 14) {
-
-        setDaily(true);
-
-        type dateTimeElement = {
-          time: string,
-          values: any[number]
-        }
-
-        interface Dates {
-          [key: string]: dateTimeElement
-        }
-
-        let dates: Dates = {};
-
-        for (let key = 0; key < data.length; key++) {
-          const date = moment.unix(data[key].time).format('DDMMYYYY');
-
-          if (!(date in dates)) {
-            dates = {
-              ...dates,
-              [date]: {
-                time: moment.unix(data[key].time).format('DD-MM-YYYY'),
-                values: []
-              }
-            };
-          }
-
-          dates[date].values = [...dates[date].values, data[key].humidity];
-        }
-
-        for (const [key, dateItem] of Object.entries(dates)) {
-          console.log(dateItem);
-
-          newData = [...newData, {
-            timeParsed: moment(dateItem.time, "DD-MM-YYYY").toISOString(),
-            humidity: Math.round(dateItem.values.reduce((a: number, b: number) => a + b, 0) / dateItem.values.length)
-          }];
-        }
-
-        newData.sort((a: { timeParsed: number }, b: { timeParsed: number }) => {
-          return (a.timeParsed < b.timeParsed) ? -1 : ((a.timeParsed > b.timeParsed) ? 1 : 0);
-        });
-      }
+    // Calculate daily average by summing all measurements an dividing by the
+    // number of values.
+    if (timeDifferenceInDays > 14) {
+      setDaily(true);
+      newData = scaleAverage(data, 'humidity');
+    } else {
+      newData = data;
+    }
 
     setData(newData);
     setLoading(false);
@@ -131,8 +90,7 @@ export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
                   <li>
                     <div className="datapoint-tooltip ">
                       <p className="label">Date</p>
-                      <p
-                        className="value">
+                      <p className="value">
                         {daily ? (
                           <>{moment(data[0].timeParsed).format('D.M.YY')}</>
                         ) : (
