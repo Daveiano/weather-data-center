@@ -7,7 +7,7 @@ type dateTimeElement = {
   values: any[number]
 }
 
-type propertyParameter = 'humidity' | 'pressure';
+type propertyParameter = 'humidity' | 'pressure' | 'temperature';
 
 interface Dates {
   [key: string]: dateTimeElement
@@ -21,14 +21,13 @@ interface Dates {
  */
 const getTimeDifferenceInDays = (data: dataItem[]): number => {
   const firstDate = moment.unix(data[0].time),
-    lastDate = moment.unix(data[data.length - 1].time),
-    timeDifferenceInDays = lastDate.diff(firstDate, 'days');
+    lastDate = moment.unix(data[data.length - 1].time);
 
-  return timeDifferenceInDays;
+  return lastDate.diff(firstDate, 'days');
 };
 
 /**
- * Calculates an average value per day by uming uo all values of a day and
+ * Calculates an average value per day by summing up all values of a day and
  * dividing by the count of the values.
  *
  * @param data The array of data to process.

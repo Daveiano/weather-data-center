@@ -57,6 +57,7 @@ class Start extends Component<Props> {
   }
 
   render() {
+    // @todo Why? Also look into UI when changing dates - optical feedback.
     if (this.props.appState.loading) {
       return false;
     }

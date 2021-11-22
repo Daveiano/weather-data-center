@@ -16,7 +16,7 @@ export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
   const [daily, setDaily] = useState(false);
 
   const scale = () => {
-    const timeDifferenceInDays = getTimeDifferenceInDays(data);
+    const timeDifferenceInDays = getTimeDifferenceInDays(props.data);
 
     let newData: any = [];
 
@@ -24,9 +24,10 @@ export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
     // number of values.
     if (timeDifferenceInDays > 14) {
       setDaily(true);
-      newData = scaleAverage(data, 'humidity');
+      newData = scaleAverage(props.data, 'humidity');
     } else {
-      newData = data;
+      setDaily(false);
+      newData = props.data;
     }
 
     setData(newData);

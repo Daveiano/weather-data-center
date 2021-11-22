@@ -16,15 +16,16 @@ export const PressureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
   const [daily, setDaily] = useState(false);
 
   const scale = () => {
-    const timeDifferenceInDays = getTimeDifferenceInDays(data);
+    const timeDifferenceInDays = getTimeDifferenceInDays(props.data);
 
     let newData: any = [];
 
     if (timeDifferenceInDays > 14) {
       setDaily(true);
-      newData = scaleAverage(data, 'pressure');
+      newData = scaleAverage(props.data, 'pressure');
     } else {
-      newData = data;
+      setDaily(false);
+      newData = props.data;
     }
 
     setData(newData);
