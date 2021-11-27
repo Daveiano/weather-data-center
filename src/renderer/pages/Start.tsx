@@ -33,9 +33,10 @@ class Start extends Component<Props> {
   };
 
   getData = (event: any, arg: any[]): void => {
-    console.log('get data', arg);
-    this.setState({ data: arg });
-    this.props.dispatch(dataAction(arg));
+    if (arg.length) {
+      this.setState({ data: arg });
+      this.props.dispatch(dataAction(arg));
+    }
     this.props.dispatch(isLoadingAction(false));
   };
 
@@ -51,7 +52,8 @@ class Start extends Component<Props> {
   }
 
   componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<{}>, snapshot?: any) {
-    if (JSON.stringify(prevProps.appState.dateSetByUser) !== JSON.stringify(this.props.appState.dateSetByUser)) {
+    console.log('hä', this.props.appState.data);
+    if (JSON.stringify(prevProps.appState.dateSetByUser) !== JSON.stringify(this.props.appState.dateSetByUser) && this.props.appState.data.length) {
       this.filterDataPerTime();
     }
   }

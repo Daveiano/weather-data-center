@@ -1,7 +1,7 @@
 import queryString from 'query-string';
 import moment from "moment";
 
-const { has_data, end, start } = queryString.parse(window.location.search);
+const { end, start } = queryString.parse(window.location.search);
 
 const appReducerDefaultState = {
     loading: false,

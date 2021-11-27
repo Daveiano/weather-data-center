@@ -1,7 +1,9 @@
 import { app, BrowserWindow, ipcMain, dialog, session } from 'electron';
-import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
+
+//import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 
 import fs from 'fs';
+
 const async = require("async");
 const moment = require('moment');
 const csv = require('csv-parser');
@@ -10,6 +12,8 @@ const Datastore = require('nedb');
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: any;
 
+console.log(MAIN_WINDOW_WEBPACK_ENTRY);
+
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
   app.quit();
@@ -17,11 +21,9 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 
 const db = new Datastore({
   autoload: true,
-  // On linux this is /home/{username}/.config/weather-data-center.
+  // On ubuntu this is /home/{username}/.config/weather-data-center.
   filename: `${app.getPath('userData')}/nedb/data`
 });
-
-//db.ensureIndex({ fieldName: 'Zeit' });
 
 type asyncCallback = (error: any, results: any) => void;
 const count = (callback: asyncCallback) => {
@@ -32,7 +34,7 @@ const count = (callback: asyncCallback) => {
 const start = (callback: asyncCallback) => {
   db.find({}).sort({ time: 1 }).limit(1).exec((err: any, docs: any) => {
     if (docs.length > 0) {
-      callback(null, moment.unix(docs[0].time).format('DD-MM-YYYY'));
+      return callback(null, moment.unix(docs[0].time).format('DD-MM-YYYY'));
     }
 
     callback(null, 0);
@@ -41,7 +43,7 @@ const start = (callback: asyncCallback) => {
 const end = (callback: asyncCallback) => {
   db.find({}).sort({ time: -1 }).limit(1).exec((err: any, docs: any) => {
     if (docs.length > 0) {
-      callback(null, moment.unix(docs[0].time).format('DD-MM-YYYY'));
+      return callback(null, moment.unix(docs[0].time).format('DD-MM-YYYY'));
     }
 
     callback(null, 0);
@@ -78,7 +80,7 @@ const createWindow = (): void => {
               start,
               end
             },
-            (error: any, results: any) => {
+            (error, results) => {
               return callback({
                 redirectURL: `${details.url}?has_data=${results.count}&start=${results.start}&end=${results.end}`
               });
@@ -92,12 +94,12 @@ const createWindow = (): void => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
-  installExtension(REACT_DEVELOPER_TOOLS)
+  /*installExtension(REACT_DEVELOPER_TOOLS)
     .then((name: string) => {
-      console.log(`Added Extension:  ${name}`);
+      console.log(`Added Extension:  ${name}`);*/
       createWindow();
-    })
-    .catch((err: any) => console.log('An error occurred: ', err));
+    /*})
+    .catch((err: any) => console.log('An error occurred: ', err));*/
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common

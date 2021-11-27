@@ -90,3 +90,10 @@ out/
 
 # PHPStorm
 .idea/
+
+# Testing
+*__diff_output__
+tests/data/empty/*
+!tests/data/empty/nedb
+tests/data/small/*
+!tests/data/small/nedb
