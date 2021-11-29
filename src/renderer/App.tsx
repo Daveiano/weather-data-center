@@ -10,8 +10,7 @@ import Start from './pages/Start';
 const mapStateToProps = (state: any) => ({ appState: state.appState });
 
 type Props = {
-  appState: any,
-  dispatch: (action: any) => void
+  appState: any
 };
 
 class App extends React.Component<Props> {

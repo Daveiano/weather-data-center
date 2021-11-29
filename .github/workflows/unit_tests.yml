@@ -1,6 +1,6 @@
 # @see https://medium.com/swlh/jest-and-github-actions-eaf3eaf2427d for multi-env tests.
 # @see https://joelhooks.com/jest-and-github-actions for better error reporting.
-name: CI Tests
+name: Unit & integration tests
 
 on:
   push:
@@ -20,9 +20,8 @@ jobs:
       - name: Install Yarn
         run: npm install -g yarn
       - run: yarn install
-      - run: npx playwright install-deps
-      - name: yarn test:ci
-        run: yarn test:ci
+      - name: yarn test:unit:ci
+        run: yarn test:unit:ci
         env:
           # This might depend on your test-runner/language binding
           PLAYWRIGHT_TEST_BASE_URL: ${{ github.event.deployment_status.target_url }}

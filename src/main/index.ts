@@ -1,16 +1,15 @@
 import { app, BrowserWindow, ipcMain, dialog, session } from 'electron';
-
-//import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
+import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 
 import fs from 'fs';
 
-const async = require("async");
-const moment = require('moment');
-const csv = require('csv-parser');
-const Datastore = require('nedb');
+import async from "async";
+import moment from 'moment';
+import csv from 'csv-parser';
+import Datastore from 'nedb';
 
-declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
-declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: any;
+declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
+declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 
 console.log(MAIN_WINDOW_WEBPACK_ENTRY);
 
@@ -25,14 +24,14 @@ const db = new Datastore({
   filename: `${app.getPath('userData')}/nedb/data`
 });
 
-type asyncCallback = (error: any, results: any) => void;
+type asyncCallback = (error: string|null, results: number|string) => void;
 const count = (callback: asyncCallback) => {
-  db.count({}, (err: any, count: number) => {
+  db.count({}, (err, count) => {
     callback(null, count);
   });
 };
 const start = (callback: asyncCallback) => {
-  db.find({}).sort({ time: 1 }).limit(1).exec((err: any, docs: any) => {
+  db.find({}).sort({ time: 1 }).limit(1).exec((err, docs) => {
     if (docs.length > 0) {
       return callback(null, moment.unix(docs[0].time).format('DD-MM-YYYY'));
     }
@@ -41,7 +40,7 @@ const start = (callback: asyncCallback) => {
   });
 };
 const end = (callback: asyncCallback) => {
-  db.find({}).sort({ time: -1 }).limit(1).exec((err: any, docs: any) => {
+  db.find({}).sort({ time: -1 }).limit(1).exec((err, docs) => {
     if (docs.length > 0) {
       return callback(null, moment.unix(docs[0].time).format('DD-MM-YYYY'));
     }
@@ -94,12 +93,16 @@ const createWindow = (): void => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
-  /*installExtension(REACT_DEVELOPER_TOOLS)
-    .then((name: string) => {
-      console.log(`Added Extension:  ${name}`);*/
+  if (process.env.NODE_ENV === 'develop') {
+    installExtension(REACT_DEVELOPER_TOOLS)
+      .then(name => {
+        console.log(`Added Extension:  ${name}`);
+        createWindow();
+      })
+      .catch(err => console.log('An error occurred: ', err));
+    } else {
       createWindow();
-    /*})
-    .catch((err: any) => console.log('An error occurred: ', err));*/
+  }
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common
@@ -121,7 +124,7 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
-ipcMain.on('query-data',(event, arg) => {
+ipcMain.on('query-data',(event) => {
   db.find({ time: { $exists: true } }).sort({ time: 1 }).exec((err, docs) => {
     event.reply(
       'query-data',
@@ -131,7 +134,7 @@ ipcMain.on('query-data',(event, arg) => {
   });
 });
 
-ipcMain.on('open-file-dialog', (event, arg) => {
+ipcMain.on('open-file-dialog', (event) => {
   console.log(app.getPath('userData'));
   dialog.showOpenDialog({
     title: 'Select your data',
@@ -161,14 +164,14 @@ ipcMain.on('open-file-dialog', (event, arg) => {
             return value;
           }
         }))
-        .on('data', (data: any) =>  parsedData.push(data))
+        .on('data', data =>  parsedData.push(data))
         .on('end', () => {
           // Check for duplicates.
           let duplicates = 0,
             deDuplicatedData: any[] = [];
 
-          async.each(parsedData, (record: any, callback) => {
-            db.count({ "time": record.time },  (err: any, count: number)  => {
+          async.each(parsedData, (record, callback) => {
+            db.count({ "time": record.time },  (err, count)  => {
               console.log('count', count);
               if (count) {
                 duplicates += 1;
@@ -177,7 +180,7 @@ ipcMain.on('open-file-dialog', (event, arg) => {
               }
               callback();
             });
-          }, (error: any) => {
+          }, () => {
             db.insert(deDuplicatedData, () => {
               db.find({ time: { $exists: true } }).sort({ time: 1 }).exec((err, docs) => {
                 event.reply(

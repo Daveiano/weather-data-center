@@ -20,6 +20,8 @@ export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: Diagr
 
     let newData: any = [];
 
+    console.log('temperature', props.data);
+
     if (timeDifferenceInDays > 14) {
       setDaily(true);
       newData = scaleAverage(props.data, 'temperature');
@@ -27,6 +29,8 @@ export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: Diagr
       setDaily(false);
       newData = props.data;
     }
+
+    console.log('temperature', newData);
 
     setData(newData);
     setLoading(false);

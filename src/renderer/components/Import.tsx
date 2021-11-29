@@ -25,7 +25,7 @@ class Import extends Component<Props> {
 
   selectFile = (): void => {
     this.props.dispatch(isLoadingAction(true));
-    window.electron.IpcSend('open-file-dialog', []);
+    window.electron.IpcSend('open-file-dialog', null);
   };
 
   // @todo: Display notification: xx records imported.

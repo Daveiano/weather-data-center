@@ -45,14 +45,13 @@ class Start extends Component<Props> {
     this.props.dispatch(isLoadingAction(true));
 
     if (!this.state.data.length) {
-      window.electron.IpcSend('query-data', []);
+      window.electron.IpcSend('query-data', null);
     } else {
       this.props.dispatch(isLoadingAction(false));
     }
   }
 
-  componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<{}>, snapshot?: any) {
-    console.log('hä', this.props.appState.data);
+  componentDidUpdate(prevProps: Props) {
     if (JSON.stringify(prevProps.appState.dateSetByUser) !== JSON.stringify(this.props.appState.dateSetByUser) && this.props.appState.data.length) {
       this.filterDataPerTime();
     }

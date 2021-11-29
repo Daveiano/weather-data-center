@@ -1,0 +1,1732 @@
+[
+  {
+    "time": 1614884220,
+    "temperature": 2.3,
+    "humidity": 88,
+    "pressure": 984,
+    "rain": 0.5,
+    "_id": "F3cQFRtEbdtMFV8Y",
+    "group": "data",
+    "timeParsed": "2021-03-04T18:57:00.000Z"
+  },
+  {
+    "time": 1614891420,
+    "temperature": 1,
+    "humidity": 88,
+    "pressure": 984.3,
+    "rain": 0.5,
+    "_id": "bnRtRFhb2CT48QDL",
+    "group": "data",
+    "timeParsed": "2021-03-04T20:57:00.000Z"
+  },
+  {
+    "time": 1614898620,
+    "temperature": 0.6,
+    "humidity": 94,
+    "pressure": 985.3,
+    "rain": 0.5,
+    "_id": "LH4MAdw9MQewdtHX",
+    "group": "data",
+    "timeParsed": "2021-03-04T22:57:00.000Z"
+  },
+  {
+    "time": 1614898740,
+    "temperature": 0.6,
+    "humidity": 94,
+    "pressure": 985.2,
+    "rain": 0.5,
+    "_id": "GBLQVlKfGisf2wF3",
+    "group": "data",
+    "timeParsed": "2021-03-04T22:59:00.000Z"
+  },
+  {
+    "time": 1614898800,
+    "temperature": 0.6,
+    "humidity": 94,
+    "pressure": 985.2,
+    "rain": 0,
+    "_id": "D0noLM9vSqlUDqPN",
+    "group": "data",
+    "timeParsed": "2021-03-04T23:00:00.000Z"
+  },
+  {
+    "time": 1614905820,
+    "temperature": 0.2,
+    "humidity": 99,
+    "pressure": 985.5,
+    "rain": 0,
+    "_id": "ViIMxWNip8mye17c",
+    "group": "data",
+    "timeParsed": "2021-03-05T00:57:00.000Z"
+  },
+  {
+    "time": 1614913020,
+    "temperature": 0.4,
+    "humidity": 99,
+    "pressure": 986.1,
+    "rain": 0,
+    "_id": "2dEF1y1psOkTdBPd",
+    "group": "data",
+    "timeParsed": "2021-03-05T02:57:00.000Z"
+  },
+  {
+    "time": 1614920220,
+    "temperature": -0.2,
+    "humidity": 96,
+    "pressure": 987.6,
+    "rain": 0,
+    "_id": "jZ4Qjkff4l1tW3xS",
+    "group": "data",
+    "timeParsed": "2021-03-05T04:57:00.000Z"
+  },
+  {
+    "time": 1614927420,
+    "temperature": -0.7,
+    "humidity": 93,
+    "pressure": 989.7,
+    "rain": 0,
+    "_id": "aXh2nDjsAp9w730p",
+    "group": "data",
+    "timeParsed": "2021-03-05T06:57:00.000Z"
+  },
+  {
+    "time": 1614934620,
+    "temperature": 1.2,
+    "humidity": 77,
+    "pressure": 991,
+    "rain": 0.3,
+    "_id": "r2zhG4DdH8g0YFwz",
+    "group": "data",
+    "timeParsed": "2021-03-05T08:57:00.000Z"
+  },
+  {
+    "time": 1614941820,
+    "temperature": 2.4,
+    "humidity": 58,
+    "pressure": 992.2,
+    "rain": 0.8,
+    "_id": "xfA2CqloDKx3jBa4",
+    "group": "data",
+    "timeParsed": "2021-03-05T10:57:00.000Z"
+  },
+  {
+    "time": 1614949020,
+    "temperature": 3,
+    "humidity": 51,
+    "pressure": 992.7,
+    "rain": 0.8,
+    "_id": "JMeWSqRJgWobBxws",
+    "group": "data",
+    "timeParsed": "2021-03-05T12:57:00.000Z"
+  },
+  {
+    "time": 1614956220,
+    "temperature": 5.8,
+    "humidity": 39,
+    "pressure": 993.6,
+    "rain": 0.8,
+    "_id": "r6VXeQyh6l56oWfl",
+    "group": "data",
+    "timeParsed": "2021-03-05T14:57:00.000Z"
+  },
+  {
+    "time": 1614963420,
+    "temperature": 0.3,
+    "humidity": 65,
+    "pressure": 995.1,
+    "rain": 0.8,
+    "_id": "JRvKs81pEojBB4LE",
+    "group": "data",
+    "timeParsed": "2021-03-05T16:57:00.000Z"
+  },
+  {
+    "time": 1614970620,
+    "temperature": -2,
+    "humidity": 76,
+    "pressure": 996.6,
+    "rain": 0.8,
+    "_id": "CnMBDsuU6gSoEBW6",
+    "group": "data",
+    "timeParsed": "2021-03-05T18:57:00.000Z"
+  },
+  {
+    "time": 1614977820,
+    "temperature": -2.1,
+    "humidity": 72,
+    "pressure": 998.2,
+    "rain": 0.8,
+    "_id": "EGHudgBpH6M39q4m",
+    "group": "data",
+    "timeParsed": "2021-03-05T20:57:00.000Z"
+  },
+  {
+    "time": 1614985020,
+    "temperature": -2.6,
+    "humidity": 78,
+    "pressure": 998.4,
+    "rain": 0.8,
+    "_id": "0qPqAMxe4ZstJKhb",
+    "group": "data",
+    "timeParsed": "2021-03-05T22:57:00.000Z"
+  },
+  {
+    "time": 1614985140,
+    "temperature": -2.6,
+    "humidity": 74,
+    "pressure": 998.5,
+    "rain": 0.8,
+    "_id": "SMf0NWpEGJzcDTII",
+    "group": "data",
+    "timeParsed": "2021-03-05T22:59:00.000Z"
+  },
+  {
+    "time": 1614985200,
+    "temperature": -2.6,
+    "humidity": 74,
+    "pressure": 998.5,
+    "rain": 0,
+    "_id": "gWfUs9ayXDaUujyT",
+    "group": "data",
+    "timeParsed": "2021-03-05T23:00:00.000Z"
+  },
+  {
+    "time": 1614992220,
+    "temperature": -2.8,
+    "humidity": 78,
+    "pressure": 998.8,
+    "rain": 0,
+    "_id": "WiZSR8A5ZgCEdvf7",
+    "group": "data",
+    "timeParsed": "2021-03-06T00:57:00.000Z"
+  },
+  {
+    "time": 1614999420,
+    "temperature": -3.2,
+    "humidity": 78,
+    "pressure": 998.7,
+    "rain": 0,
+    "_id": "Vy35GsNbNcNLTgV2",
+    "group": "data",
+    "timeParsed": "2021-03-06T02:57:00.000Z"
+  },
+  {
+    "time": 1615006620,
+    "temperature": -3.5,
+    "humidity": 82,
+    "pressure": 999.6,
+    "rain": 0,
+    "_id": "Kt2RwaBJhxTxvfSx",
+    "group": "data",
+    "timeParsed": "2021-03-06T04:57:00.000Z"
+  },
+  {
+    "time": 1615013820,
+    "temperature": -1,
+    "humidity": 72,
+    "pressure": 1000.5,
+    "rain": 0,
+    "_id": "BFmE4zON6q1i4cxa",
+    "group": "data",
+    "timeParsed": "2021-03-06T06:57:00.000Z"
+  },
+  {
+    "time": 1615021020,
+    "temperature": 0.7,
+    "humidity": 67,
+    "pressure": 1000.6,
+    "rain": 0,
+    "_id": "kUKWdfWY8ptAZQfk",
+    "group": "data",
+    "timeParsed": "2021-03-06T08:57:00.000Z"
+  },
+  {
+    "time": 1615028220,
+    "temperature": 3.3,
+    "humidity": 56,
+    "pressure": 999.6,
+    "rain": 0,
+    "_id": "OXWbElmwMSO2iufN",
+    "group": "data",
+    "timeParsed": "2021-03-06T10:57:00.000Z"
+  },
+  {
+    "time": 1615035420,
+    "temperature": 4,
+    "humidity": 55,
+    "pressure": 998.8,
+    "rain": 0,
+    "_id": "Kpgvqaw67pFugGJz",
+    "group": "data",
+    "timeParsed": "2021-03-06T12:57:00.000Z"
+  },
+  {
+    "time": 1615042620,
+    "temperature": 4.1,
+    "humidity": 57,
+    "pressure": 997.9,
+    "rain": 0,
+    "_id": "HM6cv3lWA5Sgf556",
+    "group": "data",
+    "timeParsed": "2021-03-06T14:57:00.000Z"
+  },
+  {
+    "time": 1615049820,
+    "temperature": 2.4,
+    "humidity": 63,
+    "pressure": 997.9,
+    "rain": 0,
+    "_id": "LfYw6Rpr3COb1m7b",
+    "group": "data",
+    "timeParsed": "2021-03-06T16:57:00.000Z"
+  },
+  {
+    "time": 1615057020,
+    "temperature": 0.9,
+    "humidity": 76,
+    "pressure": 997.2,
+    "rain": 0,
+    "_id": "n1DxYeDF4rpj5aBo",
+    "group": "data",
+    "timeParsed": "2021-03-06T18:57:00.000Z"
+  },
+  {
+    "time": 1615064220,
+    "temperature": 1.2,
+    "humidity": 76,
+    "pressure": 996.6,
+    "rain": 0,
+    "_id": "iRJ6vyxwQ7W44s04",
+    "group": "data",
+    "timeParsed": "2021-03-06T20:57:00.000Z"
+  },
+  {
+    "time": 1615071420,
+    "temperature": 1.5,
+    "humidity": 77,
+    "pressure": 996,
+    "rain": 0,
+    "_id": "U23003k0y0n916K8",
+    "group": "data",
+    "timeParsed": "2021-03-06T22:57:00.000Z"
+  },
+  {
+    "time": 1615071540,
+    "temperature": 1.5,
+    "humidity": 77,
+    "pressure": 995.8,
+    "rain": 0,
+    "_id": "t8iN7WuryiggEXzJ",
+    "group": "data",
+    "timeParsed": "2021-03-06T22:59:00.000Z"
+  },
+  {
+    "time": 1615071600,
+    "temperature": 1.5,
+    "humidity": 77,
+    "pressure": 995.8,
+    "rain": 0,
+    "_id": "DZcZVT1cMUffBtrm",
+    "group": "data",
+    "timeParsed": "2021-03-06T23:00:00.000Z"
+  },
+  {
+    "time": 1615078620,
+    "temperature": 1.4,
+    "humidity": 78,
+    "pressure": 995.1,
+    "rain": 0,
+    "_id": "asJqUTyPOpUaRxjP",
+    "group": "data",
+    "timeParsed": "2021-03-07T00:57:00.000Z"
+  },
+  {
+    "time": 1615085820,
+    "temperature": 0.9,
+    "humidity": 77,
+    "pressure": 993.6,
+    "rain": 0,
+    "_id": "tiWqatu2SzWR4gBS",
+    "group": "data",
+    "timeParsed": "2021-03-07T02:57:00.000Z"
+  },
+  {
+    "time": 1615093020,
+    "temperature": 0.9,
+    "humidity": 72,
+    "pressure": 992.9,
+    "rain": 0,
+    "_id": "OW3rkVgRrLoGMGU9",
+    "group": "data",
+    "timeParsed": "2021-03-07T04:57:00.000Z"
+  },
+  {
+    "time": 1615100220,
+    "temperature": 1.1,
+    "humidity": 71,
+    "pressure": 992.6,
+    "rain": 0,
+    "_id": "HanD8VjHlSAyA4Kx",
+    "group": "data",
+    "timeParsed": "2021-03-07T06:57:00.000Z"
+  },
+  {
+    "time": 1615107420,
+    "temperature": 1.3,
+    "humidity": 74,
+    "pressure": 992.1,
+    "rain": 0,
+    "_id": "Gcy2wOp0k8njrmbJ",
+    "group": "data",
+    "timeParsed": "2021-03-07T08:57:00.000Z"
+  },
+  {
+    "time": 1615114620,
+    "temperature": 2.2,
+    "humidity": 74,
+    "pressure": 990.8,
+    "rain": 0,
+    "_id": "TG3tKBH5CbbI3Zin",
+    "group": "data",
+    "timeParsed": "2021-03-07T10:57:00.000Z"
+  },
+  {
+    "time": 1615121820,
+    "temperature": 1.8,
+    "humidity": 71,
+    "pressure": 989.4,
+    "rain": 1.2,
+    "_id": "fGjtjXlFdYHwsKTJ",
+    "group": "data",
+    "timeParsed": "2021-03-07T12:57:00.000Z"
+  },
+  {
+    "time": 1615129020,
+    "temperature": 2.7,
+    "humidity": 67,
+    "pressure": 987.9,
+    "rain": 1.2,
+    "_id": "FW5N9jCmpgbdUoNW",
+    "group": "data",
+    "timeParsed": "2021-03-07T14:57:00.000Z"
+  },
+  {
+    "time": 1615136220,
+    "temperature": 1.1,
+    "humidity": 68,
+    "pressure": 987.5,
+    "rain": 1.2,
+    "_id": "5or6MLOLY3glWbmx",
+    "group": "data",
+    "timeParsed": "2021-03-07T16:57:00.000Z"
+  },
+  {
+    "time": 1615143420,
+    "temperature": 0.8,
+    "humidity": 67,
+    "pressure": 987.2,
+    "rain": 1.2,
+    "_id": "wvTXd7cBOnXToqIn",
+    "group": "data",
+    "timeParsed": "2021-03-07T18:57:00.000Z"
+  },
+  {
+    "time": 1615150620,
+    "temperature": 0.6,
+    "humidity": 71,
+    "pressure": 987.4,
+    "rain": 1.2,
+    "_id": "8ejmIV0hlnW938oc",
+    "group": "data",
+    "timeParsed": "2021-03-07T20:57:00.000Z"
+  },
+  {
+    "time": 1615157820,
+    "temperature": 0.3,
+    "humidity": 77,
+    "pressure": 986.4,
+    "rain": 1.2,
+    "_id": "u7xHc3mrXKpXtgSf",
+    "group": "data",
+    "timeParsed": "2021-03-07T22:57:00.000Z"
+  },
+  {
+    "time": 1615157940,
+    "temperature": 0.3,
+    "humidity": 78,
+    "pressure": 986.7,
+    "rain": 1.2,
+    "_id": "dzEomYOixR91EVHK",
+    "group": "data",
+    "timeParsed": "2021-03-07T22:59:00.000Z"
+  },
+  {
+    "time": 1615158000,
+    "temperature": 0.3,
+    "humidity": 78,
+    "pressure": 986.7,
+    "rain": 0,
+    "_id": "3NklidNq7dpX49Cx",
+    "group": "data",
+    "timeParsed": "2021-03-07T23:00:00.000Z"
+  },
+  {
+    "time": 1615165020,
+    "temperature": -0.8,
+    "humidity": 96,
+    "pressure": 986.7,
+    "rain": 0,
+    "_id": "oy7F66gwaIXMbxoM",
+    "group": "data",
+    "timeParsed": "2021-03-08T00:57:00.000Z"
+  },
+  {
+    "time": 1615172220,
+    "temperature": -0.7,
+    "humidity": 98,
+    "pressure": 986.9,
+    "rain": 0,
+    "_id": "KhSHCkBYwiN7c2oQ",
+    "group": "data",
+    "timeParsed": "2021-03-08T02:57:00.000Z"
+  },
+  {
+    "time": 1615179420,
+    "temperature": -0.5,
+    "humidity": 99,
+    "pressure": 987.8,
+    "rain": 0,
+    "_id": "VAcNlZPObErQnFSr",
+    "group": "data",
+    "timeParsed": "2021-03-08T04:57:00.000Z"
+  },
+  {
+    "time": 1615186620,
+    "temperature": -0.2,
+    "humidity": 99,
+    "pressure": 988.9,
+    "rain": 0,
+    "_id": "PbKtKwy6ffv47oH7",
+    "group": "data",
+    "timeParsed": "2021-03-08T06:57:00.000Z"
+  },
+  {
+    "time": 1615193820,
+    "temperature": 1.2,
+    "humidity": 80,
+    "pressure": 990,
+    "rain": 0,
+    "_id": "v0oih7DRfjdxCIZs",
+    "group": "data",
+    "timeParsed": "2021-03-08T08:57:00.000Z"
+  },
+  {
+    "time": 1615201020,
+    "temperature": 3.5,
+    "humidity": 56,
+    "pressure": 990.1,
+    "rain": 1.1,
+    "_id": "E1drRPPgv71cfM0I",
+    "group": "data",
+    "timeParsed": "2021-03-08T10:57:00.000Z"
+  },
+  {
+    "time": 1615208220,
+    "temperature": 5.4,
+    "humidity": 45,
+    "pressure": 989.9,
+    "rain": 1.1,
+    "_id": "hMl71F1C6HgiEMrn",
+    "group": "data",
+    "timeParsed": "2021-03-08T12:57:00.000Z"
+  },
+  {
+    "time": 1615215420,
+    "temperature": 5,
+    "humidity": 35,
+    "pressure": 989.6,
+    "rain": 1.1,
+    "_id": "5WoUqGDAN4zlBOa1",
+    "group": "data",
+    "timeParsed": "2021-03-08T14:57:00.000Z"
+  },
+  {
+    "time": 1615222620,
+    "temperature": 0.5,
+    "humidity": 62,
+    "pressure": 989.6,
+    "rain": 1.1,
+    "_id": "cgMhphqyujIffeSm",
+    "group": "data",
+    "timeParsed": "2021-03-08T16:57:00.000Z"
+  },
+  {
+    "time": 1615229820,
+    "temperature": -1.3,
+    "humidity": 67,
+    "pressure": 990.7,
+    "rain": 1.1,
+    "_id": "9BsMYb3ODsWAlsvg",
+    "group": "data",
+    "timeParsed": "2021-03-08T18:57:00.000Z"
+  },
+  {
+    "time": 1615237020,
+    "temperature": -1.1,
+    "humidity": 62,
+    "pressure": 990.1,
+    "rain": 1.1,
+    "_id": "yXdvPlsMGABZYgLh",
+    "group": "data",
+    "timeParsed": "2021-03-08T20:57:00.000Z"
+  },
+  {
+    "time": 1615244220,
+    "temperature": -1.6,
+    "humidity": 66,
+    "pressure": 989.6,
+    "rain": 1.1,
+    "_id": "hpX2dGfKyrFbrPE1",
+    "group": "data",
+    "timeParsed": "2021-03-08T22:57:00.000Z"
+  },
+  {
+    "time": 1615244340,
+    "temperature": -1.5,
+    "humidity": 64,
+    "pressure": 989.3,
+    "rain": 1.1,
+    "_id": "FELs17RwYFefjphf",
+    "group": "data",
+    "timeParsed": "2021-03-08T22:59:00.000Z"
+  },
+  {
+    "time": 1615244400,
+    "temperature": -1.5,
+    "humidity": 64,
+    "pressure": 989.3,
+    "rain": 0,
+    "_id": "dCbp8ld8Z5sizvtV",
+    "group": "data",
+    "timeParsed": "2021-03-08T23:00:00.000Z"
+  },
+  {
+    "time": 1615251420,
+    "temperature": -1.9,
+    "humidity": 67,
+    "pressure": 989.5,
+    "rain": 0,
+    "_id": "HmqYXczKcwF970pB",
+    "group": "data",
+    "timeParsed": "2021-03-09T00:57:00.000Z"
+  },
+  {
+    "time": 1615258620,
+    "temperature": -0.8,
+    "humidity": 48,
+    "pressure": 989,
+    "rain": 0,
+    "_id": "R0Sq0LK0k0yx1pvw",
+    "group": "data",
+    "timeParsed": "2021-03-09T02:57:00.000Z"
+  },
+  {
+    "time": 1615265820,
+    "temperature": -0.7,
+    "humidity": 50,
+    "pressure": 989,
+    "rain": 0,
+    "_id": "5Bu4KBWx6N0xjT40",
+    "group": "data",
+    "timeParsed": "2021-03-09T04:57:00.000Z"
+  },
+  {
+    "time": 1615273020,
+    "temperature": -0.1,
+    "humidity": 53,
+    "pressure": 989.3,
+    "rain": 0,
+    "_id": "3KX9jjWMtfsArHo0",
+    "group": "data",
+    "timeParsed": "2021-03-09T06:57:00.000Z"
+  },
+  {
+    "time": 1615280220,
+    "temperature": 1.6,
+    "humidity": 53,
+    "pressure": 989.2,
+    "rain": 0,
+    "_id": "N6KHSmNcVe4QqPFM",
+    "group": "data",
+    "timeParsed": "2021-03-09T08:57:00.000Z"
+  },
+  {
+    "time": 1615287420,
+    "temperature": 2.6,
+    "humidity": 44,
+    "pressure": 987.5,
+    "rain": 0,
+    "_id": "SZRNel6qGupJDrT5",
+    "group": "data",
+    "timeParsed": "2021-03-09T10:57:00.000Z"
+  },
+  {
+    "time": 1615294620,
+    "temperature": 3.4,
+    "humidity": 41,
+    "pressure": 986.6,
+    "rain": 0,
+    "_id": "0ZwKwxJ4iC7HcDdi",
+    "group": "data",
+    "timeParsed": "2021-03-09T12:57:00.000Z"
+  },
+  {
+    "time": 1615301820,
+    "temperature": 4.7,
+    "humidity": 40,
+    "pressure": 985.8,
+    "rain": 0,
+    "_id": "P9EhMHN4NbZ6RyNx",
+    "group": "data",
+    "timeParsed": "2021-03-09T14:57:00.000Z"
+  },
+  {
+    "time": 1615309020,
+    "temperature": 1.4,
+    "humidity": 49,
+    "pressure": 986,
+    "rain": 0,
+    "_id": "tgO7CtIYHjopVYth",
+    "group": "data",
+    "timeParsed": "2021-03-09T16:57:00.000Z"
+  },
+  {
+    "time": 1615316220,
+    "temperature": 1.1,
+    "humidity": 54,
+    "pressure": 986.8,
+    "rain": 0,
+    "_id": "0v1WION2rwhKBxfo",
+    "group": "data",
+    "timeParsed": "2021-03-09T18:57:00.000Z"
+  },
+  {
+    "time": 1615323420,
+    "temperature": 0.5,
+    "humidity": 52,
+    "pressure": 987.1,
+    "rain": 0,
+    "_id": "Ak5nLNccbFCwKnrh",
+    "group": "data",
+    "timeParsed": "2021-03-09T20:57:00.000Z"
+  },
+  {
+    "time": 1615330620,
+    "temperature": 0.7,
+    "humidity": 56,
+    "pressure": 987,
+    "rain": 0,
+    "_id": "prXoJ1Rmy7oWfOPg",
+    "group": "data",
+    "timeParsed": "2021-03-09T22:57:00.000Z"
+  },
+  {
+    "time": 1615330740,
+    "temperature": 0.6,
+    "humidity": 55,
+    "pressure": 987,
+    "rain": 0,
+    "_id": "9qHdGzUdf24aaFat",
+    "group": "data",
+    "timeParsed": "2021-03-09T22:59:00.000Z"
+  },
+  {
+    "time": 1615330800,
+    "temperature": 0.6,
+    "humidity": 55,
+    "pressure": 986.9,
+    "rain": 0,
+    "_id": "XK0BlxhAkSEaebO0",
+    "group": "data",
+    "timeParsed": "2021-03-09T23:00:00.000Z"
+  },
+  {
+    "time": 1615337820,
+    "temperature": 0.3,
+    "humidity": 60,
+    "pressure": 986.6,
+    "rain": 0,
+    "_id": "H6OrMdAc2tUawARd",
+    "group": "data",
+    "timeParsed": "2021-03-10T00:57:00.000Z"
+  },
+  {
+    "time": 1615345020,
+    "temperature": 0,
+    "humidity": 60,
+    "pressure": 986.8,
+    "rain": 0,
+    "_id": "aG6AsRPKMBIEiSju",
+    "group": "data",
+    "timeParsed": "2021-03-10T02:57:00.000Z"
+  },
+  {
+    "time": 1615352220,
+    "temperature": -0.7,
+    "humidity": 64,
+    "pressure": 987.4,
+    "rain": 0,
+    "_id": "W4cPVfmOV7m77D6s",
+    "group": "data",
+    "timeParsed": "2021-03-10T04:57:00.000Z"
+  },
+  {
+    "time": 1615359420,
+    "temperature": 0.5,
+    "humidity": 67,
+    "pressure": 988.3,
+    "rain": 0,
+    "_id": "Ei4Pe3Cqr2p4nFgX",
+    "group": "data",
+    "timeParsed": "2021-03-10T06:57:00.000Z"
+  },
+  {
+    "time": 1615366620,
+    "temperature": 3.8,
+    "humidity": 54,
+    "pressure": 988.5,
+    "rain": 0,
+    "_id": "t9GBxAxEsOyBVNfP",
+    "group": "data",
+    "timeParsed": "2021-03-10T08:57:00.000Z"
+  },
+  {
+    "time": 1615373820,
+    "temperature": 5.5,
+    "humidity": 46,
+    "pressure": 988,
+    "rain": 0,
+    "_id": "SWycKIMv1PhXCGPO",
+    "group": "data",
+    "timeParsed": "2021-03-10T10:57:00.000Z"
+  },
+  {
+    "time": 1615381020,
+    "temperature": 6.1,
+    "humidity": 37,
+    "pressure": 987.2,
+    "rain": 0,
+    "_id": "u7vD09wonfXHs9bB",
+    "group": "data",
+    "timeParsed": "2021-03-10T12:57:00.000Z"
+  },
+  {
+    "time": 1615388220,
+    "temperature": 5.7,
+    "humidity": 48,
+    "pressure": 986.9,
+    "rain": 0,
+    "_id": "wxajm045wqqFIiRA",
+    "group": "data",
+    "timeParsed": "2021-03-10T14:57:00.000Z"
+  },
+  {
+    "time": 1615395420,
+    "temperature": 3,
+    "humidity": 62,
+    "pressure": 986.8,
+    "rain": 0,
+    "_id": "caSI0xInzF5BFx1D",
+    "group": "data",
+    "timeParsed": "2021-03-10T16:57:00.000Z"
+  },
+  {
+    "time": 1615402620,
+    "temperature": 2.3,
+    "humidity": 71,
+    "pressure": 986.5,
+    "rain": 0,
+    "_id": "BkfSJGXGfAnjEGE9",
+    "group": "data",
+    "timeParsed": "2021-03-10T18:57:00.000Z"
+  },
+  {
+    "time": 1615409820,
+    "temperature": 1.7,
+    "humidity": 74,
+    "pressure": 985.3,
+    "rain": 0,
+    "_id": "aiFSSF4mfLNcu6gT",
+    "group": "data",
+    "timeParsed": "2021-03-10T20:57:00.000Z"
+  },
+  {
+    "time": 1615417020,
+    "temperature": 1.7,
+    "humidity": 75,
+    "pressure": 983.3,
+    "rain": 0,
+    "_id": "Q6Bs1KSSAxLVL0Ec",
+    "group": "data",
+    "timeParsed": "2021-03-10T22:57:00.000Z"
+  },
+  {
+    "time": 1615417140,
+    "temperature": 1.7,
+    "humidity": 75,
+    "pressure": 983.2,
+    "rain": 0,
+    "_id": "pOWlYX8XOa5YzsKt",
+    "group": "data",
+    "timeParsed": "2021-03-10T22:59:00.000Z"
+  },
+  {
+    "time": 1615417200,
+    "temperature": 1.7,
+    "humidity": 75,
+    "pressure": 983.2,
+    "rain": 0,
+    "_id": "dyv6D3y9OyPstdWH",
+    "group": "data",
+    "timeParsed": "2021-03-10T23:00:00.000Z"
+  },
+  {
+    "time": 1615424220,
+    "temperature": 1.8,
+    "humidity": 77,
+    "pressure": 981.5,
+    "rain": 0,
+    "_id": "3XQolFIUe2Qn5NEb",
+    "group": "data",
+    "timeParsed": "2021-03-11T00:57:00.000Z"
+  },
+  {
+    "time": 1615431420,
+    "temperature": 1.7,
+    "humidity": 77,
+    "pressure": 979.6,
+    "rain": 0,
+    "_id": "LomYsK2AklqNx0bN",
+    "group": "data",
+    "timeParsed": "2021-03-11T02:57:00.000Z"
+  },
+  {
+    "time": 1615438620,
+    "temperature": 1,
+    "humidity": 88,
+    "pressure": 977.9,
+    "rain": 0,
+    "_id": "krUVzW0SCMDoOZ4T",
+    "group": "data",
+    "timeParsed": "2021-03-11T04:57:00.000Z"
+  },
+  {
+    "time": 1615445820,
+    "temperature": 1.3,
+    "humidity": 90,
+    "pressure": 975.4,
+    "rain": 0.2,
+    "_id": "PbHjR7faWLeoVzwg",
+    "group": "data",
+    "timeParsed": "2021-03-11T06:57:00.000Z"
+  },
+  {
+    "time": 1615453020,
+    "temperature": 2.1,
+    "humidity": 91,
+    "pressure": 973.6,
+    "rain": 2.2,
+    "_id": "RONWNxbWG6Fin6eL",
+    "group": "data",
+    "timeParsed": "2021-03-11T08:57:00.000Z"
+  },
+  {
+    "time": 1615460220,
+    "temperature": 3.7,
+    "humidity": 88,
+    "pressure": 971.4,
+    "rain": 2.2,
+    "_id": "X9KbGf0yODeUXIuW",
+    "group": "data",
+    "timeParsed": "2021-03-11T10:57:00.000Z"
+  },
+  {
+    "time": 1615467420,
+    "temperature": 5.4,
+    "humidity": 89,
+    "pressure": 969.8,
+    "rain": 5,
+    "_id": "HmMBziYDUZullPog",
+    "group": "data",
+    "timeParsed": "2021-03-11T12:57:00.000Z"
+  },
+  {
+    "time": 1615474620,
+    "temperature": 6.3,
+    "humidity": 84,
+    "pressure": 967.8,
+    "rain": 5,
+    "_id": "NTflDyAGq5gxe3GJ",
+    "group": "data",
+    "timeParsed": "2021-03-11T14:57:00.000Z"
+  },
+  {
+    "time": 1615481820,
+    "temperature": 8.7,
+    "humidity": 78,
+    "pressure": 967.2,
+    "rain": 5,
+    "_id": "SpFNUDqncoG8IMq0",
+    "group": "data",
+    "timeParsed": "2021-03-11T16:57:00.000Z"
+  },
+  {
+    "time": 1615489020,
+    "temperature": 7.8,
+    "humidity": 77,
+    "pressure": 968,
+    "rain": 5,
+    "_id": "I1ltAXSZnurnKULW",
+    "group": "data",
+    "timeParsed": "2021-03-11T18:57:00.000Z"
+  },
+  {
+    "time": 1615496220,
+    "temperature": 6.8,
+    "humidity": 75,
+    "pressure": 968.6,
+    "rain": 5,
+    "_id": "LPCLol5qPE66NMKI",
+    "group": "data",
+    "timeParsed": "2021-03-11T20:57:00.000Z"
+  },
+  {
+    "time": 1615503420,
+    "temperature": 7.7,
+    "humidity": 72,
+    "pressure": 968.3,
+    "rain": 5,
+    "_id": "3x7OgmjyGY77b8jn",
+    "group": "data",
+    "timeParsed": "2021-03-11T22:57:00.000Z"
+  },
+  {
+    "time": 1615503540,
+    "temperature": 7.7,
+    "humidity": 72,
+    "pressure": 968.6,
+    "rain": 5,
+    "_id": "w5tVdtFgRVg1bv2E",
+    "group": "data",
+    "timeParsed": "2021-03-11T22:59:00.000Z"
+  },
+  {
+    "time": 1615503600,
+    "temperature": 7.7,
+    "humidity": 72,
+    "pressure": 968.6,
+    "rain": 0,
+    "_id": "kGKHW35xHDU8fYam",
+    "group": "data",
+    "timeParsed": "2021-03-11T23:00:00.000Z"
+  },
+  {
+    "time": 1615510620,
+    "temperature": 4.8,
+    "humidity": 88,
+    "pressure": 971.2,
+    "rain": 0,
+    "_id": "i0umgRkX9n9V9fB4",
+    "group": "data",
+    "timeParsed": "2021-03-12T00:57:00.000Z"
+  },
+  {
+    "time": 1615517820,
+    "temperature": 4.2,
+    "humidity": 88,
+    "pressure": 971.1,
+    "rain": 2.1,
+    "_id": "xburIqKYPmdBUhTY",
+    "group": "data",
+    "timeParsed": "2021-03-12T02:57:00.000Z"
+  },
+  {
+    "time": 1615525020,
+    "temperature": 3.3,
+    "humidity": 95,
+    "pressure": 972.8,
+    "rain": 4.4,
+    "_id": "yi6ovZ3qKHLBIgxv",
+    "group": "data",
+    "timeParsed": "2021-03-12T04:57:00.000Z"
+  },
+  {
+    "time": 1615532220,
+    "temperature": 3.7,
+    "humidity": 89,
+    "pressure": 975.2,
+    "rain": 5.4,
+    "_id": "uEnVZsHhOKqARXon",
+    "group": "data",
+    "timeParsed": "2021-03-12T06:57:00.000Z"
+  },
+  {
+    "time": 1615539420,
+    "temperature": 6,
+    "humidity": 74,
+    "pressure": 977,
+    "rain": 5.4,
+    "_id": "81nx7pwjGyJQCTVR",
+    "group": "data",
+    "timeParsed": "2021-03-12T08:57:00.000Z"
+  },
+  {
+    "time": 1615546620,
+    "temperature": 6.3,
+    "humidity": 68,
+    "pressure": 976.7,
+    "rain": 5.4,
+    "_id": "mSbrXCBB2I4nd8id",
+    "group": "data",
+    "timeParsed": "2021-03-12T10:57:00.000Z"
+  },
+  {
+    "time": 1615553820,
+    "temperature": 7.3,
+    "humidity": 54,
+    "pressure": 976.4,
+    "rain": 5.4,
+    "_id": "JhNB7TiF5DQuFM5r",
+    "group": "data",
+    "timeParsed": "2021-03-12T12:57:00.000Z"
+  },
+  {
+    "time": 1615561020,
+    "temperature": 7.6,
+    "humidity": 52,
+    "pressure": 976,
+    "rain": 5.4,
+    "_id": "z4NOzDocHPlX4jt2",
+    "group": "data",
+    "timeParsed": "2021-03-12T14:57:00.000Z"
+  },
+  {
+    "time": 1615568220,
+    "temperature": 7.1,
+    "humidity": 52,
+    "pressure": 975.7,
+    "rain": 5.4,
+    "_id": "cXF6JHi9x2iF3xZc",
+    "group": "data",
+    "timeParsed": "2021-03-12T16:57:00.000Z"
+  },
+  {
+    "time": 1615575420,
+    "temperature": 5.6,
+    "humidity": 53,
+    "pressure": 975.1,
+    "rain": 5.4,
+    "_id": "0FmMiMlNi82Iq7Vc",
+    "group": "data",
+    "timeParsed": "2021-03-12T18:57:00.000Z"
+  },
+  {
+    "time": 1615582620,
+    "temperature": 5.5,
+    "humidity": 59,
+    "pressure": 974,
+    "rain": 5.4,
+    "_id": "9MMrawKi8Yoywi7J",
+    "group": "data",
+    "timeParsed": "2021-03-12T20:57:00.000Z"
+  },
+  {
+    "time": 1615589820,
+    "temperature": 5.4,
+    "humidity": 59,
+    "pressure": 972.4,
+    "rain": 5.4,
+    "_id": "iq8bRLXrEZwP0bgV",
+    "group": "data",
+    "timeParsed": "2021-03-12T22:57:00.000Z"
+  },
+  {
+    "time": 1615589940,
+    "temperature": 5.4,
+    "humidity": 60,
+    "pressure": 972.4,
+    "rain": 5.4,
+    "_id": "F5txPXdtbrkJ9al1",
+    "group": "data",
+    "timeParsed": "2021-03-12T22:59:00.000Z"
+  },
+  {
+    "time": 1615590000,
+    "temperature": 5.4,
+    "humidity": 60,
+    "pressure": 972.4,
+    "rain": 0,
+    "_id": "EcnQQn9VENX38sHs",
+    "group": "data",
+    "timeParsed": "2021-03-12T23:00:00.000Z"
+  },
+  {
+    "time": 1615595580,
+    "temperature": 4.4,
+    "humidity": 80,
+    "pressure": 973.1,
+    "rain": 0,
+    "_id": "LcdCiwYkAxVh1p8d",
+    "group": "data",
+    "timeParsed": "2021-03-13T00:33:00.000Z"
+  },
+  {
+    "time": 1615599180,
+    "temperature": 3.9,
+    "humidity": 84,
+    "pressure": 973.1,
+    "rain": 0,
+    "_id": "2T7E1F64ASTJU1VR",
+    "group": "data",
+    "timeParsed": "2021-03-13T01:33:00.000Z"
+  },
+  {
+    "time": 1615602780,
+    "temperature": 4.3,
+    "humidity": 77,
+    "pressure": 972.8,
+    "rain": 0,
+    "_id": "njC8H7Zidj5gnUyS",
+    "group": "data",
+    "timeParsed": "2021-03-13T02:33:00.000Z"
+  },
+  {
+    "time": 1615606380,
+    "temperature": 4.1,
+    "humidity": 76,
+    "pressure": 973,
+    "rain": 0,
+    "_id": "Ratc3HrLm5NzgIPz",
+    "group": "data",
+    "timeParsed": "2021-03-13T03:33:00.000Z"
+  },
+  {
+    "time": 1615609980,
+    "temperature": 4.5,
+    "humidity": 74,
+    "pressure": 973,
+    "rain": 0,
+    "_id": "t03MPf2Bsc5dXSYO",
+    "group": "data",
+    "timeParsed": "2021-03-13T04:33:00.000Z"
+  },
+  {
+    "time": 1615613580,
+    "temperature": 3.8,
+    "humidity": 77,
+    "pressure": 972.4,
+    "rain": 0,
+    "_id": "VPbt4WBsMj3YFX13",
+    "group": "data",
+    "timeParsed": "2021-03-13T05:33:00.000Z"
+  },
+  {
+    "time": 1615617180,
+    "temperature": 4.7,
+    "humidity": 74,
+    "pressure": 972.4,
+    "rain": 0,
+    "_id": "IPNY48S9h0n0jV09",
+    "group": "data",
+    "timeParsed": "2021-03-13T06:33:00.000Z"
+  },
+  {
+    "time": 1615620780,
+    "temperature": 4.3,
+    "humidity": 81,
+    "pressure": 972.2,
+    "rain": 0.2,
+    "_id": "K4wfwGg77dm9lf5l",
+    "group": "data",
+    "timeParsed": "2021-03-13T07:33:00.000Z"
+  },
+  {
+    "time": 1615624380,
+    "temperature": 5.7,
+    "humidity": 79,
+    "pressure": 970.9,
+    "rain": 0.5,
+    "_id": "aNi5qdNwtt8j9cp4",
+    "group": "data",
+    "timeParsed": "2021-03-13T08:33:00.000Z"
+  },
+  {
+    "time": 1615627980,
+    "temperature": 6.8,
+    "humidity": 72,
+    "pressure": 969.8,
+    "rain": 0.5,
+    "_id": "ynZ8USnTcoeBegdF",
+    "group": "data",
+    "timeParsed": "2021-03-13T09:33:00.000Z"
+  },
+  {
+    "time": 1615631580,
+    "temperature": 7.8,
+    "humidity": 68,
+    "pressure": 969.1,
+    "rain": 0.5,
+    "_id": "5ZYvksSzOdSfaPyZ",
+    "group": "data",
+    "timeParsed": "2021-03-13T10:33:00.000Z"
+  },
+  {
+    "time": 1615635180,
+    "temperature": 8.5,
+    "humidity": 65,
+    "pressure": 967.7,
+    "rain": 0.5,
+    "_id": "DtWW4YUdOPd4dXGO",
+    "group": "data",
+    "timeParsed": "2021-03-13T11:33:00.000Z"
+  },
+  {
+    "time": 1615638780,
+    "temperature": 9.2,
+    "humidity": 60,
+    "pressure": 966.2,
+    "rain": 0.5,
+    "_id": "P1dEW7N3i77WjXwe",
+    "group": "data",
+    "timeParsed": "2021-03-13T12:33:00.000Z"
+  },
+  {
+    "time": 1615642380,
+    "temperature": 9.5,
+    "humidity": 58,
+    "pressure": 965.8,
+    "rain": 0.5,
+    "_id": "K8YdVaYcMgR1m9ko",
+    "group": "data",
+    "timeParsed": "2021-03-13T13:33:00.000Z"
+  },
+  {
+    "time": 1615645980,
+    "temperature": 10.3,
+    "humidity": 54,
+    "pressure": 965.2,
+    "rain": 0.5,
+    "_id": "Ccn0xNiKmxhQackS",
+    "group": "data",
+    "timeParsed": "2021-03-13T14:33:00.000Z"
+  },
+  {
+    "time": 1615649580,
+    "temperature": 9,
+    "humidity": 60,
+    "pressure": 965.3,
+    "rain": 0.5,
+    "_id": "vd9JLQ4CFIihU2sD",
+    "group": "data",
+    "timeParsed": "2021-03-13T15:33:00.000Z"
+  },
+  {
+    "time": 1615653180,
+    "temperature": 7.2,
+    "humidity": 66,
+    "pressure": 966.3,
+    "rain": 0.5,
+    "_id": "TZy5EbZ5wFLRpedM",
+    "group": "data",
+    "timeParsed": "2021-03-13T16:33:00.000Z"
+  },
+  {
+    "time": 1615656780,
+    "temperature": 6.3,
+    "humidity": 65,
+    "pressure": 966.5,
+    "rain": 0.5,
+    "_id": "hVzjYauvdvlUCa5Q",
+    "group": "data",
+    "timeParsed": "2021-03-13T17:33:00.000Z"
+  },
+  {
+    "time": 1615660380,
+    "temperature": 6.1,
+    "humidity": 63,
+    "pressure": 967.2,
+    "rain": 0.5,
+    "_id": "3cthCzZhL1ie18B2",
+    "group": "data",
+    "timeParsed": "2021-03-13T18:33:00.000Z"
+  },
+  {
+    "time": 1615663980,
+    "temperature": 5.9,
+    "humidity": 65,
+    "pressure": 967.4,
+    "rain": 0.5,
+    "_id": "NjXkHaM2ljIwXbSe",
+    "group": "data",
+    "timeParsed": "2021-03-13T19:33:00.000Z"
+  },
+  {
+    "time": 1615667580,
+    "temperature": 5,
+    "humidity": 69,
+    "pressure": 967.2,
+    "rain": 0.5,
+    "_id": "vkIm0roVZ4cdLcVF",
+    "group": "data",
+    "timeParsed": "2021-03-13T20:33:00.000Z"
+  },
+  {
+    "time": 1615671180,
+    "temperature": 4.7,
+    "humidity": 71,
+    "pressure": 967.3,
+    "rain": 0.5,
+    "_id": "y48qlQd8w7XFTdXo",
+    "group": "data",
+    "timeParsed": "2021-03-13T21:33:00.000Z"
+  },
+  {
+    "time": 1615674780,
+    "temperature": 5.1,
+    "humidity": 65,
+    "pressure": 967.6,
+    "rain": 0.5,
+    "_id": "Z0qr4ca6mIqLJUqy",
+    "group": "data",
+    "timeParsed": "2021-03-13T22:33:00.000Z"
+  },
+  {
+    "time": 1615676340,
+    "temperature": 5.1,
+    "humidity": 65,
+    "pressure": 967.6,
+    "rain": 0.5,
+    "_id": "MiFujLUq4442VKBN",
+    "group": "data",
+    "timeParsed": "2021-03-13T22:59:00.000Z"
+  },
+  {
+    "time": 1615676400,
+    "temperature": 5.1,
+    "humidity": 65,
+    "pressure": 967.6,
+    "rain": 0,
+    "_id": "eXjLwhgQ3kf7vLp1",
+    "group": "data",
+    "timeParsed": "2021-03-13T23:00:00.000Z"
+  },
+  {
+    "time": 1615678380,
+    "temperature": 4.9,
+    "humidity": 66,
+    "pressure": 967.5,
+    "rain": 0,
+    "_id": "Cihx0NXalUqaq8cj",
+    "group": "data",
+    "timeParsed": "2021-03-13T23:33:00.000Z"
+  },
+  {
+    "time": 1615681980,
+    "temperature": 4.4,
+    "humidity": 68,
+    "pressure": 967.8,
+    "rain": 0,
+    "_id": "GqrfxuYwDQGrZ2mI",
+    "group": "data",
+    "timeParsed": "2021-03-14T00:33:00.000Z"
+  },
+  {
+    "time": 1615685580,
+    "temperature": 4.7,
+    "humidity": 70,
+    "pressure": 968.2,
+    "rain": 0,
+    "_id": "tF1QJQsEr8Cf0P8o",
+    "group": "data",
+    "timeParsed": "2021-03-14T01:33:00.000Z"
+  },
+  {
+    "time": 1615689180,
+    "temperature": 4.2,
+    "humidity": 72,
+    "pressure": 968.2,
+    "rain": 0,
+    "_id": "Q3mT6WF4ZhljeQDA",
+    "group": "data",
+    "timeParsed": "2021-03-14T02:33:00.000Z"
+  },
+  {
+    "time": 1615692780,
+    "temperature": 3.8,
+    "humidity": 71,
+    "pressure": 968.5,
+    "rain": 0,
+    "_id": "Tsns2PGemONi9Z48",
+    "group": "data",
+    "timeParsed": "2021-03-14T03:33:00.000Z"
+  },
+  {
+    "time": 1615696380,
+    "temperature": 3.5,
+    "humidity": 73,
+    "pressure": 968.7,
+    "rain": 0,
+    "_id": "HQPWDTvbfgPrlFve",
+    "group": "data",
+    "timeParsed": "2021-03-14T04:33:00.000Z"
+  },
+  {
+    "time": 1615699980,
+    "temperature": 3.3,
+    "humidity": 75,
+    "pressure": 969.6,
+    "rain": 0,
+    "_id": "fmcKkXTd6oDmPRZx",
+    "group": "data",
+    "timeParsed": "2021-03-14T05:33:00.000Z"
+  },
+  {
+    "time": 1615703580,
+    "temperature": 4.2,
+    "humidity": 68,
+    "pressure": 970.5,
+    "rain": 0,
+    "_id": "HRDNZAMnLhQCFmK5",
+    "group": "data",
+    "timeParsed": "2021-03-14T06:33:00.000Z"
+  },
+  {
+    "time": 1615707180,
+    "temperature": 4.2,
+    "humidity": 71,
+    "pressure": 970.9,
+    "rain": 0,
+    "_id": "qrVtlfmq7YhyJLIW",
+    "group": "data",
+    "timeParsed": "2021-03-14T07:33:00.000Z"
+  },
+  {
+    "time": 1615710780,
+    "temperature": 3.6,
+    "humidity": 79,
+    "pressure": 972.2,
+    "rain": 0,
+    "_id": "JDNW96Lj7IdPTdb9",
+    "group": "data",
+    "timeParsed": "2021-03-14T08:33:00.000Z"
+  },
+  {
+    "time": 1615714380,
+    "temperature": 3.4,
+    "humidity": 85,
+    "pressure": 973,
+    "rain": 0,
+    "_id": "B5rFVLQujyXIMeBb",
+    "group": "data",
+    "timeParsed": "2021-03-14T09:33:00.000Z"
+  },
+  {
+    "time": 1615717980,
+    "temperature": 3.5,
+    "humidity": 85,
+    "pressure": 973.9,
+    "rain": 0,
+    "_id": "9zgOnAWKUtoKEWng",
+    "group": "data",
+    "timeParsed": "2021-03-14T10:33:00.000Z"
+  },
+  {
+    "time": 1615721580,
+    "temperature": 2.8,
+    "humidity": 93,
+    "pressure": 975.3,
+    "rain": 1,
+    "_id": "a8QbkYXtMMhfKoE7",
+    "group": "data",
+    "timeParsed": "2021-03-14T11:33:00.000Z"
+  },
+  {
+    "time": 1615725180,
+    "temperature": 4.5,
+    "humidity": 82,
+    "pressure": 975.1,
+    "rain": 1,
+    "_id": "IsCA4sa5tgHO5zeZ",
+    "group": "data",
+    "timeParsed": "2021-03-14T12:33:00.000Z"
+  },
+  {
+    "time": 1615728780,
+    "temperature": 5.1,
+    "humidity": 81,
+    "pressure": 975.3,
+    "rain": 1,
+    "_id": "xMpot3WMOBJwzHnE",
+    "group": "data",
+    "timeParsed": "2021-03-14T13:33:00.000Z"
+  },
+  {
+    "time": 1615732380,
+    "temperature": 5.6,
+    "humidity": 74,
+    "pressure": 975.8,
+    "rain": 1,
+    "_id": "HAYDSpcBYPEzEi4J",
+    "group": "data",
+    "timeParsed": "2021-03-14T14:33:00.000Z"
+  },
+  {
+    "time": 1615735980,
+    "temperature": 5.2,
+    "humidity": 74,
+    "pressure": 976.6,
+    "rain": 1,
+    "_id": "7eFCLYw50evR2loO",
+    "group": "data",
+    "timeParsed": "2021-03-14T15:33:00.000Z"
+  },
+  {
+    "time": 1615739580,
+    "temperature": 4.7,
+    "humidity": 77,
+    "pressure": 976.9,
+    "rain": 1,
+    "_id": "HgVOlE7Yog3tJGJQ",
+    "group": "data",
+    "timeParsed": "2021-03-14T16:33:00.000Z"
+  },
+  {
+    "time": 1615743180,
+    "temperature": 4.8,
+    "humidity": 74,
+    "pressure": 977.3,
+    "rain": 1,
+    "_id": "d0k06RKcire9Gvls",
+    "group": "data",
+    "timeParsed": "2021-03-14T17:33:00.000Z"
+  },
+  {
+    "time": 1615746780,
+    "temperature": 4.5,
+    "humidity": 76,
+    "pressure": 977.8,
+    "rain": 1,
+    "_id": "VrR2iHAiFEdWbaI8",
+    "group": "data",
+    "timeParsed": "2021-03-14T18:33:00.000Z"
+  },
+  {
+    "time": 1615750380,
+    "temperature": 4.4,
+    "humidity": 74,
+    "pressure": 977.7,
+    "rain": 1,
+    "_id": "Dm8vv3GZArejOFm1",
+    "group": "data",
+    "timeParsed": "2021-03-14T19:33:00.000Z"
+  },
+  {
+    "time": 1615753980,
+    "temperature": 3.6,
+    "humidity": 76,
+    "pressure": 978.1,
+    "rain": 1,
+    "_id": "i8fgPqhl41lLtCCA",
+    "group": "data",
+    "timeParsed": "2021-03-14T20:33:00.000Z"
+  },
+  {
+    "time": 1615757580,
+    "temperature": 3.1,
+    "humidity": 77,
+    "pressure": 978,
+    "rain": 1,
+    "_id": "nwBv3kIYuntqu0Fa",
+    "group": "data",
+    "timeParsed": "2021-03-14T21:33:00.000Z"
+  },
+  {
+    "time": 1615761180,
+    "temperature": 2.5,
+    "humidity": 81,
+    "pressure": 977.7,
+    "rain": 1,
+    "_id": "l57gF5JTjJmdvPik",
+    "group": "data",
+    "timeParsed": "2021-03-14T22:33:00.000Z"
+  },
+  {
+    "time": 1615762740,
+    "temperature": 2.1,
+    "humidity": 82,
+    "pressure": 977.8,
+    "rain": 1,
+    "_id": "raJOTrdGqyrnrlYx",
+    "group": "data",
+    "timeParsed": "2021-03-14T22:59:00.000Z"
+  },
+  {
+    "time": 1615762800,
+    "temperature": 2.1,
+    "humidity": 82,
+    "pressure": 977.8,
+    "rain": 0,
+    "_id": "P61KKq4ZNlVunloP",
+    "group": "data",
+    "timeParsed": "2021-03-14T23:00:00.000Z"
+  },
+  {
+    "time": 1615764780,
+    "temperature": 2,
+    "humidity": 83,
+    "pressure": 977.6,
+    "rain": 0,
+    "_id": "6BmlEsk6qZrEzLbF",
+    "group": "data",
+    "timeParsed": "2021-03-14T23:33:00.000Z"
+  },
+  {
+    "time": 1615768380,
+    "temperature": 2,
+    "humidity": 83,
+    "pressure": 977.8,
+    "rain": 0,
+    "_id": "idSKryHFE7sZFpIS",
+    "group": "data",
+    "timeParsed": "2021-03-15T00:33:00.000Z"
+  },
+  {
+    "time": 1615771980,
+    "temperature": 2.3,
+    "humidity": 84,
+    "pressure": 977.5,
+    "rain": 0,
+    "_id": "JBP6IqtXOmOLXmV2",
+    "group": "data",
+    "timeParsed": "2021-03-15T01:33:00.000Z"
+  },
+  {
+    "time": 1615775580,
+    "temperature": 2.4,
+    "humidity": 85,
+    "pressure": 977.2,
+    "rain": 0,
+    "_id": "rUKMZtyUOwjTL71v",
+    "group": "data",
+    "timeParsed": "2021-03-15T02:33:00.000Z"
+  },
+  {
+    "time": 1615779180,
+    "temperature": 2.5,
+    "humidity": 85,
+    "pressure": 977.2,
+    "rain": 0,
+    "_id": "JOiOfmgIN7bcGZQJ",
+    "group": "data",
+    "timeParsed": "2021-03-15T03:33:00.000Z"
+  }
+]
