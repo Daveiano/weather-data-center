@@ -58,7 +58,7 @@ const scaleAverage = (data: dataItem[], property: propertyParameter): dataItem[]
   for (const [key, dateItem] of Object.entries(dates)) {
     newData = [...newData, {
       time: dateItem.time,
-      timeParsed: moment.unix(dateItem.time).toISOString(true),
+      timeParsed: moment.unix(dateItem.time).toISOString(false),
       [property]: (dateItem.values.reduce((a: number, b: number) => a + b, 0) / dateItem.values.length).toFixed(1)
     }];
   }
