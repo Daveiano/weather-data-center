@@ -39,7 +39,7 @@ const scaleAverage = (data: dataItem[], property: propertyParameter): dataItem[]
 
   // Loop over all date elements and create an object to hold all data per day.
   for (let key = 0; key < data.length; key++) {
-    const date = moment.unix(data[key].time).format('DDMMYYYY');
+    const date = moment.unix(data[key].time).utc().format('DDMMYYYY');
     if (!(date in dates)) {
       dates = {
         ...dates,
@@ -58,7 +58,7 @@ const scaleAverage = (data: dataItem[], property: propertyParameter): dataItem[]
   for (const [key, dateItem] of Object.entries(dates)) {
     newData = [...newData, {
       time: dateItem.time,
-      timeParsed: moment.unix(dateItem.time).toISOString(false),
+      timeParsed: moment.unix(dateItem.time).toISOString(),
       [property]: (dateItem.values.reduce((a: number, b: number) => a + b, 0) / dateItem.values.length).toFixed(1)
     }];
   }
