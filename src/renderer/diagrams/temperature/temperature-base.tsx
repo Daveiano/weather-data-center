@@ -8,7 +8,7 @@ import {LineChart} from "@carbon/charts-react";
 import {Alignments, ScaleTypes} from "@carbon/charts/interfaces";
 
 import { DiagramBaseProps } from "../types";
-import {getTimeDifferenceInDays, scaleAverage} from "../scaling";
+import { getTimeDifferenceInDays, scaleAverage } from "../scaling";
 
 export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
   const [data, setData] = useState(props.data);
@@ -20,8 +20,6 @@ export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: Diagr
 
     let newData: any = [];
 
-    console.log('temperature', props.data);
-
     if (timeDifferenceInDays > 14) {
       setDaily(true);
       newData = scaleAverage(props.data, 'temperature');
@@ -30,20 +28,17 @@ export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: Diagr
       newData = props.data;
     }
 
-    console.log('temperature', newData);
-
     setData(newData);
     setLoading(false);
   };
 
   useEffect(() => {
-    console.log('useEffect');
     setLoading(true);
     scale();
   }, [props.data]);
 
   return (
-    <>
+    <div data-testid="temperature-diagram">
       <h3>{props.title}</h3>
       {props.data && props.data.length > 0 &&
       <LineChart
@@ -124,6 +119,6 @@ export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: Diagr
         }}
       />
       }
-    </>
+    </div>
   );
 }

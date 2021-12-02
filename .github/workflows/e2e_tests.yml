@@ -1,6 +1,6 @@
 # @see https://medium.com/swlh/jest-and-github-actions-eaf3eaf2427d for multi-env tests.
 # @see https://joelhooks.com/jest-and-github-actions for better error reporting.
-name: E2E Tests
+name: End-to-end tests
 
 on:
   push:

@@ -12,7 +12,7 @@ beforeAll(async () => {
   electronApp = await electron.launch({
     args: [
       '.',
-      `--user-data-dir=${__dirname.replace('tests/src/e2e', '')}tests/data/empty`
+      `--user-data-dir=${__dirname.replace('src/main', '')}tests/data/small`
     ],
     env: {
       ...process.env
@@ -46,25 +46,25 @@ afterEach(async () => {
     await page.close();
 });*/
 
-it('should start the app on an empty state', async () => {
+it('should start the app with a small set of data', async () => {
   expect(await window.title()).toBe('Weather Data Center');
 
   const image = await window.screenshot({ fullPage: true });
   expect(image).toMatchImageSnapshot({
-    failureThreshold:3.5,
+    failureThreshold: 3.5,
     failureThresholdType: 'percent',
     dumpDiffToConsole: true
   });
 
   const mainText = window.locator('.main.bx--content h2');
-  expect(await mainText.evaluate(node => node.textContent.replace(/(\r\n|\n|\r)/gm, ""))).toBe('Please import some data.  This can be done via the icon on the top right.');
+  expect(await mainText.evaluate(node => node.textContent)).toBe('Overview');
 
   // Open right sidebar.
   await window.click('header.bx--header button[aria-label="Upload Data"]');
 
   // Expect 0 items to be imported.
   const numberImported = window.locator('header.bx--header .bx--header-panel .import-data');
-  expect(await numberImported.evaluate(node => node.textContent)).toBe('');
+  expect(await numberImported.evaluate(node => node.textContent)).toBe('145 records in DB');
 
   const imageSideBarOpen = await window.screenshot({ fullPage: true });
   expect(imageSideBarOpen).toMatchImageSnapshot({

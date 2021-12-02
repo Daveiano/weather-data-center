@@ -1,6 +1,6 @@
-import { getTimeDifferenceInDays, scaleAverage } from '../../../../src/renderer/diagrams/scaling';
-import { dataItem } from "../../../../src/renderer/diagrams/types";
-import scalingInput from "./scaling-input.json";
+import { getTimeDifferenceInDays, scaleAverage } from './scaling';
+import { dataItem } from "./types";
+import scalingInput from "../../../tests/data/scaling-input.json";
 
 it('should get the correct day difference', () => {
   const data: dataItem[] = [
