@@ -20,7 +20,10 @@
     "publish": "electron-forge publish"
   },
   "jest": {
-    "projects": ["./jest.config.unit.js", "./jest.config.e2e.js"]
+    "projects": [
+      "./jest.config.unit.js",
+      "./jest.config.e2e.js"
+    ]
   },
   "keywords": [],
   "author": {

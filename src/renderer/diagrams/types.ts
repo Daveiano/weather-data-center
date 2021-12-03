@@ -7,6 +7,7 @@ type DiagramBaseProps= {
 type dataItem = {
   time: number,
   timeParsed: string,
+  group: string,
   temperature?: number,
   humidity?: number,
   pressure?: number

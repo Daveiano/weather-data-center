@@ -83,7 +83,7 @@ export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: Diagr
             enabled: true
           },
           color: {
-            scale: {'data': '#8b0000'}
+            scale: { data: "#8B0000" },
           },
           tooltip: {
             showTotal: false,
