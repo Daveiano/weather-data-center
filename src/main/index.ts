@@ -124,12 +124,14 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+const columnsToRead: string[] = ['time', 'temperature', 'humidity', 'pressure', 'rain'];
+
 ipcMain.on('query-data',(event) => {
   db.find({ time: { $exists: true } }).sort({ time: 1 }).exec((err, docs) => {
     event.reply(
       'query-data',
       docs
-        .map(doc => ({ ...doc, group: 'data', timeParsed: moment.unix(doc.time).toISOString() }))
+        .map(doc => ({ ...doc, timeParsed: moment.unix(doc.time).toISOString() }))
     );
   });
 });
@@ -145,7 +147,6 @@ ipcMain.on('open-file-dialog', (event) => {
   }).then(result => {
     if (!result.canceled) {
       const parsedData: [any?] = [],
-        columnsToRead: string[] = ['time', 'temperature', 'humidity', 'pressure', 'rain'],
         columnsToParseFloat: string[] = ['temperature', 'humidity', 'pressure', 'rain'];
 
       fs.createReadStream(result.filePaths[0])
@@ -186,7 +187,7 @@ ipcMain.on('open-file-dialog', (event) => {
                 event.reply(
                   'query-data',
                   docs
-                    .map(doc => ({ ...doc, group: 'data', timeParsed: moment.unix(doc.time).toISOString() }))
+                    .map(doc => ({ ...doc, timeParsed: moment.unix(doc.time).toISOString() }))
                 );
 
                 event.reply('app-is-loading', false);
