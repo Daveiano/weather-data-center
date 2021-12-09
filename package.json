@@ -132,6 +132,7 @@
     "@carbon/charts-react": "^0.53.0",
     "@carbon/icons-react": "10.22.0",
     "@carbon/themes": "^10.40.0",
+    "@nivo/bar": "^0.74.0",
     "@nivo/core": "^0.74.0",
     "@nivo/line": "^0.74.0",
     "@types/nedb": "ramiroaisen/nedb-types",

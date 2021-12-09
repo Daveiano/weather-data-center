@@ -1,14 +1,11 @@
 import React, {FunctionComponent, useEffect, useState} from 'react';
-import ReactDOMServer from 'react-dom/server';
 
-import { enGB } from 'date-fns/locale'
-import moment from 'moment';
 import { Loading } from "carbon-components-react";
 import { ResponsiveLine } from '@nivo/line'
 
-import { DiagramBaseProps } from "../types";
-import { getTimeDifferenceInDays, scaleAverage } from "../scaling";
-import { Tooltip } from "../tooltip";
+import { dataItem, DiagramBaseProps } from "../types";
+import { getTimeDifferenceInDays, scaleAveragePerDay } from "../scaling";
+import { TooltipLine} from "../tooltip";
 
 export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
   const [data, setData] = useState([]);
@@ -18,13 +15,14 @@ export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: Diagr
   const scale = () => {
     const timeDifferenceInDays = getTimeDifferenceInDays(props.data);
 
-    let newData: any = [];
+    let newData: dataItem[];
 
     setLoading(true);
 
     if (timeDifferenceInDays > 14) {
       setDaily(true);
-      newData = scaleAverage(props.data, 'temperature');
+      // @todo useMemo?
+      newData = scaleAveragePerDay(props.data, 'temperature');
     } else {
       setDaily(false);
       newData = props.data;
@@ -102,7 +100,7 @@ export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: Diagr
             tickPadding: 5
           }}
           isInteractive={true}
-          tooltip={point => <Tooltip point={point.point} />}
+          tooltip={point => <TooltipLine point={point.point} color="#8B0000" colorDarken="#450000" />}
           useMesh={true}
           enableCrosshair={true}
           markers={[

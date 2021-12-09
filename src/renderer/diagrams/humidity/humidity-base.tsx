@@ -1,14 +1,11 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import ReactDOMServer from 'react-dom/server';
 
-import { enGB } from 'date-fns/locale'
-import moment from 'moment';
+import { Loading } from "carbon-components-react";
+import { ResponsiveLine } from '@nivo/line'
 
-import {LineChart} from "@carbon/charts-react";
-import {Alignments, ScaleTypes} from "@carbon/charts/interfaces";
-
-import { DiagramBaseProps } from "../types";
-import { getTimeDifferenceInDays, scaleAverage } from "../scaling";
+import {dataItem, DiagramBaseProps} from "../types";
+import { getTimeDifferenceInDays, scaleAveragePerDay } from "../scaling";
+import { TooltipLine } from "../tooltip";
 
 export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
   const [data, setData] = useState(props.data);
@@ -18,13 +15,13 @@ export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
   const scale = () => {
     const timeDifferenceInDays = getTimeDifferenceInDays(props.data);
 
-    let newData: any = [];
+    let newData: dataItem[];
 
     // Calculate daily average by summing all measurements an dividing by the
     // number of values.
     if (timeDifferenceInDays > 14) {
       setDaily(true);
-      newData = scaleAverage(props.data, 'humidity');
+      newData = scaleAveragePerDay(props.data, 'humidity');
     } else {
       setDaily(false);
       newData = props.data;
@@ -39,82 +36,76 @@ export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
     scale();
   }, [props.data]);
 
-  return (
-    <>
-      <h3>{props.title}</h3>
-      <LineChart
-        data={data}
-        options={{
-          data: {
-            loading: !data || data.length === 0 || loading
-          },
-          title: "",
-          timeScale: {
-            showDayName: false,
-            addSpaceOnEdges: 0,
-            localeObject: enGB
-          },
-          axes: {
-            bottom: {
-              title: "Date",
-              mapsTo: "timeParsed",
-              scaleType: ScaleTypes.TIME,
-            },
-            left: {
-              mapsTo: "humidity",
-              title: "Humidity in %",
-              scaleType: ScaleTypes.LINEAR,
-              includeZero: true,
-            }
-          },
-          legend: {
-            alignment: Alignments.CENTER,
-            clickable: false,
-            enabled: false
-          },
-          points: {
-            radius: 1,
-            enabled: true
-          },
-          color: {
-            scale: {'data': '#1e90ff'},
-            gradient: {
-              enabled: true
-            }
-          },
-          tooltip: {
-            showTotal: false,
-            groupLabel: '',
-            customHTML: (data: [{ humidity: number, time: number, timeParsed: string }], html: string) => {
-              const tooltip =
-                <ul className='multi-tooltip'>
-                  <li>
-                    <div className="datapoint-tooltip ">
-                      <p className="label">Date</p>
-                      <p className="value">
-                        {daily ? (
-                          <>{moment(data[0].timeParsed).format('D.M.YY')}</>
-                        ) : (
-                          <>{moment(data[0].timeParsed).format('D.M.YY HH:mm')}</>
-                        )}
-                      </p>
-                    </div>
-                  </li>
-                  <li>
-                    <div className="datapoint-tooltip ">
-                      <p className="label">%</p>
-                      <p className="value">{data[0].humidity}</p>
-                    </div>
-                  </li>
-                </ul>;
+  if (loading) {
+    return (
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Loading
+          description="Active loading indicator"
+          withOverlay={false}
+        />
+      </div>
+    );
+  }
 
-              return ReactDOMServer.renderToString(tooltip);
+  return (
+    <div data-testid="humidity-diagram">
+      <h3>{props.title}</h3>
+
+      <div style={{ height: props.height }}>
+        <ResponsiveLine
+          data={[
+            {
+              id: 'humidity',
+              data: data.map(item => ({
+                x: item.timeParsed,
+                y: item.humidity
+              }))
             }
-          },
-          curve: "curveMonotoneX",
-          height: props.height
-        }}
-      />
-    </>
+          ]}
+          xScale={{
+            type: "time",
+            useUTC: true,
+            format: "%Y-%m-%dT%H:%M:%S.000Z",
+            precision: 'minute'
+          }}
+          xFormat={daily ? "time:%Y/%m/%d" : "time:%Y/%m/%d %H:%M"}
+          yScale={{
+            type: "linear",
+            min: 0,
+            max: 103
+          }}
+          yFormat={value => `${value} %`}
+          margin={{ top: 20, right: 10, bottom: 20, left: 40 }}
+          curve="linear"
+          // @todo theme={}
+          colors= {['#0099CC']}
+          lineWidth={2}
+          enableArea={true}
+          areaOpacity={0.07}
+          enablePoints={true}
+          pointSize={5}
+          enablePointLabel={false}
+          pointLabel="yFormatted"
+          axisLeft={{
+            legend: '%',
+            legendOffset: -35,
+            legendPosition: 'middle',
+            tickSize: 0,
+            tickPadding: 10
+          }}
+          axisBottom={{
+            format: daily ? "%b %Y" : "%e",
+            tickValues: daily ? "every month" : "every 3 days",
+            tickSize: 0,
+            tickPadding: 5
+          }}
+          isInteractive={true}
+          tooltip={point => <TooltipLine point={point.point} color="#0099CC" colorDarken="#004c66" />}
+          useMesh={true}
+          enableCrosshair={true}
+        />
+      </div>
+
+    </div>
   );
 }
