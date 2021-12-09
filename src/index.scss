@@ -3,7 +3,6 @@
 $carbon--theme: $carbon--theme--g10;
 @include carbon--theme();
 @import '~carbon-components/scss/globals/scss/styles.scss';
-@import "~@carbon/charts/styles/styles.scss";
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;
@@ -56,12 +55,6 @@ header.bx--header {
       margin-bottom: $spacing-07;
       h3 {
         padding-left: $spacing-07;
-      }
-      .bx--chart-holder, .bx--cc--chart-wrapper {
-        background-color: transparent;
-        &.fullscreen {
-          background-color: inherit;
-        }
       }
     }
   }

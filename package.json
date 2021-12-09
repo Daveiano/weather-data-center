@@ -128,8 +128,6 @@
     "typescript": "^4.0.2"
   },
   "dependencies": {
-    "@carbon/charts": "^0.53.0",
-    "@carbon/charts-react": "^0.53.0",
     "@carbon/icons-react": "10.22.0",
     "@carbon/themes": "^10.40.0",
     "@nivo/bar": "^0.74.0",
