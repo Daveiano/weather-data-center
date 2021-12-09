@@ -1,28 +1,28 @@
 import React, {FunctionComponent, useEffect, useState} from 'react';
-import ReactDOMServer from 'react-dom/server';
 
-import { enGB } from 'date-fns/locale'
-import moment from 'moment';
+import { Loading } from "carbon-components-react";
+import { ResponsiveLine } from '@nivo/line'
 
-import {LineChart} from "@carbon/charts-react";
-import {Alignments, ScaleTypes} from "@carbon/charts/interfaces";
-
-import { DiagramBaseProps } from "../types";
-import { getTimeDifferenceInDays, scaleAverage } from "../scaling";
+import { dataItem, DiagramBaseProps } from "../types";
+import { getTimeDifferenceInDays, scaleAveragePerDay } from "../scaling";
+import { TooltipLine} from "../tooltip";
 
 export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
-  const [data, setData] = useState(props.data);
-  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [daily, setDaily] = useState(false);
 
   const scale = () => {
     const timeDifferenceInDays = getTimeDifferenceInDays(props.data);
 
-    let newData: any = [];
+    let newData: dataItem[];
+
+    setLoading(true);
 
     if (timeDifferenceInDays > 14) {
       setDaily(true);
-      newData = scaleAverage(props.data, 'temperature');
+      // @todo useMemo?
+      newData = scaleAveragePerDay(props.data, 'temperature');
     } else {
       setDaily(false);
       newData = props.data;
@@ -33,92 +33,93 @@ export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: Diagr
   };
 
   useEffect(() => {
-    setLoading(true);
     scale();
   }, [props.data]);
+
+  if (loading) {
+    return (
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Loading
+          description="Active loading indicator"
+          withOverlay={false}
+        />
+      </div>
+    );
+  }
 
   return (
     <div data-testid="temperature-diagram">
       <h3>{props.title}</h3>
-      {props.data && props.data.length > 0 &&
-      <LineChart
-        data={data}
-        options={{
-          data: {
-            loading: !data || data.length === 0 || loading
-          },
-          title: "",
-          timeScale: {
-            showDayName: false,
-            addSpaceOnEdges: 0,
-            localeObject: enGB
-          },
-          axes: {
-            bottom: {
-              title: "Date",
-              mapsTo: "timeParsed",
-              scaleType: ScaleTypes.TIME,
-            },
-            left: {
-              mapsTo: "temperature",
-              title: "Temperature in °C",
-              scaleType: ScaleTypes.LINEAR,
-              includeZero: true,
-              thresholds: [
-                {
-                  value: 0,
-                  fillColor: '#191970',
-                  label: '0°C'
-                }
-              ]
-            }
-          },
-          legend: {
-            alignment: Alignments.CENTER,
-            clickable: false,
-            enabled: false
-          },
-          points: {
-            radius: 1,
-            enabled: true
-          },
-          color: {
-            scale: { data: "#8B0000" },
-          },
-          tooltip: {
-            showTotal: false,
-            groupLabel: '',
-            customHTML: (data: [{ temperature: number, time: number, timeParsed: string }], html: string) => {
-              const tooltip =
-                <ul className='multi-tooltip'>
-                  <li>
-                    <div className="datapoint-tooltip ">
-                      <p className="label">Date</p>
-                      <p className="value">
-                        {daily ? (
-                          <>{moment(data[0].timeParsed).format('D.M.YY')}</>
-                        ) : (
-                          <>{moment(data[0].timeParsed).format('D.M.YY HH:mm')}</>
-                        )}
-                      </p>
-                    </div>
-                  </li>
-                  <li>
-                    <div className="datapoint-tooltip ">
-                      <p className="label">°C</p>
-                      <p className="value">{data[0].temperature}</p>
-                    </div>
-                  </li>
-                </ul>;
 
-              return ReactDOMServer.renderToString(tooltip);
+      <div style={{ height: props.height }}>
+        <ResponsiveLine
+          data={[
+            {
+              id: 'temperature',
+              data: data.map(item => ({
+                x: item.timeParsed,
+                y: item.temperature
+              }))
             }
-          },
-          curve: "curveMonotoneX",
-          height: props.height
-        }}
-      />
-      }
+          ]}
+          xScale={{
+            type: "time",
+            useUTC: true,
+            format: "%Y-%m-%dT%H:%M:%S.000Z",
+            precision: 'minute'
+          }}
+          xFormat={daily ? "time:%Y/%m/%d" : "time:%Y/%m/%d %H:%M"}
+          yScale={{
+            type: "linear",
+            min: Math.min.apply(Math, data.map(item => item.temperature)) - 3,
+            max: Math.max.apply(Math, data.map(item => item.temperature)) + 3
+          }}
+          yFormat={value => `${value} °C`}
+          margin={{ top: 20, right: 10, bottom: 20, left: 40 }}
+          curve="linear"
+          // @todo theme={}
+          colors= {['#8B0000']}
+          lineWidth={2}
+          enableArea={false}
+          areaOpacity={0.07}
+          enablePoints={true}
+          pointSize={5}
+          enablePointLabel={false}
+          pointLabel="yFormatted"
+          axisLeft={{
+            legend: '°C',
+            legendOffset: -35,
+            legendPosition: 'middle',
+            tickSize: 0,
+            tickPadding: 10
+          }}
+          axisBottom={{
+            format: daily ? "%b %Y" : "%e",
+            tickValues: daily ? "every month" : "every 3 days",
+            tickSize: 0,
+            tickPadding: 5
+          }}
+          isInteractive={true}
+          tooltip={point => <TooltipLine point={point.point} color="#8B0000" colorDarken="#450000" />}
+          useMesh={true}
+          enableCrosshair={true}
+          markers={[
+            {
+              axis: 'y',
+              value: 0,
+              lineStyle: {
+                stroke: '#00BFFF',
+                strokeWidth: 2,
+                strokeOpacity: 0.75,
+                strokeDasharray: "10, 10"
+              },
+              legend: '0 °C',
+              legendOrientation: 'horizontal',
+            },
+          ]}
+        />
+      </div>
+
     </div>
   );
 }

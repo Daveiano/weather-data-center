@@ -8,6 +8,7 @@ import { TemperatureBase } from '../diagrams/temperature/temperature-base';
 import { HumidityBase } from "../diagrams/humidity/humidity-base";
 import { PressureBase } from "../diagrams/pressure/pressure-base";
 import { dataAction, isLoadingAction } from "../actions-app";
+import {RainBase} from "../diagrams/rain/rain-base";
 
 type Props = {
   appState: any,
@@ -75,22 +76,22 @@ class Start extends Component<Props> {
           <Row className="start-tiles">
             <Column sm={4} md={4} lg={6} xlg={4}>
               <Tile>
-                <TemperatureBase data={this.state.data} title="Temperature" height="300px" />
+                <TemperatureBase data={this.state.data} title="Temperature" height="340px" />
               </Tile>
             </Column>
             <Column sm={4} md={4} lg={6} xlg={4}>
               <Tile>
-                <HumidityBase data={this.state.data} title="Humidity" height="300px" />
+                <HumidityBase data={this.state.data} title="Humidity" height="340px" />
               </Tile>
             </Column>
             <Column sm={4} md={8} lg={6} xlg={4}>
               <Tile>
-                <PressureBase data={this.state.data} title="Pressure" height="300px" />
+                <PressureBase data={this.state.data} title="Pressure" height="340px" />
               </Tile>
             </Column>
             <Column sm={4} md={8} lg={6} xlg={4}>
               <Tile>
-                Rain
+                <RainBase data={this.state.data} title="Rain" height="420px" />
               </Tile>
             </Column>
             <Column sm={4} md={8} lg={6} xlg={4}>
