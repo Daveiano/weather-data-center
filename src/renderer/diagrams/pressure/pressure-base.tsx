@@ -74,7 +74,7 @@ export const PressureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
           }}
           yFormat={value => `${value} hPa`}
           margin={{ top: 20, right: 10, bottom: 20, left: 40 }}
-          curve="linear"
+          curve="cardinal"
           // @todo theme={}
           colors= {['#666666']}
           lineWidth={2}

@@ -4,11 +4,13 @@ import moment from "moment";
 
 import { Row, Column, Tile } from 'carbon-components-react';
 
+import { dataAction, isLoadingAction } from "../actions-app";
 import { TemperatureBase } from '../diagrams/temperature/temperature-base';
 import { HumidityBase } from "../diagrams/humidity/humidity-base";
 import { PressureBase } from "../diagrams/pressure/pressure-base";
-import { dataAction, isLoadingAction } from "../actions-app";
-import {RainBase} from "../diagrams/rain/rain-base";
+import { RainBase } from "../diagrams/rain/rain-base";
+import { SolarBase } from "../diagrams/solar/solar-base";
+import { UviBase } from "../diagrams/uvi/uvi-base";
 
 type Props = {
   appState: any,
@@ -91,7 +93,7 @@ class Start extends Component<Props> {
             </Column>
             <Column sm={4} md={8} lg={6} xlg={4}>
               <Tile>
-                <RainBase data={this.state.data} title="Rain" height="420px" />
+                <RainBase data={this.state.data} title="Rain" height="340px" />
               </Tile>
             </Column>
             <Column sm={4} md={8} lg={6} xlg={4}>
@@ -102,6 +104,16 @@ class Start extends Component<Props> {
             <Column sm={4} md={8} lg={6} xlg={4}>
               <Tile>
                 Wind direction
+              </Tile>
+            </Column>
+            <Column sm={4} md={8} lg={6} xlg={4}>
+              <Tile>
+                <SolarBase data={this.state.data} title="Solar" height="340px" />
+              </Tile>
+            </Column>
+            <Column sm={4} md={8} lg={6} xlg={4}>
+              <Tile>
+                <UviBase data={this.state.data} title="UVI" height="340px" />
               </Tile>
             </Column>
           </Row>

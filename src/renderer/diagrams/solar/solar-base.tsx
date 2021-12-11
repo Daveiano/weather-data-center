@@ -1,15 +1,22 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, {FunctionComponent, useEffect, useState} from 'react';
 
+import moment from 'moment';
+import {ResponsiveLine} from "@nivo/line";
 import { Loading } from "carbon-components-react";
-import { ResponsiveLine } from '@nivo/line'
 
 import {dataItem, DiagramBaseProps} from "../types";
-import { getTimeDifferenceInDays, scaleAveragePerDay } from "../scaling";
+import {
+  getTimeDifferenceInDays,
+  scaleMaxPerDay,
+  scaleMaxPerWeek,
+  scaleMaxPerMonth,
+  scaleAveragePerDay
+} from "../scaling";
 import { TooltipLine } from "../tooltip";
 
-export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
-  const [data, setData] = useState(props.data);
-  const [loading, setLoading] = useState(false);
+export const SolarBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [daily, setDaily] = useState(false);
 
   const scale = () => {
@@ -17,11 +24,11 @@ export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
 
     let newData: dataItem[];
 
-    // Calculate daily average by summing all measurements an dividing by the
-    // number of values.
+    setLoading(true);
+
     if (timeDifferenceInDays > 14) {
       setDaily(true);
-      newData = scaleAveragePerDay(props.data, 'humidity');
+      newData = scaleAveragePerDay(props.data, 'solar');
     } else {
       setDaily(false);
       newData = props.data;
@@ -32,7 +39,6 @@ export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
   };
 
   useEffect(() => {
-    setLoading(true);
     scale();
   }, [props.data]);
 
@@ -48,17 +54,17 @@ export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
   }
 
   return (
-    <div data-testid="humidity-diagram">
+    <div data-testid="rain-diagram">
       <h3>{props.title}</h3>
 
       <div style={{ height: props.height }}>
         <ResponsiveLine
           data={[
             {
-              id: 'humidity',
+              id: 'solar',
               data: data.map(item => ({
                 x: item.timeParsed,
-                y: item.humidity
+                y: item.solar
               }))
             }
           ]}
@@ -71,14 +77,13 @@ export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
           xFormat={daily ? "time:%Y/%m/%d" : "time:%Y/%m/%d %H:%M"}
           yScale={{
             type: "linear",
-            min: 0,
-            max: 103
+            max: Math.max.apply(Math, data.map(item => item.solar)) + 25
           }}
-          yFormat={value => `${value} %`}
+          yFormat={value => `${value} w/m²`}
           margin={{ top: 20, right: 10, bottom: 20, left: 40 }}
-          curve="cardinal"
+          curve="basis"
           // @todo theme={}
-          colors= {['#0099CC']}
+          colors= {['#ff8c00']}
           lineWidth={2}
           enableArea={true}
           areaOpacity={0.07}
@@ -87,11 +92,11 @@ export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
           enablePointLabel={false}
           pointLabel="yFormatted"
           axisLeft={{
-            legend: '%',
+            legend: 'w/m²',
             legendOffset: -35,
             legendPosition: 'middle',
             tickSize: 0,
-            tickPadding: 10
+            tickPadding: 5
           }}
           axisBottom={{
             format: daily ? "%b %Y" : "%e",
@@ -100,12 +105,11 @@ export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
             tickPadding: 5
           }}
           isInteractive={true}
-          tooltip={point => <TooltipLine point={point.point} color="#0099CC" colorDarken="#004c66" />}
+          tooltip={point => <TooltipLine point={point.point} color="#ff8c00" colorDarken="#7f4600" />}
           useMesh={true}
           enableCrosshair={true}
         />
       </div>
-
     </div>
   );
 }

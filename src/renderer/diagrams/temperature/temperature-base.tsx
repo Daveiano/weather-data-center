@@ -76,7 +76,7 @@ export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: Diagr
           }}
           yFormat={value => `${value} °C`}
           margin={{ top: 20, right: 10, bottom: 20, left: 40 }}
-          curve="linear"
+          curve="natural"
           // @todo theme={}
           colors= {['#8B0000']}
           lineWidth={2}

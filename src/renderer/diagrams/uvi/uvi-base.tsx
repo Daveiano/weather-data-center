@@ -1,27 +1,36 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, {FunctionComponent, useEffect, useState} from 'react';
 
+import moment from 'moment';
+import {ResponsiveLine} from "@nivo/line";
 import { Loading } from "carbon-components-react";
-import { ResponsiveLine } from '@nivo/line'
 
 import {dataItem, DiagramBaseProps} from "../types";
-import { getTimeDifferenceInDays, scaleAveragePerDay } from "../scaling";
+import {
+  getTimeDifferenceInDays,
+  scaleMaxPerDay,
+  scaleMaxPerWeek,
+  scaleMaxPerMonth,
+  scaleAveragePerDay
+} from "../scaling";
 import { TooltipLine } from "../tooltip";
 
-export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
-  const [data, setData] = useState(props.data);
-  const [loading, setLoading] = useState(false);
+export const UviBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [daily, setDaily] = useState(false);
+  const [weekly, setWeekly] = useState(false);
+  const [monthly, setMonthly] = useState(false);
 
   const scale = () => {
     const timeDifferenceInDays = getTimeDifferenceInDays(props.data);
 
     let newData: dataItem[];
 
-    // Calculate daily average by summing all measurements an dividing by the
-    // number of values.
+    setLoading(true);
+
     if (timeDifferenceInDays > 14) {
       setDaily(true);
-      newData = scaleAveragePerDay(props.data, 'humidity');
+      newData = scaleMaxPerDay(props.data, 'uvi');
     } else {
       setDaily(false);
       newData = props.data;
@@ -32,9 +41,10 @@ export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
   };
 
   useEffect(() => {
-    setLoading(true);
     scale();
   }, [props.data]);
+
+  console.log(data);
 
   if (loading) {
     return (
@@ -48,17 +58,17 @@ export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
   }
 
   return (
-    <div data-testid="humidity-diagram">
+    <div data-testid="rain-diagram">
       <h3>{props.title}</h3>
 
       <div style={{ height: props.height }}>
         <ResponsiveLine
           data={[
             {
-              id: 'humidity',
+              id: 'uvi',
               data: data.map(item => ({
                 x: item.timeParsed,
-                y: item.humidity
+                y: item.uvi
               }))
             }
           ]}
@@ -71,14 +81,13 @@ export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
           xFormat={daily ? "time:%Y/%m/%d" : "time:%Y/%m/%d %H:%M"}
           yScale={{
             type: "linear",
-            min: 0,
-            max: 103
+            max: Math.max.apply(Math, data.map(item => item.uvi)) + 1
           }}
-          yFormat={value => `${value} %`}
+          yFormat={value => `${value}`}
           margin={{ top: 20, right: 10, bottom: 20, left: 40 }}
-          curve="cardinal"
+          curve="step"
           // @todo theme={}
-          colors= {['#0099CC']}
+          colors= {['#e61919']}
           lineWidth={2}
           enableArea={true}
           areaOpacity={0.07}
@@ -87,11 +96,11 @@ export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
           enablePointLabel={false}
           pointLabel="yFormatted"
           axisLeft={{
-            legend: '%',
+            legend: 'UVI',
             legendOffset: -35,
             legendPosition: 'middle',
             tickSize: 0,
-            tickPadding: 10
+            tickPadding: 5
           }}
           axisBottom={{
             format: daily ? "%b %Y" : "%e",
@@ -100,12 +109,11 @@ export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
             tickPadding: 5
           }}
           isInteractive={true}
-          tooltip={point => <TooltipLine point={point.point} color="#0099CC" colorDarken="#004c66" />}
+          tooltip={point => <TooltipLine point={point.point} color="#e61919" colorDarken="#730c0c" />}
           useMesh={true}
           enableCrosshair={true}
         />
       </div>
-
     </div>
   );
 }

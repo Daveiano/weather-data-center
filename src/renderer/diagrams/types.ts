@@ -10,7 +10,9 @@ type dataItem = {
   temperature?: number,
   humidity?: number,
   pressure?: number,
-  rain?: number
+  rain?: number,
+  solar?: number,
+  uvi?: string
 }
 
 export { DiagramBaseProps, dataItem };

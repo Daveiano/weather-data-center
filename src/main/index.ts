@@ -124,7 +124,7 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
-const columnsToRead: string[] = ['time', 'temperature', 'humidity', 'pressure', 'rain'];
+const columnsToRead: string[] = ['time', 'temperature', 'humidity', 'pressure', 'rain', 'solar', 'uvi'];
 
 ipcMain.on('query-data',(event) => {
   db.find({ time: { $exists: true } }).sort({ time: 1 }).exec((err, docs) => {
@@ -147,7 +147,8 @@ ipcMain.on('open-file-dialog', (event) => {
   }).then(result => {
     if (!result.canceled) {
       const parsedData: [any?] = [],
-        columnsToParseFloat: string[] = ['temperature', 'humidity', 'pressure', 'rain'];
+        columnsToParseFloat: string[] = ['temperature', 'humidity', 'pressure', 'rain', 'solar'],
+        columnsToParseInt: string[] = ['uvi'];
 
       fs.createReadStream(result.filePaths[0])
         .pipe(csv({
@@ -162,6 +163,10 @@ ipcMain.on('open-file-dialog', (event) => {
               return parseFloat(value);
             }
 
+            if (columnsToParseInt.includes(header)) {
+              return parseInt(value);
+            }
+
             return value;
           }
         }))
@@ -173,7 +178,6 @@ ipcMain.on('open-file-dialog', (event) => {
 
           async.each(parsedData, (record, callback) => {
             db.count({ "time": record.time },  (err, count)  => {
-              console.log('count', count);
               if (count) {
                 duplicates += 1;
               } else {
