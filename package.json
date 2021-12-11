@@ -17,7 +17,8 @@
     "test:unit:ci": "jest --ci --selectProjects \"Unit & integration tests\"",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "publish": "electron-forge publish"
+    "publish": "electron-forge publish",
+    "postinstall": "husky install"
   },
   "jest": {
     "projects": [
@@ -113,6 +114,7 @@
     "eslint-plugin-import": "^2.20.0",
     "eslint-plugin-react": "^7.22.0",
     "fork-ts-checker-webpack-plugin": "^5.0.14",
+    "husky": "^7.0.4",
     "jest": "^27.3.1",
     "jest-image-snapshot": "4.5.1",
     "jest-playwright-preset": "^1.7.0",

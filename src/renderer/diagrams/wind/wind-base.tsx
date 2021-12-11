@@ -1,46 +1,41 @@
 import React, {FunctionComponent, useEffect, useState} from 'react';
 
-import moment from 'moment';
-import {ResponsiveLine} from "@nivo/line";
 import { Loading } from "carbon-components-react";
+import { ResponsiveLine } from '@nivo/line'
 
-import {dataItem, DiagramBaseProps} from "../types";
-import {
-  getTimeDifferenceInDays,
-  scaleMaxPerDay,
-  scaleMaxPerWeek,
-  scaleMaxPerMonth,
-  scaleAveragePerDay
-} from "../scaling";
+import { dataItem, DiagramBaseProps } from "../types";
+import {getTimeDifferenceInDays, scaleAveragePerDay, scaleMaxPerDay} from "../scaling";
 import { TooltipLine } from "../tooltip";
 
-export const UviBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
+export const WindBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
+  const [dataWind, setDataWind] = useState(props.data);
+  const [dataGust, setDataGust] = useState(props.data);
+  const [loading, setLoading] = useState(false);
   const [daily, setDaily] = useState(false);
-  const [weekly, setWeekly] = useState(false);
-  const [monthly, setMonthly] = useState(false);
 
   const scale = () => {
     const timeDifferenceInDays = getTimeDifferenceInDays(props.data);
 
-    let newData: dataItem[];
-
-    setLoading(true);
+    let newDataWind: dataItem[],
+      newDataGust: dataItem[];
 
     if (timeDifferenceInDays > 14) {
       setDaily(true);
-      newData = scaleMaxPerDay(props.data, 'uvi');
+      newDataWind = scaleAveragePerDay(props.data, 'wind');
+      newDataGust = scaleMaxPerDay(props.data, 'gust');
     } else {
       setDaily(false);
-      newData = props.data;
+      newDataWind = props.data;
+      newDataGust = props.data;
     }
 
-    setData(newData);
+    setDataWind(newDataWind);
+    setDataGust(newDataGust);
     setLoading(false);
   };
 
   useEffect(() => {
+    setLoading(true);
     scale();
   }, [props.data]);
 
@@ -56,17 +51,24 @@ export const UviBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBasePr
   }
 
   return (
-    <div data-testid="uvi-diagram">
+    <div data-testid="wind-diagram">
       <h3>{props.title}</h3>
 
       <div style={{ height: props.height }}>
         <ResponsiveLine
           data={[
             {
-              id: 'uvi',
-              data: data.map(item => ({
+              id: 'wind',
+              data: dataWind.map(item => ({
                 x: item.timeParsed,
-                y: item.uvi
+                y: item.wind
+              }))
+            },
+            {
+              id: 'gust',
+              data: dataGust.map(item => ({
+                x: item.timeParsed,
+                y: item.gust
               }))
             }
           ]}
@@ -79,22 +81,23 @@ export const UviBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBasePr
           xFormat={daily ? "time:%Y/%m/%d" : "time:%Y/%m/%d %H:%M"}
           yScale={{
             type: "linear",
-            max: 8
+            max: Math.max.apply(Math, dataGust.map(item => item.gust)) + 5
           }}
-          yFormat={value => `${value}`}
+          yFormat={value => `${value} km/h`}
           margin={{ top: 20, right: 10, bottom: 20, left: 40 }}
-          curve="step"
+          curve="cardinal"
           // @todo theme={}
-          colors= {['#e61919']}
+          colors= {['#ffc000', '#666666']}
           lineWidth={2}
           enableArea={true}
-          areaOpacity={0.07}
+          areaOpacity={0.5}
+          areaBlendMode="normal"
           enablePoints={true}
           pointSize={5}
           enablePointLabel={false}
           pointLabel="yFormatted"
           axisLeft={{
-            legend: 'UVI',
+            legend: 'km/h',
             legendOffset: -35,
             legendPosition: 'middle',
             tickSize: 0,
@@ -107,11 +110,24 @@ export const UviBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBasePr
             tickPadding: 5
           }}
           isInteractive={true}
-          tooltip={point => <TooltipLine point={point.point} color="#e61919" colorDarken="#730c0c" />}
+          tooltip={point => point.point.serieId === 'gust' ?
+            <TooltipLine point={point.point} color="#666666" colorDarken="#333333" /> :
+            <TooltipLine point={point.point} color="#ffc000" colorDarken="#7f6000" />
+          }
           useMesh={true}
           enableCrosshair={true}
+          legends={[
+            {
+              anchor: 'top-right',
+              direction: 'row',
+              itemWidth: 50,
+              itemHeight: 20,
+              itemsSpacing: 10
+            }
+          ]}
         />
       </div>
+
     </div>
   );
 }

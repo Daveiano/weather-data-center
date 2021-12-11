@@ -54,7 +54,7 @@ export const SolarBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBase
   }
 
   return (
-    <div data-testid="rain-diagram">
+    <div data-testid="solar-diagram">
       <h3>{props.title}</h3>
 
       <div style={{ height: props.height }}>

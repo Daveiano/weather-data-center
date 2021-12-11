@@ -46,6 +46,7 @@ afterEach(async () => {
     await page.close();
 });*/
 
+// @todo add new props: uvi, solar, wind
 it('should start the app with a small set of data', async () => {
   expect(await window.title()).toBe('Weather Data Center');
 

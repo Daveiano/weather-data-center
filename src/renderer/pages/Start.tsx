@@ -11,6 +11,8 @@ import { PressureBase } from "../diagrams/pressure/pressure-base";
 import { RainBase } from "../diagrams/rain/rain-base";
 import { SolarBase } from "../diagrams/solar/solar-base";
 import { UviBase } from "../diagrams/uvi/uvi-base";
+import { WindBase } from "../diagrams/wind/wind-base";
+import { WindDirectionBase } from "../diagrams/wind-direction/wind-direction-base";
 
 type Props = {
   appState: any,
@@ -98,12 +100,12 @@ class Start extends Component<Props> {
             </Column>
             <Column sm={4} md={8} lg={6} xlg={4}>
               <Tile>
-                Wind
+                <WindBase title="Wind speed" height="340px" data={this.state.data} />
               </Tile>
             </Column>
             <Column sm={4} md={8} lg={6} xlg={4}>
               <Tile>
-                Wind direction
+                <WindDirectionBase title="Wind direction" height="340px" data={this.state.data} />
               </Tile>
             </Column>
             <Column sm={4} md={8} lg={6} xlg={4}>

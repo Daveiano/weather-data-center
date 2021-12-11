@@ -12,7 +12,10 @@ type dataItem = {
   pressure?: number,
   rain?: number,
   solar?: number,
-  uvi?: string
+  uvi?: string,
+  gust?: number,
+  wind?: number,
+  wind_direction?: number
 }
 
 export { DiagramBaseProps, dataItem };

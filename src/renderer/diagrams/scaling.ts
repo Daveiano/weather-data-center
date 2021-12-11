@@ -6,7 +6,7 @@ type dateTimeElement = {
   values: any[number]
 }
 
-type propertyParameter = 'humidity' | 'pressure' | 'temperature' | 'rain' | 'solar' | 'uvi';
+type propertyParameter = 'humidity' | 'pressure' | 'temperature' | 'rain' | 'solar' | 'uvi' | 'wind' | 'gust' | 'wind_direction';
 
 interface Dates {
   [key: string]: dateTimeElement
