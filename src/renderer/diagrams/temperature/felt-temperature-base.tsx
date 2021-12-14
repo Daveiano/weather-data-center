@@ -1,41 +1,42 @@
-import React, {FunctionComponent, useEffect, useState} from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 
 import { Loading } from "carbon-components-react";
 import { ResponsiveLine } from '@nivo/line'
 
 import { dataItem, DiagramBaseProps } from "../types";
-import { getTimeDifferenceInDays, scaleAveragePerDay, scaleMaxPerDay } from "../scaling";
-import { TooltipLine } from "../tooltip";
+import {getTimeDifferenceInDays, scaleMinPerDay, scaleMaxPerDay} from "../scaling";
+import { TooltipLine} from "../tooltip";
 
-export const WindBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
-  const [dataWind, setDataWind] = useState(props.data);
-  const [dataGust, setDataGust] = useState(props.data);
-  const [loading, setLoading] = useState(false);
+export const FeltTemperatureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
+  const [dataMin, setDataMin] = useState([]);
+  const [dataMax, setDataMax] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [daily, setDaily] = useState(false);
 
   const scale = () => {
     const timeDifferenceInDays = getTimeDifferenceInDays(props.data);
 
-    let newDataWind: dataItem[],
-      newDataGust: dataItem[];
+    let newDataMin: dataItem[],
+      newDataMax: dataItem[];
+
+    setLoading(true);
 
     if (timeDifferenceInDays > 14) {
       setDaily(true);
-      newDataWind = scaleAveragePerDay(props.data, 'wind');
-      newDataGust = scaleMaxPerDay(props.data, 'gust');
+      newDataMin = scaleMinPerDay(props.data, 'felt_temperature');
+      newDataMax = scaleMaxPerDay(props.data, 'felt_temperature');
     } else {
       setDaily(false);
-      newDataWind = props.data;
-      newDataGust = props.data;
+      newDataMin = props.data;
+      newDataMax = props.data;
     }
 
-    setDataWind(newDataWind);
-    setDataGust(newDataGust);
+    setDataMin(newDataMin);
+    setDataMax(newDataMax);
     setLoading(false);
   };
 
   useEffect(() => {
-    setLoading(true);
     scale();
   }, [props.data]);
 
@@ -51,24 +52,24 @@ export const WindBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseP
   }
 
   return (
-    <div data-testid="wind-diagram">
+    <div data-testid="dew-point-diagram">
       <h3>{props.title}</h3>
 
       <div style={{ height: props.height }}>
         <ResponsiveLine
           data={[
             {
-              id: 'wind',
-              data: dataWind.map(item => ({
+              id: 'Min',
+              data: dataMin.map(item => ({
                 x: item.timeParsed,
-                y: item.wind
+                y: item.felt_temperature
               }))
             },
             {
-              id: 'gust',
-              data: dataGust.map(item => ({
+              id: 'Max',
+              data: dataMax.map(item => ({
                 x: item.timeParsed,
-                y: item.gust
+                y: item.felt_temperature
               }))
             }
           ]}
@@ -81,27 +82,27 @@ export const WindBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseP
           xFormat={daily ? "time:%Y/%m/%d" : "time:%Y/%m/%d %H:%M"}
           yScale={{
             type: "linear",
-            max: Math.max.apply(Math, dataGust.map(item => item.gust)) + 5
+            min: Math.min.apply(Math, dataMin.map(item => item.felt_temperature)) - 3,
+            max: Math.max.apply(Math, dataMax.map(item => item.felt_temperature)) + 3
           }}
-          yFormat={value => `${value} km/h`}
+          yFormat={value => `${value} °C`}
           margin={{ top: 20, right: 10, bottom: 20, left: 40 }}
-          curve="cardinal"
+          curve="natural"
           // @todo theme={}
-          colors= {['#ffc000', '#666666']}
+          colors= {['#67C8FF', '#C41E3A']}
           lineWidth={2}
-          enableArea={true}
-          areaOpacity={0.5}
-          areaBlendMode="normal"
+          enableArea={false}
+          areaOpacity={0.07}
           enablePoints={true}
           pointSize={5}
           enablePointLabel={false}
           pointLabel="yFormatted"
           axisLeft={{
-            legend: 'km/h',
+            legend: '°C',
             legendOffset: -35,
             legendPosition: 'middle',
             tickSize: 0,
-            tickPadding: 5
+            tickPadding: 10
           }}
           axisBottom={{
             format: daily ? "%b %Y" : "%e",
@@ -110,12 +111,26 @@ export const WindBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseP
             tickPadding: 5
           }}
           isInteractive={true}
-          tooltip={point => point.point.serieId === 'gust' ?
-            <TooltipLine point={point.point} color="#666666" colorDarken="#333333" /> :
-            <TooltipLine point={point.point} color="#ffc000" colorDarken="#7f6000" />
+          tooltip={point => point.point.serieId === 'Min' ?
+            <TooltipLine point={point.point} color="#67C8FF" colorDarken="#0072b3" /> :
+            <TooltipLine point={point.point} color="#C41E3A" colorDarken="#620f1d" />
           }
           useMesh={true}
           enableCrosshair={true}
+          markers={[
+            {
+              axis: 'y',
+              value: 0,
+              lineStyle: {
+                stroke: '#00BFFF',
+                strokeWidth: 2,
+                strokeOpacity: 0.75,
+                strokeDasharray: "10, 10"
+              },
+              legend: '0 °C',
+              legendOrientation: 'horizontal',
+            },
+          ]}
           legends={[
             {
               anchor: 'top-right',

@@ -6,7 +6,7 @@ type dateTimeElement = {
   values: any[number]
 }
 
-type propertyParameter = 'humidity' | 'pressure' | 'temperature' | 'rain' | 'solar' | 'uvi' | 'wind' | 'gust' | 'wind_direction';
+type propertyParameter = 'humidity' | 'pressure' | 'temperature' | 'rain' | 'solar' | 'uvi' | 'wind' | 'gust' | 'wind_direction' | 'dew_point' | 'felt_temperature';
 
 interface Dates {
   [key: string]: dateTimeElement
@@ -14,7 +14,7 @@ interface Dates {
 
 /**
  * Calculates the time difference in days of the first and the last element in
- * an data array.
+ * a data array.
  *
  * @param data the data to process.
  */
@@ -25,10 +25,13 @@ const getTimeDifferenceInDays = (data: dataItem[]): number => {
   return lastDate.diff(firstDate, 'days');
 };
 
-const calculateScaling = (dateItem: dateTimeElement, method: 'max' | 'average' | 'sum'): string | number => {
+const calculateScaling = (dateItem: dateTimeElement, method: 'max' | 'average' | 'sum' | 'min'): string | number => {
   switch (method) {
     case 'max': {
       return Math.max(...dateItem.values);
+    }
+    case 'min': {
+      return Math.min(...dateItem.values);
     }
     case 'average': {
       return (dateItem.values.reduce((a: number, b: number) => a + b, 0) / dateItem.values.length).toFixed(1);
@@ -39,7 +42,7 @@ const calculateScaling = (dateItem: dateTimeElement, method: 'max' | 'average' |
   }
 };
 
-const scale = (data: dataItem[], property: propertyParameter, method: 'max' | 'average' | 'sum', precision?: string): dataItem[] => {
+const scale = (data: dataItem[], property: propertyParameter, method: 'max' | 'average' | 'sum' | 'min', precision?: string): dataItem[] => {
   let newData: dataItem[] = [];
 
   let dates: Dates = {};
@@ -81,7 +84,9 @@ const scale = (data: dataItem[], property: propertyParameter, method: 'max' | 'a
     newData = [...newData, {
       time: dateItem.time,
       timeParsed: moment.unix(dateItem.time).toISOString(),
-      [property]: calculateScaling(dateItem, method)
+      [property]: calculateScaling(dateItem, method),
+      id: key.toString(),
+      _id: key
     }];
   }
 
@@ -95,6 +100,10 @@ const scale = (data: dataItem[], property: propertyParameter, method: 'max' | 'a
 
 const scaleMaxPerDay = (data: dataItem[], property: propertyParameter): dataItem[] => {
   return scale(data, property, 'max');
+}
+
+const scaleMinPerDay = (data: dataItem[], property: propertyParameter): dataItem[] => {
+  return scale(data, property, 'min');
 }
 
 const scaleMaxPerWeek = (data: dataItem[], property: propertyParameter): dataItem[] => {
@@ -120,4 +129,4 @@ const scaleAveragePerDay = (data: dataItem[], property: propertyParameter): data
   return scale(data, property, 'average');
 };
 
-export { getTimeDifferenceInDays, scaleMaxPerDay, scaleMaxPerWeek, scaleMaxPerMonth, scaleAveragePerDay };
+export { getTimeDifferenceInDays, scaleMaxPerDay, scaleMinPerDay, scaleMaxPerWeek, scaleMaxPerMonth, scaleAveragePerDay };

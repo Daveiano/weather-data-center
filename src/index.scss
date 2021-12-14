@@ -1,8 +1,13 @@
-//@import 'carbon-components/scss/globals/scss/theme.scss';
 @import "~@carbon/themes/scss/themes";
 $carbon--theme: $carbon--theme--g10;
 @include carbon--theme();
 @import '~carbon-components/scss/globals/scss/styles.scss';
+
+// @see https://www.carbondesignsystem.com/guidelines/typography/code/
+@import '~@carbon/type/scss/type';
+@import '~@carbon/type/scss/classes';
+@include carbon--type-classes();
+@import '~@carbon/type/scss/styles';
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;
@@ -69,5 +74,15 @@ header.bx--header {
     .import-data {
 
     }
+  }
+}
+
+.bx--type-helper-text-01 {
+  //@include carbon--type-style('helper-text-01');
+}
+
+.bx--pagination {
+  .bx--pagination__left {
+    padding-left: 0;
   }
 }

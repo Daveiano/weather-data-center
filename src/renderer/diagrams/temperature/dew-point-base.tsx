@@ -4,38 +4,35 @@ import { Loading } from "carbon-components-react";
 import { ResponsiveLine } from '@nivo/line'
 
 import { dataItem, DiagramBaseProps } from "../types";
-import { getTimeDifferenceInDays, scaleAveragePerDay, scaleMaxPerDay } from "../scaling";
-import { TooltipLine } from "../tooltip";
+import { getTimeDifferenceInDays, scaleAveragePerDay } from "../scaling";
+import { TooltipLine} from "../tooltip";
 
-export const WindBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
-  const [dataWind, setDataWind] = useState(props.data);
-  const [dataGust, setDataGust] = useState(props.data);
-  const [loading, setLoading] = useState(false);
+export const DewPointBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [daily, setDaily] = useState(false);
 
   const scale = () => {
     const timeDifferenceInDays = getTimeDifferenceInDays(props.data);
 
-    let newDataWind: dataItem[],
-      newDataGust: dataItem[];
+    let newData: dataItem[];
+
+    setLoading(true);
 
     if (timeDifferenceInDays > 14) {
       setDaily(true);
-      newDataWind = scaleAveragePerDay(props.data, 'wind');
-      newDataGust = scaleMaxPerDay(props.data, 'gust');
+      // @todo useMemo?
+      newData = scaleAveragePerDay(props.data, 'dew_point');
     } else {
       setDaily(false);
-      newDataWind = props.data;
-      newDataGust = props.data;
+      newData = props.data;
     }
 
-    setDataWind(newDataWind);
-    setDataGust(newDataGust);
+    setData(newData);
     setLoading(false);
   };
 
   useEffect(() => {
-    setLoading(true);
     scale();
   }, [props.data]);
 
@@ -51,24 +48,17 @@ export const WindBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseP
   }
 
   return (
-    <div data-testid="wind-diagram">
+    <div data-testid="dew-point-diagram">
       <h3>{props.title}</h3>
 
       <div style={{ height: props.height }}>
         <ResponsiveLine
           data={[
             {
-              id: 'wind',
-              data: dataWind.map(item => ({
+              id: 'dew_point',
+              data: data.map(item => ({
                 x: item.timeParsed,
-                y: item.wind
-              }))
-            },
-            {
-              id: 'gust',
-              data: dataGust.map(item => ({
-                x: item.timeParsed,
-                y: item.gust
+                y: item.dew_point
               }))
             }
           ]}
@@ -81,27 +71,27 @@ export const WindBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseP
           xFormat={daily ? "time:%Y/%m/%d" : "time:%Y/%m/%d %H:%M"}
           yScale={{
             type: "linear",
-            max: Math.max.apply(Math, dataGust.map(item => item.gust)) + 5
+            min: Math.min.apply(Math, data.map(item => item.dew_point)) - 3,
+            max: Math.max.apply(Math, data.map(item => item.dew_point)) + 3
           }}
-          yFormat={value => `${value} km/h`}
+          yFormat={value => `${value} °C`}
           margin={{ top: 20, right: 10, bottom: 20, left: 40 }}
-          curve="cardinal"
+          curve="natural"
           // @todo theme={}
-          colors= {['#ffc000', '#666666']}
+          colors= {['#5F9EA0']}
           lineWidth={2}
-          enableArea={true}
-          areaOpacity={0.5}
-          areaBlendMode="normal"
+          enableArea={false}
+          areaOpacity={0.07}
           enablePoints={true}
           pointSize={5}
           enablePointLabel={false}
           pointLabel="yFormatted"
           axisLeft={{
-            legend: 'km/h',
+            legend: '°C',
             legendOffset: -35,
             legendPosition: 'middle',
             tickSize: 0,
-            tickPadding: 5
+            tickPadding: 10
           }}
           axisBottom={{
             format: daily ? "%b %Y" : "%e",
@@ -110,20 +100,22 @@ export const WindBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseP
             tickPadding: 5
           }}
           isInteractive={true}
-          tooltip={point => point.point.serieId === 'gust' ?
-            <TooltipLine point={point.point} color="#666666" colorDarken="#333333" /> :
-            <TooltipLine point={point.point} color="#ffc000" colorDarken="#7f6000" />
-          }
+          tooltip={point => <TooltipLine point={point.point} color="#5F9EA0" colorDarken="#2f4f50" />}
           useMesh={true}
           enableCrosshair={true}
-          legends={[
+          markers={[
             {
-              anchor: 'top-right',
-              direction: 'row',
-              itemWidth: 50,
-              itemHeight: 20,
-              itemsSpacing: 10
-            }
+              axis: 'y',
+              value: 0,
+              lineStyle: {
+                stroke: '#00BFFF',
+                strokeWidth: 2,
+                strokeOpacity: 0.75,
+                strokeDasharray: "10, 10"
+              },
+              legend: '0 °C',
+              legendOrientation: 'horizontal',
+            },
           ]}
         />
       </div>

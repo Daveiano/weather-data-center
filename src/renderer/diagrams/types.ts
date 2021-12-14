@@ -5,6 +5,8 @@ type DiagramBaseProps= {
 };
 
 type dataItem = {
+  id: string,
+  _id: string,
   time: number,
   timeParsed: string,
   temperature?: number,
@@ -12,10 +14,12 @@ type dataItem = {
   pressure?: number,
   rain?: number,
   solar?: number,
-  uvi?: string,
+  uvi?: number,
   gust?: number,
   wind?: number,
-  wind_direction?: number
+  wind_direction?: number,
+  dew_point?: number,
+  felt_temperature?: number
 }
 
 export { DiagramBaseProps, dataItem };

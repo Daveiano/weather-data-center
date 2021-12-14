@@ -13,6 +13,9 @@ import { SolarBase } from "../diagrams/solar/solar-base";
 import { UviBase } from "../diagrams/uvi/uvi-base";
 import { WindBase } from "../diagrams/wind/wind-base";
 import { WindDirectionBase } from "../diagrams/wind-direction/wind-direction-base";
+import { DewPointBase } from "../diagrams/temperature/dew-point-base";
+import { FeltTemperatureBase } from "../diagrams/temperature/felt-temperature-base";
+import { TableBase } from "../components/table-base";
 
 type Props = {
   appState: any,
@@ -118,12 +121,20 @@ class Start extends Component<Props> {
                 <UviBase data={this.state.data} title="UVI" height="340px" />
               </Tile>
             </Column>
+            <Column sm={4} md={8} lg={6} xlg={4}>
+              <Tile>
+                <DewPointBase data={this.state.data} title="Dew point" height="340px" />
+              </Tile>
+            </Column>
+            <Column sm={4} md={8} lg={6} xlg={4}>
+              <Tile>
+                <FeltTemperatureBase data={this.state.data} title="Felt temperature" height="340px" />
+              </Tile>
+            </Column>
           </Row>
           <Row className="start-tables">
             <Column>
-              <Tile>
-                Overview Table
-              </Tile>
+              <TableBase data={this.state.data} title="All data" />
             </Column>
           </Row>
         </div>

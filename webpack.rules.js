@@ -33,8 +33,15 @@ module.exports = [
       "css-loader",
       "postcss-loader",
       // Compiles Sass to CSS
-      "sass-loader",
-    ],
+      {
+        loader: "sass-loader",
+        options: {
+          sassOptions: {
+            includePaths: ["node_modules/@carbon/type"],
+          },
+        },
+      }
+    ]
   },
   {
     test: /\.css$/,

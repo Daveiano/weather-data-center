@@ -1,7 +1,10 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+# @todo electron-forge not found
 electron-forge package && rm -rf ./out/
 yarn run test:u
 yarn run test
-#git add *__image_snapshots__
+
+git add *__image_snapshots__*
+git add *__snapshots__*
