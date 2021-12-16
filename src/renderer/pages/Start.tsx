@@ -15,7 +15,8 @@ import { WindBase } from "../diagrams/wind/wind-base";
 import { WindDirectionBase } from "../diagrams/wind-direction/wind-direction-base";
 import { DewPointBase } from "../diagrams/temperature/dew-point-base";
 import { FeltTemperatureBase } from "../diagrams/temperature/felt-temperature-base";
-import { TableBase } from "../components/table-base";
+import TableBase from '../components/table-base/table-base';
+import { TABLE_SORT_DIRECTION } from '../components/table-base/misc'
 
 type Props = {
   appState: any,
@@ -134,7 +135,89 @@ class Start extends Component<Props> {
           </Row>
           <Row className="start-tables">
             <Column>
-              <TableBase data={this.state.data} title="All data" />
+              <TableBase
+                size="short"
+                start={0}
+                pageSize={15}
+                rows={this.state.data.map(item => ({
+                  ...item,
+                  selected: false
+                }))}
+                columns={[
+                  {
+                    title: 'Time',
+                    id: 'timeParsed',
+                    tooltip: 'Date format is YYYY/MM/DD HH:mm',
+                    sortCycle: 'tri-states-from-ascending',
+                  },
+                  {
+                    title: 'Temperature',
+                    small: 'in °C',
+                    id: 'temperature',
+                    sortCycle: 'tri-states-from-ascending',
+                  },
+                  {
+                    title: 'Felt temperature',
+                    small: 'in °C',
+                    id: 'felt_temperature',
+                    sortCycle: 'tri-states-from-ascending',
+                  },
+                  {
+                    title: 'Dew point',
+                    small: 'in °C',
+                    id: 'dew_point',
+                    sortCycle: 'tri-states-from-ascending',
+                  },
+                  {
+                    title: 'Pressure',
+                    small: 'in hPa',
+                    id: 'pressure',
+                    sortCycle: 'tri-states-from-ascending',
+                  },
+                  {
+                    title: 'Humidity',
+                    small: 'in %',
+                    id: 'humidity',
+                    sortCycle: 'tri-states-from-ascending',
+                  },
+                  {
+                    title: 'Rain',
+                    small: 'in mm',
+                    id: 'rain',
+                    tooltip: 'Accumulated per day',
+                    sortCycle: 'tri-states-from-ascending',
+                  },
+                  {
+                    title: 'Wind',
+                    small: 'in km/h',
+                    id: 'wind',
+                    sortCycle: 'tri-states-from-ascending',
+                  },
+                  {
+                    title: 'Gust',
+                    small: 'in km/h',
+                    id: 'gust',
+                    sortCycle: 'tri-states-from-ascending',
+                  },
+                  {
+                    title: 'Solar irradiation',
+                    small: 'in w/m²',
+                    id: 'solar',
+                    sortCycle: 'tri-states-from-ascending',
+                  },
+                  {
+                    title: 'UV Index',
+                    id: 'uvi',
+                    sortCycle: 'tri-states-from-ascending',
+                  },
+                ]}
+                title="All data"
+                hasSelection={false}
+                sortInfo={{
+                  columnId: 'timeParsed',
+                  direction: TABLE_SORT_DIRECTION.ASCENDING,
+                }}
+              />
             </Column>
           </Row>
         </div>
