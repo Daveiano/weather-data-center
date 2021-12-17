@@ -97,6 +97,7 @@
     "@types/async": "^3.2.10",
     "@types/carbon-components-react": "^7.46.1",
     "@types/carbon__icons-react": "^10.24.0",
+    "@types/carbon__pictograms-react": "^11.9.1",
     "@types/jest": "^27.0.3",
     "@types/jest-image-snapshot": "^4.3.1",
     "@types/nedb": "ramiroaisen/nedb-types",
@@ -132,6 +133,7 @@
   },
   "dependencies": {
     "@carbon/icons-react": "10.22.0",
+    "@carbon/pictograms-react": "^11.20.0",
     "@carbon/themes": "^10.40.0",
     "@carbon/type": "^10.39.0",
     "@nivo/bar": "^0.74.0",

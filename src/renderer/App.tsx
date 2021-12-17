@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { Loading, Grid, Row, Column } from 'carbon-components-react';
@@ -32,11 +32,10 @@ class App extends React.Component<Props> {
           <Grid fullWidth>
             <Row>
               <Column>
-                  <HashRouter>
-                    <Switch>
-                      <Route path="/" component={Start} />
-                    </Switch>
-                  </HashRouter>
+                <Switch>
+                  <Route path="/" exact component={Start} />
+                  <Route path="/temperature" component={Start} />
+                </Switch>
               </Column>
             </Row>
           </Grid>

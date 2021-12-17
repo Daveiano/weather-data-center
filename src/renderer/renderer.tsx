@@ -35,6 +35,7 @@ import { combineReducers, createStore } from 'redux';
 import App from './App';
 import { appReducerDefaultState, appReducer } from './reducer-app';
 import { isLoadingAction } from "./actions-app";
+import { HashRouter } from "react-router-dom";
 
 const store = createStore(
   combineReducers({
@@ -55,7 +56,9 @@ console.log('👋 This message is being logged by "renderer.js", included via we
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <HashRouter>
+      <App />
+    </HashRouter>
   </Provider>,
   document.getElementById('app')
 );

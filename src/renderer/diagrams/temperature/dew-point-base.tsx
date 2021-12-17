@@ -2,6 +2,7 @@ import React, {FunctionComponent, useEffect, useState} from 'react';
 
 import { Loading } from "carbon-components-react";
 import { ResponsiveLine } from '@nivo/line'
+import { DewPoint32 } from "@carbon/icons-react";
 
 import { dataItem, DiagramBaseProps } from "../types";
 import { getTimeDifferenceInDays, scaleAveragePerDay } from "../scaling";
@@ -49,7 +50,10 @@ export const DewPointBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
 
   return (
     <div data-testid="dew-point-diagram">
-      <h3>{props.title}</h3>
+      <h3>
+        <DewPoint32 />
+        {props.title}
+      </h3>
 
       <div style={{ height: props.height }}>
         <ResponsiveLine

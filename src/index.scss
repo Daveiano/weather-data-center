@@ -1,16 +1,55 @@
 @import "~@carbon/themes/scss/themes";
 $carbon--theme: $carbon--theme--g10;
 @include carbon--theme();
+
+@import "~@carbon/layout/scss/convert";
+$carbon--grid-breakpoints: (
+  sm: (
+    columns: 4,
+    margin: 0,
+    width: carbon--rem(320px),
+  ),
+  md: (
+    columns: 8,
+    margin: carbon--rem(16px),
+    width: carbon--rem(672px),
+  ),
+  lg: (
+    columns: 16,
+    margin: carbon--rem(16px),
+    width: carbon--rem(1056px),
+  ),
+  xlg: (
+    columns: 16,
+    margin: carbon--rem(16px),
+    width: carbon--rem(1312px),
+  ),
+  max: (
+    columns: 16,
+    margin: carbon--rem(24px),
+    width: carbon--rem(1850px),
+  ),
+);
 @import '~carbon-components/scss/globals/scss/styles.scss';
 
 // @see https://www.carbondesignsystem.com/guidelines/typography/code/
 @import '~@carbon/type/scss/type';
+
+@import '~@carbon/type/scss/font-face/mono';
+@import '~@carbon/type/scss/font-face/sans';
+@import '~@carbon/type/scss/font-face/serif';
+
 @import '~@carbon/type/scss/classes';
 @include carbon--type-classes();
 @import '~@carbon/type/scss/styles';
 
+@include carbon--type-reset();
+@include carbon--font-face-mono();
+@include carbon--font-face-sans();
+@include carbon--font-face-serif();
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;
+  font-family: carbon--font-family('sans'), sans-serif;
   margin: 0;
   padding: 0;
   width: 100%;
@@ -54,12 +93,19 @@ header.bx--header {
   h2 {
     margin-bottom: $spacing-07;
     margin-left: calc(#{$spacing-02} + #{$spacing-08});
+    @include carbon--type-style('expressive-heading-06');
   }
   .start-tiles {
     .bx--tile {
       margin-bottom: $spacing-07;
       h3 {
-        padding-left: $spacing-07;
+        padding-left: $spacing-04;
+        @include carbon--type-style('expressive-heading-04');
+        display: flex;
+        align-items: center;
+        svg {
+          margin-right: $spacing-04;
+        }
       }
     }
   }
@@ -77,12 +123,27 @@ header.bx--header {
   }
 }
 
-.bx--type-helper-text-01 {
-  //@include carbon--type-style('helper-text-01');
-}
-
 .bx--pagination {
   .bx--pagination__left {
     padding-left: 0;
+  }
+}
+
+.stat-tile-container {
+  display: flex;
+  height: calc(100% - 2rem);
+  padding-left: $spacing-07;
+}
+
+.stats {
+  align-items: flex-end;
+  .stat-tile {
+    margin-bottom: $spacing-07;
+    .heading {
+      margin-bottom: $spacing-02;
+    }
+    .value {
+      margin-bottom: $spacing-02;
+    }
   }
 }

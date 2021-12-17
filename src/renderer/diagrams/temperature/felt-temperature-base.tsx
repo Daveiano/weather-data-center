@@ -2,6 +2,7 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 
 import { Loading } from "carbon-components-react";
 import { ResponsiveLine } from '@nivo/line'
+import { TemperatureFeelsLike32 } from "@carbon/icons-react";
 
 import { dataItem, DiagramBaseProps } from "../types";
 import {getTimeDifferenceInDays, scaleMinPerDay, scaleMaxPerDay} from "../scaling";
@@ -53,7 +54,10 @@ export const FeltTemperatureBase:FunctionComponent<DiagramBaseProps> = (props: D
 
   return (
     <div data-testid="dew-point-diagram">
-      <h3>{props.title}</h3>
+      <h3>
+        <TemperatureFeelsLike32 />
+        {props.title}
+      </h3>
 
       <div style={{ height: props.height }}>
         <ResponsiveLine

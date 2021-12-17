@@ -3,6 +3,7 @@ import React, {FunctionComponent, useEffect, useState} from 'react';
 import moment from 'moment';
 import { ResponsiveBar } from '@nivo/bar'
 import { Loading } from "carbon-components-react";
+import { Rain32 } from "@carbon/icons-react";
 
 import {dataItem, DiagramBaseProps} from "../types";
 import { getTimeDifferenceInDays, scaleMaxPerDay, scaleMaxPerWeek, scaleMaxPerMonth } from "../scaling";
@@ -54,7 +55,10 @@ export const RainBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseP
 
   return (
     <div data-testid="rain-diagram">
-      <h3>{props.title}</h3>
+      <h3>
+        <Rain32 />
+        {props.title}
+      </h3>
 
       <div style={{ height: props.height }}>
         <ResponsiveBar

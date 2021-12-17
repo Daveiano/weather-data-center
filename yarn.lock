@@ -1069,6 +1069,15 @@
   resolved "https://registry.yarnpkg.com/@carbon/layout/-/layout-10.34.0.tgz#83dd68303f6ad29e6b4964b88da7bb2942e3e8d2"
   integrity sha512-+PAQfV/bEXM9zRcjDWtuCjl/62mqdN6vpaal+6wnFi0FADr+uHYhNi+9W6QUpa29nbUqgIla+jlr59gAYidGLw==
 
+"@carbon/pictograms-react@^11.20.0":
+  version "11.20.0"
+  resolved "https://registry.yarnpkg.com/@carbon/pictograms-react/-/pictograms-react-11.20.0.tgz#5cb8faf1f5803e2cdc4a8b33f0c4092bf213f7cf"
+  integrity sha512-JfNQro7884XJdiXkHbIzgrs8d2dLajpR66nuoYshA/TlbcH/gSdH+gDQYQ3FIC0SSk12zfKJ8edzdw7suIAWIA==
+  dependencies:
+    "@carbon/icon-helpers" "^10.25.0"
+    "@carbon/telemetry" "0.0.0-alpha.6"
+    prop-types "^15.7.2"
+
 "@carbon/telemetry@0.0.0-alpha.6":
   version "0.0.0-alpha.6"
   resolved "https://registry.yarnpkg.com/@carbon/telemetry/-/telemetry-0.0.0-alpha.6.tgz#1d11e64f310e98f32c3db0c55f02e047f2398087"
@@ -2164,6 +2173,11 @@
   version "10.31.2"
   resolved "https://registry.yarnpkg.com/@types/carbon__icons-react/-/carbon__icons-react-10.31.2.tgz#3aad2a752f82ccc8a0151d8053edcebc0dc92765"
   integrity sha512-TFZhgEZVCTbB0AsQfohcMLC1dblJxGIDjSJeleiie5z7bc1O6qfLAjomh0bg54EgkuTNK2UIMJ2QPL1qPQZJyQ==
+
+"@types/carbon__pictograms-react@^11.9.1":
+  version "11.9.1"
+  resolved "https://registry.yarnpkg.com/@types/carbon__pictograms-react/-/carbon__pictograms-react-11.9.1.tgz#f6585b12c7785b826f7d927dfdf7c942fa0455e4"
+  integrity sha512-3qXuzarwEdvaEbiaJbPgFWVkG0PQUAONH3Ehy1/ztpZc5b+nmNBAUbA5zPgumD3XojLpQ4lsalX9TB4Nd/C61A==
 
 "@types/fs-extra@^9.0.1":
   version "9.0.13"

@@ -1,6 +1,6 @@
 import React, {FunctionComponent, useEffect, useState} from 'react';
 
-import moment from 'moment';
+import { Sun32 } from "@carbon/icons-react";
 import {ResponsiveLine} from "@nivo/line";
 import { Loading } from "carbon-components-react";
 
@@ -55,7 +55,10 @@ export const SolarBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBase
 
   return (
     <div data-testid="solar-diagram">
-      <h3>{props.title}</h3>
+      <h3>
+        <Sun32 />
+        {props.title}
+      </h3>
 
       <div style={{ height: props.height }}>
         <ResponsiveLine

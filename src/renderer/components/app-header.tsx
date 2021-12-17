@@ -15,10 +15,11 @@ import {
   DatePicker,
   DatePickerInput
 } from "carbon-components-react";
-import { DocumentAdd20, ChartTreemap20, Fade20 } from "@carbon/icons-react";
+import {DocumentAdd20, ChartTreemap20, Fade20, Temperature20, Temperature32, ChartTreemap32} from "@carbon/icons-react";
 
 import Import from "./Import";
 import { userSetDateAction } from "../actions-app";
+import {Link} from "react-router-dom";
 
 const mapStateToProps = (appState: any) =>  appState;
 
@@ -106,11 +107,11 @@ class AppHeader extends React.Component<Props, State> {
                 isRail
                 expanded={isSideNavExpanded}>
                 <SideNavItems>
-                  <SideNavLink aria-current="page" renderIcon={ChartTreemap20} href="#overview">
+                  <SideNavLink aria-current="page" renderIcon={ChartTreemap32} href="/temperature" element={Link}>
                     Overview
                   </SideNavLink>
-                  <SideNavLink renderIcon={Fade20} href="#overview">
-                    TODO
+                  <SideNavLink renderIcon={Temperature32} href="#temperature">
+                    Temperature
                   </SideNavLink>
                 </SideNavItems>
               </SideNav>

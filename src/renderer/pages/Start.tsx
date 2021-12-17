@@ -17,6 +17,7 @@ import { DewPointBase } from "../diagrams/temperature/dew-point-base";
 import { FeltTemperatureBase } from "../diagrams/temperature/felt-temperature-base";
 import TableBase from '../components/table-base/table-base';
 import { TABLE_SORT_DIRECTION } from '../components/table-base/misc'
+import {Stats} from "../components/stats";
 
 type Props = {
   appState: any,
@@ -82,54 +83,59 @@ class Start extends Component<Props> {
           </Row>
 
           <Row className="start-tiles">
-            <Column sm={4} md={4} lg={6} xlg={4}>
+            <Column sm={12} lg={12} max={8}>
+              <Tile className="stat-tile-container">
+                <Stats data={this.state.data} />
+              </Tile>
+            </Column>
+            <Column sm={6} lg={6} max={4}>
               <Tile>
                 <TemperatureBase data={this.state.data} title="Temperature" height="340px" />
               </Tile>
             </Column>
-            <Column sm={4} md={4} lg={6} xlg={4}>
-              <Tile>
-                <HumidityBase data={this.state.data} title="Humidity" height="340px" />
-              </Tile>
-            </Column>
-            <Column sm={4} md={8} lg={6} xlg={4}>
+            <Column sm={6} lg={6} max={4}>
               <Tile>
                 <PressureBase data={this.state.data} title="Pressure" height="340px" />
               </Tile>
             </Column>
-            <Column sm={4} md={8} lg={6} xlg={4}>
+            <Column sm={6} lg={6} max={4}>
               <Tile>
                 <RainBase data={this.state.data} title="Rain" height="340px" />
               </Tile>
             </Column>
-            <Column sm={4} md={8} lg={6} xlg={4}>
+            <Column sm={6} lg={6} max={4}>
+              <Tile>
+                <HumidityBase data={this.state.data} title="Humidity" height="340px" />
+              </Tile>
+            </Column>
+            <Column sm={6} lg={6} max={4}>
               <Tile>
                 <WindBase title="Wind speed" height="340px" data={this.state.data} />
               </Tile>
             </Column>
-            <Column sm={4} md={8} lg={6} xlg={4}>
+            <Column sm={6} lg={6} max={4}>
               <Tile>
                 <WindDirectionBase title="Wind direction" height="340px" data={this.state.data} />
               </Tile>
             </Column>
-            <Column sm={4} md={8} lg={6} xlg={4}>
+            <Column sm={6} lg={6} max={4}>
+              <Tile>
+                <FeltTemperatureBase data={this.state.data} title="Felt temperature" height="340px" />
+              </Tile>
+            </Column>
+            <Column sm={6} lg={6} max={4}>
               <Tile>
                 <SolarBase data={this.state.data} title="Solar" height="340px" />
               </Tile>
             </Column>
-            <Column sm={4} md={8} lg={6} xlg={4}>
+            <Column sm={6} lg={6} max={4}>
               <Tile>
                 <UviBase data={this.state.data} title="UVI" height="340px" />
               </Tile>
             </Column>
-            <Column sm={4} md={8} lg={6} xlg={4}>
+            <Column sm={6} lg={6} max={4}>
               <Tile>
                 <DewPointBase data={this.state.data} title="Dew point" height="340px" />
-              </Tile>
-            </Column>
-            <Column sm={4} md={8} lg={6} xlg={4}>
-              <Tile>
-                <FeltTemperatureBase data={this.state.data} title="Felt temperature" height="340px" />
               </Tile>
             </Column>
           </Row>
@@ -184,7 +190,7 @@ class Start extends Component<Props> {
                     title: 'Rain',
                     small: 'in mm',
                     id: 'rain',
-                    tooltip: 'Accumulated per day',
+                    tooltip: 'Accumulated during the day',
                     sortCycle: 'tri-states-from-ascending',
                   },
                   {

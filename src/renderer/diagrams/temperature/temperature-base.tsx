@@ -6,7 +6,9 @@ import { ResponsiveLine } from '@nivo/line'
 import { dataItem, DiagramBaseProps } from "../types";
 import { getTimeDifferenceInDays, scaleAveragePerDay } from "../scaling";
 import { TooltipLine} from "../tooltip";
+import {Temperature32} from "@carbon/icons-react";
 
+// @todo add font-face mono to diagrams labels / legends / axes / tooltips.
 export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -49,7 +51,10 @@ export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: Diagr
 
   return (
     <div data-testid="temperature-diagram">
-      <h3>{props.title}</h3>
+      <h3>
+        <Temperature32 />
+        {props.title}
+      </h3>
 
       <div style={{ height: props.height }}>
         <ResponsiveLine

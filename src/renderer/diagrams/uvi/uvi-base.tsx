@@ -1,6 +1,6 @@
 import React, {FunctionComponent, useEffect, useState} from 'react';
 
-import moment from 'moment';
+import { UvIndex32 } from "@carbon/icons-react";
 import {ResponsiveLine} from "@nivo/line";
 import { Loading } from "carbon-components-react";
 
@@ -57,7 +57,10 @@ export const UviBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBasePr
 
   return (
     <div data-testid="uvi-diagram">
-      <h3>{props.title}</h3>
+      <h3>
+        <UvIndex32 />
+        {props.title}
+      </h3>
 
       <div style={{ height: props.height }}>
         <ResponsiveLine

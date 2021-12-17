@@ -1,6 +1,6 @@
 import React, {FunctionComponent, useEffect, useState} from 'react';
 
-import moment from 'moment';
+import { WindStream32 } from "@carbon/icons-react";
 import {ResponsiveLine} from "@nivo/line";
 import { Loading } from "carbon-components-react";
 
@@ -62,7 +62,10 @@ export const WindDirectionBase:FunctionComponent<DiagramBaseProps> = (props: Dia
 
   return (
     <div data-testid="wind-direction-diagram">
-      <h3>{props.title}</h3>
+      <h3>
+        <WindStream32 />
+        {props.title}
+      </h3>
 
       <div style={{ height: props.height }}>
         <ResponsiveLine
