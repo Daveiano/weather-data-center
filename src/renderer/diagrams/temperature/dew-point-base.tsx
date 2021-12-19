@@ -18,8 +18,6 @@ export const DewPointBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
 
     let newData: dataItem[];
 
-    setLoading(true);
-
     if (timeDifferenceInDays > 14) {
       setDaily(true);
       // @todo useMemo?
@@ -34,6 +32,7 @@ export const DewPointBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
   };
 
   useEffect(() => {
+    setLoading(true);
     scale();
   }, [props.data]);
 

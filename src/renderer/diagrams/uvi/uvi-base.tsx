@@ -18,8 +18,6 @@ export const UviBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBasePr
 
     let newData: dataItem[];
 
-    setLoading(true);
-
     if (timeDifferenceInDays > 14) {
       setDaily(true);
       newData = scaleMaxPerDay(props.data, 'uvi');
@@ -33,6 +31,7 @@ export const UviBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBasePr
   };
 
   useEffect(() => {
+    setLoading(true);
     scale();
   }, [props.data]);
 

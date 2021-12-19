@@ -57,7 +57,7 @@ it('should start the app with a small set of data', async () => {
     dumpDiffToConsole: true
   });
 
-  const mainText = window.locator('.main.bx--content h2');
+  const mainText = window.locator('.main.bx--content h1');
   expect(await mainText.evaluate(node => node.textContent)).toBe('Overview');
 
   // Open right sidebar.

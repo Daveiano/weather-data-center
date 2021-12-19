@@ -18,8 +18,6 @@ export const SolarBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBase
 
     let newData: dataItem[];
 
-    setLoading(true);
-
     if (timeDifferenceInDays > 14) {
       setDaily(true);
       newData = scaleAveragePerDay(props.data, 'solar');
@@ -33,6 +31,7 @@ export const SolarBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBase
   };
 
   useEffect(() => {
+    setLoading(true);
     scale();
   }, [props.data]);
 

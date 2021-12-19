@@ -1,5 +1,6 @@
 import queryString from 'query-string';
 import moment from "moment";
+import { dataItem } from "./diagrams/types";
 
 const { end, start } = queryString.parse(window.location.search);
 
@@ -13,9 +14,9 @@ const appReducerDefaultState = {
       start: start,
       end: end
     },
-    data: [] as any[]
+    data: [] as dataItem[],
+    dataFilteredPerTime: [] as dataItem[]
   },
-  // @todo Simplify, just dispatch data and get everything from it.
   appReducer = (state = appReducerDefaultState, action: any) => {
     switch (action.type) {
       case 'IS_LOADING': {
@@ -40,6 +41,9 @@ const appReducerDefaultState = {
             end: moment.unix(action.data[action.data.length - 1].time).format('DD-MM-YYYY')
           }
         });
+      }
+      case 'DATA_FILTERED_TIME': {
+        return Object.assign({}, state, { dataFilteredPerTime: action.data });
       }
       case 'USER_SET_DATE': {
         return Object.assign({}, state, { dateSetByUser: {

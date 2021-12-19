@@ -19,8 +19,6 @@ export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: Diagr
 
     let newData: dataItem[];
 
-    setLoading(true);
-
     if (timeDifferenceInDays > 14) {
       setDaily(true);
       // @todo useMemo?
@@ -35,6 +33,7 @@ export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: Diagr
   };
 
   useEffect(() => {
+    setLoading(true);
     scale();
   }, [props.data]);
 

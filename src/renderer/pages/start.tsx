@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
-import moment from "moment";
+import { useSelector } from 'react-redux'
 
 import { Row, Column, Tile } from 'carbon-components-react';
-
-import { dataAction, isLoadingAction } from "../actions-app";
 
 import { TemperatureBase } from '../diagrams/temperature/temperature-base';
 import { HumidityBase } from "../diagrams/humidity/humidity-base";
@@ -24,70 +21,20 @@ import { TABLE_SORT_DIRECTION } from '../components/table-base/misc'
 
 import { RootState } from "../renderer";
 import { dataItem } from "../diagrams/types";
+import { Empty } from "../components/empty";
 
 export const Start:React.FC = (): React.ReactElement => {
-  const [data, setData] = useState([]);
-
-  const dispatch = useDispatch();
-
-  const dataFromStore = useSelector((state: RootState) => state.appState.data);
-  const dateSetByUser = useSelector((state: RootState) => state.appState.dateSetByUser);
+  const dataFilteredFromStore = useSelector((state: RootState) => state.appState.dataFilteredPerTime);
   const loading = useSelector((state: RootState) => state.appState.loading);
 
-  const getData = (arg: [dataItem[]]): void => {
-    console.log('getData', arg);
-    if (arg[0].length) {
-      setData(arg);
-      dispatch(dataAction(arg[0]));
-    }
-    console.log('getData dispatch(isLoadingAction(false));');
-    dispatch(isLoadingAction(false));
-  };
+  const [data, setData] = useState(dataFilteredFromStore);
 
-  // Get data from electron.
   useEffect(() => {
-    console.log('useEffect1 dispatch(isLoadingAction(true));');
-    dispatch(isLoadingAction(true));
-    const removeEventListener = window.electron.IpcOn('query-data', (event, arg) => getData(arg));
+    setData(dataFilteredFromStore);
+  }, [dataFilteredFromStore]);
 
-    if (!dataFromStore.length) {
-      window.electron.IpcSend('query-data', null);
-    } else {
-      setData(dataFromStore);
-      console.log('useEffect1 dispatch(isLoadingAction(false));');
-      dispatch(isLoadingAction(false));
-    }
-
-    return () => {
-      removeEventListener();
-    };
-  }, []);
-
-  const filterDataPerTime = (): void => {
-    const startDate = moment(dateSetByUser.start, 'DD-MM-YYYY').unix();
-    const endDate = moment(dateSetByUser.end, 'DD-MM-YYYY').unix();
-
-    const filteredData = dataFromStore.filter((dataItem: dataItem) => dataItem.time >= startDate && dataItem.time <= endDate);
-
-    setData(filteredData);
-    console.log('filterDataPerTime dispatch(isLoadingAction(false));');
-    dispatch(isLoadingAction(false));
-  };
-
-  // Filter data when user changes dates.
-  useEffect(() => {
-    if (data.length) {
-      console.log('useEffect2 dispatch(isLoadingAction(true));');
-      dispatch(isLoadingAction(true));
-      filterDataPerTime();
-    }
-  }, [dateSetByUser]);
-
-  console.log(loading);
-
-  // @todo Why? Also look into UI when changing dates - optical feedback.
   if (loading) {
-    return <></>;
+    return null;
   }
 
   if (data.length > 0) {
@@ -95,7 +42,7 @@ export const Start:React.FC = (): React.ReactElement => {
       <div className="page">
         <Row>
           <Column>
-            <h2>Overview</h2>
+            <h1>Overview</h1>
           </Column>
         </Row>
 
@@ -162,7 +109,7 @@ export const Start:React.FC = (): React.ReactElement => {
               size="short"
               start={0}
               pageSize={15}
-              rows={data.map(item => ({
+              rows={data.map((item: dataItem) => ({
                 ...item,
                 selected: false
               }))}
@@ -248,8 +195,6 @@ export const Start:React.FC = (): React.ReactElement => {
   }
 
   return (
-    <div>
-      <h2>Please import some data. <br/> This can be done via the icon on the top right.</h2>
-    </div>
+    <Empty />
   );
 }

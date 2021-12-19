@@ -20,8 +20,6 @@ export const FeltTemperatureBase:FunctionComponent<DiagramBaseProps> = (props: D
     let newDataMin: dataItem[],
       newDataMax: dataItem[];
 
-    setLoading(true);
-
     if (timeDifferenceInDays > 14) {
       setDaily(true);
       newDataMin = scaleMinPerDay(props.data, 'felt_temperature');
@@ -38,6 +36,7 @@ export const FeltTemperatureBase:FunctionComponent<DiagramBaseProps> = (props: D
   };
 
   useEffect(() => {
+    setLoading(true);
     scale();
   }, [props.data]);
 

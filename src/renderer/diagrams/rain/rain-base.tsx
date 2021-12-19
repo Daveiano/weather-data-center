@@ -21,8 +21,6 @@ export const RainBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseP
 
     let newData: dataItem[];
 
-    setLoading(true);
-
     if (timeDifferenceInDays > 18 && timeDifferenceInDays < 77) {
       setWeekly(true);
       newData = scaleMaxPerWeek(props.data, 'rain');
@@ -39,6 +37,7 @@ export const RainBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseP
   };
 
   useEffect(() => {
+    setLoading(true);
     scale();
   }, [props.data]);
 

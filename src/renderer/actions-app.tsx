@@ -8,6 +8,10 @@ const isLoadingAction = (loading: boolean): { loading: boolean, type: string } =
     data,
     type: 'DATA'
   }),
+  dataFilteredPerTimeAction = (data: dataItem[]): { data: dataItem[], type: string } => ({
+    data,
+    type: 'DATA_FILTERED_TIME'
+  }),
   userSetDateAction = (userSetDate: Date[]): { userSetDate: Date[], type: string } => ({
     userSetDate,
     type: 'USER_SET_DATE'
@@ -15,10 +19,6 @@ const isLoadingAction = (loading: boolean): { loading: boolean, type: string } =
   dateAction = (date: Date[]): { date: Date[], type: string } => ({
     date,
     type: 'DATE'
-  }),
-  userHasDataAction = (userHasData: number): { userHasData: number, type: string } => ({
-    userHasData,
-    type: 'USER_HAS_DATA'
   });
 
-export { isLoadingAction, dataAction, userSetDateAction, userHasDataAction, dateAction };
+export { isLoadingAction, dataAction, dataFilteredPerTimeAction, userSetDateAction, dateAction };

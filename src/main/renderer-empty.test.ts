@@ -56,8 +56,8 @@ it('should start the app on an empty state', async () => {
     dumpDiffToConsole: true
   });
 
-  const mainText = window.locator('.main.bx--content h2');
-  expect(await mainText.evaluate(node => node.textContent.replace(/(\r\n|\n|\r)/gm, ""))).toBe('Please import some data.  This can be done via the icon on the top right.');
+  const mainText = window.locator('.main.bx--content h1');
+  expect(await mainText.evaluate(node => node.textContent.replace(/(\r\n|\n|\r)/gm, ""))).toBe('No data found');
 
   // Open right sidebar.
   await window.click('header.bx--header button[aria-label="Upload Data"]');

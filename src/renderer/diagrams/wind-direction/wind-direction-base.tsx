@@ -25,8 +25,6 @@ export const WindDirectionBase:FunctionComponent<DiagramBaseProps> = (props: Dia
 
     let newData: dataItem[];
 
-    setLoading(true);
-
     if (timeDifferenceInDays > 14) {
       setDaily(true);
       newData = scaleAveragePerDay(props.data, 'wind_direction');
@@ -40,6 +38,7 @@ export const WindDirectionBase:FunctionComponent<DiagramBaseProps> = (props: Dia
   };
 
   useEffect(() => {
+    setLoading(true);
     scale();
   }, [props.data]);
 
