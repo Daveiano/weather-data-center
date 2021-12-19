@@ -5,21 +5,13 @@ import {ResponsiveLine} from "@nivo/line";
 import { Loading } from "carbon-components-react";
 
 import {dataItem, DiagramBaseProps} from "../types";
-import {
-  getTimeDifferenceInDays,
-  scaleMaxPerDay,
-  scaleMaxPerWeek,
-  scaleMaxPerMonth,
-  scaleAveragePerDay
-} from "../scaling";
+import { getTimeDifferenceInDays, scaleMaxPerDay } from "../scaling";
 import { TooltipLine } from "../tooltip";
 
 export const UviBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [daily, setDaily] = useState(false);
-  const [weekly, setWeekly] = useState(false);
-  const [monthly, setMonthly] = useState(false);
 
   const scale = () => {
     const timeDifferenceInDays = getTimeDifferenceInDays(props.data);

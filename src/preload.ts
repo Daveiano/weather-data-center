@@ -4,12 +4,13 @@ const validChannels = ["open-file-dialog", "loaded-raw-csv-data", "app-is-loadin
 declare interface Window {
   electron: {
     IpcSend(channel: string, data: any[]): void,
-    IpcOn(channel: string, callback: (event: any, ...arg: any) => void): void
+    IpcOn(channel: string, callback: (event: any, ...args: any) => void): () => void
   }
 }
 
 /**
  * @see https://stackoverflow.com/questions/59993468/electron-contextbridge/63894861#63894861
+ * see https://stackoverflow.com/questions/68940343/remove-event-listener-from-preload-js-in-electron-created-by-react-component
  */
 contextBridge.exposeInMainWorld(
   'electron',
@@ -19,9 +20,14 @@ contextBridge.exposeInMainWorld(
         ipcRenderer.send(channel, data);
       }
     },
-    IpcOn: (channel: string, listener: (event: any, ...arg: any) => void) => {
+    IpcOn: (channel: string, listener: (event: any, ...args: any) => void) => {
       if (validChannels.includes(channel)) {
-        ipcRenderer.on(channel, listener);
+        const subscription = (event: any, ...args: any) => listener(event, args);
+
+        ipcRenderer.on(channel, subscription);
+        return () => {
+          ipcRenderer.removeListener(channel, subscription);
+        };
       }
     }
   }

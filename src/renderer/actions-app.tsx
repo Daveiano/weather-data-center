@@ -1,8 +1,10 @@
+import {dataItem} from "./diagrams/types";
+
 const isLoadingAction = (loading: boolean): { loading: boolean, type: string } => ({
     loading,
     type: 'IS_LOADING'
   }),
-  dataAction = (data: any[]): { data: any[], type: string } => ({
+  dataAction = (data: dataItem[]): { data: dataItem[], type: string } => ({
     data,
     type: 'DATA'
   }),

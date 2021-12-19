@@ -1,5 +1,8 @@
 import React, { useCallback, useState } from 'react';
-import {Delete16 as Delete, Information16} from '@carbon/icons-react';
+
+import moment from "moment";
+
+import { Delete16 as Delete, Information16 } from '@carbon/icons-react';
 import {
   TableContainer,
   Table,
@@ -17,8 +20,10 @@ import {
   TableToolbarMenu,
   TableBatchActions,
   TableBatchAction,
-  DataTableSize, TooltipIcon
+  DataTableSize,
+  TooltipIcon
 } from 'carbon-components-react';
+
 import {
   useFilteredRows,
   usePageInfo,
@@ -27,13 +32,9 @@ import {
   useSortInfo,
   useUniqueId,
 } from './hooks';
-import Pagination from './components/Pagination';
-import {
-  TABLE_SORT_DIRECTION,
-  doesRowMatchSearchString,
-} from './misc';
-import {dataItem} from "../../diagrams/types";
-import moment from "moment";
+import Pagination from './components/pagination';
+import { TABLE_SORT_DIRECTION, doesRowMatchSearchString } from './misc';
+import { dataItem } from "../../diagrams/types";
 
 export type dataItemDataTable = dataItem & { selected: boolean };
 

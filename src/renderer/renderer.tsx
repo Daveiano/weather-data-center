@@ -32,7 +32,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { combineReducers, createStore } from 'redux';
 
-import App from './App';
+import { App } from './app';
 import { appReducerDefaultState, appReducer } from './reducer-app';
 import { isLoadingAction } from "./actions-app";
 import { HashRouter } from "react-router-dom";
@@ -46,11 +46,12 @@ const store = createStore(
   }
 );
 
-const ipcMainLoadingListener = (event: any, arg: any): void => {
+const ipcMainLoadingListener = (arg: any): void => {
+  console.log('loading', arg);
   store.dispatch(isLoadingAction(arg));
 };
 
-window.electron.IpcOn('app-is-loading', ipcMainLoadingListener);
+window.electron.IpcOn('app-is-loading', (event, arg) => ipcMainLoadingListener(arg));
 
 console.log('👋 This message is being logged by "renderer.js", included via webpack');
 
@@ -62,3 +63,8 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('app')
 );
+
+// Infer the `RootState` and `AppDispatch` types from the store itself
+export type RootState = ReturnType<typeof store.getState>
+// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+export type AppDispatch = typeof store.dispatch

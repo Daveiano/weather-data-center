@@ -5,13 +5,7 @@ import {ResponsiveLine} from "@nivo/line";
 import { Loading } from "carbon-components-react";
 
 import {dataItem, DiagramBaseProps} from "../types";
-import {
-  getTimeDifferenceInDays,
-  scaleMaxPerDay,
-  scaleMaxPerWeek,
-  scaleMaxPerMonth,
-  scaleAveragePerDay
-} from "../scaling";
+import { getTimeDifferenceInDays, scaleAveragePerDay } from "../scaling";
 import { TooltipLine } from "../tooltip";
 
 export const SolarBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {

@@ -89,13 +89,13 @@ header.bx--header {
 }
 
 /* Start tiles */
-.start-overview {
+.page {
   h2 {
     margin-bottom: $spacing-07;
     margin-left: calc(#{$spacing-02} + #{$spacing-08});
     @include carbon--type-style('expressive-heading-06');
   }
-  .start-tiles {
+  .tiles {
     .bx--tile {
       margin-bottom: $spacing-07;
       h3 {

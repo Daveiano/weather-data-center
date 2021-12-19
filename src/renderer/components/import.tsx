@@ -16,6 +16,7 @@ type State = {
 
 const mapStateToProps = (state: any) => ({ state });
 
+// @todo Refactor to functional component.
 class Import extends Component<Props> {
   props: Props;
 

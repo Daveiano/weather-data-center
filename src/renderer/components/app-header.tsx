@@ -1,5 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import { Link, LinkProps, useLocation } from "react-router-dom";
+import moment from 'moment';
+
 import {
   HeaderContainer,
   HeaderGlobalAction,
@@ -15,125 +18,122 @@ import {
   DatePicker,
   DatePickerInput
 } from "carbon-components-react";
-import {DocumentAdd20, ChartTreemap20, Fade20, Temperature20, Temperature32, ChartTreemap32} from "@carbon/icons-react";
+import { DocumentAdd20, Temperature32, ChartTreemap32 } from "@carbon/icons-react";
 
-import Import from "./Import";
+import Import from "./import";
 import { userSetDateAction } from "../actions-app";
-import {Link} from "react-router-dom";
+import { RootState } from "../renderer";
 
-const mapStateToProps = (appState: any) =>  appState;
+export const AppHeader: React.FC = (): React.ReactElement => {
+  const [headerPanelExpanded, setHeaderPanelExpanded] = useState(false);
 
-// @todo This should be required, but produces an error, refactor and follow
-//   documentation.
-// @see https://react-redux.js.org/using-react-redux/usage-with-typescript
-type Props = {
-  dispatch?: (action: any) => void,
-  appState?: any
-};
+  const dataFromStore = useSelector((state: RootState) => state.appState.data);
+  const dateSetByUser = useSelector((state: RootState) => state.appState.dateSetByUser);
+  const dateFromStore = useSelector((state: RootState) => state.appState.date);
 
-type State = {
-  headerPanelExpanded: boolean
-};
+  const dispatch = useDispatch();
+  const location = useLocation();
 
-class AppHeader extends React.Component<Props, State> {
-  state: State = {
-    headerPanelExpanded: false
-  };
-
-  render() {
-    return (
-      <HeaderContainer
-        render={({ isSideNavExpanded, onClickSideNavExpand }) => (
-          <>
-            <Header aria-label="Weather Data Center">
-              <SkipToContent />
-              <HeaderMenuButton
-                aria-label="Open menu"
-                isCollapsible
-                onClick={onClickSideNavExpand}
-                isActive={isSideNavExpanded}
+  return (
+    <HeaderContainer
+      render={({ isSideNavExpanded, onClickSideNavExpand }) => (
+        <>
+          <Header aria-label="Weather Data Center">
+            <SkipToContent />
+            <HeaderMenuButton
+              aria-label="Open menu"
+              isCollapsible
+              onClick={onClickSideNavExpand}
+              isActive={isSideNavExpanded}
+            />
+            <HeaderName<LinkProps> element={Link} to="/" prefix="">
+              Weather Data Center
+            </HeaderName>
+            {/*<HeaderNavigation>
+              <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+              <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+              <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+              <HeaderMenu aria-label="Link 4" menuLinkName={'test'}>
+                <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
+                <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+                <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
+              </HeaderMenu>
+            </HeaderNavigation>*/}
+            {dateFromStore.start !== '0' && dateFromStore.end !== '0' &&
+            <DatePicker
+              dateFormat="d/m/Y"
+              datePickerType="range"
+              onChange={(values) => dispatch(userSetDateAction(values))}
+              minDate={moment(dateFromStore.start, 'DD-MM-YYYY').format('DD-MM-YYYY')}
+              maxDate={moment(dateFromStore.end, 'DD-MM-YYYY').format('DD-MM-YYYY')}
+            >
+              <DatePickerInput
+                id="date-picker-range-start"
+                placeholder="dd/mm/yyyy"
+                labelText="Start date"
+                type="text"
+                size={"sm"}
+                defaultValue={dateSetByUser.start}
               />
-              <HeaderName href="/main_window" prefix="">
-                Weather Data Center
-              </HeaderName>
-              {/*<HeaderNavigation>
-                <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
-                <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
-                <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
-                <HeaderMenu aria-label="Link 4" menuLinkName={'test'}>
-                  <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
-                  <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
-                  <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
-                </HeaderMenu>
-              </HeaderNavigation>*/}
-              {this.props.appState.date.start !== '0' && this.props.appState.date.end !== '0' &&
-              <DatePicker
-                dateFormat="d/m/Y"
-                datePickerType="range"
-                onChange={(values) => this.props.dispatch(userSetDateAction(values))}
-                minDate={this.props.appState.date.start}
-                maxDate={this.props.appState.date.end}
+              <DatePickerInput
+                id="date-picker-range-end"
+                placeholder="dd/mm/yyyy"
+                labelText="End date"
+                type="text"
+                size={"sm"}
+                defaultValue={dateSetByUser.end}
+              />
+            </DatePicker>
+            }
+
+            <HeaderGlobalBar>
+              <HeaderGlobalAction
+                aria-label="Upload Data"
+                isActive={true}
+                onClick={() => setHeaderPanelExpanded(!headerPanelExpanded)}
               >
-                <DatePickerInput
-                  id="date-picker-range-start"
-                  placeholder="dd/mm/yyyy"
-                  labelText="Start date"
-                  type="text"
-                  size={"sm"}
-                  defaultValue={this.props.appState.dateSetByUser.start}
-                />
-                <DatePickerInput
-                  id="date-picker-range-end"
-                  placeholder="dd/mm/yyyy"
-                  labelText="End date"
-                  type="text"
-                  size={"sm"}
-                  defaultValue={this.props.appState.dateSetByUser.end}
-                />
-              </DatePicker>
-              }
-
-              <HeaderGlobalBar>
-                <HeaderGlobalAction
-                  aria-label="Upload Data"
-                  isActive={true}
-                  onClick={() => this.setState({ headerPanelExpanded: !this.state.headerPanelExpanded })}
+                <DocumentAdd20 />
+              </HeaderGlobalAction>
+            </HeaderGlobalBar>
+            <SideNav
+              aria-label="Side navigation"
+              isRail
+              expanded={isSideNavExpanded}>
+              <SideNavItems>
+                <SideNavLink<LinkProps>
+                  aria-current={location.pathname === '/' ? 'page' : false}
+                  renderIcon={ChartTreemap32}
+                  to="/"
+                  element={Link}
                 >
-                  <DocumentAdd20 />
-                </HeaderGlobalAction>
-              </HeaderGlobalBar>
-              <SideNav
-                aria-label="Side navigation"
-                isRail
-                expanded={isSideNavExpanded}>
-                <SideNavItems>
-                  <SideNavLink aria-current="page" renderIcon={ChartTreemap32} href="/temperature" element={Link}>
-                    Overview
-                  </SideNavLink>
-                  <SideNavLink renderIcon={Temperature32} href="#temperature">
-                    Temperature
-                  </SideNavLink>
-                </SideNavItems>
-              </SideNav>
-              <HeaderPanel aria-label="Header Panel" expanded={this.state.headerPanelExpanded}>
-                <Column>
-                  <Import />
+                  Overview
+                </SideNavLink>
+                <SideNavLink<LinkProps>
+                  aria-current={location.pathname === '/temperature' ? 'page' : false}
+                  renderIcon={Temperature32}
+                  to="/temperature"
+                  element={Link}
+                >
+                  Temperature
+                </SideNavLink>
+              </SideNavItems>
+            </SideNav>
+            <HeaderPanel aria-label="Header Panel" expanded={headerPanelExpanded}>
+              <Column>
+                <Import />
 
-                  <div className="import-data">
-                    {this.props.appState.data.length > 0 &&
-                    <div>
-                      {this.props.appState.data.length} records in DB
-                    </div>
-                    }
+                <div className="import-data">
+                  {dataFromStore.length > 0 &&
+                  <div>
+                    {dataFromStore.length} records in DB
                   </div>
-                </Column>
-              </HeaderPanel>
-            </Header>
-          </>
-        )}
-      />
-    );
-  }
+                  }
+                </div>
+              </Column>
+            </HeaderPanel>
+          </Header>
+        </>
+      )}
+    />
+  );
 }
-
-export default connect(mapStateToProps)(AppHeader);

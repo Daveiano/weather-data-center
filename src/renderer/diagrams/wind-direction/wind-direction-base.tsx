@@ -1,17 +1,11 @@
 import React, {FunctionComponent, useEffect, useState} from 'react';
 
 import { WindStream32 } from "@carbon/icons-react";
-import {ResponsiveLine} from "@nivo/line";
 import { Loading } from "carbon-components-react";
+import { ResponsiveLine } from "@nivo/line";
 
 import {dataItem, DiagramBaseProps} from "../types";
-import {
-  getTimeDifferenceInDays,
-  scaleMaxPerDay,
-  scaleMaxPerWeek,
-  scaleMaxPerMonth,
-  scaleAveragePerDay
-} from "../scaling";
+import { getTimeDifferenceInDays, scaleAveragePerDay } from "../scaling";
 import { TooltipLine } from "../tooltip";
 
 const degToCompass = (deg: number): string => {
