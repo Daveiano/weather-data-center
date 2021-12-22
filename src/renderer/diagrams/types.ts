@@ -1,5 +1,5 @@
-type DiagramBaseProps= {
-  title: string,
+type DiagramBaseProps = {
+  title?: string,
   height: string,
   data: dataItem[]
 };

@@ -50,10 +50,12 @@ export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: Diagr
 
   return (
     <div data-testid="temperature-diagram">
-      <h3>
-        <Temperature32 />
-        {props.title}
-      </h3>
+      {props.title &&
+        <h3>
+          <Temperature32 />
+          {props.title}
+        </h3>
+      }
 
       <div style={{ height: props.height }}>
         <ResponsiveLine
@@ -72,6 +74,7 @@ export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: Diagr
             format: "%Y-%m-%dT%H:%M:%S.000Z",
             precision: 'minute'
           }}
+          // @see https://github.com/d3/d3-time-format
           xFormat={daily ? "time:%Y/%m/%d" : "time:%Y/%m/%d %H:%M"}
           yScale={{
             type: "linear",

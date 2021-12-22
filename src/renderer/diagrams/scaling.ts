@@ -3,10 +3,11 @@ import moment from "moment";
 
 type dateTimeElement = {
   time: number,
+  date: string,
   values: any[number]
 }
 
-type propertyParameter = 'humidity' | 'pressure' | 'temperature' | 'rain' | 'solar' | 'uvi' | 'wind' | 'gust' | 'wind_direction' | 'dew_point' | 'felt_temperature';
+export type propertyParameter = 'humidity' | 'pressure' | 'temperature' | 'rain' | 'solar' | 'uvi' | 'wind' | 'gust' | 'wind_direction' | 'dew_point' | 'felt_temperature';
 
 interface Dates {
   [key: string]: dateTimeElement
@@ -42,9 +43,7 @@ const calculateScaling = (dateItem: dateTimeElement, method: 'max' | 'average' |
   }
 };
 
-const scale = (data: dataItem[], property: propertyParameter, method: 'max' | 'average' | 'sum' | 'min', precision?: string): dataItem[] => {
-  let newData: dataItem[] = [];
-
+const bundleData = (data: dataItem[], property: propertyParameter, precision?: string): Dates => {
   let dates: Dates = {};
 
   // Loop over all date elements and create an object to hold all data per day.
@@ -69,6 +68,7 @@ const scale = (data: dataItem[], property: propertyParameter, method: 'max' | 'a
       dates = {
         ...dates,
         [date]: {
+          date: date,
           time: data[key].time,
           values: []
         }
@@ -78,6 +78,14 @@ const scale = (data: dataItem[], property: propertyParameter, method: 'max' | 'a
     // Add all values of the day.
     dates[date].values = [ ...dates[date].values, data[key][property] ];
   }
+
+  return dates;
+}
+
+const scale = (data: dataItem[], property: propertyParameter, method: 'max' | 'average' | 'sum' | 'min', precision?: string): dataItem[] => {
+  let newData: dataItem[] = [];
+
+  const dates = bundleData(data, property, precision);
 
   // Create the needed structure.
   for (const [key, dateItem] of Object.entries(dates)) {
@@ -129,4 +137,4 @@ const scaleAveragePerDay = (data: dataItem[], property: propertyParameter): data
   return scale(data, property, 'average');
 };
 
-export { getTimeDifferenceInDays, scaleMaxPerDay, scaleMinPerDay, scaleMaxPerWeek, scaleMaxPerMonth, scaleAveragePerDay };
+export { getTimeDifferenceInDays, scaleMaxPerDay, scaleMinPerDay, scaleMaxPerWeek, scaleMaxPerMonth, scaleAveragePerDay, bundleData };

@@ -23,5 +23,5 @@ Coming soon
 
 * Carbon structure: components-react vs @carbon - https://github.com/carbon-design-system/carbon/issues/9540
 * <s>Carbon DataTable sort all pages, not only current visible - https://github.com/carbon-design-system/carbon/issues/6373</s>
-* <s>Carbon - Support React <Link> in SideNav - https://github.com/carbon-design-system/carbon/issues/2473<s>
+* <s>Carbon - Support React <Link> in SideNav - https://github.com/carbon-design-system/carbon/issues/2473</s>
 * Nivo Annotations for line diagram (show min and max value for e.g. temperature) - https://github.com/plouc/nivo/issues/1857

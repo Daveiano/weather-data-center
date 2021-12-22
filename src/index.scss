@@ -139,21 +139,58 @@ header.bx--header {
   }
 }
 
-.stat-tile-container {
-  display: flex;
-  height: calc(100% - 2rem);
-  padding-left: $spacing-07;
+.bx--tile.combined-tile-stats-diagram {
+  h3 {
+    padding-left: $spacing-06;
+    margin-bottom: $spacing-07;
+  }
 }
 
 .stats {
   align-items: flex-end;
-  .stat-tile {
-    margin-bottom: $spacing-07;
-    .heading {
-      margin-bottom: $spacing-02;
+  padding-left: $spacing-06;
+  &.normal {
+    padding-top: $spacing-05;
+  }
+  &.compact {
+    width: 100%;
+    align-items: baseline;
+    margin-bottom: -$spacing-06;
+    h3.heading {
+      margin-bottom: $spacing-07;
+      @include carbon--breakpoint-up("max") {
+        margin-bottom: $spacing-05;
+      }
     }
-    .value {
-      margin-bottom: $spacing-02;
+  }
+  .stat-tile {
+    &.normal {
+      margin-bottom: $spacing-07;
+      .heading {
+        margin-bottom: $spacing-02;
+      }
+      .value {
+        margin-bottom: $spacing-02;
+      }
+    }
+    &.compact {
+      margin-bottom: $spacing-06;
+      .value {
+        white-space: nowrap;
+        @include carbon--type-style('productive-heading-04');
+        @include carbon--breakpoint-up("max") {
+          @include carbon--type-style('productive-heading-05');
+        }
+      }
+      .heading {
+        margin-bottom: $spacing-02;
+      }
+      .date {
+        margin-bottom: $spacing-02;
+        sub {
+          font-size: 0.75em;
+        }
+      }
     }
   }
 }

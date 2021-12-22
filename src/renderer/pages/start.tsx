@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
 
 import { Row, Column, Tile } from 'carbon-components-react';
+import { TemperatureHigh, TemperatureLow, Windy, RainyHeavy, Weather, Sunny } from '@carbon/pictograms-react';
 
 import { TemperatureBase } from '../diagrams/temperature/temperature-base';
 import { HumidityBase } from "../diagrams/humidity/humidity-base";
@@ -14,7 +15,7 @@ import { WindDirectionBase } from "../diagrams/wind-direction/wind-direction-bas
 import { DewPointBase } from "../diagrams/temperature/dew-point-base";
 import { FeltTemperatureBase } from "../diagrams/temperature/felt-temperature-base";
 
-import { Stats } from "../components/stats";
+import { Stats } from "../components/stats/stats";
 
 import TableBase from '../components/table-base/table-base';
 import { TABLE_SORT_DIRECTION } from '../components/table-base/misc'
@@ -49,7 +50,56 @@ export const Start:React.FC = (): React.ReactElement => {
         <Row className="tiles">
           <Column sm={12} lg={12} max={8}>
             <Tile className="stat-tile-container">
-              <Stats data={data} />
+              <Stats
+                data={data}
+                columnSpanLg={6}
+                columnSpan={6}
+                size="normal"
+                stats={[
+                  {
+                    property: 'temperature',
+                    direction: 'max',
+                    label: 'Maximum Temperature',
+                    unit: '°C',
+                    icon: <TemperatureHigh />
+                  },
+                  {
+                    property: 'temperature',
+                    direction: 'min',
+                    label: 'Minimum Temperature',
+                    unit: '°C',
+                    icon: <TemperatureLow />
+                  },
+                  {
+                    property: 'gust',
+                    direction: 'max',
+                    label: 'Maximum Gust',
+                    unit: ' km/h',
+                    icon: <Windy />
+                  },
+                  {
+                    property: 'rain',
+                    direction: 'max',
+                    label: 'Maximum Rain in one day',
+                    unit: ' mm',
+                    icon: <RainyHeavy />
+                  },
+                  {
+                    property: 'pressure',
+                    direction: 'max',
+                    label: 'Maximum Pressure',
+                    unit: ' hPa',
+                    icon: <Sunny />
+                  },
+                  {
+                    property: 'pressure',
+                    direction: 'min',
+                    label: 'Minimum Pressure',
+                    unit: ' hPa',
+                    icon: <Weather />
+                  }
+                ]}
+              />
             </Tile>
           </Column>
           <Column sm={6} lg={6} max={4}>
