@@ -5,8 +5,9 @@ import { ResponsiveLine } from '@nivo/line'
 import { TemperatureFeelsLike32 } from "@carbon/icons-react";
 
 import { dataItem, DiagramBaseProps } from "../types";
-import {getTimeDifferenceInDays, scaleMinPerDay, scaleMaxPerDay} from "../scaling";
+import { getTimeDifferenceInDays, scaleMinPerDay, scaleMaxPerDay } from "../scaling";
 import { TooltipLine} from "../tooltip";
+import { getTemperatureLineBaseProps } from './temperature-base';
 
 export const FeltTemperatureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
   const [dataMin, setDataMin] = useState([]);
@@ -58,8 +59,9 @@ export const FeltTemperatureBase:FunctionComponent<DiagramBaseProps> = (props: D
         {props.title}
       </h3>
 
-      <div style={{ height: props.height }}>
+      <div style={{ height: props.height }} className="diagram">
         <ResponsiveLine
+          {...getTemperatureLineBaseProps(daily, [...dataMin, ...dataMax], 'felt_temperature')}
           data={[
             {
               id: 'Min',
@@ -76,64 +78,12 @@ export const FeltTemperatureBase:FunctionComponent<DiagramBaseProps> = (props: D
               }))
             }
           ]}
-          xScale={{
-            type: "time",
-            useUTC: true,
-            format: "%Y-%m-%dT%H:%M:%S.000Z",
-            precision: 'minute'
-          }}
-          xFormat={daily ? "time:%Y/%m/%d" : "time:%Y/%m/%d %H:%M"}
-          yScale={{
-            type: "linear",
-            min: Math.min.apply(Math, dataMin.map(item => item.felt_temperature)) - 3,
-            max: Math.max.apply(Math, dataMax.map(item => item.felt_temperature)) + 3
-          }}
-          yFormat={value => `${value} °C`}
-          margin={{ top: 20, right: 10, bottom: 20, left: 40 }}
-          curve="natural"
           // @todo theme={}
           colors= {['#67C8FF', '#C41E3A']}
-          lineWidth={2}
-          enableArea={false}
-          areaOpacity={0.07}
-          enablePoints={true}
-          pointSize={5}
-          enablePointLabel={false}
-          pointLabel="yFormatted"
-          axisLeft={{
-            legend: '°C',
-            legendOffset: -35,
-            legendPosition: 'middle',
-            tickSize: 0,
-            tickPadding: 10
-          }}
-          axisBottom={{
-            format: daily ? "%b %Y" : "%e",
-            tickValues: daily ? "every month" : "every 3 days",
-            tickSize: 0,
-            tickPadding: 5
-          }}
-          isInteractive={true}
           tooltip={point => point.point.serieId === 'Min' ?
             <TooltipLine point={point.point} color="#67C8FF" colorDarken="#0072b3" /> :
             <TooltipLine point={point.point} color="#C41E3A" colorDarken="#620f1d" />
           }
-          useMesh={true}
-          enableCrosshair={true}
-          markers={[
-            {
-              axis: 'y',
-              value: 0,
-              lineStyle: {
-                stroke: '#00BFFF',
-                strokeWidth: 2,
-                strokeOpacity: 0.75,
-                strokeDasharray: "10, 10"
-              },
-              legend: '0 °C',
-              legendOrientation: 'horizontal',
-            },
-          ]}
           legends={[
             {
               anchor: 'top-right',

@@ -49,7 +49,7 @@ export const Start:React.FC = (): React.ReactElement => {
 
         <Row className="tiles">
           <Column sm={12} lg={12} max={8}>
-            <Tile className="stat-tile-container">
+            <Tile className="stat-tile-container normal">
               <Stats
                 data={data}
                 columnSpanLg={6}

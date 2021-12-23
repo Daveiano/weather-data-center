@@ -1,7 +1,7 @@
 import React from "react";
 
-import { Column, ColumnSpan, Row } from "carbon-components-react";
-import moment from "moment";
+import { Column, Row } from "carbon-components-react";
+import type { ColumnSpan } from "carbon-components-react";
 
 import { statsItem } from "./stats";
 

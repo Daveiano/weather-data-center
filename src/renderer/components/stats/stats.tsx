@@ -1,6 +1,7 @@
 import React from "react";
 
-import { ColumnSpan, Row, Column } from "carbon-components-react";
+import { Row, Column } from "carbon-components-react";
+import type { ColumnSpan } from "carbon-components-react";
 import moment from "moment";
 
 import { dataItem } from "../../diagrams/types";
@@ -15,7 +16,8 @@ export type statsItem = {
   label: string,
   description?: string,
   unit: string,
-  icon?: React.ReactElement
+  icon?: React.ReactElement,
+  tooltip?: string,
 }
 
 interface StatsProps {
@@ -27,12 +29,6 @@ interface StatsProps {
   stats: statsItem[]
 }
 
-/**
- * @todo Add second layout: more compact for temperature page without icons.
- *
- * @param props
- * @constructor
- */
 export const Stats: React.FC<StatsProps> = (props: StatsProps): React.ReactElement  => {
   const output: React.ReactElement[] = [];
 
@@ -108,6 +104,7 @@ export const Stats: React.FC<StatsProps> = (props: StatsProps): React.ReactEleme
             item={statsKey}
             date={date ? date : false}
             value={value}
+            tooltip={statsKey.tooltip}
           />
         );
         break;

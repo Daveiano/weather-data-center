@@ -55,7 +55,7 @@ export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
         {props.title}
       </h3>
 
-      <div style={{ height: props.height }}>
+      <div style={{ height: props.height }} className="diagram">
         <ResponsiveLine
           data={[
             {

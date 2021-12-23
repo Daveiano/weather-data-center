@@ -47,7 +47,7 @@ export const UviBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBasePr
   }
 
   return (
-    <div data-testid="uvi-diagram">
+    <div data-testid="uvi-diagram" className="diagram">
       <h3>
         <UvIndex32 />
         {props.title}

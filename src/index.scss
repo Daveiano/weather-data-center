@@ -121,6 +121,12 @@ header.bx--header {
   }
 }
 
+.diagram {
+  svg, text {
+    font-family: carbon--font-family('mono'), monospace !important;
+  }
+}
+
 /* App Header */
 header.bx--header {
   .bx--header-panel {
@@ -144,6 +150,11 @@ header.bx--header {
     padding-left: $spacing-06;
     margin-bottom: $spacing-07;
   }
+}
+
+.bx--tile.stat-tile-container.normal {
+  margin-bottom: 0;
+  padding-top: 2rem;
 }
 
 .stats {
@@ -187,10 +198,15 @@ header.bx--header {
       }
       .date {
         margin-bottom: $spacing-02;
+        margin-right: $spacing-03;
         sub {
           font-size: 0.75em;
         }
       }
     }
   }
+}
+
+.diagram-tooltip {
+  font-family: carbon--font-family('mono'), monospace;
 }

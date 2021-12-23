@@ -53,7 +53,7 @@ export const SolarBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBase
         {props.title}
       </h3>
 
-      <div style={{ height: props.height }}>
+      <div style={{ height: props.height }} className="diagram">
         <ResponsiveLine
           data={[
             {

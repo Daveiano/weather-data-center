@@ -59,7 +59,7 @@ export const RainBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseP
         {props.title}
       </h3>
 
-      <div style={{ height: props.height }}>
+      <div style={{ height: props.height }} className="diagram">
         <ResponsiveBar
           data={data}
           indexBy={"timeParsed"}

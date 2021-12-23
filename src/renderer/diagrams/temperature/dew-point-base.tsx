@@ -7,6 +7,7 @@ import { DewPoint32 } from "@carbon/icons-react";
 import { dataItem, DiagramBaseProps } from "../types";
 import { getTimeDifferenceInDays, scaleAveragePerDay } from "../scaling";
 import { TooltipLine} from "../tooltip";
+import { getTemperatureLineBaseProps } from "./temperature-base";
 
 export const DewPointBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
   const [data, setData] = useState([]);
@@ -54,8 +55,9 @@ export const DewPointBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
         {props.title}
       </h3>
 
-      <div style={{ height: props.height }}>
+      <div style={{ height: props.height }} className="diagram">
         <ResponsiveLine
+          {...getTemperatureLineBaseProps(daily, data, 'dew_point')}
           data={[
             {
               id: 'dew_point',
@@ -65,61 +67,9 @@ export const DewPointBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
               }))
             }
           ]}
-          xScale={{
-            type: "time",
-            useUTC: true,
-            format: "%Y-%m-%dT%H:%M:%S.000Z",
-            precision: 'minute'
-          }}
-          xFormat={daily ? "time:%Y/%m/%d" : "time:%Y/%m/%d %H:%M"}
-          yScale={{
-            type: "linear",
-            min: Math.min.apply(Math, data.map(item => item.dew_point)) - 3,
-            max: Math.max.apply(Math, data.map(item => item.dew_point)) + 3
-          }}
-          yFormat={value => `${value} °C`}
-          margin={{ top: 20, right: 10, bottom: 20, left: 40 }}
-          curve="natural"
           // @todo theme={}
           colors= {['#5F9EA0']}
-          lineWidth={2}
-          enableArea={false}
-          areaOpacity={0.07}
-          enablePoints={true}
-          pointSize={5}
-          enablePointLabel={false}
-          pointLabel="yFormatted"
-          axisLeft={{
-            legend: '°C',
-            legendOffset: -35,
-            legendPosition: 'middle',
-            tickSize: 0,
-            tickPadding: 10
-          }}
-          axisBottom={{
-            format: daily ? "%b %Y" : "%e",
-            tickValues: daily ? "every month" : "every 3 days",
-            tickSize: 0,
-            tickPadding: 5
-          }}
-          isInteractive={true}
           tooltip={point => <TooltipLine point={point.point} color="#5F9EA0" colorDarken="#2f4f50" />}
-          useMesh={true}
-          enableCrosshair={true}
-          markers={[
-            {
-              axis: 'y',
-              value: 0,
-              lineStyle: {
-                stroke: '#00BFFF',
-                strokeWidth: 2,
-                strokeOpacity: 0.75,
-                strokeDasharray: "10, 10"
-              },
-              legend: '0 °C',
-              legendOrientation: 'horizontal',
-            },
-          ]}
         />
       </div>
 

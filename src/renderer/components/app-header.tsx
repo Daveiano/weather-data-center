@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Link, LinkProps, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import type { LinkProps } from "react-router-dom";
 import moment from 'moment';
 
 import {

@@ -24,6 +24,7 @@ exports[`temperature diagram with 11-day data 1`] = `
       Temperature
     </h3>
     <div
+      class="diagram"
       style="height: 300px;"
     >
       <div

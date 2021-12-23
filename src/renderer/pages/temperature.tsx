@@ -8,6 +8,9 @@ import { RootState } from "../renderer";
 import { Stats } from "../components/stats/stats";
 import { Empty } from "../components/empty";
 import {TemperatureBase} from "../diagrams/temperature/temperature-base";
+import TableBase from "../components/table-base/table-base";
+import {TABLE_SORT_DIRECTION} from "../components/table-base/misc";
+import {dataItem} from "../diagrams/types";
 
 /**
  * @see https://www.dwd.de/DE/service/lexikon/Functions/glossar.html?lv2=101334&lv3=101452
@@ -48,20 +51,20 @@ export const TemperaturePage: React.FC = (): React.ReactElement  => {
                     <Column sm={12} lg={12} max={3}>
                       <Stats
                         data={data}
-                        columnSpanLg={true}
+                        columnSpanLg={3}
                         columnSpan={6}
                         size="compact"
                         stats={[
                           {
                             property: 'temperature',
                             direction: 'max',
-                            label: 'Maximum Temperature',
+                            label: 'Maximum',
                             unit: '°C'
                           },
                           {
                             property: 'temperature',
                             direction: 'min',
-                            label: 'Minimum Temperature',
+                            label: 'Minimum',
                             unit: '°C',
                             icon: <TemperatureLow />
                           },
@@ -102,7 +105,8 @@ export const TemperaturePage: React.FC = (): React.ReactElement  => {
                             direction: 'extra',
                             extra: 'tropical-nights',
                             label: 'Tropical nights',
-                            description: 'T<sub>min</sub> ≥ 20 °C during 18:00 UTC - 06:00 UTC',
+                            description: 'T<sub>min</sub> ≥ 20 °C',
+                            tooltip: '18:00 UTC - 06:00 UTC',
                             unit: '°C'
                           },
                           {
@@ -117,10 +121,63 @@ export const TemperaturePage: React.FC = (): React.ReactElement  => {
                       />
                     </Column>
                     <Column sm={12} lg={12} max={9}>
-                      <TemperatureBase height="500px" data={data} />
+                      <TemperatureBase height="450px" data={data} />
                     </Column>
                   </Row>
                 </Tile>
+              </Column>
+              <Column sm={12} lg={12} max={12}>
+                <Tile>
+                  <h3>Combined Temperature, Dew point, Felt</h3>
+                </Tile>
+              </Column>
+              <Column sm={12} lg={12} max={12}>
+                <Tile>
+                  <h3>Diagram with Point Labels? and select to change between daily and monthly average</h3>
+                </Tile>
+              </Column>
+              <Column sm={12} lg={12} max={12}>
+                <TableBase
+                  start={0}
+                  pageSize={25}
+                  rows={data.map((item: dataItem) => ({
+                    ...item,
+                    selected: false
+                  }))}
+                  columns={[
+                    {
+                      title: 'Time',
+                      id: 'timeParsed',
+                      tooltip: 'Date format is YYYY/MM/DD HH:mm',
+                      sortCycle: 'tri-states-from-ascending',
+                    },
+                    {
+                      title: 'Temperature',
+                      small: 'in °C',
+                      id: 'temperature',
+                      sortCycle: 'tri-states-from-ascending',
+                    },
+                    {
+                      title: 'Felt temperature',
+                      small: 'in °C',
+                      id: 'felt_temperature',
+                      sortCycle: 'tri-states-from-ascending',
+                    },
+                    {
+                      title: 'Dew point',
+                      small: 'in °C',
+                      id: 'dew_point',
+                      sortCycle: 'tri-states-from-ascending',
+                    }
+                  ]}
+                  title="All data"
+                  hasSelection={false}
+                  sortInfo={{
+                    columnId: 'timeParsed',
+                    direction: TABLE_SORT_DIRECTION.ASCENDING,
+                  }}
+                  size="short"
+                />
               </Column>
             </Row>
           </Column>

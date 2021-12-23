@@ -20,9 +20,9 @@ import {
   TableToolbarMenu,
   TableBatchActions,
   TableBatchAction,
-  DataTableSize,
   TooltipIcon
 } from 'carbon-components-react';
+import type { DataTableSize } from 'carbon-components-react';
 
 import {
   useFilteredRows,
@@ -269,8 +269,9 @@ const TableBase: React.FC<TableBaseProps> = (props: TableBaseProps): React.React
                         tooltipText={tooltip}
                         renderIcon={Information16}
                         direction="right"
-                        children={<></>}
-                      />
+                      >
+                        <></>
+                      </TooltipIcon>
                     }
                   </div>
                 </TableHeader>

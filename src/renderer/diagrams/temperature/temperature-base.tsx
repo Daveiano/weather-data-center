@@ -1,14 +1,112 @@
-import React, {FunctionComponent, useEffect, useState} from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 
 import { Loading } from "carbon-components-react";
-import { ResponsiveLine } from '@nivo/line'
+import { Temperature32 } from "@carbon/icons-react";
+import { ResponsiveLine} from '@nivo/line'
+import type { DatumValue } from '@nivo/line'
+import type { ScaleTimeSpec, ScaleLinearSpec } from "@nivo/scales/dist/types/types";
+import type { CartesianMarkerProps, Box, ValueFormat } from "@nivo/core";
+import type { AxisProps } from "@nivo/axes";
 
 import { dataItem, DiagramBaseProps } from "../types";
-import { getTimeDifferenceInDays, scaleAveragePerDay } from "../scaling";
-import { TooltipLine} from "../tooltip";
-import {Temperature32} from "@carbon/icons-react";
+import {getTimeDifferenceInDays, propertyParameter, scaleAveragePerDay} from "../scaling";
+import { TooltipLine } from "../tooltip";
 
-// @todo add font-face mono to diagrams labels / legends / axes / tooltips.
+export type TemperatureLineBasePropsTypes = {
+  xScale: ScaleTimeSpec,
+  yScale?: ScaleLinearSpec,
+  xFormat?: ValueFormat<DatumValue>,
+  yFormat: ValueFormat<DatumValue>,
+  axisLeft: AxisProps,
+  axisBottom?: AxisProps,
+  markers: CartesianMarkerProps[],
+  useMesh: boolean,
+  enableCrosshair: boolean,
+  isInteractive: boolean,
+  lineWidth: number,
+  enableArea: boolean,
+  areaOpacity: number,
+  enablePoints: boolean,
+  pointSize: number,
+  enablePointLabel: boolean,
+  pointLabel: string,
+  curve: 'basis'
+    | 'cardinal'
+    | 'catmullRom'
+    | 'linear'
+    | 'monotoneX'
+    | 'monotoneY'
+    | 'natural'
+    | 'step'
+    | 'stepAfter'
+    | 'stepBefore',
+  margin: Box
+}
+
+// @todo use for combined.
+export const TemperatureLineBaseProps:TemperatureLineBasePropsTypes = {
+  xScale: {
+    type: "time",
+    useUTC: true,
+    format: "%Y-%m-%dT%H:%M:%S.000Z",
+    precision: 'minute'
+  },
+  yFormat: value => `${value} °C`,
+  axisLeft: {
+    legend: '°C',
+    legendOffset: -35,
+    legendPosition: 'middle',
+    tickSize: 0,
+    tickPadding: 10
+  },
+  markers: [
+    {
+      axis: 'y',
+      value: 0,
+      lineStyle: {
+        stroke: '#00BFFF',
+        strokeWidth: 2,
+        strokeOpacity: 0.75,
+        strokeDasharray: "10, 10"
+      },
+      legend: '0 °C',
+      legendOrientation: 'horizontal',
+    }
+  ],
+  useMesh: true,
+  enableCrosshair: true,
+  isInteractive: true,
+  lineWidth: 2,
+  enableArea: false,
+  areaOpacity: 0.07,
+  enablePoints: true,
+  pointSize: 5,
+  enablePointLabel: false,
+  pointLabel: "yFormatted",
+  curve: "natural",
+  margin: { top: 20, right: 10, bottom: 20, left: 40 }
+};
+
+export const getTemperatureLineBaseProps = (daily: boolean, data: dataItem[], property: propertyParameter): TemperatureLineBasePropsTypes => {
+  const newTemperatureLineBaseProps = TemperatureLineBaseProps;
+
+  // @see https://github.com/d3/d3-time-format
+  newTemperatureLineBaseProps.xFormat = daily ? "time:%Y/%m/%d" : "time:%Y/%m/%d %H:%M";
+  newTemperatureLineBaseProps.yScale = {
+    type: "linear",
+    min: Math.min(...data.map(item => item[property])) - 3,
+    max: Math.max(...data.map(item => item[property])) + 3
+  };
+  newTemperatureLineBaseProps.axisBottom = {
+    format: daily ? "%b %Y" : "%e",
+    tickValues: daily ? "every month" : "every 3 days",
+    tickSize: 0,
+    tickPadding: 5
+  };
+
+  return newTemperatureLineBaseProps;
+}
+
 export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -57,8 +155,9 @@ export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: Diagr
         </h3>
       }
 
-      <div style={{ height: props.height }}>
+      <div style={{ height: props.height }} className="diagram">
         <ResponsiveLine
+          {...getTemperatureLineBaseProps(daily, data, 'temperature')}
           data={[
             {
               id: 'temperature',
@@ -68,62 +167,9 @@ export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: Diagr
               }))
             }
           ]}
-          xScale={{
-            type: "time",
-            useUTC: true,
-            format: "%Y-%m-%dT%H:%M:%S.000Z",
-            precision: 'minute'
-          }}
-          // @see https://github.com/d3/d3-time-format
-          xFormat={daily ? "time:%Y/%m/%d" : "time:%Y/%m/%d %H:%M"}
-          yScale={{
-            type: "linear",
-            min: Math.min.apply(Math, data.map(item => item.temperature)) - 3,
-            max: Math.max.apply(Math, data.map(item => item.temperature)) + 3
-          }}
-          yFormat={value => `${value} °C`}
-          margin={{ top: 20, right: 10, bottom: 20, left: 40 }}
-          curve="natural"
           // @todo theme={}
           colors= {['#8B0000']}
-          lineWidth={2}
-          enableArea={false}
-          areaOpacity={0.07}
-          enablePoints={true}
-          pointSize={5}
-          enablePointLabel={false}
-          pointLabel="yFormatted"
-          axisLeft={{
-            legend: '°C',
-            legendOffset: -35,
-            legendPosition: 'middle',
-            tickSize: 0,
-            tickPadding: 10
-          }}
-          axisBottom={{
-            format: daily ? "%b %Y" : "%e",
-            tickValues: daily ? "every month" : "every 3 days",
-            tickSize: 0,
-            tickPadding: 5
-          }}
-          isInteractive={true}
           tooltip={point => <TooltipLine point={point.point} color="#8B0000" colorDarken="#450000" />}
-          useMesh={true}
-          enableCrosshair={true}
-          markers={[
-            {
-              axis: 'y',
-              value: 0,
-              lineStyle: {
-                stroke: '#00BFFF',
-                strokeWidth: 2,
-                strokeOpacity: 0.75,
-                strokeDasharray: "10, 10"
-              },
-              legend: '0 °C',
-              legendOrientation: 'horizontal',
-            },
-          ]}
         />
       </div>
 
