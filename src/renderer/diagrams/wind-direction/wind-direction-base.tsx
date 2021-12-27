@@ -110,7 +110,7 @@ export const WindDirectionBase:FunctionComponent<DiagramBaseProps> = (props: Dia
             tickPadding: 5
           }}
           isInteractive={true}
-          tooltip={point => <TooltipLine point={point.point} color="#000000" colorDarken="#000000" />}
+          tooltip={point => <TooltipLine point={point.point} />}
           useMesh={true}
           enableCrosshair={true}
         />

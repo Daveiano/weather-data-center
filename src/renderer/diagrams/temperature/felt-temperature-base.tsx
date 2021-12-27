@@ -61,7 +61,7 @@ export const FeltTemperatureBase:FunctionComponent<DiagramBaseProps> = (props: D
 
       <div style={{ height: props.height }} className="diagram">
         <ResponsiveLine
-          {...getTemperatureLineBaseProps(daily, [...dataMin, ...dataMax], 'felt_temperature')}
+          {...getTemperatureLineBaseProps(daily ? 'daily' : '', [...dataMin, ...dataMax], 'felt_temperature')}
           data={[
             {
               id: 'Min',
@@ -80,10 +80,37 @@ export const FeltTemperatureBase:FunctionComponent<DiagramBaseProps> = (props: D
           ]}
           // @todo theme={}
           colors= {['#67C8FF', '#C41E3A']}
-          tooltip={point => point.point.serieId === 'Min' ?
-            <TooltipLine point={point.point} color="#67C8FF" colorDarken="#0072b3" /> :
-            <TooltipLine point={point.point} color="#C41E3A" colorDarken="#620f1d" />
-          }
+          // @todo Add base for slice tooltip.
+          enableSlices="x"
+          sliceTooltip={({ slice }) => {
+            const tooltips = slice.points.map((item, index) =>
+              <TooltipLine
+                slice={true}
+                key={index}
+                point={item}
+              />
+            );
+
+            return (
+              <div
+                style={{
+                  background: 'rgb(57 57 57)',
+                  boxShadow: `0 2px 6px rgb(57 57 57)`
+                }}
+                className="diagram-tooltip"
+              >
+                <header style={{
+                  textAlign: 'right',
+                  color: 'white',
+                  padding: '7px 7px 14px 20px',
+                  fontSize: '1.2em'
+                }}>
+                  {slice.points[0].data.xFormatted}
+                </header>
+                {tooltips}
+              </div>
+            );
+          }}
           legends={[
             {
               anchor: 'top-right',

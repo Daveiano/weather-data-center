@@ -101,7 +101,7 @@ export const SolarBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBase
             tickPadding: 5
           }}
           isInteractive={true}
-          tooltip={point => <TooltipLine point={point.point} color="#ff8c00" colorDarken="#7f4600" />}
+          tooltip={point => <TooltipLine point={point.point} />}
           useMesh={true}
           enableCrosshair={true}
         />

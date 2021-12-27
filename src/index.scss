@@ -31,6 +31,8 @@ $carbon--grid-breakpoints: (
   ),
 );
 @import '~carbon-components/scss/globals/scss/styles.scss';
+@import '~@carbon/colors/scss/mixins';
+@include carbon--colors();
 
 // @see https://www.carbondesignsystem.com/guidelines/typography/code/
 @import '~@carbon/type/scss/type';
@@ -106,6 +108,9 @@ header.bx--header {
         svg {
           margin-right: $spacing-04;
         }
+        svg + svg {
+          margin-left: -$spacing-03;
+        }
       }
       &.empty {
         h3 {
@@ -115,6 +120,47 @@ header.bx--header {
         .text {
           display: flex;
           align-items: center;
+        }
+      }
+      &.combined-tile-stats-diagram {
+        h3 {
+          padding-left: $spacing-06;
+          margin-bottom: $spacing-07;
+        }
+      }
+      &.table-combined {
+        padding-left: 0;
+        padding-bottom: 0;
+        h3 {
+          margin-left: $spacing-05;
+          margin-bottom: $spacing-07;
+        }
+        .bx--data-table-container {
+          border-right: 1px solid $carbon--gray-20;
+        }
+        .bx--content-switcher {
+          margin-bottom: $spacing-07;
+          margin-left: $spacing-05;
+          // @todo Why do I need to do this?
+          button {
+            border-bottom: 0.0625rem solid var(--cds-border-inverse,#161616);
+            border-top: 0.0625rem solid var(--cds-border-inverse,#161616);
+            &:first-child {
+              border-left: 0.0625rem solid var(--cds-border-inverse,#161616);
+            }
+            &:last-child {
+              border-right: 0.0625rem solid var(--cds-border-inverse,#161616);
+            }
+          }
+        }
+        .content {
+          .bx--data-table-container {
+            margin-right: -1rem;
+            padding-top: 0;
+          }
+          @include carbon--breakpoint-down("xlg") {
+            flex-direction: column-reverse;
+          }
         }
       }
     }
@@ -145,15 +191,7 @@ header.bx--header {
   }
 }
 
-.bx--tile.combined-tile-stats-diagram {
-  h3 {
-    padding-left: $spacing-06;
-    margin-bottom: $spacing-07;
-  }
-}
-
 .bx--tile.stat-tile-container.normal {
-  margin-bottom: 0;
   padding-top: 2rem;
 }
 

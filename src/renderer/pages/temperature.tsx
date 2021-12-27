@@ -11,18 +11,19 @@ import {TemperatureBase} from "../diagrams/temperature/temperature-base";
 import TableBase from "../components/table-base/table-base";
 import {TABLE_SORT_DIRECTION} from "../components/table-base/misc";
 import {dataItem} from "../diagrams/types";
+import {TemperatureCombinedBase} from "../diagrams/temperature/temperature-combined-base";
+import {FeltTemperatureBase} from "../diagrams/temperature/felt-temperature-base";
+import {TemperatureMinMaxBase} from "../diagrams/temperature/temperature-min-max-base";
 
 /**
  * @see https://www.dwd.de/DE/service/lexikon/Functions/glossar.html?lv2=101334&lv3=101452
- *
- * @constructor
+ * @todo Add sub-diagrams to left navigation.
  */
 export const TemperaturePage: React.FC = (): React.ReactElement  => {
   const dataFilteredFromStore = useSelector((state: RootState) => state.appState.dataFilteredPerTime);
+  const loading = useSelector((state: RootState) => state.appState.loading);
 
   const [data, setData] = useState(dataFilteredFromStore);
-
-  const loading = useSelector((state: RootState) => state.appState.loading);
 
   useEffect(() => {
     setData(dataFilteredFromStore);
@@ -121,6 +122,7 @@ export const TemperaturePage: React.FC = (): React.ReactElement  => {
                       />
                     </Column>
                     <Column sm={12} lg={12} max={9}>
+                      {/* @todo Add annotations. */}
                       <TemperatureBase height="450px" data={data} />
                     </Column>
                   </Row>
@@ -128,12 +130,17 @@ export const TemperaturePage: React.FC = (): React.ReactElement  => {
               </Column>
               <Column sm={12} lg={12} max={12}>
                 <Tile>
-                  <h3>Combined Temperature, Dew point, Felt</h3>
+                  <TemperatureCombinedBase data={data} title="Temperature, Felt temperature and Dew point" height="600px" />
                 </Tile>
               </Column>
               <Column sm={12} lg={12} max={12}>
                 <Tile>
-                  <h3>Diagram with Point Labels? and select to change between daily and monthly average</h3>
+                  <FeltTemperatureBase height="600px" data={data} title="Felt temperature Minimum & Maximum" />
+                </Tile>
+              </Column>
+              <Column sm={12} lg={12} max={12}>
+                <Tile className="table-combined">
+                  <TemperatureMinMaxBase height="650px" data={data} title="Minimum, maximum and average temperature" />
                 </Tile>
               </Column>
               <Column sm={12} lg={12} max={12}>

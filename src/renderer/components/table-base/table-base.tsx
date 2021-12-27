@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 
 import moment from "moment";
 
@@ -58,7 +58,9 @@ interface TableBaseProps {
   },
   start: number,
   zebra?: boolean,
-  title: string,
+  title?: string,
+  dateFormat?: string,
+  pageSizes?: number[]
 }
 
 /**
@@ -181,10 +183,19 @@ const TableBase: React.FC<TableBaseProps> = (props: TableBaseProps): React.React
     );
   }, [rows, searchString]);
 
+  useEffect(() => {
+    setRows(props.rows);
+  }, [props.rows]);
+
+  let description = `from ${moment(rows[0].timeParsed).format('YYYY/MM/DD HH:mm')} till ${moment(rows[rows.length - 1].timeParsed).format('YYYY/MM/DD HH:mm')}`;
+  if (props.dateFormat) {
+    description= `from ${moment(rows[0].timeParsed).format(props.dateFormat)} till ${moment(rows[rows.length - 1].timeParsed).format(props.dateFormat)}`;
+  }
+
   return (
     <TableContainer
       title={props.title}
-      description={`from ${moment(rows[0].timeParsed).format('YYYY/MM/DD HH:mm')} till ${moment(rows[rows.length - 1].timeParsed).format('YYYY/MM/DD HH:mm')}`}
+      description={description}
     >
       {hasBatchActions &&
         <TableToolbar>
@@ -303,7 +314,15 @@ const TableBase: React.FC<TableBaseProps> = (props: TableBaseProps): React.React
                   <TableCell key={columnId}>
                     {columnId === 'timeParsed' ? (
                       <>
-                        {moment(row[columnId]).format('YYYY/MM/DD HH:mm')}
+                        {props.dateFormat ? (
+                          <>
+                            {moment(row[columnId]).format(props.dateFormat)}
+                          </>
+                        ) : (
+                          <>
+                            {moment(row[columnId]).format('YYYY/MM/DD HH:mm')}
+                          </>
+                        )}
                       </>
                     ) : (
                       <>
@@ -322,7 +341,7 @@ const TableBase: React.FC<TableBaseProps> = (props: TableBaseProps): React.React
           start={start}
           count={filteredRows.length}
           pageSize={pageSize}
-          pageSizes={[10, 15, 20, 25, 50, 100]}
+          pageSizes={props.pageSizes ? props.pageSizes : [10, 15, 20, 25, 50, 100]}
           onChangePageSize={handleChangePageSize}
           onChangeStart={handleChangeStart}
         />

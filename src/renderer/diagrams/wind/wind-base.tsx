@@ -62,14 +62,14 @@ export const WindBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseP
         <ResponsiveLine
           data={[
             {
-              id: 'wind',
+              id: 'Wind',
               data: dataWind.map(item => ({
                 x: item.timeParsed,
                 y: item.wind
               }))
             },
             {
-              id: 'gust',
+              id: 'Gust',
               data: dataGust.map(item => ({
                 x: item.timeParsed,
                 y: item.gust
@@ -114,10 +114,37 @@ export const WindBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseP
             tickPadding: 5
           }}
           isInteractive={true}
-          tooltip={point => point.point.serieId === 'gust' ?
-            <TooltipLine point={point.point} color="#666666" colorDarken="#333333" /> :
-            <TooltipLine point={point.point} color="#ffc000" colorDarken="#7f6000" />
-          }
+          // @todo Add base for slice tooltip.
+          enableSlices="x"
+          sliceTooltip={({ slice }) => {
+            const tooltips = slice.points.map((item, index) =>
+              <TooltipLine
+                slice={true}
+                key={index}
+                point={item}
+              />
+            );
+
+            return (
+              <div
+                style={{
+                  background: 'rgb(57 57 57)',
+                  boxShadow: `0 2px 6px rgb(57 57 57)`
+                }}
+                className="diagram-tooltip"
+              >
+                <header style={{
+                  textAlign: 'right',
+                  color: 'white',
+                  padding: '7px 7px 14px 20px',
+                  fontSize: '1.2em'
+                }}>
+                  {slice.points[0].data.xFormatted}
+                </header>
+                {tooltips}
+              </div>
+            );
+          }}
           useMesh={true}
           enableCrosshair={true}
           legends={[

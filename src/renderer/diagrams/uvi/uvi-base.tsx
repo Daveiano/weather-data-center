@@ -101,7 +101,7 @@ export const UviBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBasePr
             tickPadding: 5
           }}
           isInteractive={true}
-          tooltip={point => <TooltipLine point={point.point} color="#e61919" colorDarken="#730c0c" />}
+          tooltip={point => <TooltipLine point={point.point} />}
           useMesh={true}
           enableCrosshair={true}
         />

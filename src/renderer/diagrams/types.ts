@@ -5,7 +5,7 @@ type DiagramBaseProps = {
 };
 
 type dataItem = {
-  [key: string]: number | string,
+  [key: string]: number | string | boolean,
   id: string,
   _id: string,
   time: number,
@@ -20,7 +20,10 @@ type dataItem = {
   wind?: number,
   wind_direction?: number,
   dew_point?: number,
-  felt_temperature?: number
+  felt_temperature?: number,
+  temperature_max?: number,
+  temperature_min?: number,
+  temperature_average?: number
 }
 
 export { DiagramBaseProps, dataItem };

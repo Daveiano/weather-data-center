@@ -87,21 +87,42 @@ export const TemperatureLineBaseProps:TemperatureLineBasePropsTypes = {
   margin: { top: 20, right: 10, bottom: 20, left: 40 }
 };
 
-export const getTemperatureLineBaseProps = (daily: boolean, data: dataItem[], property: propertyParameter): TemperatureLineBasePropsTypes => {
+export const getTemperatureLineBaseProps = (precision: string, data: dataItem[], property: propertyParameter): TemperatureLineBasePropsTypes => {
   const newTemperatureLineBaseProps = TemperatureLineBaseProps;
 
+  newTemperatureLineBaseProps.axisBottom = {
+    tickSize: 0,
+    tickPadding: 5
+  };
+
   // @see https://github.com/d3/d3-time-format
-  newTemperatureLineBaseProps.xFormat = daily ? "time:%Y/%m/%d" : "time:%Y/%m/%d %H:%M";
+  switch (precision) {
+    case 'yearly':
+      newTemperatureLineBaseProps.xFormat = "time:%Y";
+      newTemperatureLineBaseProps.axisBottom.format = "%Y";
+      newTemperatureLineBaseProps.axisBottom.tickValues = "every year";
+      break;
+    case 'monthly':
+      newTemperatureLineBaseProps.xFormat = "time:%Y/%m";
+      newTemperatureLineBaseProps.axisBottom.format = "%b %Y";
+      newTemperatureLineBaseProps.axisBottom.tickValues = "every month";
+      break;
+    case 'daily':
+      newTemperatureLineBaseProps.xFormat = "time:%Y/%m/%d";
+      newTemperatureLineBaseProps.axisBottom.format = "%b %Y";
+      newTemperatureLineBaseProps.axisBottom.tickValues = "every month";
+      break;
+    default:
+      newTemperatureLineBaseProps.xFormat = "time:%Y/%m/%d %H:%M";
+      newTemperatureLineBaseProps.axisBottom.format = "%e";
+      newTemperatureLineBaseProps.axisBottom.tickValues = "every 3 days";
+      break;
+  }
+
   newTemperatureLineBaseProps.yScale = {
     type: "linear",
     min: Math.min(...data.map(item => item[property])) - 3,
     max: Math.max(...data.map(item => item[property])) + 3
-  };
-  newTemperatureLineBaseProps.axisBottom = {
-    format: daily ? "%b %Y" : "%e",
-    tickValues: daily ? "every month" : "every 3 days",
-    tickSize: 0,
-    tickPadding: 5
   };
 
   return newTemperatureLineBaseProps;
@@ -157,7 +178,7 @@ export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: Diagr
 
       <div style={{ height: props.height }} className="diagram">
         <ResponsiveLine
-          {...getTemperatureLineBaseProps(daily, data, 'temperature')}
+          {...getTemperatureLineBaseProps(daily ? 'daily' : '', data, 'temperature')}
           data={[
             {
               id: 'temperature',
@@ -169,7 +190,7 @@ export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: Diagr
           ]}
           // @todo theme={}
           colors= {['#8B0000']}
-          tooltip={point => <TooltipLine point={point.point} color="#8B0000" colorDarken="#450000" />}
+          tooltip={point => <TooltipLine point={point.point} />}
         />
       </div>
 

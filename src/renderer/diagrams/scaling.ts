@@ -59,6 +59,10 @@ const bundleData = (data: dataItem[], property: propertyParameter, precision?: s
         date = moment.unix(data[key].time).utc().format('MMYYYY');
         break;
       }
+      case 'year': {
+        date = moment.unix(data[key].time).utc().format('YYYY');
+        break;
+      }
       default: {
         date = moment.unix(data[key].time).utc().format('DDMMYYYY');
       }
@@ -126,6 +130,32 @@ const scaleMaxPerMonth = (data: dataItem[], property: propertyParameter): dataIt
   return scale(dailyData, 'rain', 'sum', 'month');
 }
 
+const scaleMinMaxAvg = (data: dataItem[], property: propertyParameter, precision: string): dataItem[] => {
+  let newData: dataItem[] = [];
+
+  const dates = bundleData(data, property, precision);
+
+  // Create the needed structure.
+  for (const [key, dateItem] of Object.entries(dates)) {
+    newData = [...newData, {
+      time: dateItem.time,
+      timeParsed: moment.unix(dateItem.time).toISOString(),
+      [`${property}_min`]: calculateScaling(dateItem, 'min'),
+      [`${property}_max`]: calculateScaling(dateItem, 'max'),
+      [`${property}_average`]: calculateScaling(dateItem, 'average'),
+      id: key.toString(),
+      _id: key
+    }];
+  }
+
+  // Sort by date.
+  newData.sort((a: { timeParsed: string }, b: { timeParsed: string }) => {
+    return (a.timeParsed < b.timeParsed) ? -1 : ((a.timeParsed > b.timeParsed) ? 1 : 0);
+  });
+
+  return newData;
+}
+
 /**
  * Calculates an average value per day by summing up all values of a day and
  * dividing by the count of the values.
@@ -137,4 +167,13 @@ const scaleAveragePerDay = (data: dataItem[], property: propertyParameter): data
   return scale(data, property, 'average');
 };
 
-export { getTimeDifferenceInDays, scaleMaxPerDay, scaleMinPerDay, scaleMaxPerWeek, scaleMaxPerMonth, scaleAveragePerDay, bundleData };
+export {
+  getTimeDifferenceInDays,
+  scaleMaxPerDay,
+  scaleMinPerDay,
+  scaleMinMaxAvg,
+  scaleMaxPerWeek,
+  scaleMaxPerMonth,
+  scaleAveragePerDay,
+  bundleData
+};

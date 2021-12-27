@@ -133,6 +133,7 @@
     "typescript": "^4.0.2"
   },
   "dependencies": {
+    "@carbon/colors": "^10.34.0",
     "@carbon/icons-react": "10.22.0",
     "@carbon/pictograms-react": "^11.20.0",
     "@carbon/themes": "^10.40.0",

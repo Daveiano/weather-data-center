@@ -103,7 +103,7 @@ export const PressureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
             tickPadding: 5
           }}
           isInteractive={true}
-          tooltip={point => <TooltipLine point={point.point} color="#666666" colorDarken="#333333" />}
+          tooltip={point => <TooltipLine point={point.point} />}
           useMesh={true}
           enableCrosshair={true}
         />

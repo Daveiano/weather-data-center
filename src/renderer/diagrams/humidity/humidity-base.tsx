@@ -104,7 +104,7 @@ export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
             tickPadding: 5
           }}
           isInteractive={true}
-          tooltip={point => <TooltipLine point={point.point} color="#0099CC" colorDarken="#004c66" />}
+          tooltip={point => <TooltipLine point={point.point} />}
           useMesh={true}
           enableCrosshair={true}
         />
