@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useLocation } from "react-router-dom";
+import { HashLink } from 'react-router-hash-link';
+import type { HashLinkProps } from 'react-router-hash-link';
 import type { LinkProps } from "react-router-dom";
 import moment from 'moment';
 
@@ -17,9 +19,9 @@ import {
   SkipToContent,
   Column,
   DatePicker,
-  DatePickerInput
+  DatePickerInput, SideNavMenu, SideNavMenuItem
 } from "carbon-components-react";
-import { DocumentAdd20, Temperature32, ChartTreemap32 } from "@carbon/icons-react";
+import {DocumentAdd20, Temperature32, ChartTreemap32, Rain32} from "@carbon/icons-react";
 
 import Import from "./import";
 import { userSetDateAction } from "../actions-app";
@@ -34,6 +36,12 @@ export const AppHeader: React.FC = (): React.ReactElement => {
 
   const dispatch = useDispatch();
   const location = useLocation();
+
+  const scrollWithOffset = (el: HTMLElement) => {
+    const yCoordinate = el.getBoundingClientRect().top + window.scrollY;
+    const yOffset = -80;
+    window.scrollTo({ top: yCoordinate + yOffset, behavior: 'smooth' });
+  }
 
   return (
     <HeaderContainer
@@ -101,22 +109,84 @@ export const AppHeader: React.FC = (): React.ReactElement => {
               isRail
               expanded={isSideNavExpanded}>
               <SideNavItems>
-                <SideNavLink<LinkProps>
+                <SideNavLink<HashLinkProps>
                   aria-current={location.pathname === '/' ? 'page' : false}
                   renderIcon={ChartTreemap32}
-                  to="/"
-                  element={Link}
+                  to="/#top"
+                  element={HashLink}
+                  scroll={el => scrollWithOffset(el)}
                 >
                   Overview
                 </SideNavLink>
-                <SideNavLink<LinkProps>
-                  aria-current={location.pathname === '/temperature' ? 'page' : false}
+                <SideNavMenu
+                  title="Temperature"
                   renderIcon={Temperature32}
-                  to="/temperature"
-                  element={Link}
+                  isSideNavExpanded={location.pathname === '/temperature'}
+                  isActive={location.pathname === '/temperature'}
                 >
-                  Temperature
-                </SideNavLink>
+                  <SideNavMenuItem<HashLinkProps>
+                    aria-current={location.pathname === '/temperature' && location.hash === '' ? 'page' : false}
+                    to="/temperature#top"
+                    element={HashLink}
+                  >
+                    Overview
+                  </SideNavMenuItem>
+                  <SideNavMenuItem<HashLinkProps>
+                    aria-current={location.pathname === '/temperature' && location.hash === '#temp-01-felt-dew' ? 'page' : false}
+                    to="/temperature#temp-01-felt-dew"
+                    element={HashLink}
+                    scroll={el => scrollWithOffset(el)}
+                  >
+                    Felt and Dew point
+                  </SideNavMenuItem>
+                  <SideNavMenuItem<HashLinkProps>
+                    aria-current={location.pathname === '/temperature' && location.hash === '#temp-02-min-max-felt' ? 'page' : false}
+                    to="/temperature#temp-02-min-max-felt"
+                    element={HashLink}
+                    scroll={el => scrollWithOffset(el)}
+                  >
+                    Felt Min/Max
+                  </SideNavMenuItem>
+                  <SideNavMenuItem<HashLinkProps>
+                    aria-current={location.pathname === '/temperature' && location.hash === '#temp-03-combined' ? 'page' : false}
+                    to="/temperature#temp-03-combined"
+                    element={HashLink}
+                    scroll={el => scrollWithOffset(el)}
+                  >
+                    Min/Max/Avg
+                  </SideNavMenuItem>
+                  <SideNavMenuItem<HashLinkProps>
+                    aria-current={location.pathname === '/temperature' && location.hash === '#temp-04-table' ? 'page' : false}
+                    to="/temperature#temp-04-table"
+                    element={HashLink}
+                    scroll={el => scrollWithOffset(el)}
+                  >
+                    All data
+                  </SideNavMenuItem>
+                </SideNavMenu>
+                <SideNavMenu
+                  title="Precipitation"
+                  renderIcon={Rain32}
+                  isSideNavExpanded={location.pathname === '/precipitation'}
+                  isActive={location.pathname === '/precipitation'}
+                >
+                  <SideNavMenuItem<HashLinkProps>
+                    aria-current={location.pathname === '/precipitation' && location.hash === '' ? 'page' : false}
+                    to="/precipitation#top"
+                    element={HashLink}
+                    scroll={el => scrollWithOffset(el)}
+                  >
+                    Overview
+                  </SideNavMenuItem>
+                  <SideNavMenuItem<HashLinkProps>
+                    aria-current={location.pathname === '/precipitation' && location.hash === '#rain-02-selectable' ? 'page' : false}
+                    to="/precipitation#rain-02-selectable"
+                    element={HashLink}
+                    scroll={el => scrollWithOffset(el)}
+                  >
+                    Daily/Weekly/Monthly/Yearly
+                  </SideNavMenuItem>
+                </SideNavMenu>
               </SideNavItems>
             </SideNav>
             <HeaderPanel aria-label="Header Panel" expanded={headerPanelExpanded}>

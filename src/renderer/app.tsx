@@ -8,6 +8,7 @@ import moment from "moment";
 import { AppHeader } from './components/app-header';
 import { Start } from './pages/start';
 import { TemperaturePage } from "./pages/temperature";
+import {PrecipitationPage} from "./pages/precipitation";
 import { RootState } from "./renderer";
 import { dataItem } from "./diagrams/types";
 import { dataAction, dataFilteredPerTimeAction, isLoadingAction } from "./actions-app";
@@ -79,6 +80,7 @@ export const App: React.FC = (): React.ReactElement => {
               <Switch>
                 <Route path="/" exact component={Start} />
                 <Route path="/temperature" component={TemperaturePage} />
+                <Route path="/precipitation" component={PrecipitationPage} />
               </Switch>
             </Column>
           </Row>

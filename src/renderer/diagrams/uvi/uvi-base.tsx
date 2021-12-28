@@ -5,7 +5,7 @@ import {ResponsiveLine} from "@nivo/line";
 import { Loading } from "carbon-components-react";
 
 import {dataItem, DiagramBaseProps} from "../types";
-import { getTimeDifferenceInDays, scaleMaxPerDay } from "../scaling";
+import { getTimeDifferenceInDays, scaleMax } from "../scaling";
 import { TooltipLine } from "../tooltip";
 
 export const UviBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
@@ -20,7 +20,7 @@ export const UviBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBasePr
 
     if (timeDifferenceInDays > 14) {
       setDaily(true);
-      newData = scaleMaxPerDay(props.data, 'uvi');
+      newData = scaleMax(props.data, 'uvi', 'day');
     } else {
       setDaily(false);
       newData = props.data;

@@ -170,6 +170,7 @@ header.bx--header {
 .diagram {
   svg, text {
     font-family: carbon--font-family('mono'), monospace !important;
+    word-spacing: -5px;
   }
 }
 

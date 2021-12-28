@@ -110,24 +110,31 @@ const scale = (data: dataItem[], property: propertyParameter, method: 'max' | 'a
   return newData;
 };
 
-const scaleMaxPerDay = (data: dataItem[], property: propertyParameter): dataItem[] => {
-  return scale(data, property, 'max');
+const scaleMax = (data: dataItem[], property: propertyParameter, precision: string): dataItem[] => {
+  return scale(
+    data,
+    property,
+    'max',
+    precision
+  );
 }
 
-const scaleMinPerDay = (data: dataItem[], property: propertyParameter): dataItem[] => {
-  return scale(data, property, 'min');
+const scaleSum = (data: dataItem[], property: propertyParameter, precision: 'week' | 'month' | 'year'): dataItem[] => {
+  return scale(
+    scale(data, property, 'max', 'day'),
+    property,
+    'sum',
+    precision
+  );
 }
 
-const scaleMaxPerWeek = (data: dataItem[], property: propertyParameter): dataItem[] => {
-  const dailyData = scale(data, property, 'max');
-
-  return scale(dailyData, 'rain', 'sum', 'week');
-}
-
-const scaleMaxPerMonth = (data: dataItem[], property: propertyParameter): dataItem[] => {
-  const dailyData = scale(data, property, 'max');
-
-  return scale(dailyData, 'rain', 'sum', 'month');
+const scaleMin = (data: dataItem[], property: propertyParameter, precision: string): dataItem[] => {
+  return scale(
+    precision === 'day' ? data : scale(data, property, 'max'),
+    property,
+    'min',
+    precision
+  );
 }
 
 const scaleMinMaxAvg = (data: dataItem[], property: propertyParameter, precision: string): dataItem[] => {
@@ -169,11 +176,10 @@ const scaleAveragePerDay = (data: dataItem[], property: propertyParameter): data
 
 export {
   getTimeDifferenceInDays,
-  scaleMaxPerDay,
-  scaleMinPerDay,
+  scaleMax,
+  scaleMin,
+  scaleSum,
   scaleMinMaxAvg,
-  scaleMaxPerWeek,
-  scaleMaxPerMonth,
   scaleAveragePerDay,
   bundleData
 };

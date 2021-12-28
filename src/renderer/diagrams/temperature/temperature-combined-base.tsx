@@ -83,7 +83,8 @@ export const TemperatureCombinedBase:FunctionComponent<DiagramBaseProps> = (prop
               }),
               ...dataTemp
             ],
-            'temperature'
+            'temperature',
+            true
           )}
           data={[
             {
@@ -113,37 +114,6 @@ export const TemperatureCombinedBase:FunctionComponent<DiagramBaseProps> = (prop
           ]}
           // @todo theme={}
           colors={d => d.color}
-          // @todo Add base for slice tooltip.
-          enableSlices="x"
-          sliceTooltip={({ slice }) => {
-            const tooltips = slice.points.map((item, index) =>
-              <TooltipLine
-                slice={true}
-                key={index}
-                point={item}
-              />
-            );
-
-            return (
-              <div
-                style={{
-                  background: 'rgb(57 57 57)',
-                  boxShadow: `0 2px 6px rgb(57 57 57)`
-                }}
-                className="diagram-tooltip"
-              >
-                <header style={{
-                  textAlign: 'right',
-                  color: 'white',
-                  padding: '7px 7px 14px 20px',
-                  fontSize: '1.2em'
-                }}>
-                  {slice.points[0].data.xFormatted}
-                </header>
-                {tooltips}
-              </div>
-            );
-          }}
           legends={[
             {
               anchor: 'top-right',

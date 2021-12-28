@@ -5,8 +5,7 @@ import { ResponsiveLine } from '@nivo/line'
 import { TemperatureFeelsLike32 } from "@carbon/icons-react";
 
 import { dataItem, DiagramBaseProps } from "../types";
-import { getTimeDifferenceInDays, scaleMinPerDay, scaleMaxPerDay } from "../scaling";
-import { TooltipLine} from "../tooltip";
+import { getTimeDifferenceInDays, scaleMin, scaleMax } from "../scaling";
 import { getTemperatureLineBaseProps } from './temperature-base';
 
 export const FeltTemperatureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
@@ -23,8 +22,8 @@ export const FeltTemperatureBase:FunctionComponent<DiagramBaseProps> = (props: D
 
     if (timeDifferenceInDays > 14) {
       setDaily(true);
-      newDataMin = scaleMinPerDay(props.data, 'felt_temperature');
-      newDataMax = scaleMaxPerDay(props.data, 'felt_temperature');
+      newDataMin = scaleMin(props.data, 'felt_temperature', 'day');
+      newDataMax = scaleMax(props.data, 'felt_temperature', 'day');
     } else {
       setDaily(false);
       newDataMin = props.data;
@@ -61,7 +60,7 @@ export const FeltTemperatureBase:FunctionComponent<DiagramBaseProps> = (props: D
 
       <div style={{ height: props.height }} className="diagram">
         <ResponsiveLine
-          {...getTemperatureLineBaseProps(daily ? 'daily' : '', [...dataMin, ...dataMax], 'felt_temperature')}
+          {...getTemperatureLineBaseProps(daily ? 'daily' : '', [...dataMin, ...dataMax], 'felt_temperature', true)}
           data={[
             {
               id: 'Min',
@@ -80,37 +79,6 @@ export const FeltTemperatureBase:FunctionComponent<DiagramBaseProps> = (props: D
           ]}
           // @todo theme={}
           colors= {['#67C8FF', '#C41E3A']}
-          // @todo Add base for slice tooltip.
-          enableSlices="x"
-          sliceTooltip={({ slice }) => {
-            const tooltips = slice.points.map((item, index) =>
-              <TooltipLine
-                slice={true}
-                key={index}
-                point={item}
-              />
-            );
-
-            return (
-              <div
-                style={{
-                  background: 'rgb(57 57 57)',
-                  boxShadow: `0 2px 6px rgb(57 57 57)`
-                }}
-                className="diagram-tooltip"
-              >
-                <header style={{
-                  textAlign: 'right',
-                  color: 'white',
-                  padding: '7px 7px 14px 20px',
-                  fontSize: '1.2em'
-                }}>
-                  {slice.points[0].data.xFormatted}
-                </header>
-                {tooltips}
-              </div>
-            );
-          }}
           legends={[
             {
               anchor: 'top-right',

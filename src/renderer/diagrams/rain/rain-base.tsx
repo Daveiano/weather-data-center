@@ -6,7 +6,7 @@ import { Loading } from "carbon-components-react";
 import { Rain32 } from "@carbon/icons-react";
 
 import {dataItem, DiagramBaseProps} from "../types";
-import { getTimeDifferenceInDays, scaleMaxPerDay, scaleMaxPerWeek, scaleMaxPerMonth } from "../scaling";
+import { getTimeDifferenceInDays, scaleMax, scaleSum } from "../scaling";
 import { TooltipBar } from "../tooltip";
 
 export const RainBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
@@ -23,13 +23,13 @@ export const RainBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseP
 
     if (timeDifferenceInDays > 18 && timeDifferenceInDays < 77) {
       setWeekly(true);
-      newData = scaleMaxPerWeek(props.data, 'rain');
+      newData = scaleSum(props.data, 'rain', 'week');
     } else if (timeDifferenceInDays >= 77) {
       setMonthly(true);
-      newData = scaleMaxPerMonth(props.data, 'rain');
+      newData = scaleSum(props.data, 'rain', 'month');
     } else {
       setDaily(true);
-      newData = scaleMaxPerDay(props.data, 'rain');
+      newData = scaleMax(props.data, 'rain', 'day');
     }
 
     setData(newData);
@@ -40,6 +40,8 @@ export const RainBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseP
     setLoading(true);
     scale();
   }, [props.data]);
+
+  console.log(data);
 
   if (loading) {
     return (
@@ -54,10 +56,12 @@ export const RainBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseP
 
   return (
     <div data-testid="rain-diagram">
-      <h3>
-        <Rain32 />
-        {props.title}
-      </h3>
+      {props.title &&
+        <h3>
+          <Rain32 />
+          {props.title}
+        </h3>
+      }
 
       <div style={{ height: props.height }} className="diagram">
         <ResponsiveBar
@@ -98,7 +102,7 @@ export const RainBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseP
             tickPadding: 5,
           }}
           isInteractive={true}
-          tooltip={point => <TooltipBar formattedValue={point.formattedValue} time={point.data.time} color="#0198E1" colorDarken="#004c70" />}
+          tooltip={point => <TooltipBar formattedValue={point.formattedValue} time={point.data.time} color="#0198E1" />}
         />
       </div>
     </div>

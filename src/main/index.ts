@@ -1,5 +1,6 @@
 import { app, BrowserWindow, ipcMain, dialog, session } from 'electron';
 import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
+import type { Document } from 'nedb';
 
 import fs from 'fs';
 
@@ -31,7 +32,7 @@ const count = (callback: asyncCallback) => {
   });
 };
 const start = (callback: asyncCallback) => {
-  db.find({}).sort({ time: 1 }).limit(1).exec((err, docs) => {
+  db.find({}).sort({ time: 1 }).limit(1).exec((err, docs: Document<{ time: number }>[]) => {
     if (docs.length > 0) {
       return callback(null, moment.unix(docs[0].time).format('DD-MM-YYYY'));
     }
@@ -40,7 +41,7 @@ const start = (callback: asyncCallback) => {
   });
 };
 const end = (callback: asyncCallback) => {
-  db.find({}).sort({ time: -1 }).limit(1).exec((err, docs) => {
+  db.find({}).sort({ time: -1 }).limit(1).exec((err, docs: Document<{ time: number }>[]) => {
     if (docs.length > 0) {
       return callback(null, moment.unix(docs[0].time).format('DD-MM-YYYY'));
     }
@@ -127,7 +128,7 @@ app.on('activate', () => {
 const columnsToRead: string[] = ['time', 'temperature', 'humidity', 'pressure', 'rain', 'solar', 'uvi', 'wind', 'wind_direction', 'gust', 'dew_point', 'felt_temperature'];
 
 ipcMain.on('query-data',(event) => {
-  db.find({ time: { $exists: true } }).sort({ time: 1 }).exec((err, docs) => {
+  db.find({ time: { $exists: true } }).sort({ time: 1 }).exec((err, docs: Document<{ time: number }>[]) => {
     event.reply(
       'query-data',
       docs
@@ -191,7 +192,7 @@ ipcMain.on('open-file-dialog', (event) => {
             });
           }, () => {
             db.insert(deDuplicatedData, () => {
-              db.find({ time: { $exists: true } }).sort({ time: 1 }).exec((err, docs) => {
+              db.find({ time: { $exists: true } }).sort({ time: 1 }).exec((err, docs: Document<{ time: number }>[]) => {
                 event.reply(
                   'query-data',
                   docs

@@ -5,7 +5,7 @@ type DiagramBaseProps = {
 };
 
 type dataItem = {
-  [key: string]: number | string | boolean,
+  [key: string]: any,
   id: string,
   _id: string,
   time: number,

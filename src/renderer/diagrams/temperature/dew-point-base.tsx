@@ -57,7 +57,7 @@ export const DewPointBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
 
       <div style={{ height: props.height }} className="diagram">
         <ResponsiveLine
-          {...getTemperatureLineBaseProps(daily ? 'daily' : '', data, 'dew_point')}
+          {...getTemperatureLineBaseProps(daily ? 'daily' : '', data, 'dew_point', false)}
           data={[
             {
               id: 'dew_point',

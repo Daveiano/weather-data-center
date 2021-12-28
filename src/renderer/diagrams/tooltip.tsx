@@ -10,9 +10,8 @@ interface TooltipPropsLine {
 
 interface TooltipPropsBar {
   formattedValue: string,
-  time: number,
-  color: string,
-  colorDarken: string
+  time: string,
+  color: string
 }
 
 export const TooltipLine: React.FC<TooltipPropsLine> = (props: TooltipPropsLine): React.ReactElement  => {
@@ -29,7 +28,7 @@ export const TooltipBar: React.FC<TooltipPropsBar> = (props: TooltipPropsBar): R
   return (
     <div style={{ padding: '7px', background: 'rgb(57 57 57)', color: 'white', boxShadow: `0 2px 6px rgb(57 57 57)`, borderLeft: `5px solid ${props.color}`, textAlign: 'right' }} className="diagram-tooltip">
       <div style={{ marginBottom: '5px' }}>
-        {moment.unix(props.time).utc().format('YYYY/MM/DD')}
+        {props.time}
       </div>
       <div>
         {props.formattedValue}

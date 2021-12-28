@@ -2,8 +2,8 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 
 import { Loading } from "carbon-components-react";
 import { Temperature32 } from "@carbon/icons-react";
-import { ResponsiveLine} from '@nivo/line'
-import type { DatumValue } from '@nivo/line'
+import {ResponsiveLine} from '@nivo/line'
+import type { DatumValue, SliceTooltip } from '@nivo/line'
 import type { ScaleTimeSpec, ScaleLinearSpec } from "@nivo/scales/dist/types/types";
 import type { CartesianMarkerProps, Box, ValueFormat } from "@nivo/core";
 import type { AxisProps } from "@nivo/axes";
@@ -40,10 +40,11 @@ export type TemperatureLineBasePropsTypes = {
     | 'step'
     | 'stepAfter'
     | 'stepBefore',
-  margin: Box
+  margin: Box,
+  enableSlices?: 'x' | 'y' | false,
+  sliceTooltip?: SliceTooltip
 }
 
-// @todo use for combined.
 export const TemperatureLineBaseProps:TemperatureLineBasePropsTypes = {
   xScale: {
     type: "time",
@@ -87,7 +88,7 @@ export const TemperatureLineBaseProps:TemperatureLineBasePropsTypes = {
   margin: { top: 20, right: 10, bottom: 20, left: 40 }
 };
 
-export const getTemperatureLineBaseProps = (precision: string, data: dataItem[], property: propertyParameter): TemperatureLineBasePropsTypes => {
+export const getTemperatureLineBaseProps = (precision: string, data: dataItem[], property: propertyParameter, combinedTooltip: boolean): TemperatureLineBasePropsTypes => {
   const newTemperatureLineBaseProps = TemperatureLineBaseProps;
 
   newTemperatureLineBaseProps.axisBottom = {
@@ -124,6 +125,39 @@ export const getTemperatureLineBaseProps = (precision: string, data: dataItem[],
     min: Math.min(...data.map(item => item[property])) - 3,
     max: Math.max(...data.map(item => item[property])) + 3
   };
+
+  if (combinedTooltip) {
+    newTemperatureLineBaseProps.enableSlices = 'x';
+    newTemperatureLineBaseProps.sliceTooltip = ({ slice }) => {
+      const tooltips = slice.points.map((item, index) =>
+        <TooltipLine
+          slice={true}
+          key={index}
+          point={item}
+        />
+      );
+
+      return (
+        <div
+          style={{
+            background: 'rgb(57 57 57)',
+            boxShadow: `0 2px 6px rgb(57 57 57)`
+          }}
+          className="diagram-tooltip"
+        >
+          <header style={{
+            textAlign: 'right',
+            color: 'white',
+            padding: '7px 7px 14px 20px',
+            fontSize: '1.2em'
+          }}>
+            {slice.points[0].data.xFormatted}
+          </header>
+          {tooltips}
+        </div>
+      );
+    };
+  }
 
   return newTemperatureLineBaseProps;
 }
@@ -178,7 +212,7 @@ export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: Diagr
 
       <div style={{ height: props.height }} className="diagram">
         <ResponsiveLine
-          {...getTemperatureLineBaseProps(daily ? 'daily' : '', data, 'temperature')}
+          {...getTemperatureLineBaseProps(daily ? 'daily' : '', data, 'temperature', false)}
           data={[
             {
               id: 'temperature',
