@@ -12,7 +12,7 @@ import { dataItem, DiagramBaseProps } from "../types";
 import {getTimeDifferenceInDays, propertyParameter, scaleAveragePerDay} from "../scaling";
 import { TooltipLine } from "../tooltip";
 
-export type TemperatureLineBasePropsTypes = {
+type TemperatureLineBasePropsTypes = {
   xScale: ScaleTimeSpec,
   yScale?: ScaleLinearSpec,
   xFormat?: ValueFormat<DatumValue>,
@@ -45,7 +45,7 @@ export type TemperatureLineBasePropsTypes = {
   sliceTooltip?: SliceTooltip
 }
 
-export const TemperatureLineBaseProps:TemperatureLineBasePropsTypes = {
+const TemperatureLineBaseProps: TemperatureLineBasePropsTypes = {
   xScale: {
     type: "time",
     useUTC: true,

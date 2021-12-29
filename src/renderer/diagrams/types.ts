@@ -1,7 +1,10 @@
+import {Precision} from "./scaling";
+
 type DiagramBaseProps = {
   title?: string,
   height: string,
-  data: dataItem[]
+  data: dataItem[],
+  precision?: Precision
 };
 
 type dataItem = {

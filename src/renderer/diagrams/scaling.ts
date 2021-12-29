@@ -9,6 +9,8 @@ type dateTimeElement = {
 
 export type propertyParameter = 'humidity' | 'pressure' | 'temperature' | 'rain' | 'solar' | 'uvi' | 'wind' | 'gust' | 'wind_direction' | 'dew_point' | 'felt_temperature';
 
+export type Precision = 'day' | 'week' | 'month' | 'year';
+
 interface Dates {
   [key: string]: dateTimeElement
 }
@@ -43,7 +45,7 @@ const calculateScaling = (dateItem: dateTimeElement, method: 'max' | 'average' |
   }
 };
 
-const bundleData = (data: dataItem[], property: propertyParameter, precision?: string): Dates => {
+const bundleData = (data: dataItem[], property: propertyParameter, precision?: Precision): Dates => {
   let dates: Dates = {};
 
   // Loop over all date elements and create an object to hold all data per day.
@@ -86,7 +88,7 @@ const bundleData = (data: dataItem[], property: propertyParameter, precision?: s
   return dates;
 }
 
-const scale = (data: dataItem[], property: propertyParameter, method: 'max' | 'average' | 'sum' | 'min', precision?: string): dataItem[] => {
+export const scale = (data: dataItem[], property: propertyParameter, method: 'max' | 'average' | 'sum' | 'min', precision?: Precision): dataItem[] => {
   let newData: dataItem[] = [];
 
   const dates = bundleData(data, property, precision);
@@ -110,7 +112,7 @@ const scale = (data: dataItem[], property: propertyParameter, method: 'max' | 'a
   return newData;
 };
 
-const scaleMax = (data: dataItem[], property: propertyParameter, precision: string): dataItem[] => {
+const scaleMax = (data: dataItem[], property: propertyParameter, precision: Precision): dataItem[] => {
   return scale(
     data,
     property,
@@ -128,7 +130,7 @@ const scaleSum = (data: dataItem[], property: propertyParameter, precision: 'wee
   );
 }
 
-const scaleMin = (data: dataItem[], property: propertyParameter, precision: string): dataItem[] => {
+const scaleMin = (data: dataItem[], property: propertyParameter, precision: Precision): dataItem[] => {
   return scale(
     precision === 'day' ? data : scale(data, property, 'max'),
     property,
@@ -137,7 +139,7 @@ const scaleMin = (data: dataItem[], property: propertyParameter, precision: stri
   );
 }
 
-const scaleMinMaxAvg = (data: dataItem[], property: propertyParameter, precision: string): dataItem[] => {
+const scaleMinMaxAvg = (data: dataItem[], property: propertyParameter, precision: Precision): dataItem[] => {
   let newData: dataItem[] = [];
 
   const dates = bundleData(data, property, precision);

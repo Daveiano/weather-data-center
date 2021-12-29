@@ -4,17 +4,121 @@ import moment from 'moment';
 import { ResponsiveBar } from '@nivo/bar'
 import { Loading } from "carbon-components-react";
 import { Rain32 } from "@carbon/icons-react";
+import type {ScaleSpec, ScaleBandSpec} from "@nivo/scales";
+import type {ValueFormat, Box, Theme} from "@nivo/core";
+import type {AxisProps} from "@nivo/axes";
+import type {BarTooltipProps} from "@nivo/bar/dist/types/types";
 
 import {dataItem, DiagramBaseProps} from "../types";
-import { getTimeDifferenceInDays, scaleMax, scaleSum } from "../scaling";
+import {getTimeDifferenceInDays, Precision, propertyParameter, scaleMax, scaleSum} from "../scaling";
 import { TooltipBar } from "../tooltip";
+
+type RainBarBasePropsTypes = {
+  indexBy: string,
+  keys: string[],
+  valueScale: ScaleSpec,
+  indexScale: ScaleBandSpec,
+  maxValue?: 'auto' | number,
+  minValue: 'auto' | number,
+  valueFormat?: ValueFormat<number>,
+  margin?: Box,
+  enableLabel: boolean,
+  labelSkipHeight: number,
+  enableGridX: boolean,
+  enableGridY: boolean,
+  axisLeft: AxisProps | null,
+  axisBottom?: AxisProps | null,
+  colors: string[],
+  theme?: Theme,
+  isInteractive: boolean,
+  tooltip?: React.FC<BarTooltipProps<dataItem>>
+};
+
+const RainBarBaseProps: RainBarBasePropsTypes = {
+  indexBy: "timeParsed",
+  keys: ['rain'],
+  valueScale: { type: 'linear' },
+  indexScale: { type: 'band', round: false },
+  minValue: 0,
+  valueFormat: value => `${value} mm`,
+  margin: { top: 20, right: 10, bottom: 20, left: 40 },
+  enableLabel: false,
+  labelSkipHeight: 50,
+  enableGridX: false,
+  enableGridY: true,
+  axisLeft: {
+    legend: 'mm',
+    legendOffset: -35,
+    legendPosition: 'middle',
+    tickSize: 0,
+    tickPadding: 10
+  },
+  colors: ['#0198E1'],
+  isInteractive: true
+};
+
+export const getRainBarBaseProps = (precision: Precision, data: dataItem[], property: propertyParameter): RainBarBasePropsTypes => {
+  const newRainBarBaseProps = RainBarBaseProps;
+
+  newRainBarBaseProps.maxValue = Math.max(...data.map(item => item[property] )) + 5;
+  newRainBarBaseProps.theme = {
+    fontSize: precision === 'day' ? 10 : 11
+  };
+  newRainBarBaseProps.axisBottom = {
+    format: value => {
+      switch (precision) {
+        case 'day':
+          if (parseInt(moment(value).format("D")) % 2 == 0 || moment(value).format("D") === '31') {
+            return '';
+          }
+          if (moment(value).format("D") === '1') {
+            return moment(value).format("Do MMM");
+          }
+
+          return moment(value).format("Do");
+        case 'week':
+          // @todo add month on 1st.
+          return moment(value).format("\\Www\\/YY");
+        case 'month':
+          return moment(value).format("MMM YY");
+        case 'year':
+          return moment(value).format("YY");
+      }
+    },
+    tickSize: 0,
+    tickPadding: 5,
+    tickRotation: precision === 'day' || precision === 'week' ? -65 : 0
+  };
+
+  newRainBarBaseProps.tooltip = point => <TooltipBar
+    formattedValue={point.formattedValue}
+    color="#0198E1"
+    time={(() => {
+      switch(precision) {
+        case "day":
+          return moment.unix(point.data.time).utc().format("YYYY/MM/DD");
+        case "week":
+          // @todo better date display.
+          return moment.unix(point.data.time).utc().format("\\Www YY");
+        case "month":
+          return moment.unix(point.data.time).utc().format("YYYY/MM");
+        case "year":
+          return moment.unix(point.data.time).utc().format("YYYY");
+      }
+    })()}
+  />
+
+  if (precision === 'day' || precision === 'week') {
+    newRainBarBaseProps.margin.bottom = 60;
+  }
+
+  return newRainBarBaseProps;
+};
 
 export const RainBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [daily, setDaily] = useState(false);
-  const [weekly, setWeekly] = useState(false);
-  const [monthly, setMonthly] = useState(false);
+  const [precision, setPrecision] = useState(props.precision ? props.precision : 'day');
 
   const scale = () => {
     const timeDifferenceInDays = getTimeDifferenceInDays(props.data);
@@ -22,13 +126,13 @@ export const RainBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseP
     let newData: dataItem[];
 
     if (timeDifferenceInDays > 18 && timeDifferenceInDays < 77) {
-      setWeekly(true);
+      setPrecision('week')
       newData = scaleSum(props.data, 'rain', 'week');
     } else if (timeDifferenceInDays >= 77) {
-      setMonthly(true);
+      setPrecision('month')
       newData = scaleSum(props.data, 'rain', 'month');
     } else {
-      setDaily(true);
+      setPrecision('day')
       newData = scaleMax(props.data, 'rain', 'day');
     }
 
@@ -37,11 +141,15 @@ export const RainBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseP
   };
 
   useEffect(() => {
-    setLoading(true);
-    scale();
+    if (!props.precision) {
+      setLoading(true);
+      scale();
+    } else {
+      setPrecision(props.precision);
+      setData(props.precision === 'day' ? scaleMax(props.data, 'rain', 'day') : scaleSum(props.data, 'rain', props.precision))
+      setLoading(false);
+    }
   }, [props.data]);
-
-  console.log(data);
 
   if (loading) {
     return (
@@ -65,44 +173,8 @@ export const RainBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseP
 
       <div style={{ height: props.height }} className="diagram">
         <ResponsiveBar
+          {...getRainBarBaseProps(precision, data, 'rain')}
           data={data}
-          indexBy={"timeParsed"}
-          keys={['rain']}
-          valueScale={{ type: 'linear' }}
-          indexScale={{ type: 'band', round: false }}
-          minValue={0}
-          maxValue={Math.max.apply(Math, data.map(item => item.rain )) + 5}
-          valueFormat={value => `${value} mm`}
-          margin={{ top: 20, right: 10, bottom: 20, left: 40 }}
-          colors= {['#0198E1']}
-          enableLabel={false}
-          labelSkipHeight={50}
-          enableGridX={false}
-          enableGridY={true}
-          axisLeft={{
-            legend: 'mm',
-            legendOffset: -35,
-            legendPosition: 'middle',
-            tickSize: 0,
-            tickPadding: 10
-          }}
-          axisBottom={{
-            format: value => {
-              if (daily) {
-                return moment(value).format("Do");
-              }
-              if (weekly) {
-                return moment(value).format('\\Www YY');
-              }
-              if (monthly) {
-                return moment(value).format('MMM YY');
-              }
-            },
-            tickSize: 0,
-            tickPadding: 5,
-          }}
-          isInteractive={true}
-          tooltip={point => <TooltipBar formattedValue={point.formattedValue} time={point.data.time} color="#0198E1" />}
         />
       </div>
     </div>

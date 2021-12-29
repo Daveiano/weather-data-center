@@ -5,13 +5,21 @@ import type { ColumnSpan } from "carbon-components-react";
 import moment from "moment";
 
 import { dataItem } from "../../diagrams/types";
-import { bundleData, propertyParameter } from "../../diagrams/scaling";
+import { bundleData, propertyParameter, scale } from "../../diagrams/scaling";
 import { StatsItemNormal } from "./stats-item-normal";
 import { StatsItemCompact } from "./stats-item-compact";
 
 export type statsItem = {
   direction: 'min' | 'max' | 'extra',
-  extra?: 'frost-days' | 'ice-days' | 'summer-days' | 'hot-days' | 'tropical-nights' | 'desert-days',
+  extra?: 'frost-days'
+    | 'ice-days'
+    | 'summer-days'
+    | 'hot-days'
+    | 'tropical-nights'
+    | 'desert-days'
+    | 'rain-days'
+    | 'max-rain-week'
+    | 'max-rain-month',
   property: propertyParameter,
   label: string,
   description?: string,
@@ -29,6 +37,7 @@ interface StatsProps {
   stats: statsItem[]
 }
 
+// @todo Property 'property' makes no sense for 'extra' - it's everytime property bound.
 export const Stats: React.FC<StatsProps> = (props: StatsProps): React.ReactElement  => {
   const output: React.ReactElement[] = [];
 
@@ -41,50 +50,81 @@ export const Stats: React.FC<StatsProps> = (props: StatsProps): React.ReactEleme
       case "min": {
         const data = props.data.slice().sort((a, b) => statsKey.direction === 'max' ? b[statsKey.property] - a[statsKey.property] : a[statsKey.property] - b[statsKey.property]);
 
-        date = moment(data[0].timeParsed).format('YYYY/MM/DD HH:mm');
+        date = moment(data[0].timeParsed).format('YYYY/MM/DD');
         value = `${data[0][statsKey.property]} ${statsKey.unit}`;
 
         break;
       }
       case "extra": {
         switch (statsKey.extra) {
+          case "max-rain-week": {
+            const data = scale(
+              scale(props.data, statsKey.property, 'max', 'day'),
+              statsKey.property,
+              'sum',
+              'week'
+            ).sort((a, b) => b[statsKey.property] - a[statsKey.property]);
+
+            date = moment(data[0].timeParsed).format("\\Www\\/YY");
+            value = `${data[0][statsKey.property]} ${statsKey.unit}`;
+            break;
+          }
+          case 'max-rain-month': {
+            const data = scale(
+              scale(props.data, statsKey.property, 'max', 'day'),
+              statsKey.property,
+              'sum',
+              'month'
+            ).sort((a, b) => b[statsKey.property] - a[statsKey.property]);
+
+            date = moment(data[0].timeParsed).format("MMM YY");
+            value = `${data[0][statsKey.property]} ${statsKey.unit}`;
+            break;
+          }
+          case 'rain-days': {
+            const dataBundledPerDay = bundleData(props.data, statsKey.property, 'day'),
+              data = Object.values(dataBundledPerDay).slice().filter(item => Math.max(...item.values) >= 0.1).length;
+
+            value = data.toString();
+            break;
+          }
           case "frost-days": {
-            const dataBundledPerDay = bundleData(props.data, 'temperature', 'day'),
+            const dataBundledPerDay = bundleData(props.data, statsKey.property, 'day'),
               data = Object.values(dataBundledPerDay).slice().filter(item => Math.min(...item.values) < 0).length;
 
             value = data.toString();
             break;
           }
           case "ice-days": {
-            const dataBundledPerDay = bundleData(props.data, 'temperature', 'day'),
+            const dataBundledPerDay = bundleData(props.data, statsKey.property, 'day'),
               data = Object.values(dataBundledPerDay).slice().filter(item => Math.max(...item.values) < 0).length;
 
             value = data.toString();
             break;
           }
           case 'summer-days': {
-            const dataBundledPerDay = bundleData(props.data, 'temperature', 'day'),
+            const dataBundledPerDay = bundleData(props.data, statsKey.property, 'day'),
               data = Object.values(dataBundledPerDay).slice().filter(item => Math.max(...item.values) >= 25).length;
 
             value = data.toString();
             break;
           }
           case 'hot-days': {
-            const dataBundledPerDay = bundleData(props.data, 'temperature', 'day'),
+            const dataBundledPerDay = bundleData(props.data, statsKey.property, 'day'),
               data = Object.values(dataBundledPerDay).slice().filter(item => Math.max(...item.values) >= 30).length;
 
             value = data.toString();
             break;
           }
           case 'tropical-nights': {
-            const dataBundledPerDay = bundleData(props.data.filter(item => parseInt(moment.unix(item.time).utc().format('HH')) >= 18 || parseInt(moment.unix(item.time).utc().format('HH')) < 6), 'temperature', 'day'),
+            const dataBundledPerDay = bundleData(props.data.filter(item => parseInt(moment.unix(item.time).utc().format('HH')) >= 18 || parseInt(moment.unix(item.time).utc().format('HH')) < 6), statsKey.property, 'day'),
               data = Object.values(dataBundledPerDay).slice().filter(item => Math.min(...item.values) >= 20).length;
 
             value = data.toString();
             break;
           }
           case 'desert-days': {
-            const dataBundledPerDay = bundleData(props.data, 'temperature', 'day'),
+            const dataBundledPerDay = bundleData(props.data, statsKey.property, 'day'),
               data = Object.values(dataBundledPerDay).slice().filter(item => Math.max(...item.values) >= 35).length;
 
             value = data.toString();

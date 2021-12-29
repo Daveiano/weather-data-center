@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import {Column, Row, Tile} from "carbon-components-react";
-import {TemperatureLow} from "@carbon/pictograms-react";
 
 import {RootState} from "../renderer";
 import {Stats} from "../components/stats/stats";
@@ -51,73 +50,39 @@ export const PrecipitationPage: React.FC = (): React.ReactElement  => {
                         size="compact"
                         stats={[
                           {
-                            property: 'temperature',
+                            property: 'rain',
+                            direction: 'extra',
+                            extra: 'rain-days',
+                            label: 'Rain days',
+                            description: 'R<sub>min</sub> ≥ 0.1 mm',
+                            unit: 'mm',
+                          },
+                          {
+                            property: 'rain',
                             direction: 'max',
-                            label: 'Maximum',
-                            unit: '°C'
+                            label: 'Maximum per day',
+                            unit: 'mm'
                           },
                           {
-                            property: 'temperature',
-                            direction: 'min',
-                            label: 'Minimum',
-                            unit: '°C',
-                            icon: <TemperatureLow />
-                          },
-                          {
-                            property: 'temperature',
+                            property: 'rain',
                             direction: 'extra',
-                            extra: 'summer-days',
-                            label: 'Summer days',
-                            description: 'T<sub>max</sub> ≥ 25 °C',
-                            unit: '°C'
+                            extra: 'max-rain-week',
+                            label: 'Maximum per week',
+                            unit: 'mm'
                           },
                           {
-                            property: 'temperature',
+                            property: 'rain',
                             direction: 'extra',
-                            extra: 'frost-days',
-                            label: 'Frost days',
-                            description: 'T<sub>min</sub> < 0 °C',
-                            unit: '°C'
+                            extra: 'max-rain-month',
+                            label: 'Maximum per month',
+                            unit: 'mm'
                           },
-                          {
-                            property: 'temperature',
-                            direction: 'extra',
-                            extra: 'hot-days',
-                            label: 'Hot days',
-                            description: 'T<sub>max</sub> ≥ 30 °C',
-                            unit: '°C'
-                          },
-                          {
-                            property: 'temperature',
-                            direction: 'extra',
-                            extra: 'ice-days',
-                            label: 'Ice days',
-                            description: 'T<sub>max</sub> < 0 °C',
-                            unit: '°C'
-                          },
-                          {
-                            property: 'temperature',
-                            direction: 'extra',
-                            extra: 'tropical-nights',
-                            label: 'Tropical nights',
-                            description: 'T<sub>min</sub> ≥ 20 °C',
-                            tooltip: '18:00 UTC - 06:00 UTC',
-                            unit: '°C'
-                          },
-                          {
-                            property: 'temperature',
-                            direction: 'extra',
-                            extra: 'desert-days',
-                            label: 'Desert days',
-                            description: 'T<sub>max</sub> ≥ 35 °C',
-                            unit: '°C'
-                          }
                         ]}
                       />
                     </Column>
                     <Column sm={12} lg={12} max={9}>
                       {/* @todo Add annotations. */}
-                      <RainBase height="450px" data={data} />
+                      <RainBase height="450px" data={data} precision="day" />
                     </Column>
                   </Row>
                 </Tile>
