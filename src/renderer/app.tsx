@@ -9,6 +9,9 @@ import { AppHeader } from './components/app-header';
 import { Start } from './pages/start';
 import { TemperaturePage } from "./pages/temperature";
 import {PrecipitationPage} from "./pages/precipitation";
+import {PressurePage} from "./pages/pressure";
+import {WindPage} from "./pages/wind";
+import {SolarPage} from "./pages/solar";
 import { RootState } from "./renderer";
 import { dataItem } from "./diagrams/types";
 import { dataAction, dataFilteredPerTimeAction, isLoadingAction } from "./actions-app";
@@ -81,6 +84,9 @@ export const App: React.FC = (): React.ReactElement => {
                 <Route path="/" exact component={Start} />
                 <Route path="/temperature" component={TemperaturePage} />
                 <Route path="/precipitation" component={PrecipitationPage} />
+                <Route path="/pressure" component={PressurePage} />
+                <Route path="/wind" component={WindPage} />
+                <Route path="/solar" component={SolarPage} />
               </Switch>
             </Column>
           </Row>

@@ -21,7 +21,15 @@ import {
   DatePicker,
   DatePickerInput, SideNavMenu, SideNavMenuItem
 } from "carbon-components-react";
-import {DocumentAdd20, Temperature32, ChartTreemap32, Rain32} from "@carbon/icons-react";
+import {
+  DocumentAdd20,
+  Temperature32,
+  ChartTreemap32,
+  Rain32,
+  Windy32,
+  UvIndexAlt32,
+  Pressure32
+} from "@carbon/icons-react";
 
 import Import from "./import";
 import { userSetDateAction } from "../actions-app";
@@ -185,6 +193,75 @@ export const AppHeader: React.FC = (): React.ReactElement => {
                     scroll={el => scrollWithOffset(el)}
                   >
                     Daily/Weekly/Monthly/Yearly
+                  </SideNavMenuItem>
+                  <SideNavMenuItem<HashLinkProps>
+                    aria-current={location.pathname === '/precipitation' && location.hash === '#rain-03-humidity' ? 'page' : false}
+                    to="/precipitation#rain-03-humidity"
+                    element={HashLink}
+                    scroll={el => scrollWithOffset(el)}
+                  >
+                    Humidity
+                  </SideNavMenuItem>
+                </SideNavMenu>
+                <SideNavMenu
+                  title="Pressure"
+                  renderIcon={Pressure32}
+                  isSideNavExpanded={location.pathname === '/pressure'}
+                  isActive={location.pathname === '/pressure'}
+                >
+                  <SideNavMenuItem<HashLinkProps>
+                    aria-current={location.pathname === '/pressure' && location.hash === '' ? 'page' : false}
+                    to="/pressure#top"
+                    element={HashLink}
+                    scroll={el => scrollWithOffset(el)}
+                  >
+                    Overview
+                  </SideNavMenuItem>
+                </SideNavMenu>
+                <SideNavMenu
+                  title="Wind"
+                  renderIcon={Windy32}
+                  isSideNavExpanded={location.pathname === '/wind'}
+                  isActive={location.pathname === '/wind'}
+                >
+                  <SideNavMenuItem<HashLinkProps>
+                    aria-current={location.pathname === '/wind' && location.hash === '' ? 'page' : false}
+                    to="/wind#top"
+                    element={HashLink}
+                    scroll={el => scrollWithOffset(el)}
+                  >
+                    Overview
+                  </SideNavMenuItem>
+                  <SideNavMenuItem<HashLinkProps>
+                    aria-current={location.pathname === '/wind' && location.hash === '#wind-01-direction' ? 'page' : false}
+                    to="/wind#wind-01-direction"
+                    element={HashLink}
+                    scroll={el => scrollWithOffset(el)}
+                  >
+                    Wind direction
+                  </SideNavMenuItem>
+                </SideNavMenu>
+                <SideNavMenu
+                  title="Solar"
+                  renderIcon={UvIndexAlt32}
+                  isSideNavExpanded={location.pathname === '/solar'}
+                  isActive={location.pathname === '/solar'}
+                >
+                  <SideNavMenuItem<HashLinkProps>
+                    aria-current={location.pathname === '/solar' && location.hash === '' ? 'page' : false}
+                    to="/solar#top"
+                    element={HashLink}
+                    scroll={el => scrollWithOffset(el)}
+                  >
+                    Overview
+                  </SideNavMenuItem>
+                  <SideNavMenuItem<HashLinkProps>
+                    aria-current={location.pathname === '/solar' && location.hash === '#solar-01-uvi' ? 'page' : false}
+                    to="/solar#solar-01-uvi"
+                    element={HashLink}
+                    scroll={el => scrollWithOffset(el)}
+                  >
+                    UV Index
                   </SideNavMenuItem>
                 </SideNavMenu>
               </SideNavItems>

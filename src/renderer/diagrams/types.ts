@@ -1,10 +1,13 @@
 import {Precision} from "./scaling";
+import {AnnotationMatcher} from "@nivo/annotations";
+import {ComputedBarDatum} from "@nivo/bar/dist/types/types";
 
 type DiagramBaseProps = {
   title?: string,
   height: string,
   data: dataItem[],
-  precision?: Precision
+  precision?: Precision,
+  annotations?: AnnotationMatcher<ComputedBarDatum<dataItem>>[]
 };
 
 type dataItem = {

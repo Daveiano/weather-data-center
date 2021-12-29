@@ -53,10 +53,12 @@ export const WindBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseP
 
   return (
     <div data-testid="wind-diagram">
-      <h3>
-        <Windy32 />
-        {props.title}
-      </h3>
+      {props.title &&
+        <h3>
+          <Windy32 />
+          {props.title}
+        </h3>
+      }
 
       <div style={{ height: props.height }} className="diagram">
         <ResponsiveLine

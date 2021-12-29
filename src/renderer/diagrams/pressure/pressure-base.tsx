@@ -48,10 +48,12 @@ export const PressureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
 
   return (
     <div data-testid="pressure-diagram">
-      <h3>
-        <Pressure32 />
-        {props.title}
-      </h3>
+      {props.title &&
+        <h3>
+          <Pressure32 />
+          {props.title}
+        </h3>
+      }
 
       <div style={{ height: props.height }} className="diagram">
         <ResponsiveLine

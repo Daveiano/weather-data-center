@@ -175,6 +175,7 @@ export const RainBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseP
         <ResponsiveBar
           {...getRainBarBaseProps(precision, data, 'rain')}
           data={data}
+          annotations={props.annotations}
         />
       </div>
     </div>

@@ -19,7 +19,8 @@ export type statsItem = {
     | 'desert-days'
     | 'rain-days'
     | 'max-rain-week'
-    | 'max-rain-month',
+    | 'max-rain-month'
+    | 'storm-days',
   property: propertyParameter,
   label: string,
   description?: string,
@@ -57,6 +58,14 @@ export const Stats: React.FC<StatsProps> = (props: StatsProps): React.ReactEleme
       }
       case "extra": {
         switch (statsKey.extra) {
+          case 'storm-days': {
+            const dataBundledPerDay = bundleData(props.data, statsKey.property, 'day'),
+              data = Object.values(dataBundledPerDay).slice().filter(item => Math.max(...item.values) >= 62).length;
+
+            value = data.toString();
+
+            break;
+          }
           case "max-rain-week": {
             const data = scale(
               scale(props.data, statsKey.property, 'max', 'day'),

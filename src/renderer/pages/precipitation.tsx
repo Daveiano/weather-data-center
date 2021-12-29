@@ -8,6 +8,7 @@ import {Stats} from "../components/stats/stats";
 import {RainBase} from "../diagrams/rain/rain-base";
 import {Empty} from "../components/empty";
 import {RainManualPeriodBase} from "../diagrams/rain/rain-manual-period-base";
+import {HumidityBase} from "../diagrams/humidity/humidity-base";
 
 export const PrecipitationPage: React.FC = (): React.ReactElement  => {
   const dataFilteredFromStore = useSelector((state: RootState) => state.appState.dataFilteredPerTime);
@@ -82,7 +83,27 @@ export const PrecipitationPage: React.FC = (): React.ReactElement  => {
                     </Column>
                     <Column sm={12} lg={12} max={9}>
                       {/* @todo Add annotations. */}
-                      <RainBase height="450px" data={data} precision="day" />
+                      <RainBase
+                        height="450px"
+                        data={data}
+                        precision="day"
+                        annotations={[
+                          {
+                            type: 'dot',
+                            note: 'Most rain per day',
+                            match: (value, index, collection) => {
+                              const max = Math.max(...Array.from(collection).map(item => item.data.value));
+
+                              return value.data.formattedValue === `${max} mm`;
+                            },
+                            noteX: 25,
+                            noteY: -100,
+                            noteTextOffset: -3,
+                            noteWidth: 5,
+                            size: 5
+                          }
+                        ]}
+                      />
                     </Column>
                   </Row>
                 </Tile>
@@ -91,6 +112,12 @@ export const PrecipitationPage: React.FC = (): React.ReactElement  => {
               <Column sm={12} lg={12} max={12}>
                 <Tile className="table-combined" id="rain-02-selectable">
                   <RainManualPeriodBase height="600px" data={data} />
+                </Tile>
+              </Column>
+
+              <Column sm={12} lg={12} max={12}>
+                <Tile id="rain-03-humidity">
+                  <HumidityBase height="600px" data={data} title="Humidity" />
                 </Tile>
               </Column>
 

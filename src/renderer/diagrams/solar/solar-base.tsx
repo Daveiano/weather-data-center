@@ -48,10 +48,12 @@ export const SolarBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBase
 
   return (
     <div data-testid="solar-diagram">
-      <h3>
-        <Sun32 />
-        {props.title}
-      </h3>
+      {props.title &&
+        <h3>
+          <Sun32 />
+          {props.title}
+        </h3>
+      }
 
       <div style={{ height: props.height }} className="diagram">
         <ResponsiveLine
