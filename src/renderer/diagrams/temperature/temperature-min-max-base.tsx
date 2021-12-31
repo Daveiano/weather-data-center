@@ -17,6 +17,7 @@ export const TemperatureMinMaxBase:FunctionComponent<DiagramBaseProps> = (props:
   const [data, setData] = useState(scaleMinMaxAvg(props.data, 'temperature', 'day'));
   const [loading, setLoading] = useState(true);
   const [precision, setPrecision] = useState('daily');
+  const [hiddenSeries, setHiddenSeries] = useState([]);
 
   const scale = () => {
     switch (precision) {
@@ -147,32 +148,46 @@ export const TemperatureMinMaxBase:FunctionComponent<DiagramBaseProps> = (props:
                     data: data.map(item => ({
                       x: item.timeParsed,
                       y: item.temperature_min
-                    }))
+                    })),
+                    color: hiddenSeries.includes('Minimum') ? 'transparent' : '#67C8FF'
                   },
                   {
                     id: 'Average',
                     data: data.map(item => ({
                       x: item.timeParsed,
                       y: item.temperature_average
-                    }))
+                    })),
+                    color: hiddenSeries.includes('Average') ? 'transparent' : '#000000'
                   },
                   {
                     id: 'Maximum',
                     data: data.map(item => ({
                       x: item.timeParsed,
                       y: item.temperature_max
-                    }))
+                    })),
+                    color: hiddenSeries.includes('Maximum') ? 'transparent' : '#C41E3A'
                   }
                 ]}
                 // @todo theme={}
-                colors= {['#67C8FF', '#000000', '#C41E3A']}
+                colors={d => d.color}
                 legends={[
                   {
                     anchor: 'top-right',
                     direction: 'row',
                     itemWidth: 70,
                     itemHeight: 20,
-                    itemsSpacing: 20
+                    itemsSpacing: 20,
+                    onClick: (d) => {
+                      let hidden = hiddenSeries;
+                      if (hidden.includes(d.id)) {
+                        hidden = hidden.filter(item => item != d.id);
+                      }
+                      else {
+                        hidden = [...hidden, d.id];
+                      }
+
+                      setHiddenSeries(hidden);
+                    }
                   }
                 ]}
                 margin={{ top: 10, right: 10, bottom: 20, left: 40 }}

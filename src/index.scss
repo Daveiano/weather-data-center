@@ -98,10 +98,12 @@ header.bx--header {
     @include carbon--type-style('expressive-heading-06');
   }
   .tiles {
+    .table-tile {
+      margin-bottom: $spacing-07;
+    }
     .bx--tile {
       margin-bottom: $spacing-07;
       h3 {
-        //padding-left: $spacing-04;
         @include carbon--type-style('expressive-heading-04');
         display: flex;
         align-items: center;
@@ -110,6 +112,12 @@ header.bx--header {
         }
         svg + svg {
           margin-left: -$spacing-03;
+        }
+        &.p-left {
+          padding-left: $spacing-06;
+        }
+        &.m-bottom {
+          margin-bottom: $spacing-03;
         }
       }
       &.empty {

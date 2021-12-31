@@ -6,6 +6,9 @@ import {RootState} from "../renderer";
 import {Empty} from "../components/empty";
 import {Stats} from "../components/stats/stats";
 import {PressureBase} from "../diagrams/pressure/pressure-base";
+import TableBase from "../components/table-base/table-base";
+import {dataItem} from "../diagrams/types";
+import {TABLE_SORT_DIRECTION} from "../components/table-base/misc";
 
 export const PressurePage: React.FC = (): React.ReactElement => {
   const dataFilteredFromStore = useSelector((state: RootState) => state.appState.dataFilteredPerTime);
@@ -30,18 +33,15 @@ export const PressurePage: React.FC = (): React.ReactElement => {
 
             <Row className="tiles">
               <Column sm={12} lg={12} max={12}>
-                <Tile className="combined-tile-stats-diagram">
-                  <Row>
-                    <Column sm={12} lg={12} max={12}>
-                      <h3>Minimum/Maximum values</h3>
-                    </Column>
-                  </Row>
-                  <Row>
-                    <Column sm={12} lg={12} max={3}>
+                <Row>
+                  <Column sm={3} lg={3} max={3}>
+                    <Tile>
+                      <h3 className="p-left m-bottom">Minimum / Maximum values</h3>
+
                       <Stats
                         data={data}
-                        columnSpanLg={3}
-                        columnSpan={6}
+                        columnSpanLg={12}
+                        columnSpan={12}
                         size="compact"
                         stats={[
                           {
@@ -58,12 +58,56 @@ export const PressurePage: React.FC = (): React.ReactElement => {
                           }
                         ]}
                       />
-                    </Column>
-                    <Column sm={12} lg={12} max={9}>
-                      {/* @todo Add annotations. */}
-                      <PressureBase height="450px" data={data} />
-                    </Column>
-                  </Row>
+                    </Tile>
+                  </Column>
+                  <Column sm={9} lg={9} max={9} className="table-tile">
+                    <TableBase
+                      start={0}
+                      pageSize={15}
+                      rows={data.map((item: dataItem) => ({
+                        ...item,
+                        selected: false
+                      }))}
+                      columns={[
+                        {
+                          title: 'Time',
+                          id: 'timeParsed',
+                          tooltip: 'Date format is YYYY/MM/DD HH:mm',
+                          sortCycle: 'tri-states-from-ascending',
+                        },
+                        {
+                          title: 'Pressure',
+                          small: 'in hPa',
+                          id: 'pressure',
+                          sortCycle: 'tri-states-from-ascending',
+                        },
+                        {
+                          title: 'Wind',
+                          small: 'in km/h',
+                          id: 'wind',
+                          sortCycle: 'tri-states-from-ascending',
+                        },
+                        {
+                          title: 'Temperature',
+                          small: 'in °C',
+                          id: 'temperature',
+                          sortCycle: 'tri-states-from-ascending',
+                        },
+                      ]}
+                      title="All data"
+                      hasSelection={false}
+                      sortInfo={{
+                        columnId: 'timeParsed',
+                        direction: TABLE_SORT_DIRECTION.ASCENDING,
+                      }}
+                      size="short"
+                    />
+                  </Column>
+                </Row>
+              </Column>
+              <Column sm={12} lg={12} max={12}>
+                <Tile>
+                  <PressureBase height="600px" data={data} title="Pressure (Ø per day)" />
                 </Tile>
               </Column>
             </Row>

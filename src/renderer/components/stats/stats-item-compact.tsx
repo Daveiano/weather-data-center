@@ -34,7 +34,7 @@ export const StatsItemCompact: React.FC<StatsItemCompactProps> = (props: StatsIt
             }
 
             {props.date &&
-              <div className="date bx--type-body-short-01">on {props.date}</div>
+              <div className="date bx--type-body-short-01">{props.date}</div>
             }
 
             {props.tooltip &&

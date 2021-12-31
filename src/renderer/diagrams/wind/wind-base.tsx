@@ -64,14 +64,14 @@ export const WindBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseP
         <ResponsiveLine
           data={[
             {
-              id: 'Wind',
+              id: 'Wind (Ø / day)',
               data: dataWind.map(item => ({
                 x: item.timeParsed,
                 y: item.wind
               }))
             },
             {
-              id: 'Gust',
+              id: 'Gust (Max / day)',
               data: dataGust.map(item => ({
                 x: item.timeParsed,
                 y: item.gust
@@ -152,8 +152,8 @@ export const WindBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseP
           legends={[
             {
               anchor: 'top-right',
-              direction: 'row',
-              itemWidth: 50,
+              direction: 'column',
+              itemWidth: 105,
               itemHeight: 20,
               itemsSpacing: 10
             }

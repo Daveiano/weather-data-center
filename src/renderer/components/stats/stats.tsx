@@ -5,7 +5,7 @@ import type { ColumnSpan } from "carbon-components-react";
 import moment from "moment";
 
 import { dataItem } from "../../diagrams/types";
-import { bundleData, propertyParameter, scale } from "../../diagrams/scaling";
+import { bundleData, propertyParameter, scale, dateTimeElement } from "../../diagrams/scaling";
 import { StatsItemNormal } from "./stats-item-normal";
 import { StatsItemCompact } from "./stats-item-compact";
 
@@ -18,8 +18,12 @@ export type statsItem = {
     | 'tropical-nights'
     | 'desert-days'
     | 'rain-days'
+    | 'rain-days-consecutive'
+    | 'rain-days-consecutive-sum'
     | 'max-rain-week'
     | 'max-rain-month'
+    | 'max-rain-year'
+    | 'driest-month'
     | 'storm-days',
   property: propertyParameter,
   label: string,
@@ -38,7 +42,41 @@ interface StatsProps {
   stats: statsItem[]
 }
 
+const getRainPeriods = (data: dateTimeElement[]) => {
+  let splitIntoSeries: Array<dateTimeElement[]> = [];
+
+  for (let i = 0; i < data.length; i++) {
+    if (i === 0) {
+      splitIntoSeries = [
+        [data[i]]
+      ];
+    } else {
+      let added = false;
+
+      for (let k = 0; k < splitIntoSeries.length; k++) {
+        if (moment.unix(splitIntoSeries[k][splitIntoSeries[k].length - 1].time).utc().add(1, 'days').format('DDMMYYYY') === moment.unix(data[i].time).utc().format('DDMMYYYY')) {
+          splitIntoSeries[k] = [...splitIntoSeries[k], data[i]];
+          added = true;
+        }
+      }
+
+      if (!added) {
+        splitIntoSeries = [
+          ...splitIntoSeries,
+          [data[i]]
+        ]
+      }
+    }
+  }
+
+  const maxPeriod = Math.max(...splitIntoSeries.map(item => item.length));
+
+  return splitIntoSeries.filter(item => item.length === maxPeriod);
+};
+
 // @todo Property 'property' makes no sense for 'extra' - it's everytime property bound.
+// @todo Add 'precision' for eg. driest-month and all max rains.
+// @todo Unit required?
 export const Stats: React.FC<StatsProps> = (props: StatsProps): React.ReactElement  => {
   const output: React.ReactElement[] = [];
 
@@ -90,11 +128,61 @@ export const Stats: React.FC<StatsProps> = (props: StatsProps): React.ReactEleme
             value = `${data[0][statsKey.property]} ${statsKey.unit}`;
             break;
           }
+          case 'driest-month': {
+            const data = scale(
+              scale(props.data, statsKey.property, 'max', 'day'),
+              statsKey.property,
+              'sum',
+              'month'
+            ).sort((a, b) => a[statsKey.property] - b[statsKey.property]);
+
+            date = moment(data[0].timeParsed).format("MMM YY");
+            value = `${data[0][statsKey.property]} ${statsKey.unit}`;
+            break;
+          }
+          case 'max-rain-year': {
+            const data = scale(
+              scale(props.data, statsKey.property, 'max', 'day'),
+              statsKey.property,
+              'sum',
+              'year'
+            ).sort((a, b) => b[statsKey.property] - a[statsKey.property]);
+
+            date = moment(data[0].timeParsed).format("YYYY");
+            value = `${data[0][statsKey.property]} ${statsKey.unit}`;
+            break;
+          }
           case 'rain-days': {
             const dataBundledPerDay = bundleData(props.data, statsKey.property, 'day'),
               data = Object.values(dataBundledPerDay).slice().filter(item => Math.max(...item.values) >= 0.1).length;
 
             value = data.toString();
+            break;
+          }
+          case 'rain-days-consecutive': {
+            const dataBundledPerDay = bundleData(props.data, statsKey.property, 'day'),
+              data = Object.values(dataBundledPerDay).slice().filter(item => Math.max(...item.values) >= 0.1).sort((a, b) => a.time - b.time);
+
+            const periods = getRainPeriods(data);
+
+            value = periods[0].length.toString();
+            statsKey.tooltip = periods.map(item =>
+              `${moment.unix(item[0].time).utc().format('YYYY/MM/DD')} - ${moment.unix(item[item.length - 1].time).utc().format('YYYY/MM/DD')}`
+            ).join(', ');
+            break;
+          }
+          case 'rain-days-consecutive-sum': {
+            const dataBundledPerDay = bundleData(props.data, statsKey.property, 'day'),
+              data = Object.values(dataBundledPerDay).slice().filter(item => Math.max(...item.values) >= 0.1).sort((a, b) => a.time - b.time);
+
+            const periods = getRainPeriods(data);
+            const amount = periods.map(item => ({
+              ...item,
+              amount: item.reduce((a, b) => a + Math.max(...b.values), 0)
+            })).sort((a, b) => b.amount - a.amount);
+
+            value = `${amount[0].amount.toString()} ${statsKey.unit}`;
+            statsKey.tooltip = `${moment.unix(periods[0][0].time).utc().format('YYYY/MM/DD')} - ${moment.unix(periods[0][periods[0].length - 1].time).utc().format('YYYY/MM/DD')}`;
             break;
           }
           case "frost-days": {

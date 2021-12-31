@@ -1,10 +1,10 @@
 import { dataItem } from './types';
 import moment from "moment";
 
-type dateTimeElement = {
+export type dateTimeElement = {
   time: number,
   date: string,
-  values: any[number]
+  values: number[]
 }
 
 export type propertyParameter = 'humidity' | 'pressure' | 'temperature' | 'rain' | 'solar' | 'uvi' | 'wind' | 'gust' | 'wind_direction' | 'dew_point' | 'felt_temperature';
@@ -168,6 +168,8 @@ const scaleMinMaxAvg = (data: dataItem[], property: propertyParameter, precision
 /**
  * Calculates an average value per day by summing up all values of a day and
  * dividing by the count of the values.
+ *
+ * @todo Rename in scaleAverage and add precision parameter.
  *
  * @param data The array of data to process.
  * @param property The property to process.

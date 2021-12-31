@@ -44,7 +44,7 @@ export const TemperaturePage: React.FC = (): React.ReactElement  => {
                 <Tile className="combined-tile-stats-diagram">
                   <Row>
                     <Column sm={12} lg={12} max={12}>
-                      <h3>Minimum/Maximum values & Climatological days</h3>
+                      <h3>Minimum / Maximum values & Climatological days</h3>
                     </Column>
                   </Row>
                   <Row>
@@ -129,12 +129,12 @@ export const TemperaturePage: React.FC = (): React.ReactElement  => {
               </Column>
               <Column sm={12} lg={12} max={12}>
                 <Tile id="temp-01-felt-dew">
-                  <TemperatureCombinedBase data={data} title="Temperature, Felt temperature and Dew point" height="600px" />
+                  <TemperatureCombinedBase data={data} title="Temperature, Felt temperature and Dew point (Ø per day)" height="600px" />
                 </Tile>
               </Column>
               <Column sm={12} lg={12} max={12}>
                 <Tile id="temp-02-min-max-felt">
-                  <FeltTemperatureBase height="600px" data={data} title="Felt temperature Minimum & Maximum" />
+                  <FeltTemperatureBase height="600px" data={data} title="Felt temperature Minimum & Maximum (Min/Max per day)" />
                 </Tile>
               </Column>
               <Column sm={12} lg={12} max={12}>

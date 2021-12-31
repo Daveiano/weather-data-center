@@ -39,7 +39,7 @@ export const PrecipitationPage: React.FC = (): React.ReactElement  => {
                 <Tile className="combined-tile-stats-diagram">
                   <Row>
                     <Column sm={12} lg={12} max={12}>
-                      <h3>Minimum/Maximum values & Climatological days</h3>
+                      <h3>Minimum / Maximum values & Climatological days</h3>
                     </Column>
                   </Row>
                   <Row>
@@ -56,6 +56,13 @@ export const PrecipitationPage: React.FC = (): React.ReactElement  => {
                             extra: 'rain-days',
                             label: 'Rain days',
                             description: 'R<sub>min</sub> ≥ 0.1 mm',
+                            unit: 'mm',
+                          },
+                          {
+                            property: 'rain',
+                            direction: 'extra',
+                            extra: 'driest-month',
+                            label: 'Driest month',
                             unit: 'mm',
                           },
                           {
@@ -78,13 +85,36 @@ export const PrecipitationPage: React.FC = (): React.ReactElement  => {
                             label: 'Maximum per month',
                             unit: 'mm'
                           },
+                          {
+                            property: 'rain',
+                            direction: 'extra',
+                            extra: 'max-rain-year',
+                            label: 'Maximum per year',
+                            unit: 'mm'
+                          },
+                          {
+                            property: 'rain',
+                            direction: 'extra',
+                            extra: 'rain-days-consecutive',
+                            label: 'Longest rain period',
+                            description: 'Consecutive days with rain',
+                            unit: '',
+                          },
+                          {
+                            property: 'rain',
+                            direction: 'extra',
+                            extra: 'rain-days-consecutive-sum',
+                            label: 'Longest rain period amount',
+                            description: 'Consecutive days with rain',
+                            unit: 'mm',
+                          }
                         ]}
                       />
                     </Column>
                     <Column sm={12} lg={12} max={9}>
-                      {/* @todo Add annotations. */}
+                      {/* @todo Add consecutive and maximum annotations. */}
                       <RainBase
-                        height="450px"
+                        height="500px"
                         data={data}
                         precision="day"
                         annotations={[
@@ -117,7 +147,7 @@ export const PrecipitationPage: React.FC = (): React.ReactElement  => {
 
               <Column sm={12} lg={12} max={12}>
                 <Tile id="rain-03-humidity">
-                  <HumidityBase height="600px" data={data} title="Humidity" />
+                  <HumidityBase height="600px" data={data} title="Humidity (Ø per day)" />
                 </Tile>
               </Column>
 
