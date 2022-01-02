@@ -12,7 +12,8 @@ beforeAll(async () => {
   electronApp = await electron.launch({
     args: [
       '.',
-      `--user-data-dir=${__dirname.replace('src/main', '')}tests/data/empty`
+      `--user-data-dir=${__dirname.replace('src/main', '')}tests/data/empty`,
+      '--window-size=1920,1000'
     ],
     env: {
       ...process.env

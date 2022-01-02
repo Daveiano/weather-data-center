@@ -21,7 +21,7 @@ beforeAll(async () => {
     args: [
       '.',
       `--user-data-dir=${__dirname.replace('src/main', '')}tests/data/small`,
-      '--window-size=1920,1080'
+      '--window-size=1920,1000'
     ],
     env: {
       ...process.env

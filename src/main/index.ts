@@ -51,7 +51,7 @@ const end = (callback: asyncCallback) => {
 const createWindow = (): void => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    height: 1080,
+    height: 1000,
     width: 1920,
     minHeight: 600,
     minWidth: 1200,
