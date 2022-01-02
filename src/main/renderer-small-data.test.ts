@@ -7,11 +7,12 @@ expect.extend({ toMatchImageSnapshot });
 let page: Page,
   electronApp: ElectronApplication;
 
-const navigate = async(index: number) => {
-  await page.click('.bx--header__menu-trigger');
+const navigate = async (index: number) => {
+  await page.click('.bx--header__menu-trigger.bx--header__menu-toggle');
   await page.click(`nav.bx--side-nav__navigation ul li:nth-child(${index}) button`);
   await page.click(`nav.bx--side-nav__navigation ul li:nth-child(${index}) ul li:nth-child(1) a`);
-  await page.click('.bx--header__menu-trigger');
+  await page.click('.bx--header__menu-trigger.bx--header__menu-toggle');
+  await page.waitForSelector('nav.bx--side-nav__navigation .bx--side-nav__submenu-title', {state: 'hidden'});
 };
 
 beforeAll(async () => {
@@ -20,7 +21,7 @@ beforeAll(async () => {
     args: [
       '.',
       `--user-data-dir=${__dirname.replace('src/main', '')}tests/data/small`,
-      '--window-size=1850,1000'
+      '--window-size=1920,1080'
     ],
     env: {
       ...process.env
