@@ -48,7 +48,7 @@ const store = createStore(
 
 const ipcMainLoadingListener = (arg: any): void => {
   console.log('loading', arg);
-  store.dispatch(isLoadingAction(arg));
+  store.dispatch(isLoadingAction(arg[0]));
 };
 
 window.electron.IpcOn('app-is-loading', (event, arg) => ipcMainLoadingListener(arg));

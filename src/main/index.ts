@@ -53,8 +53,8 @@ const end = (callback: asyncCallback) => {
 const createWindow = (): void => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    height: 800,
-    width: 1200,
+    height: 1000,
+    width: 1850,
     minHeight: 600,
     minWidth: 1200,
     webPreferences: {
@@ -142,7 +142,6 @@ ipcMain.on('query-data',(event) => {
 });
 
 ipcMain.on('open-file-dialog', (event) => {
-  console.log(app.getPath('userData'));
   dialog.showOpenDialog({
     title: 'Select your data',
     filters: [

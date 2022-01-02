@@ -34,7 +34,7 @@ export const PressurePage: React.FC = (): React.ReactElement => {
             <Row className="tiles">
               <Column sm={12} lg={12} max={12}>
                 <Row>
-                  <Column sm={3} lg={3} max={3}>
+                  <Column sm={4} lg={4} max={3}>
                     <Tile>
                       <h3 className="p-left m-bottom">Minimum / Maximum values</h3>
 
@@ -55,12 +55,26 @@ export const PressurePage: React.FC = (): React.ReactElement => {
                             direction: 'min',
                             label: 'Minimum',
                             unit: 'hPa',
+                          },
+                          {
+                            property: 'pressure',
+                            direction: 'extra',
+                            extra: 'min-max-diff-down',
+                            label: 'Biggest fall per day',
+                            unit: 'hPa',
+                          },
+                          {
+                            property: 'pressure',
+                            direction: 'extra',
+                            extra: 'min-max-diff-up',
+                            label: 'Biggest rise per day',
+                            unit: 'hPa',
                           }
                         ]}
                       />
                     </Tile>
                   </Column>
-                  <Column sm={9} lg={9} max={9} className="table-tile">
+                  <Column sm={8} lg={8} max={9} className="table-tile">
                     <TableBase
                       start={0}
                       pageSize={15}

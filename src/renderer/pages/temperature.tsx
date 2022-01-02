@@ -70,7 +70,7 @@ export const TemperaturePage: React.FC = (): React.ReactElement  => {
                           },
                           {
                             property: 'temperature',
-                            direction: 'extra',
+                            direction: 'day',
                             extra: 'summer-days',
                             label: 'Summer days',
                             description: 'T<sub>max</sub> ≥ 25 °C',
@@ -78,7 +78,7 @@ export const TemperaturePage: React.FC = (): React.ReactElement  => {
                           },
                           {
                             property: 'temperature',
-                            direction: 'extra',
+                            direction: 'day',
                             extra: 'frost-days',
                             label: 'Frost days',
                             description: 'T<sub>min</sub> < 0 °C',
@@ -86,7 +86,7 @@ export const TemperaturePage: React.FC = (): React.ReactElement  => {
                           },
                           {
                             property: 'temperature',
-                            direction: 'extra',
+                            direction: 'day',
                             extra: 'hot-days',
                             label: 'Hot days',
                             description: 'T<sub>max</sub> ≥ 30 °C',
@@ -94,7 +94,7 @@ export const TemperaturePage: React.FC = (): React.ReactElement  => {
                           },
                           {
                             property: 'temperature',
-                            direction: 'extra',
+                            direction: 'day',
                             extra: 'ice-days',
                             label: 'Ice days',
                             description: 'T<sub>max</sub> < 0 °C',
@@ -102,7 +102,7 @@ export const TemperaturePage: React.FC = (): React.ReactElement  => {
                           },
                           {
                             property: 'temperature',
-                            direction: 'extra',
+                            direction: 'day',
                             extra: 'tropical-nights',
                             label: 'Tropical nights',
                             description: 'T<sub>min</sub> ≥ 20 °C',
@@ -111,7 +111,7 @@ export const TemperaturePage: React.FC = (): React.ReactElement  => {
                           },
                           {
                             property: 'temperature',
-                            direction: 'extra',
+                            direction: 'day',
                             extra: 'desert-days',
                             label: 'Desert days',
                             description: 'T<sub>max</sub> ≥ 35 °C',

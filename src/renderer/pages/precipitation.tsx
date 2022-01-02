@@ -52,16 +52,17 @@ export const PrecipitationPage: React.FC = (): React.ReactElement  => {
                         stats={[
                           {
                             property: 'rain',
-                            direction: 'extra',
+                            direction: 'day',
                             extra: 'rain-days',
                             label: 'Rain days',
-                            description: 'R<sub>min</sub> ≥ 0.1 mm',
-                            unit: 'mm',
+                            description: 'R<sub>min</sub> ≥ 0.1 mm'
                           },
                           {
                             property: 'rain',
-                            direction: 'extra',
-                            extra: 'driest-month',
+                            direction: 'min',
+                            scaling: 'sum',
+                            precision: 'month',
+                            dateFormat: 'MMM YY',
                             label: 'Driest month',
                             unit: 'mm',
                           },
@@ -73,22 +74,28 @@ export const PrecipitationPage: React.FC = (): React.ReactElement  => {
                           },
                           {
                             property: 'rain',
-                            direction: 'extra',
-                            extra: 'max-rain-week',
+                            direction: 'max',
+                            scaling: 'sum',
+                            precision: 'week',
+                            dateFormat: '\\Www\\/YY',
                             label: 'Maximum per week',
                             unit: 'mm'
                           },
                           {
                             property: 'rain',
-                            direction: 'extra',
-                            extra: 'max-rain-month',
+                            direction: 'max',
+                            scaling: 'sum',
+                            precision: 'month',
+                            dateFormat: 'MMM YY',
                             label: 'Maximum per month',
                             unit: 'mm'
                           },
                           {
                             property: 'rain',
-                            direction: 'extra',
-                            extra: 'max-rain-year',
+                            direction: 'max',
+                            scaling: 'sum',
+                            precision: 'year',
+                            dateFormat: 'YYYY',
                             label: 'Maximum per year',
                             unit: 'mm'
                           },

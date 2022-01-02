@@ -35,7 +35,7 @@ export const WindPage: React.FC = (): React.ReactElement => {
             <Row className="tiles">
               <Column sm={12} lg={12} max={12}>
                 <Row>
-                  <Column sm={3} lg={3} max={3}>
+                  <Column sm={4} lg={4} max={3}>
                     <Tile>
                       <h3 className="p-left m-bottom">Minimum / Maximum values</h3>
 
@@ -53,17 +53,25 @@ export const WindPage: React.FC = (): React.ReactElement => {
                           },
                           {
                             property: 'gust',
-                            direction: 'extra',
+                            direction: 'day',
                             extra: 'storm-days',
                             label: 'Storm days',
                             description: 'W ≥ 8 Beaufort',
+                          },
+                          {
+                            property: 'wind',
+                            direction: 'max',
+                            scaling: 'average',
+                            precision: 'day',
+                            label: 'Windiest day',
+                            tooltip: 'Highest Ø from all data',
                             unit: 'km/h',
                           }
                         ]}
                       />
                     </Tile>
                   </Column>
-                  <Column sm={9} lg={9} max={9} className="table-tile">
+                  <Column sm={8} lg={8} max={9} className="table-tile">
                     <TableBase
                       start={0}
                       pageSize={15}

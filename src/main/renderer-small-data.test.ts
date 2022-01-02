@@ -4,8 +4,15 @@ import { toMatchImageSnapshot } from 'jest-image-snapshot';
 
 expect.extend({ toMatchImageSnapshot });
 
-let window: Page,
+let page: Page,
   electronApp: ElectronApplication;
+
+const navigate = async(index: number) => {
+  await page.click('.bx--header__menu-trigger');
+  await page.click(`nav.bx--side-nav__navigation ul li:nth-child(${index}) button`);
+  await page.click(`nav.bx--side-nav__navigation ul li:nth-child(${index}) ul li:nth-child(1) a`);
+  await page.click('.bx--header__menu-trigger');
+};
 
 beforeAll(async () => {
   // Launch Electron app.
@@ -26,51 +33,137 @@ beforeAll(async () => {
   }));
 
   // Get the first window that the app opens, wait if necessary.
-  window = await electronApp.firstWindow();
+  page = await electronApp.firstWindow();
 
   // Wait for frame actually loaded.
-  await window.waitForSelector('main');
+  await page.waitForSelector('main');
 
   // Direct Electron console to Node terminal.
-  window.on('console', console.log);
+  page.on('console', console.log);
 });
 
 afterAll(async () => {
   await electronApp.close();
 });
 
-/*beforeEach(async () => {
-    page = await browser.newPage();
-});
-afterEach(async () => {
-    await page.close();
-});*/
-
-// @todo add new props: uvi, solar, wind
-it('should start the app with a small set of data', async () => {
-  expect(await window.title()).toBe('Weather Data Center');
-
-  const image = await window.screenshot({ fullPage: true });
-  expect(image).toMatchImageSnapshot({
-    failureThreshold: 3.5,
-    failureThresholdType: 'percent',
-    dumpDiffToConsole: true
+describe('Start the app with a small set of data', () => {
+  afterEach(async () => {
+    await page.click('header.bx--header a.bx--header__name');
+    await page.reload();
   });
 
-  const mainText = window.locator('.main.bx--content h1');
-  expect(await mainText.evaluate(node => node.textContent)).toBe('Overview');
+  test('Overview page', async () => {
+    expect(await page.title()).toBe('Weather Data Center');
 
+    const image = await page.screenshot({ fullPage: true });
+    expect(image).toMatchImageSnapshot({
+      failureThreshold: 3.5,
+      failureThresholdType: 'percent',
+      dumpDiffToConsole: true
+    });
+
+    const mainText = page.locator('.main.bx--content h1');
+    expect(await mainText.evaluate(node => node.textContent)).toBe('Overview');
+  });
+
+  test('Temperature page', async () => {
+    await navigate(2);
+
+    const image = await page.screenshot({ fullPage: true });
+    expect(image).toMatchImageSnapshot({
+      failureThreshold: 3.5,
+      failureThresholdType: 'percent',
+      dumpDiffToConsole: true
+    });
+
+    const mainText = page.locator('.main.bx--content h1');
+    expect(await mainText.evaluate(node => node.textContent)).toBe('Temperature');
+  });
+
+  test('Precipitation page', async () => {
+    await navigate(3);
+
+    const image = await page.screenshot({ fullPage: true });
+    expect(image).toMatchImageSnapshot({
+      failureThreshold: 3.5,
+      failureThresholdType: 'percent',
+      dumpDiffToConsole: true
+    });
+
+    const mainText = page.locator('.main.bx--content h1');
+    expect(await mainText.evaluate(node => node.textContent)).toBe('Precipitation');
+  });
+
+  test('Pressure page', async () => {
+    await navigate(4);
+
+    const image = await page.screenshot({ fullPage: true });
+    expect(image).toMatchImageSnapshot({
+      failureThreshold: 3.5,
+      failureThresholdType: 'percent',
+      dumpDiffToConsole: true
+    });
+
+    const mainText = page.locator('.main.bx--content h1');
+    expect(await mainText.evaluate(node => node.textContent)).toBe('Pressure');
+  });
+
+  test('Wind page', async () => {
+    await navigate(5);
+
+    const image = await page.screenshot({ fullPage: true });
+    expect(image).toMatchImageSnapshot({
+      failureThreshold: 3.5,
+      failureThresholdType: 'percent',
+      dumpDiffToConsole: true
+    });
+
+    const mainText = page.locator('.main.bx--content h1');
+    expect(await mainText.evaluate(node => node.textContent)).toBe('Wind');
+  });
+
+  test('Solar page', async () => {
+    await navigate(6);
+
+    const image = await page.screenshot({ fullPage: true });
+    expect(image).toMatchImageSnapshot({
+      failureThreshold: 3.5,
+      failureThresholdType: 'percent',
+      dumpDiffToConsole: true
+    });
+
+    const mainText = page.locator('.main.bx--content h1');
+    expect(await mainText.evaluate(node => node.textContent)).toBe('Solar & UVI');
+  });
+});
+
+it('should show the number of imported data', async () => {
   // Open right sidebar.
-  await window.click('header.bx--header button[aria-label="Upload Data"]');
+  await page.click('header.bx--header button[aria-label="Upload Data"]');
 
-  // Expect 0 items to be imported.
-  const numberImported = window.locator('header.bx--header .bx--header-panel .import-data');
-  expect(await numberImported.evaluate(node => node.textContent)).toBe('145 records in DB');
+  const numberImported = page.locator('header.bx--header .bx--header-panel .import-data');
+  expect(await numberImported.evaluate(node => node.textContent)).toBe('4162 records in DB');
 
-  const imageSideBarOpen = await window.screenshot({ fullPage: true });
+  const imageSideBarOpen = await page.screenshot({ fullPage: true });
   expect(imageSideBarOpen).toMatchImageSnapshot({
     failureThreshold: 3.5,
     failureThresholdType: 'percent',
     dumpDiffToConsole: true
   });
 });
+
+/* @see https://github.com/microsoft/playwright/issues/5013 */
+/*it('should import new data', async () => {
+  await page.click('header.bx--header button[aria-label="Upload Data"]');
+
+  console.log('0');
+
+  const [fileChooser] = await Promise.all([
+    page.waitForEvent('filechooser'),
+    page.click('button#import')
+  ]);
+
+  console.log('1');
+
+  await fileChooser.setFiles(`${__dirname.replace('src/main', '')}tests/data/upload-data-start-16-08-21-30-09-21-1196-records.csv`);
+});*/

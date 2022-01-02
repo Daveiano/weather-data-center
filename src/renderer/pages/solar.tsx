@@ -37,7 +37,7 @@ export const SolarPage: React.FC = (): React.ReactElement => {
             <Row className="tiles">
               <Column sm={12} lg={12} max={12}>
                 <Row>
-                  <Column sm={3} lg={3} max={3}>
+                  <Column sm={4} lg={4} max={3}>
                     <Tile>
                       <h3 className="p-left m-bottom">Minimum / Maximum values</h3>
                       <Stats
@@ -57,12 +57,30 @@ export const SolarPage: React.FC = (): React.ReactElement => {
                             direction: 'max',
                             label: 'Max UV Index',
                             unit: 'UVI'
+                          },
+                          {
+                            property: 'solar',
+                            direction: 'max',
+                            scaling: 'average',
+                            precision: 'day',
+                            label: 'Brightest day',
+                            tooltip: 'Highest Ø from all data',
+                            unit: 'w/m²'
+                          },
+                          {
+                            property: 'solar',
+                            direction: 'min',
+                            scaling: 'average',
+                            precision: 'day',
+                            label: 'Darkest day',
+                            tooltip: 'Lowest Ø from all data',
+                            unit: 'w/m²'
                           }
                         ]}
                       />
                     </Tile>
                   </Column>
-                  <Column sm={9} lg={9} max={9} className="table-tile">
+                  <Column sm={8} lg={8} max={9} className="table-tile">
                     <TableBase
                       start={0}
                       pageSize={15}
