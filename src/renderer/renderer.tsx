@@ -47,7 +47,6 @@ const store = createStore(
 );
 
 const ipcMainLoadingListener = (arg: any): void => {
-  console.log('loading', arg);
   store.dispatch(isLoadingAction(arg[0]));
 };
 

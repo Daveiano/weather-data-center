@@ -20,8 +20,6 @@ export const PrecipitationPage: React.FC = (): React.ReactElement  => {
     setData(dataFilteredFromStore);
   }, [dataFilteredFromStore]);
 
-  console.log(data);
-
   if (loading) {
     return null;
   }
