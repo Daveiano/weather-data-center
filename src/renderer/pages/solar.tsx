@@ -5,8 +5,6 @@ import {Column, Row, Tile} from "carbon-components-react";
 import {RootState} from "../renderer";
 import {Empty} from "../components/empty";
 import {Stats} from "../components/stats/stats";
-import {TemperatureLow} from "@carbon/pictograms-react";
-import {TemperatureBase} from "../diagrams/temperature/temperature-base";
 import {SolarBase} from "../diagrams/solar/solar-base";
 import {UviBase} from "../diagrams/uvi/uvi-base";
 import TableBase from "../components/table-base/table-base";

@@ -5,7 +5,7 @@ import { ResponsiveLine } from '@nivo/line'
 import { Windy32 } from "@carbon/icons-react";
 
 import { dataItem, DiagramBaseProps } from "../types";
-import { getTimeDifferenceInDays, scaleAveragePerDay, scaleMax } from "../scaling";
+import { getTimeDifferenceInDays, scaleAverage, scaleMax } from "../scaling";
 import { TooltipLine } from "../tooltip";
 
 export const WindBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
@@ -22,7 +22,7 @@ export const WindBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseP
 
     if (timeDifferenceInDays > 14) {
       setDaily(true);
-      newDataWind = scaleAveragePerDay(props.data, 'wind');
+      newDataWind = scaleAverage(props.data, 'wind', 'day');
       newDataGust = scaleMax(props.data, 'gust', 'day');
     } else {
       setDaily(false);

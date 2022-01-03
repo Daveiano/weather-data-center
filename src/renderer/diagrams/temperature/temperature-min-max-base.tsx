@@ -6,7 +6,6 @@ import { TemperatureMax32, TemperatureMin32 } from "@carbon/icons-react";
 
 import { dataItem, DiagramBaseProps } from "../types";
 import { scaleMinMaxAvg } from "../scaling";
-import { TooltipLine } from "../tooltip";
 import { getTemperatureLineBaseProps } from './temperature-base';
 import TableBase from "../../components/table-base/table-base";
 import { TABLE_SORT_DIRECTION } from "../../components/table-base/misc";

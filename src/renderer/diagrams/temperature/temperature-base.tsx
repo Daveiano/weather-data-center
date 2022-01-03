@@ -9,7 +9,7 @@ import type { CartesianMarkerProps, Box, ValueFormat } from "@nivo/core";
 import type { AxisProps } from "@nivo/axes";
 
 import { dataItem, DiagramBaseProps } from "../types";
-import {getTimeDifferenceInDays, propertyParameter, scaleAveragePerDay} from "../scaling";
+import {getTimeDifferenceInDays, propertyParameter, scaleAverage} from "../scaling";
 import { TooltipLine } from "../tooltip";
 
 type TemperatureLineBasePropsTypes = {
@@ -175,7 +175,7 @@ export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: Diagr
     if (timeDifferenceInDays > 14) {
       setDaily(true);
       // @todo useMemo?
-      newData = scaleAveragePerDay(props.data, 'temperature');
+      newData = scaleAverage(props.data, 'temperature', 'day');
     } else {
       setDaily(false);
       newData = props.data;

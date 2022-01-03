@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
+import {fireEvent, render, screen} from '@testing-library/react'
 
 import data from "../../../../tests/data/scaling-input.json";
 
@@ -57,6 +57,14 @@ test('temperature min max diagram with 11-day data', async () => {
   );
 
   expect(screen.getByTestId('temperature-min-max-diagram')).toHaveTextContent("Minimum, maximum and average temperature");
+  expect(container.querySelector('.bx--data-table-container .bx--pagination .bx--pagination__items-count')).toHaveTextContent('1–11 of 11 items');
+  expect(container).toMatchSnapshot();
 
+  fireEvent.click(screen.getByText('Monthly'));
+  expect(container.querySelector('.bx--data-table-container .bx--pagination .bx--pagination__items-count')).toHaveTextContent('1–1 of 1 items');
+  expect(container).toMatchSnapshot();
+
+  fireEvent.click(screen.getByText('Yearly'));
+  expect(container.querySelector('.bx--data-table-container .bx--pagination .bx--pagination__items-count')).toHaveTextContent('1–1 of 1 items');
   expect(container).toMatchSnapshot();
 });

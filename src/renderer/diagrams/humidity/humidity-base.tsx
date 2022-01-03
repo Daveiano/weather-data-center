@@ -5,7 +5,7 @@ import { ResponsiveLine } from '@nivo/line'
 import { Humidity32 } from "@carbon/icons-react";
 
 import {dataItem, DiagramBaseProps} from "../types";
-import { getTimeDifferenceInDays, scaleAveragePerDay } from "../scaling";
+import { getTimeDifferenceInDays, scaleAverage } from "../scaling";
 import { TooltipLine } from "../tooltip";
 
 export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
@@ -22,7 +22,7 @@ export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
     // number of values.
     if (timeDifferenceInDays > 14) {
       setDaily(true);
-      newData = scaleAveragePerDay(props.data, 'humidity');
+      newData = scaleAverage(props.data, 'humidity', 'day');
     } else {
       setDaily(false);
       newData = props.data;

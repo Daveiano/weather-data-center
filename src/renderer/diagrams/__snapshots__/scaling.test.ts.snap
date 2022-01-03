@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should average scale correctly for daily temperature 1`] = `
+exports[`average scale temperature 1`] = `
 Array [
   Object {
     "_id": "04032021",
@@ -78,6 +78,534 @@ Array [
     "temperature": "4.1",
     "time": 1615681980,
     "timeParsed": "2021-03-14T00:33:00.000Z",
+  },
+]
+`;
+
+exports[`average scale temperature 2`] = `
+Array [
+  Object {
+    "_id": "102021",
+    "id": "102021",
+    "temperature": "0.5",
+    "time": 1614884220,
+    "timeParsed": "2021-03-04T18:57:00.000Z",
+  },
+  Object {
+    "_id": "112021",
+    "id": "112021",
+    "temperature": "3.4",
+    "time": 1615078620,
+    "timeParsed": "2021-03-07T00:57:00.000Z",
+  },
+  Object {
+    "_id": "122021",
+    "id": "122021",
+    "temperature": "4.1",
+    "time": 1615681980,
+    "timeParsed": "2021-03-14T00:33:00.000Z",
+  },
+]
+`;
+
+exports[`average scale temperature 3`] = `
+Array [
+  Object {
+    "_id": "032021",
+    "id": "032021",
+    "temperature": "2.9",
+    "time": 1614884220,
+    "timeParsed": "2021-03-04T18:57:00.000Z",
+  },
+]
+`;
+
+exports[`average scale temperature 4`] = `
+Array [
+  Object {
+    "_id": "2021",
+    "id": "2021",
+    "temperature": "2.9",
+    "time": 1614884220,
+    "timeParsed": "2021-03-04T18:57:00.000Z",
+  },
+]
+`;
+
+exports[`max scale temperature 1`] = `
+Array [
+  Object {
+    "_id": "04032021",
+    "id": "04032021",
+    "temperature": 2.3,
+    "time": 1614884220,
+    "timeParsed": "2021-03-04T18:57:00.000Z",
+  },
+  Object {
+    "_id": "05032021",
+    "id": "05032021",
+    "temperature": 5.8,
+    "time": 1614905820,
+    "timeParsed": "2021-03-05T00:57:00.000Z",
+  },
+  Object {
+    "_id": "06032021",
+    "id": "06032021",
+    "temperature": 4.1,
+    "time": 1614992220,
+    "timeParsed": "2021-03-06T00:57:00.000Z",
+  },
+  Object {
+    "_id": "07032021",
+    "id": "07032021",
+    "temperature": 2.7,
+    "time": 1615078620,
+    "timeParsed": "2021-03-07T00:57:00.000Z",
+  },
+  Object {
+    "_id": "08032021",
+    "id": "08032021",
+    "temperature": 5.4,
+    "time": 1615165020,
+    "timeParsed": "2021-03-08T00:57:00.000Z",
+  },
+  Object {
+    "_id": "09032021",
+    "id": "09032021",
+    "temperature": 4.7,
+    "time": 1615251420,
+    "timeParsed": "2021-03-09T00:57:00.000Z",
+  },
+  Object {
+    "_id": "10032021",
+    "id": "10032021",
+    "temperature": 6.1,
+    "time": 1615337820,
+    "timeParsed": "2021-03-10T00:57:00.000Z",
+  },
+  Object {
+    "_id": "11032021",
+    "id": "11032021",
+    "temperature": 8.7,
+    "time": 1615424220,
+    "timeParsed": "2021-03-11T00:57:00.000Z",
+  },
+  Object {
+    "_id": "12032021",
+    "id": "12032021",
+    "temperature": 7.6,
+    "time": 1615510620,
+    "timeParsed": "2021-03-12T00:57:00.000Z",
+  },
+  Object {
+    "_id": "13032021",
+    "id": "13032021",
+    "temperature": 10.3,
+    "time": 1615595580,
+    "timeParsed": "2021-03-13T00:33:00.000Z",
+  },
+  Object {
+    "_id": "14032021",
+    "id": "14032021",
+    "temperature": 5.6,
+    "time": 1615681980,
+    "timeParsed": "2021-03-14T00:33:00.000Z",
+  },
+]
+`;
+
+exports[`max scale temperature 2`] = `
+Array [
+  Object {
+    "_id": "102021",
+    "id": "102021",
+    "temperature": 5.8,
+    "time": 1614884220,
+    "timeParsed": "2021-03-04T18:57:00.000Z",
+  },
+  Object {
+    "_id": "112021",
+    "id": "112021",
+    "temperature": 10.3,
+    "time": 1615078620,
+    "timeParsed": "2021-03-07T00:57:00.000Z",
+  },
+  Object {
+    "_id": "122021",
+    "id": "122021",
+    "temperature": 5.6,
+    "time": 1615681980,
+    "timeParsed": "2021-03-14T00:33:00.000Z",
+  },
+]
+`;
+
+exports[`max scale temperature 3`] = `
+Array [
+  Object {
+    "_id": "032021",
+    "id": "032021",
+    "temperature": 10.3,
+    "time": 1614884220,
+    "timeParsed": "2021-03-04T18:57:00.000Z",
+  },
+]
+`;
+
+exports[`max scale temperature 4`] = `
+Array [
+  Object {
+    "_id": "2021",
+    "id": "2021",
+    "temperature": 10.3,
+    "time": 1614884220,
+    "timeParsed": "2021-03-04T18:57:00.000Z",
+  },
+]
+`;
+
+exports[`min scale temperature 1`] = `
+Array [
+  Object {
+    "_id": "04032021",
+    "id": "04032021",
+    "temperature": 0.6,
+    "time": 1614884220,
+    "timeParsed": "2021-03-04T18:57:00.000Z",
+  },
+  Object {
+    "_id": "05032021",
+    "id": "05032021",
+    "temperature": -2.6,
+    "time": 1614905820,
+    "timeParsed": "2021-03-05T00:57:00.000Z",
+  },
+  Object {
+    "_id": "06032021",
+    "id": "06032021",
+    "temperature": -3.5,
+    "time": 1614992220,
+    "timeParsed": "2021-03-06T00:57:00.000Z",
+  },
+  Object {
+    "_id": "07032021",
+    "id": "07032021",
+    "temperature": 0.3,
+    "time": 1615078620,
+    "timeParsed": "2021-03-07T00:57:00.000Z",
+  },
+  Object {
+    "_id": "08032021",
+    "id": "08032021",
+    "temperature": -1.6,
+    "time": 1615165020,
+    "timeParsed": "2021-03-08T00:57:00.000Z",
+  },
+  Object {
+    "_id": "09032021",
+    "id": "09032021",
+    "temperature": -1.9,
+    "time": 1615251420,
+    "timeParsed": "2021-03-09T00:57:00.000Z",
+  },
+  Object {
+    "_id": "10032021",
+    "id": "10032021",
+    "temperature": -0.7,
+    "time": 1615337820,
+    "timeParsed": "2021-03-10T00:57:00.000Z",
+  },
+  Object {
+    "_id": "11032021",
+    "id": "11032021",
+    "temperature": 1,
+    "time": 1615424220,
+    "timeParsed": "2021-03-11T00:57:00.000Z",
+  },
+  Object {
+    "_id": "12032021",
+    "id": "12032021",
+    "temperature": 3.3,
+    "time": 1615510620,
+    "timeParsed": "2021-03-12T00:57:00.000Z",
+  },
+  Object {
+    "_id": "13032021",
+    "id": "13032021",
+    "temperature": 3.8,
+    "time": 1615595580,
+    "timeParsed": "2021-03-13T00:33:00.000Z",
+  },
+  Object {
+    "_id": "14032021",
+    "id": "14032021",
+    "temperature": 2.5,
+    "time": 1615681980,
+    "timeParsed": "2021-03-14T00:33:00.000Z",
+  },
+]
+`;
+
+exports[`min scale temperature 2`] = `
+Array [
+  Object {
+    "_id": "102021",
+    "id": "102021",
+    "temperature": -3.5,
+    "time": 1614884220,
+    "timeParsed": "2021-03-04T18:57:00.000Z",
+  },
+  Object {
+    "_id": "112021",
+    "id": "112021",
+    "temperature": -1.9,
+    "time": 1615078620,
+    "timeParsed": "2021-03-07T00:57:00.000Z",
+  },
+  Object {
+    "_id": "122021",
+    "id": "122021",
+    "temperature": 2.5,
+    "time": 1615681980,
+    "timeParsed": "2021-03-14T00:33:00.000Z",
+  },
+]
+`;
+
+exports[`min scale temperature 3`] = `
+Array [
+  Object {
+    "_id": "032021",
+    "id": "032021",
+    "temperature": -3.5,
+    "time": 1614884220,
+    "timeParsed": "2021-03-04T18:57:00.000Z",
+  },
+]
+`;
+
+exports[`min scale temperature 4`] = `
+Array [
+  Object {
+    "_id": "2021",
+    "id": "2021",
+    "temperature": -3.5,
+    "time": 1614884220,
+    "timeParsed": "2021-03-04T18:57:00.000Z",
+  },
+]
+`;
+
+exports[`min/max/average scale temperature 1`] = `
+Array [
+  Object {
+    "_id": "04032021",
+    "id": "04032021",
+    "temperature_average": "1.0",
+    "temperature_max": 2.3,
+    "temperature_min": 0.6,
+    "time": 1614884220,
+    "timeParsed": "2021-03-04T18:57:00.000Z",
+  },
+  Object {
+    "_id": "05032021",
+    "id": "05032021",
+    "temperature_average": "0.0",
+    "temperature_max": 5.8,
+    "temperature_min": -2.6,
+    "time": 1614905820,
+    "timeParsed": "2021-03-05T00:57:00.000Z",
+  },
+  Object {
+    "_id": "06032021",
+    "id": "06032021",
+    "temperature_average": "0.8",
+    "temperature_max": 4.1,
+    "temperature_min": -3.5,
+    "time": 1614992220,
+    "timeParsed": "2021-03-06T00:57:00.000Z",
+  },
+  Object {
+    "_id": "07032021",
+    "id": "07032021",
+    "temperature_average": "1.1",
+    "temperature_max": 2.7,
+    "temperature_min": 0.3,
+    "time": 1615078620,
+    "timeParsed": "2021-03-07T00:57:00.000Z",
+  },
+  Object {
+    "_id": "08032021",
+    "id": "08032021",
+    "temperature_average": "0.5",
+    "temperature_max": 5.4,
+    "temperature_min": -1.6,
+    "time": 1615165020,
+    "timeParsed": "2021-03-08T00:57:00.000Z",
+  },
+  Object {
+    "_id": "09032021",
+    "id": "09032021",
+    "temperature_average": "1.0",
+    "temperature_max": 4.7,
+    "temperature_min": -1.9,
+    "time": 1615251420,
+    "timeParsed": "2021-03-09T00:57:00.000Z",
+  },
+  Object {
+    "_id": "10032021",
+    "id": "10032021",
+    "temperature_average": "2.4",
+    "temperature_max": 6.1,
+    "temperature_min": -0.7,
+    "time": 1615337820,
+    "timeParsed": "2021-03-10T00:57:00.000Z",
+  },
+  Object {
+    "_id": "11032021",
+    "id": "11032021",
+    "temperature_average": "5.0",
+    "temperature_max": 8.7,
+    "temperature_min": 1,
+    "time": 1615424220,
+    "timeParsed": "2021-03-11T00:57:00.000Z",
+  },
+  Object {
+    "_id": "12032021",
+    "id": "12032021",
+    "temperature_average": "5.5",
+    "temperature_max": 7.6,
+    "temperature_min": 3.3,
+    "time": 1615510620,
+    "timeParsed": "2021-03-12T00:57:00.000Z",
+  },
+  Object {
+    "_id": "13032021",
+    "id": "13032021",
+    "temperature_average": "6.0",
+    "temperature_max": 10.3,
+    "temperature_min": 3.8,
+    "time": 1615595580,
+    "timeParsed": "2021-03-13T00:33:00.000Z",
+  },
+  Object {
+    "_id": "14032021",
+    "id": "14032021",
+    "temperature_average": "4.1",
+    "temperature_max": 5.6,
+    "temperature_min": 2.5,
+    "time": 1615681980,
+    "timeParsed": "2021-03-14T00:33:00.000Z",
+  },
+]
+`;
+
+exports[`min/max/average scale temperature 2`] = `
+Array [
+  Object {
+    "_id": "102021",
+    "id": "102021",
+    "temperature_average": "0.5",
+    "temperature_max": 5.8,
+    "temperature_min": -3.5,
+    "time": 1614884220,
+    "timeParsed": "2021-03-04T18:57:00.000Z",
+  },
+  Object {
+    "_id": "112021",
+    "id": "112021",
+    "temperature_average": "3.4",
+    "temperature_max": 10.3,
+    "temperature_min": -1.9,
+    "time": 1615078620,
+    "timeParsed": "2021-03-07T00:57:00.000Z",
+  },
+  Object {
+    "_id": "122021",
+    "id": "122021",
+    "temperature_average": "4.1",
+    "temperature_max": 5.6,
+    "temperature_min": 2.5,
+    "time": 1615681980,
+    "timeParsed": "2021-03-14T00:33:00.000Z",
+  },
+]
+`;
+
+exports[`min/max/average scale temperature 3`] = `
+Array [
+  Object {
+    "_id": "032021",
+    "id": "032021",
+    "temperature_average": "2.9",
+    "temperature_max": 10.3,
+    "temperature_min": -3.5,
+    "time": 1614884220,
+    "timeParsed": "2021-03-04T18:57:00.000Z",
+  },
+]
+`;
+
+exports[`min/max/average scale temperature 4`] = `
+Array [
+  Object {
+    "_id": "2021",
+    "id": "2021",
+    "temperature_average": "2.9",
+    "temperature_max": 10.3,
+    "temperature_min": -3.5,
+    "time": 1614884220,
+    "timeParsed": "2021-03-04T18:57:00.000Z",
+  },
+]
+`;
+
+exports[`sum scale rain 1`] = `
+Array [
+  Object {
+    "_id": "102021",
+    "id": "102021",
+    "rain": "1.3",
+    "time": 1614884220,
+    "timeParsed": "2021-03-04T18:57:00.000Z",
+  },
+  Object {
+    "_id": "112021",
+    "id": "112021",
+    "rain": "13.2",
+    "time": 1615078620,
+    "timeParsed": "2021-03-07T00:57:00.000Z",
+  },
+  Object {
+    "_id": "122021",
+    "id": "122021",
+    "rain": "1.0",
+    "time": 1615681980,
+    "timeParsed": "2021-03-14T00:33:00.000Z",
+  },
+]
+`;
+
+exports[`sum scale rain 2`] = `
+Array [
+  Object {
+    "_id": "032021",
+    "id": "032021",
+    "rain": "15.5",
+    "time": 1614884220,
+    "timeParsed": "2021-03-04T18:57:00.000Z",
+  },
+]
+`;
+
+exports[`sum scale rain 3`] = `
+Array [
+  Object {
+    "_id": "2021",
+    "id": "2021",
+    "rain": "15.5",
+    "time": 1614884220,
+    "timeParsed": "2021-03-04T18:57:00.000Z",
   },
 ]
 `;

@@ -1,7 +1,6 @@
 import React from "react";
 
 import type { Point } from "@nivo/line";
-import moment from 'moment';
 
 interface TooltipPropsLine {
   point: Point,

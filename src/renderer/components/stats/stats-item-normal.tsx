@@ -26,7 +26,7 @@ export const StatsItemNormal: React.FC<StatsItemNormalProps> = (props: StatsItem
         <Column lg={props.item.icon ? 8 : 12} max={props.item.icon ? 9 : 12}>
           <h4 className="heading bx--type-expressive-heading-02">{props.item.label}</h4>
           <div className="value bx--type-expressive-heading-03">{props.value}</div>
-          <div className="date bx--type-body-short-01">on {props.date}</div>
+          <div className="date bx--type-body-short-01">{`on ${props.date}`}</div>
         </Column>
       </Row>
     </Column>

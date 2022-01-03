@@ -1,6 +1,19 @@
-import { getTimeDifferenceInDays, scaleAveragePerDay } from './scaling';
+import { getTimeDifferenceInDays, scaleAverage, scaleMax, scaleMin, scaleSum, scaleMinMaxAvg, Precision } from './scaling';
 import { dataItem } from "./types";
 import scalingInput from "../../../tests/data/scaling-input.json";
+
+const precisionCases: {precision: Precision}[] = [
+  {precision: 'day'},
+  {precision: 'week'},
+  {precision: 'month'},
+  {precision: 'year'},
+];
+
+const sumPrecisionCases: {precision: 'week' | 'month' | 'year'}[] = [
+  {precision: 'week'},
+  {precision: 'month'},
+  {precision: 'year'},
+];
 
 it('should get the correct day difference', () => {
   const data: dataItem[] = [
@@ -45,8 +58,32 @@ it('should get the correct day difference', () => {
   expect(result).toBe(163);
 });
 
-it('should average scale correctly for daily temperature', () => {
-  const result = scaleAveragePerDay(scalingInput, 'temperature');
+test.each(precisionCases)('average scale temperature', ({ precision }) => {
+  const result = scaleAverage(scalingInput, 'temperature', precision);
 
   expect(result).toMatchSnapshot();
-}); 
+});
+
+test.each(precisionCases)('max scale temperature', ({ precision }) => {
+  const result = scaleMax(scalingInput, 'temperature', precision);
+
+  expect(result).toMatchSnapshot();
+});
+
+test.each(precisionCases)('min scale temperature', ({ precision }) => {
+  const result = scaleMin(scalingInput, 'temperature', precision);
+
+  expect(result).toMatchSnapshot();
+});
+
+test.each(precisionCases)('min/max/average scale temperature', ({ precision }) => {
+  const result = scaleMinMaxAvg(scalingInput, 'temperature', precision);
+
+  expect(result).toMatchSnapshot();
+});
+
+test.each(sumPrecisionCases)('sum scale rain', ({ precision }) => {
+  const result = scaleSum(scalingInput, 'rain', precision);
+
+  expect(result).toMatchSnapshot();
+});

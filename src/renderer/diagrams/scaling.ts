@@ -21,14 +21,20 @@ interface Dates {
  *
  * @param data the data to process.
  */
-const getTimeDifferenceInDays = (data: dataItem[]): number => {
+export const getTimeDifferenceInDays = (data: dataItem[]): number => {
   const firstDate = moment.unix(data[0].time),
     lastDate = moment.unix(data[data.length - 1].time);
 
   return lastDate.diff(firstDate, 'days');
 };
 
-const calculateScaling = (dateItem: dateTimeElement, method: 'max' | 'average' | 'sum' | 'min'): string | number => {
+/**
+ * Scale the values of a dateTimeElement.
+ *
+ * @param dateItem The Element to scale.
+ * @param method The method to use.
+ */
+export const calculateScaling = (dateItem: dateTimeElement, method: 'max' | 'average' | 'sum' | 'min'): string | number => {
   switch (method) {
     case 'max': {
       return Math.max(...dateItem.values);
@@ -45,7 +51,14 @@ const calculateScaling = (dateItem: dateTimeElement, method: 'max' | 'average' |
   }
 };
 
-const bundleData = (data: dataItem[], property: propertyParameter, precision?: Precision): Dates => {
+/**
+ * Bundle given data for a given precision.
+ *
+ * @param data The input data.
+ * @param property The data property, eg. temperature.
+ * @param precision The precision to use.
+ */
+export const bundleData = (data: dataItem[], property: propertyParameter, precision?: Precision): Dates => {
   let dates: Dates = {};
 
   // Loop over all date elements and create an object to hold all data per day.
@@ -88,6 +101,14 @@ const bundleData = (data: dataItem[], property: propertyParameter, precision?: P
   return dates;
 }
 
+/**
+ * Build scaled data from input data.
+ *
+ * @param data The input data.
+ * @param property The data property, e.g. temperature.
+ * @param method The scaling method.
+ * @param precision The precision to use.
+ */
 export const scale = (data: dataItem[], property: propertyParameter, method: 'max' | 'average' | 'sum' | 'min', precision?: Precision): dataItem[] => {
   let newData: dataItem[] = [];
 
@@ -112,7 +133,46 @@ export const scale = (data: dataItem[], property: propertyParameter, method: 'ma
   return newData;
 };
 
-const scaleMax = (data: dataItem[], property: propertyParameter, precision: Precision): dataItem[] => {
+/**
+ * Shortcut for average scaling.
+ *
+ * @param data The array of data to process.
+ * @param property The property to process.
+ * @param precision The precision to use.
+ */
+export const scaleAverage = (data: dataItem[], property: propertyParameter, precision: Precision): dataItem[] => {
+  return scale(
+    data,
+    property,
+    'average',
+    precision
+  );
+};
+
+/**
+ * Shortcut for min scaling.
+ *
+ * @param data The input data.
+ * @param property The data property, e.g. temperature.
+ * @param precision The precision to use.
+ */
+export const scaleMin = (data: dataItem[], property: propertyParameter, precision: Precision): dataItem[] => {
+  return scale(
+    data,
+    property,
+    'min',
+    precision
+  );
+}
+
+/**
+ * Shortcut for max scaling.
+ *
+ * @param data The input data.
+ * @param property The data property, e.g. temperature.
+ * @param precision The precision to use.
+ */
+export const scaleMax = (data: dataItem[], property: propertyParameter, precision: Precision): dataItem[] => {
   return scale(
     data,
     property,
@@ -121,7 +181,14 @@ const scaleMax = (data: dataItem[], property: propertyParameter, precision: Prec
   );
 }
 
-const scaleSum = (data: dataItem[], property: propertyParameter, precision: 'week' | 'month' | 'year'): dataItem[] => {
+/**
+ * Shortcut for sum scaling.
+ *
+ * @param data The input data.
+ * @param property The data property, e.g. temperature.
+ * @param precision The precision to use.
+ */
+export const scaleSum = (data: dataItem[], property: propertyParameter, precision: 'week' | 'month' | 'year'): dataItem[] => {
   return scale(
     scale(data, property, 'max', 'day'),
     property,
@@ -130,16 +197,14 @@ const scaleSum = (data: dataItem[], property: propertyParameter, precision: 'wee
   );
 }
 
-const scaleMin = (data: dataItem[], property: propertyParameter, precision: Precision): dataItem[] => {
-  return scale(
-    precision === 'day' ? data : scale(data, property, 'max'),
-    property,
-    'min',
-    precision
-  );
-}
-
-const scaleMinMaxAvg = (data: dataItem[], property: propertyParameter, precision: Precision): dataItem[] => {
+/**
+ * Shortcut for scaling min, max and average in one call.
+ *
+ * @param data The input data.
+ * @param property The data property, e.g. temperature.
+ * @param precision The precision to use.
+ */
+export const scaleMinMaxAvg = (data: dataItem[], property: propertyParameter, precision: Precision): dataItem[] => {
   let newData: dataItem[] = [];
 
   const dates = bundleData(data, property, precision);
@@ -164,26 +229,3 @@ const scaleMinMaxAvg = (data: dataItem[], property: propertyParameter, precision
 
   return newData;
 }
-
-/**
- * Calculates an average value per day by summing up all values of a day and
- * dividing by the count of the values.
- *
- * @todo Rename in scaleAverage and add precision parameter.
- *
- * @param data The array of data to process.
- * @param property The property to process.
- */
-const scaleAveragePerDay = (data: dataItem[], property: propertyParameter): dataItem[] => {
-  return scale(data, property, 'average');
-};
-
-export {
-  getTimeDifferenceInDays,
-  scaleMax,
-  scaleMin,
-  scaleSum,
-  scaleMinMaxAvg,
-  scaleAveragePerDay,
-  bundleData
-};

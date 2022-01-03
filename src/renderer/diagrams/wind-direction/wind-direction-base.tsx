@@ -5,7 +5,7 @@ import { Loading } from "carbon-components-react";
 import { ResponsiveLine } from "@nivo/line";
 
 import {dataItem, DiagramBaseProps} from "../types";
-import { getTimeDifferenceInDays, scaleAveragePerDay } from "../scaling";
+import { getTimeDifferenceInDays, scaleAverage } from "../scaling";
 import { TooltipLine } from "../tooltip";
 
 const degToCompass = (deg: number): string => {
@@ -27,7 +27,7 @@ export const WindDirectionBase:FunctionComponent<DiagramBaseProps> = (props: Dia
 
     if (timeDifferenceInDays > 14) {
       setDaily(true);
-      newData = scaleAveragePerDay(props.data, 'wind_direction');
+      newData = scaleAverage(props.data, 'wind_direction', 'day');
     } else {
       setDaily(false);
       newData = props.data;

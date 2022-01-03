@@ -5,7 +5,7 @@ import { Pressure32 } from "@carbon/icons-react";
 import { ResponsiveLine } from '@nivo/line'
 
 import {dataItem, DiagramBaseProps} from "../types";
-import { getTimeDifferenceInDays, scaleAveragePerDay } from "../scaling";
+import { getTimeDifferenceInDays, scaleAverage } from "../scaling";
 import { TooltipLine } from "../tooltip";
 
 export const PressureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
@@ -20,7 +20,7 @@ export const PressureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
 
     if (timeDifferenceInDays > 14) {
       setDaily(true);
-      newData = scaleAveragePerDay(props.data, 'pressure');
+      newData = scaleAverage(props.data, 'pressure', 'day');
     } else {
       setDaily(false);
       newData = props.data;

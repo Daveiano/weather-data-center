@@ -5,7 +5,7 @@ import { Temperature32 } from "@carbon/icons-react";
 import { ResponsiveLine} from '@nivo/line'
 
 import { dataItem, DiagramBaseProps } from "../types";
-import { getTimeDifferenceInDays, scaleAveragePerDay } from "../scaling";
+import { getTimeDifferenceInDays, scaleAverage } from "../scaling";
 import { TooltipLine } from "../tooltip";
 import { getTemperatureLineBaseProps } from "./temperature-base";
 
@@ -27,9 +27,9 @@ export const TemperatureCombinedBase:FunctionComponent<DiagramBaseProps> = (prop
     if (timeDifferenceInDays > 14) {
       setDaily(true);
       // @todo useMemo?
-      newDataTemp = scaleAveragePerDay(props.data, 'temperature');
-      newDataDew = scaleAveragePerDay(props.data, 'dew_point');
-      newDataFelt = scaleAveragePerDay(props.data, 'felt_temperature');
+      newDataTemp = scaleAverage(props.data, 'temperature', 'day');
+      newDataDew = scaleAverage(props.data, 'dew_point', 'day');
+      newDataFelt = scaleAverage(props.data, 'felt_temperature', 'day');
     } else {
       setDaily(false);
       newDataTemp = props.data;

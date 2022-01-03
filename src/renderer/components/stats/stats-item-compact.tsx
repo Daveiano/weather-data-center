@@ -30,7 +30,7 @@ export const StatsItemCompact: React.FC<StatsItemCompactProps> = (props: StatsIt
             }}
           >
             {props.item.description &&
-              <div className="date bx--type-body-short-01" dangerouslySetInnerHTML={{__html: props.item.description}}/>
+              <div className="date bx--type-body-short-01" dangerouslySetInnerHTML={{ __html: props.item.description }}/>
             }
 
             {props.date &&

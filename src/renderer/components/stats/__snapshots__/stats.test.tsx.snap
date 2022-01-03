@@ -1,0 +1,1275 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`stats (compact size) with pressure items 1`] = `
+<div>
+  <div
+    class="stats compact bx--row"
+  >
+    <div
+      class="stat-tile compact bx--col-lg-6 bx--col-max-6"
+    >
+      <div
+        class="bx--row"
+      >
+        <div
+          class="bx--col-lg-12 bx--col-max-12"
+        >
+          <h4
+            class="heading bx--type-expressive-heading-02"
+          >
+            Biggest fall per day
+          </h4>
+          <div
+            style="display: flex; align-items: end;"
+          >
+            <div
+              class="date bx--type-body-short-01"
+            >
+              2021/03/11
+            </div>
+            <button
+              aria-describedby="icon-tooltip-4"
+              class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--right bx--tooltip--align-center"
+              style="cursor: default;"
+              type="button"
+            >
+              <span
+                class="bx--assistive-text"
+                id="icon-tooltip-4"
+              >
+                Min: 968.6 hPa, Max: 981.5 hPa
+              </span>
+              <svg
+                aria-hidden="true"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8.5 11L8.5 6.5 6.5 6.5 6.5 7.5 7.5 7.5 7.5 11 6 11 6 12 10 12 10 11zM8 3.5c-.4 0-.8.3-.8.8S7.6 5 8 5c.4 0 .8-.3.8-.8S8.4 3.5 8 3.5z"
+                />
+                <path
+                  d="M8,15c-3.9,0-7-3.1-7-7s3.1-7,7-7s7,3.1,7,7S11.9,15,8,15z M8,2C4.7,2,2,4.7,2,8s2.7,6,6,6s6-2.7,6-6S11.3,2,8,2z"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="value"
+          >
+            -12.9 hPa
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="stat-tile compact bx--col-lg-6 bx--col-max-6"
+    >
+      <div
+        class="bx--row"
+      >
+        <div
+          class="bx--col-lg-12 bx--col-max-12"
+        >
+          <h4
+            class="heading bx--type-expressive-heading-02"
+          >
+            Biggest rise per day
+          </h4>
+          <div
+            style="display: flex; align-items: end;"
+          >
+            <div
+              class="date bx--type-body-short-01"
+            >
+              2021/03/05
+            </div>
+            <button
+              aria-describedby="icon-tooltip-5"
+              class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--right bx--tooltip--align-center"
+              style="cursor: default;"
+              type="button"
+            >
+              <span
+                class="bx--assistive-text"
+                id="icon-tooltip-5"
+              >
+                Min: 985.5 hPa, Max: 998.5 hPa
+              </span>
+              <svg
+                aria-hidden="true"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8.5 11L8.5 6.5 6.5 6.5 6.5 7.5 7.5 7.5 7.5 11 6 11 6 12 10 12 10 11zM8 3.5c-.4 0-.8.3-.8.8S7.6 5 8 5c.4 0 .8-.3.8-.8S8.4 3.5 8 3.5z"
+                />
+                <path
+                  d="M8,15c-3.9,0-7-3.1-7-7s3.1-7,7-7s7,3.1,7,7S11.9,15,8,15z M8,2C4.7,2,2,4.7,2,8s2.7,6,6,6s6-2.7,6-6S11.3,2,8,2z"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="value"
+          >
+            + 13.0 hPa
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`stats (compact size) with rain items 1`] = `
+<div>
+  <div
+    class="stats compact bx--row"
+  >
+    <div
+      class="stat-tile compact bx--col-lg-6 bx--col-max-6"
+    >
+      <div
+        class="bx--row"
+      >
+        <div
+          class="bx--col-lg-12 bx--col-max-12"
+        >
+          <h4
+            class="heading bx--type-expressive-heading-02"
+          >
+            Rain days
+          </h4>
+          <div
+            style="display: flex; align-items: end;"
+          >
+            <div
+              class="date bx--type-body-short-01"
+            >
+              R
+              <sub>
+                min
+              </sub>
+               ≥ 0.1 mm
+            </div>
+          </div>
+          <div
+            class="value"
+          >
+            8
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="stat-tile compact bx--col-lg-6 bx--col-max-6"
+    >
+      <div
+        class="bx--row"
+      >
+        <div
+          class="bx--col-lg-12 bx--col-max-12"
+        >
+          <h4
+            class="heading bx--type-expressive-heading-02"
+          >
+            Driest month
+          </h4>
+          <div
+            style="display: flex; align-items: end;"
+          >
+            <div
+              class="date bx--type-body-short-01"
+            >
+              Mar 21
+            </div>
+          </div>
+          <div
+            class="value"
+          >
+            15.5 mm
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="stat-tile compact bx--col-lg-6 bx--col-max-6"
+    >
+      <div
+        class="bx--row"
+      >
+        <div
+          class="bx--col-lg-12 bx--col-max-12"
+        >
+          <h4
+            class="heading bx--type-expressive-heading-02"
+          >
+            Maximum per day
+          </h4>
+          <div
+            style="display: flex; align-items: end;"
+          >
+            <div
+              class="date bx--type-body-short-01"
+            >
+              2021/03/12
+            </div>
+          </div>
+          <div
+            class="value"
+          >
+            5.4 mm
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="stat-tile compact bx--col-lg-6 bx--col-max-6"
+    >
+      <div
+        class="bx--row"
+      >
+        <div
+          class="bx--col-lg-12 bx--col-max-12"
+        >
+          <h4
+            class="heading bx--type-expressive-heading-02"
+          >
+            Maximum per week
+          </h4>
+          <div
+            style="display: flex; align-items: end;"
+          >
+            <div
+              class="date bx--type-body-short-01"
+            >
+              W11/21
+            </div>
+          </div>
+          <div
+            class="value"
+          >
+            13.2 mm
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="stat-tile compact bx--col-lg-6 bx--col-max-6"
+    >
+      <div
+        class="bx--row"
+      >
+        <div
+          class="bx--col-lg-12 bx--col-max-12"
+        >
+          <h4
+            class="heading bx--type-expressive-heading-02"
+          >
+            Maximum per month
+          </h4>
+          <div
+            style="display: flex; align-items: end;"
+          >
+            <div
+              class="date bx--type-body-short-01"
+            >
+              Mar 21
+            </div>
+          </div>
+          <div
+            class="value"
+          >
+            15.5 mm
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="stat-tile compact bx--col-lg-6 bx--col-max-6"
+    >
+      <div
+        class="bx--row"
+      >
+        <div
+          class="bx--col-lg-12 bx--col-max-12"
+        >
+          <h4
+            class="heading bx--type-expressive-heading-02"
+          >
+            Maximum per year
+          </h4>
+          <div
+            style="display: flex; align-items: end;"
+          >
+            <div
+              class="date bx--type-body-short-01"
+            >
+              2021
+            </div>
+          </div>
+          <div
+            class="value"
+          >
+            15.5 mm
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="stat-tile compact bx--col-lg-6 bx--col-max-6"
+    >
+      <div
+        class="bx--row"
+      >
+        <div
+          class="bx--col-lg-12 bx--col-max-12"
+        >
+          <h4
+            class="heading bx--type-expressive-heading-02"
+          >
+            Longest rain period
+          </h4>
+          <div
+            style="display: flex; align-items: end;"
+          >
+            <div
+              class="date bx--type-body-short-01"
+            >
+              Consecutive days with rain
+            </div>
+            <button
+              aria-describedby="icon-tooltip-2"
+              class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--right bx--tooltip--align-center"
+              style="cursor: default;"
+              type="button"
+            >
+              <span
+                class="bx--assistive-text"
+                id="icon-tooltip-2"
+              >
+                2021/03/11 - 2021/03/14
+              </span>
+              <svg
+                aria-hidden="true"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8.5 11L8.5 6.5 6.5 6.5 6.5 7.5 7.5 7.5 7.5 11 6 11 6 12 10 12 10 11zM8 3.5c-.4 0-.8.3-.8.8S7.6 5 8 5c.4 0 .8-.3.8-.8S8.4 3.5 8 3.5z"
+                />
+                <path
+                  d="M8,15c-3.9,0-7-3.1-7-7s3.1-7,7-7s7,3.1,7,7S11.9,15,8,15z M8,2C4.7,2,2,4.7,2,8s2.7,6,6,6s6-2.7,6-6S11.3,2,8,2z"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="value"
+          >
+            4
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="stat-tile compact bx--col-lg-6 bx--col-max-6"
+    >
+      <div
+        class="bx--row"
+      >
+        <div
+          class="bx--col-lg-12 bx--col-max-12"
+        >
+          <h4
+            class="heading bx--type-expressive-heading-02"
+          >
+            Longest rain period amount
+          </h4>
+          <div
+            style="display: flex; align-items: end;"
+          >
+            <div
+              class="date bx--type-body-short-01"
+            >
+              Consecutive days with rain
+            </div>
+            <button
+              aria-describedby="icon-tooltip-3"
+              class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--right bx--tooltip--align-center"
+              style="cursor: default;"
+              type="button"
+            >
+              <span
+                class="bx--assistive-text"
+                id="icon-tooltip-3"
+              >
+                2021/03/11 - 2021/03/14
+              </span>
+              <svg
+                aria-hidden="true"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8.5 11L8.5 6.5 6.5 6.5 6.5 7.5 7.5 7.5 7.5 11 6 11 6 12 10 12 10 11zM8 3.5c-.4 0-.8.3-.8.8S7.6 5 8 5c.4 0 .8-.3.8-.8S8.4 3.5 8 3.5z"
+                />
+                <path
+                  d="M8,15c-3.9,0-7-3.1-7-7s3.1-7,7-7s7,3.1,7,7S11.9,15,8,15z M8,2C4.7,2,2,4.7,2,8s2.7,6,6,6s6-2.7,6-6S11.3,2,8,2z"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="value"
+          >
+            11.9 mm
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`stats (compact size) with solar items 1`] = `
+<div>
+  <div
+    class="stats compact bx--row"
+  >
+    <div
+      class="stat-tile compact bx--col-lg-6 bx--col-max-6"
+    >
+      <div
+        class="bx--row"
+      >
+        <div
+          class="bx--col-lg-12 bx--col-max-12"
+        >
+          <h4
+            class="heading bx--type-expressive-heading-02"
+          >
+            Max Solar radiation
+          </h4>
+          <div
+            style="display: flex; align-items: end;"
+          >
+            <div
+              class="date bx--type-body-short-01"
+            >
+              2021/03/08
+            </div>
+          </div>
+          <div
+            class="value"
+          >
+            511.3 w/m²
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="stat-tile compact bx--col-lg-6 bx--col-max-6"
+    >
+      <div
+        class="bx--row"
+      >
+        <div
+          class="bx--col-lg-12 bx--col-max-12"
+        >
+          <h4
+            class="heading bx--type-expressive-heading-02"
+          >
+            Max UV Index
+          </h4>
+          <div
+            style="display: flex; align-items: end;"
+          >
+            <div
+              class="date bx--type-body-short-01"
+            >
+              2021/03/06
+            </div>
+          </div>
+          <div
+            class="value"
+          >
+            4 UVI
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="stat-tile compact bx--col-lg-6 bx--col-max-6"
+    >
+      <div
+        class="bx--row"
+      >
+        <div
+          class="bx--col-lg-12 bx--col-max-12"
+        >
+          <h4
+            class="heading bx--type-expressive-heading-02"
+          >
+            Brightest day
+          </h4>
+          <div
+            style="display: flex; align-items: end;"
+          >
+            <div
+              class="date bx--type-body-short-01"
+            >
+              2021/03/08
+            </div>
+            <button
+              aria-describedby="icon-tooltip-7"
+              class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--right bx--tooltip--align-center"
+              style="cursor: default;"
+              type="button"
+            >
+              <span
+                class="bx--assistive-text"
+                id="icon-tooltip-7"
+              >
+                Highest Ø from all data
+              </span>
+              <svg
+                aria-hidden="true"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8.5 11L8.5 6.5 6.5 6.5 6.5 7.5 7.5 7.5 7.5 11 6 11 6 12 10 12 10 11zM8 3.5c-.4 0-.8.3-.8.8S7.6 5 8 5c.4 0 .8-.3.8-.8S8.4 3.5 8 3.5z"
+                />
+                <path
+                  d="M8,15c-3.9,0-7-3.1-7-7s3.1-7,7-7s7,3.1,7,7S11.9,15,8,15z M8,2C4.7,2,2,4.7,2,8s2.7,6,6,6s6-2.7,6-6S11.3,2,8,2z"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="value"
+          >
+            89.0 w/m²
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="stat-tile compact bx--col-lg-6 bx--col-max-6"
+    >
+      <div
+        class="bx--row"
+      >
+        <div
+          class="bx--col-lg-12 bx--col-max-12"
+        >
+          <h4
+            class="heading bx--type-expressive-heading-02"
+          >
+            Darkest day
+          </h4>
+          <div
+            style="display: flex; align-items: end;"
+          >
+            <div
+              class="date bx--type-body-short-01"
+            >
+              2021/03/04
+            </div>
+            <button
+              aria-describedby="icon-tooltip-8"
+              class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--right bx--tooltip--align-center"
+              style="cursor: default;"
+              type="button"
+            >
+              <span
+                class="bx--assistive-text"
+                id="icon-tooltip-8"
+              >
+                Lowest Ø from all data
+              </span>
+              <svg
+                aria-hidden="true"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8.5 11L8.5 6.5 6.5 6.5 6.5 7.5 7.5 7.5 7.5 11 6 11 6 12 10 12 10 11zM8 3.5c-.4 0-.8.3-.8.8S7.6 5 8 5c.4 0 .8-.3.8-.8S8.4 3.5 8 3.5z"
+                />
+                <path
+                  d="M8,15c-3.9,0-7-3.1-7-7s3.1-7,7-7s7,3.1,7,7S11.9,15,8,15z M8,2C4.7,2,2,4.7,2,8s2.7,6,6,6s6-2.7,6-6S11.3,2,8,2z"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="value"
+          >
+            0.0 w/m²
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`stats (compact size) with temperature items 1`] = `
+<div>
+  <div
+    class="stats compact bx--row"
+  >
+    <div
+      class="stat-tile compact bx--col-lg-6 bx--col-max-6"
+    >
+      <div
+        class="bx--row"
+      >
+        <div
+          class="bx--col-lg-12 bx--col-max-12"
+        >
+          <h4
+            class="heading bx--type-expressive-heading-02"
+          >
+            Summer days
+          </h4>
+          <div
+            style="display: flex; align-items: end;"
+          >
+            <div
+              class="date bx--type-body-short-01"
+            >
+              T
+              <sub>
+                max
+              </sub>
+               ≥ 25 °C
+            </div>
+          </div>
+          <div
+            class="value"
+          >
+            0
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="stat-tile compact bx--col-lg-6 bx--col-max-6"
+    >
+      <div
+        class="bx--row"
+      >
+        <div
+          class="bx--col-lg-12 bx--col-max-12"
+        >
+          <h4
+            class="heading bx--type-expressive-heading-02"
+          >
+            Frost days
+          </h4>
+          <div
+            style="display: flex; align-items: end;"
+          >
+            <div
+              class="date bx--type-body-short-01"
+            >
+              T
+              <sub>
+                min
+              </sub>
+               &lt; 0 °C
+            </div>
+          </div>
+          <div
+            class="value"
+          >
+            5
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="stat-tile compact bx--col-lg-6 bx--col-max-6"
+    >
+      <div
+        class="bx--row"
+      >
+        <div
+          class="bx--col-lg-12 bx--col-max-12"
+        >
+          <h4
+            class="heading bx--type-expressive-heading-02"
+          >
+            Hot days
+          </h4>
+          <div
+            style="display: flex; align-items: end;"
+          >
+            <div
+              class="date bx--type-body-short-01"
+            >
+              T
+              <sub>
+                max
+              </sub>
+               ≥ 30 °C
+            </div>
+          </div>
+          <div
+            class="value"
+          >
+            0
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="stat-tile compact bx--col-lg-6 bx--col-max-6"
+    >
+      <div
+        class="bx--row"
+      >
+        <div
+          class="bx--col-lg-12 bx--col-max-12"
+        >
+          <h4
+            class="heading bx--type-expressive-heading-02"
+          >
+            Ice days
+          </h4>
+          <div
+            style="display: flex; align-items: end;"
+          >
+            <div
+              class="date bx--type-body-short-01"
+            >
+              T
+              <sub>
+                max
+              </sub>
+               &lt; 0 °C
+            </div>
+          </div>
+          <div
+            class="value"
+          >
+            0
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="stat-tile compact bx--col-lg-6 bx--col-max-6"
+    >
+      <div
+        class="bx--row"
+      >
+        <div
+          class="bx--col-lg-12 bx--col-max-12"
+        >
+          <h4
+            class="heading bx--type-expressive-heading-02"
+          >
+            Tropical nights
+          </h4>
+          <div
+            style="display: flex; align-items: end;"
+          >
+            <div
+              class="date bx--type-body-short-01"
+            >
+              T
+              <sub>
+                min
+              </sub>
+               ≥ 20 °C
+            </div>
+            <button
+              aria-describedby="icon-tooltip-1"
+              class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--right bx--tooltip--align-center"
+              style="cursor: default;"
+              type="button"
+            >
+              <span
+                class="bx--assistive-text"
+                id="icon-tooltip-1"
+              >
+                18:00 UTC - 06:00 UTC
+              </span>
+              <svg
+                aria-hidden="true"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8.5 11L8.5 6.5 6.5 6.5 6.5 7.5 7.5 7.5 7.5 11 6 11 6 12 10 12 10 11zM8 3.5c-.4 0-.8.3-.8.8S7.6 5 8 5c.4 0 .8-.3.8-.8S8.4 3.5 8 3.5z"
+                />
+                <path
+                  d="M8,15c-3.9,0-7-3.1-7-7s3.1-7,7-7s7,3.1,7,7S11.9,15,8,15z M8,2C4.7,2,2,4.7,2,8s2.7,6,6,6s6-2.7,6-6S11.3,2,8,2z"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="value"
+          >
+            0
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="stat-tile compact bx--col-lg-6 bx--col-max-6"
+    >
+      <div
+        class="bx--row"
+      >
+        <div
+          class="bx--col-lg-12 bx--col-max-12"
+        >
+          <h4
+            class="heading bx--type-expressive-heading-02"
+          >
+            Desert days
+          </h4>
+          <div
+            style="display: flex; align-items: end;"
+          >
+            <div
+              class="date bx--type-body-short-01"
+            >
+              T
+              <sub>
+                max
+              </sub>
+               ≥ 35 °C
+            </div>
+          </div>
+          <div
+            class="value"
+          >
+            0
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`stats (compact size) with wind items 1`] = `
+<div>
+  <div
+    class="stats compact bx--row"
+  >
+    <div
+      class="stat-tile compact bx--col-lg-6 bx--col-max-6"
+    >
+      <div
+        class="bx--row"
+      >
+        <div
+          class="bx--col-lg-12 bx--col-max-12"
+        >
+          <h4
+            class="heading bx--type-expressive-heading-02"
+          >
+            Storm days
+          </h4>
+          <div
+            style="display: flex; align-items: end;"
+          >
+            <div
+              class="date bx--type-body-short-01"
+            >
+              W ≥ 8 Beaufort
+            </div>
+          </div>
+          <div
+            class="value"
+          >
+            0
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="stat-tile compact bx--col-lg-6 bx--col-max-6"
+    >
+      <div
+        class="bx--row"
+      >
+        <div
+          class="bx--col-lg-12 bx--col-max-12"
+        >
+          <h4
+            class="heading bx--type-expressive-heading-02"
+          >
+            Windiest day
+          </h4>
+          <div
+            style="display: flex; align-items: end;"
+          >
+            <div
+              class="date bx--type-body-short-01"
+            >
+              2021/03/14
+            </div>
+            <button
+              aria-describedby="icon-tooltip-6"
+              class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--right bx--tooltip--align-center"
+              style="cursor: default;"
+              type="button"
+            >
+              <span
+                class="bx--assistive-text"
+                id="icon-tooltip-6"
+              >
+                Highest Ø from all data
+              </span>
+              <svg
+                aria-hidden="true"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8.5 11L8.5 6.5 6.5 6.5 6.5 7.5 7.5 7.5 7.5 11 6 11 6 12 10 12 10 11zM8 3.5c-.4 0-.8.3-.8.8S7.6 5 8 5c.4 0 .8-.3.8-.8S8.4 3.5 8 3.5z"
+                />
+                <path
+                  d="M8,15c-3.9,0-7-3.1-7-7s3.1-7,7-7s7,3.1,7,7S11.9,15,8,15z M8,2C4.7,2,2,4.7,2,8s2.7,6,6,6s6-2.7,6-6S11.3,2,8,2z"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="value"
+          >
+            19.0 km/h
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`stats (normal size) with overview items 1`] = `
+<div>
+  <div
+    class="stats normal bx--row"
+  >
+    <div
+      class="stat-tile normal bx--col-lg-6 bx--col-max-6"
+    >
+      <div
+        class="bx--row"
+      >
+        <div
+          class="bx--col-lg-4 bx--col-max-3"
+        >
+          <svg
+            aria-hidden="true"
+            fill="currentColor"
+            focusable="false"
+            height="64"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 32 32"
+            width="64"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12,31.36c-3.507,0-6.36-2.854-6.36-6.36c0-2.601,1.597-4.939,4-5.9V1	c0-0.199,0.161-0.36,0.36-0.36h4c0.199,0,0.36,0.161,0.36,0.36v18.1c2.403,0.961,4,3.301,4,5.9C18.36,28.507,15.507,31.36,12,31.36z M10.36,6.36v12.989c0,0.152-0.096,0.288-0.24,0.34C7.871,20.484,6.36,22.618,6.36,25c0,3.11,2.53,5.64,5.64,5.64	s5.64-2.529,5.64-5.64c0-2.381-1.511-4.516-3.76-5.312c-0.144-0.052-0.24-0.188-0.24-0.34V6.36H10.36z M10.36,5.64h3.28V1.36h-3.28	V5.64z M22,18.36h-4v-0.72h4V18.36z M26,15.36h-8v-0.72h8V15.36z M22,12.36h-4v-0.72h4V12.36z M26,9.36h-8V8.64h8V9.36z M22,6.36h-4	V5.64h4V6.36z M26,3.36h-8V2.64h8V3.36z"
+            />
+          </svg>
+        </div>
+        <div
+          class="bx--col-lg-8 bx--col-max-9"
+        >
+          <h4
+            class="heading bx--type-expressive-heading-02"
+          >
+            Maximum Temperature
+          </h4>
+          <div
+            class="value bx--type-expressive-heading-03"
+          >
+            10.3 °C
+          </div>
+          <div
+            class="date bx--type-body-short-01"
+          >
+            on 2021/03/13
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="stat-tile normal bx--col-lg-6 bx--col-max-6"
+    >
+      <div
+        class="bx--row"
+      >
+        <div
+          class="bx--col-lg-4 bx--col-max-3"
+        >
+          <svg
+            aria-hidden="true"
+            fill="currentColor"
+            focusable="false"
+            height="64"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 32 32"
+            width="64"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M16,31.36c-3.507,0-6.36-2.854-6.36-6.36c0-2.601,1.597-4.939,4-5.9V1	c0-0.199,0.161-0.36,0.36-0.36h4c0.199,0,0.36,0.161,0.36,0.36v18.1c2.402,0.961,4,3.3,4,5.9C22.36,28.507,19.507,31.36,16,31.36z M14.36,12.36v6.989c0,0.152-0.096,0.288-0.24,0.34c-2.249,0.796-3.76,2.93-3.76,5.312c0,3.11,2.53,5.64,5.64,5.64	s5.64-2.529,5.64-5.64c0-2.382-1.511-4.516-3.76-5.312c-0.144-0.052-0.24-0.188-0.24-0.34V12.36H14.36z M14.36,11.64h3.28V1.36	h-3.28V11.64z M26,18.36h-4v-0.72h4V18.36z M30,15.36h-8v-0.72h8V15.36z M26,12.36h-4v-0.72h4V12.36z M30,9.36h-8V8.64h8V9.36z M26,6.36h-4V5.64h4V6.36z M30,3.36h-8V2.64h8V3.36z"
+            />
+          </svg>
+        </div>
+        <div
+          class="bx--col-lg-8 bx--col-max-9"
+        >
+          <h4
+            class="heading bx--type-expressive-heading-02"
+          >
+            Minimum Temperature
+          </h4>
+          <div
+            class="value bx--type-expressive-heading-03"
+          >
+            -3.5 °C
+          </div>
+          <div
+            class="date bx--type-body-short-01"
+          >
+            on 2021/03/06
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="stat-tile normal bx--col-lg-6 bx--col-max-6"
+    >
+      <div
+        class="bx--row"
+      >
+        <div
+          class="bx--col-lg-4 bx--col-max-3"
+        >
+          <svg
+            aria-hidden="true"
+            fill="currentColor"
+            focusable="false"
+            height="64"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 32 32"
+            width="64"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M14,28.36c-2.404,0-4.36-1.956-4.36-4.36h0.72c0,2.007,1.633,3.64,3.64,3.64s3.64-1.633,3.64-3.64	s-1.632-3.64-3.64-3.64H3v-0.72h11c2.404,0,4.36,1.956,4.36,4.36S16.404,28.36,14,28.36z M27,24.36c-2.404,0-4.36-1.956-4.36-4.36	h0.721c0,2.007,1.633,3.64,3.64,3.64s3.64-1.633,3.64-3.64s-1.633-3.64-3.64-3.64H1v-0.72h26c2.404,0,4.36,1.956,4.36,4.36	S29.404,24.36,27,24.36z M21,12.36H6v-0.72h15c2.007,0,3.64-1.633,3.64-3.64S23.007,4.36,21,4.36S17.36,5.993,17.36,8h-0.72	c0-2.404,1.956-4.36,4.36-4.36S25.36,5.596,25.36,8S23.404,12.36,21,12.36z"
+            />
+          </svg>
+        </div>
+        <div
+          class="bx--col-lg-8 bx--col-max-9"
+        >
+          <h4
+            class="heading bx--type-expressive-heading-02"
+          >
+            Maximum Gust
+          </h4>
+          <div
+            class="value bx--type-expressive-heading-03"
+          >
+            36.7  km/h
+          </div>
+          <div
+            class="date bx--type-body-short-01"
+          >
+            on 2021/03/14
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="stat-tile normal bx--col-lg-6 bx--col-max-6"
+    >
+      <div
+        class="bx--row"
+      >
+        <div
+          class="bx--col-lg-4 bx--col-max-3"
+        >
+          <svg
+            aria-hidden="true"
+            fill="currentColor"
+            focusable="false"
+            height="64"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 32 32"
+            width="64"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M18.361,30.227c-0.062,0-0.123-0.016-0.18-0.049c-0.173-0.1-0.231-0.319-0.132-0.491l1-1.732	c0.1-0.174,0.322-0.231,0.491-0.132c0.173,0.1,0.231,0.319,0.132,0.491l-1,1.732C18.606,30.162,18.485,30.227,18.361,30.227z M13.861,30.227c-0.061,0-0.123-0.016-0.18-0.049c-0.172-0.1-0.231-0.319-0.132-0.491l1-1.732c0.1-0.173,0.319-0.232,0.492-0.132	c0.172,0.1,0.231,0.319,0.132,0.491l-1,1.732C14.106,30.162,13.985,30.227,13.861,30.227z M9.861,30.227	c-0.061,0-0.123-0.016-0.18-0.049c-0.172-0.1-0.231-0.319-0.132-0.491l1-1.732c0.099-0.173,0.319-0.232,0.492-0.132	c0.172,0.1,0.231,0.319,0.132,0.491l-1,1.732C10.106,30.162,9.985,30.227,9.861,30.227z M5.361,30.227	c-0.061,0-0.123-0.016-0.18-0.049c-0.172-0.1-0.231-0.319-0.132-0.491l1-1.732c0.1-0.173,0.318-0.232,0.492-0.132	c0.172,0.1,0.231,0.319,0.132,0.491l-1,1.732C5.606,30.162,5.485,30.227,5.361,30.227z M20.361,26.727	c-0.062,0-0.123-0.016-0.18-0.049c-0.173-0.1-0.231-0.319-0.132-0.491l1-1.732c0.1-0.174,0.321-0.231,0.491-0.132	c0.173,0.1,0.231,0.319,0.132,0.491l-1,1.732C20.606,26.662,20.485,26.727,20.361,26.727z M15.861,26.727	c-0.061,0-0.123-0.016-0.18-0.049c-0.172-0.1-0.231-0.319-0.132-0.491l1-1.732c0.099-0.173,0.32-0.232,0.492-0.132	c0.173,0.1,0.231,0.319,0.132,0.491l-1,1.732C16.106,26.662,15.985,26.727,15.861,26.727z M11.861,26.727	c-0.061,0-0.123-0.016-0.18-0.049c-0.172-0.1-0.231-0.319-0.132-0.491l1-1.732c0.1-0.173,0.318-0.232,0.492-0.132	c0.172,0.1,0.231,0.319,0.132,0.491l-1,1.732C12.106,26.662,11.985,26.727,11.861,26.727z M7.361,26.727	c-0.061,0-0.123-0.016-0.18-0.049c-0.172-0.1-0.231-0.319-0.132-0.491l1-1.732c0.1-0.173,0.319-0.232,0.492-0.132	c0.172,0.1,0.231,0.319,0.132,0.491l-1,1.732C7.606,26.662,7.485,26.727,7.361,26.727z M22.361,23.227	c-0.062,0-0.123-0.016-0.18-0.049c-0.173-0.1-0.231-0.319-0.132-0.491l1-1.732c0.1-0.173,0.321-0.23,0.491-0.132	c0.173,0.1,0.231,0.319,0.132,0.491l-1,1.732C22.606,23.162,22.485,23.227,22.361,23.227z M17.861,23.227	c-0.062,0-0.123-0.016-0.18-0.049c-0.173-0.1-0.231-0.319-0.132-0.491l1-1.732c0.1-0.173,0.321-0.23,0.491-0.132	c0.173,0.1,0.231,0.319,0.132,0.491l-1,1.732C18.106,23.162,17.985,23.227,17.861,23.227z M13.861,23.227	c-0.061,0-0.123-0.016-0.18-0.049c-0.172-0.1-0.231-0.319-0.132-0.491l1-1.732c0.1-0.173,0.319-0.232,0.492-0.132	c0.172,0.1,0.231,0.319,0.132,0.491l-1,1.732C14.106,23.162,13.985,23.227,13.861,23.227z M9.361,23.227	c-0.061,0-0.123-0.016-0.18-0.049c-0.172-0.1-0.231-0.319-0.132-0.491l1-1.732c0.1-0.173,0.318-0.232,0.492-0.132	c0.172,0.1,0.231,0.319,0.132,0.491l-1,1.732C9.606,23.162,9.485,23.227,9.361,23.227z M5.631,18.36	c-2.894-0.038-4.991-2.015-4.991-4.702c0-2.767,2.239-5.018,4.991-5.018c0.691,0,1.377,0.145,2.01,0.422	c0.647-4.138,4.261-7.422,8.286-7.422c3.281,0,6.332,2.085,7.689,5.223c0.599-0.153,1.309-0.223,1.811-0.223	c3.271,0,5.934,2.662,5.934,5.934c0,3.209-2.604,5.75-5.93,5.787h-19.8V18.36z M5.631,9.36c-2.355,0-4.271,1.928-4.271,4.298	c0,2.275,1.798,3.95,4.276,3.981h19.791c2.922-0.031,5.213-2.256,5.213-5.066c0-2.875-2.338-5.214-5.213-5.214	c-0.636,0-1.419,0.115-1.905,0.28c-0.183,0.064-0.38-0.031-0.451-0.21c-1.18-3.032-4.051-5.07-7.144-5.07	c-3.829,0-7.253,3.269-7.634,7.287c-0.012,0.123-0.084,0.23-0.192,0.286C7.993,9.99,7.863,9.987,7.756,9.925	C7.108,9.556,6.373,9.36,5.631,9.36z"
+            />
+          </svg>
+        </div>
+        <div
+          class="bx--col-lg-8 bx--col-max-9"
+        >
+          <h4
+            class="heading bx--type-expressive-heading-02"
+          >
+            Maximum Rain in one day
+          </h4>
+          <div
+            class="value bx--type-expressive-heading-03"
+          >
+            5.4  mm
+          </div>
+          <div
+            class="date bx--type-body-short-01"
+          >
+            on 2021/03/12
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="stat-tile normal bx--col-lg-6 bx--col-max-6"
+    >
+      <div
+        class="bx--row"
+      >
+        <div
+          class="bx--col-lg-4 bx--col-max-3"
+        >
+          <svg
+            aria-hidden="true"
+            fill="currentColor"
+            focusable="false"
+            height="64"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 32 32"
+            width="64"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M16,29.36c-0.199,0-0.36-0.161-0.36-0.36v-3c0-0.199,0.161-0.36,0.36-0.36s0.36,0.161,0.36,0.36v3	C16.36,29.199,16.199,29.36,16,29.36z M25.192,25.553c-0.092,0-0.185-0.035-0.255-0.105l-2.121-2.121	c-0.141-0.141-0.141-0.369,0-0.51s0.369-0.141,0.51,0l2.121,2.121c0.141,0.141,0.141,0.369,0,0.51	C25.377,25.518,25.284,25.553,25.192,25.553z M6.808,25.553c-0.092,0-0.184-0.035-0.254-0.105c-0.141-0.141-0.141-0.369,0-0.51	l2.121-2.121c0.141-0.141,0.368-0.141,0.509,0s0.141,0.369,0,0.51l-2.121,2.121C6.992,25.518,6.9,25.553,6.808,25.553z M16,23.36	c-4.058,0-7.36-3.302-7.36-7.36S11.942,8.64,16,8.64c4.059,0,7.36,3.302,7.36,7.36C23.36,20.059,20.059,23.36,16,23.36z M16,9.36	c-3.661,0-6.64,2.979-6.64,6.64s2.979,6.64,6.64,6.64s6.64-2.979,6.64-6.64S19.661,9.36,16,9.36z M29,16.36h-3	c-0.199,0-0.36-0.161-0.36-0.36s0.161-0.36,0.36-0.36h3c0.199,0,0.36,0.161,0.36,0.36S29.199,16.36,29,16.36z M6,16.36H3	c-0.199,0-0.36-0.161-0.36-0.36S2.801,15.64,3,15.64h3c0.199,0,0.36,0.161,0.36,0.36S6.199,16.36,6,16.36z M23.071,9.289	c-0.092,0-0.185-0.035-0.255-0.105c-0.141-0.141-0.141-0.368,0-0.509l2.121-2.121c0.141-0.141,0.369-0.141,0.51,0	s0.141,0.368,0,0.509l-2.121,2.121C23.256,9.253,23.163,9.289,23.071,9.289z M8.929,9.289c-0.092,0-0.184-0.035-0.254-0.105	L6.553,7.062c-0.141-0.141-0.141-0.368,0-0.509s0.368-0.141,0.509,0l2.121,2.121c0.141,0.141,0.141,0.368,0,0.509	C9.113,9.253,9.021,9.289,8.929,9.289z M16,6.36c-0.199,0-0.36-0.161-0.36-0.36V3c0-0.199,0.161-0.36,0.36-0.36S16.36,2.801,16.36,3	v3C16.36,6.199,16.199,6.36,16,6.36z"
+            />
+          </svg>
+        </div>
+        <div
+          class="bx--col-lg-8 bx--col-max-9"
+        >
+          <h4
+            class="heading bx--type-expressive-heading-02"
+          >
+            Maximum Pressure
+          </h4>
+          <div
+            class="value bx--type-expressive-heading-03"
+          >
+            1000.6  hPa
+          </div>
+          <div
+            class="date bx--type-body-short-01"
+          >
+            on 2021/03/06
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="stat-tile normal bx--col-lg-6 bx--col-max-6"
+    >
+      <div
+        class="bx--row"
+      >
+        <div
+          class="bx--col-lg-4 bx--col-max-3"
+        >
+          <svg
+            aria-hidden="true"
+            fill="currentColor"
+            focusable="false"
+            height="64"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 32 32"
+            width="64"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M15.32,25.82c0.064,0.111,0.064,0.248,0,0.359l-2.31,4l-0.623-0.359l1.998-3.46h-1.686	c-0.128,0-0.248-0.069-0.312-0.181c-0.064-0.111-0.064-0.248,0-0.359l2.31-4l0.623,0.359l-1.998,3.46h1.686	C15.136,25.64,15.255,25.709,15.32,25.82z M1.981,5.647L3.319,6.42c0.057,0.033,0.119,0.048,0.18,0.048	c0.125,0,0.246-0.064,0.312-0.18c0.099-0.172,0.04-0.393-0.132-0.492L2.342,5.023C2.169,4.925,1.949,4.983,1.85,5.155	S1.81,5.548,1.981,5.647z M2.905,9.67c0-0.199-0.161-0.36-0.36-0.36H1c-0.199,0-0.36,0.161-0.36,0.36S0.801,10.03,1,10.03h1.545	C2.744,10.03,2.905,9.869,2.905,9.67z M4.421,10.03c0.199,0,0.36-0.161,0.36-0.36c0-2.696,2.193-4.89,4.89-4.89	c0.682,0,1.12,0.035,1.623,0.226c0.186,0.071,0.394-0.023,0.464-0.208c0.071-0.186-0.022-0.394-0.208-0.464	c-0.665-0.252-1.244-0.273-1.878-0.273c-3.093,0-5.609,2.516-5.609,5.609C4.061,9.869,4.222,10.03,4.421,10.03z M9.67,2.905	c0.199,0,0.36-0.161,0.36-0.36V1c0-0.199-0.161-0.36-0.36-0.36S9.311,0.801,9.311,1v1.545C9.311,2.744,9.472,2.905,9.67,2.905z M7.188,21.688c-0.172-0.101-0.393-0.041-0.492,0.132l-2.31,4c-0.1,0.172-0.041,0.392,0.131,0.491	c0.057,0.033,0.119,0.049,0.18,0.049c0.125,0,0.246-0.064,0.312-0.181l2.309-4C7.419,22.008,7.36,21.788,7.188,21.688z M5.796,3.68	c0.067,0.115,0.188,0.18,0.312,0.18c0.061,0,0.123-0.015,0.18-0.048c0.172-0.1,0.231-0.32,0.132-0.492L5.647,1.981	C5.548,1.81,5.327,1.75,5.155,1.85S4.924,2.17,5.023,2.342L5.796,3.68z M11.188,21.688c-0.171-0.101-0.393-0.041-0.492,0.132	l-2.31,4c-0.1,0.172-0.041,0.392,0.131,0.491c0.057,0.033,0.119,0.049,0.18,0.049c0.125,0,0.246-0.064,0.312-0.181l2.309-4	C11.419,22.008,11.36,21.788,11.188,21.688z M31.36,14.758c0,3.089-2.514,5.603-5.603,5.603H7.355c-2.601,0-4.716-2.127-4.716-4.742	c0-2.614,2.115-4.741,4.716-4.741c0.644,0,1.283,0.133,1.874,0.388c0.609-3.812,3.88-6.625,7.81-6.625	c3.176,0,5.982,1.84,7.241,4.717c0.486-0.134,0.981-0.201,1.478-0.201C28.847,9.156,31.36,11.669,31.36,14.758z M30.64,14.758	c0-2.692-2.189-4.882-4.882-4.882c-0.527,0-1.056,0.088-1.568,0.263c-0.186,0.064-0.382-0.031-0.452-0.21	c-1.08-2.775-3.709-4.568-6.698-4.568c-3.731,0-6.809,2.789-7.159,6.487c-0.012,0.122-0.084,0.229-0.192,0.286	c-0.108,0.058-0.237,0.054-0.344-0.007c-0.606-0.346-1.294-0.529-1.988-0.529c-2.204,0-3.996,1.804-3.996,4.021	s1.792,4.021,3.996,4.021h18.402C28.45,19.64,30.64,17.45,30.64,14.758z M13.053,3.812c0.057,0.033,0.119,0.048,0.18,0.048	c0.125,0,0.246-0.064,0.312-0.18l0.773-1.338c0.099-0.172,0.04-0.393-0.132-0.492c-0.172-0.1-0.393-0.04-0.492,0.132L12.922,3.32	C12.822,3.492,12.881,3.712,13.053,3.812z M22.97,22.038c-0.141-0.141-0.369-0.141-0.51,0l-0.452,0.452l-0.452-0.452	c-0.141-0.141-0.369-0.141-0.51,0s-0.141,0.369,0,0.51L21.498,23l-0.452,0.452c-0.141,0.141-0.141,0.369,0,0.51	c0.07,0.07,0.163,0.105,0.255,0.105s0.185-0.035,0.255-0.105l0.452-0.452l0.452,0.452c0.07,0.07,0.163,0.105,0.255,0.105	s0.185-0.035,0.255-0.105c0.141-0.141,0.141-0.369,0-0.51L22.518,23l0.452-0.452C23.11,22.407,23.11,22.179,22.97,22.038z M25.97,26.038c-0.141-0.141-0.369-0.141-0.51,0l-0.452,0.452l-0.452-0.452c-0.141-0.141-0.369-0.141-0.51,0s-0.141,0.369,0,0.51	L24.498,27l-0.452,0.452c-0.141,0.141-0.141,0.369,0,0.51c0.07,0.07,0.163,0.105,0.255,0.105s0.185-0.035,0.255-0.105l0.452-0.452	l0.452,0.452c0.07,0.07,0.163,0.105,0.255,0.105s0.185-0.035,0.255-0.105c0.141-0.141,0.141-0.369,0-0.51L25.518,27l0.452-0.452	C26.11,26.407,26.11,26.179,25.97,26.038z M20.97,26.038c-0.141-0.141-0.369-0.141-0.51,0l-0.452,0.452l-0.452-0.452	c-0.141-0.141-0.369-0.141-0.51,0s-0.141,0.369,0,0.51L19.498,27l-0.452,0.452c-0.141,0.141-0.141,0.369,0,0.51	c0.07,0.07,0.163,0.105,0.255,0.105s0.185-0.035,0.255-0.105l0.452-0.452l0.452,0.452c0.07,0.07,0.163,0.105,0.255,0.105	s0.185-0.035,0.255-0.105c0.141-0.141,0.141-0.369,0-0.51L20.518,27l0.452-0.452C21.11,26.407,21.11,26.179,20.97,26.038z M27.962,22.046c-0.141-0.141-0.369-0.141-0.51,0L27,22.498l-0.452-0.452c-0.141-0.141-0.369-0.141-0.51,0s-0.141,0.369,0,0.51	l0.452,0.452l-0.452,0.452c-0.141,0.141-0.141,0.369,0,0.51c0.07,0.07,0.163,0.105,0.255,0.105s0.185-0.035,0.255-0.105L27,23.518	l0.452,0.452c0.07,0.07,0.163,0.105,0.255,0.105s0.185-0.035,0.255-0.105c0.141-0.141,0.141-0.369,0-0.51l-0.452-0.452l0.452-0.452	C28.103,22.415,28.103,22.187,27.962,22.046z"
+            />
+          </svg>
+        </div>
+        <div
+          class="bx--col-lg-8 bx--col-max-9"
+        >
+          <h4
+            class="heading bx--type-expressive-heading-02"
+          >
+            Minimum Pressure
+          </h4>
+          <div
+            class="value bx--type-expressive-heading-03"
+          >
+            965.2  hPa
+          </div>
+          <div
+            class="date bx--type-body-short-01"
+          >
+            on 2021/03/13
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
