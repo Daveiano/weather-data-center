@@ -52,7 +52,7 @@ export const FeltTemperatureBase:FunctionComponent<DiagramBaseProps> = (props: D
   }
 
   return (
-    <div data-testid="dew-point-diagram">
+    <div data-testid="felt-temperature-diagram">
       <h3>
         <TemperatureFeelsLike32 />
         {props.title}

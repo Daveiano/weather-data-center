@@ -74,3 +74,8 @@ it('should start the app on an empty state', async () => {
     dumpDiffToConsole: true
   });
 });
+
+/**
+ * @todo Test import new data into empty state.
+ * @see https://github.com/microsoft/playwright/issues/5013
+ */
