@@ -14,7 +14,7 @@ type PaginationProps = {
  * Wrapped version of Carbon `<Pagination>`, that uses zero-based starting row
  * index instead of page number.
  */
-const Pagination = (props: PaginationProps) => {
+const Pagination = (props: PaginationProps): React.ReactElement => {
   const handleChangePage = useCallback(
     ({ page: newPage, pageSize: newPageSize }) => {
       if (props.onChangePageSize && props.pageSize !== newPageSize) {

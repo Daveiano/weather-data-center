@@ -6,7 +6,6 @@ import { ResponsiveLine} from '@nivo/line'
 
 import { dataItem, DiagramBaseProps } from "../types";
 import { getTimeDifferenceInDays, scaleAverage } from "../scaling";
-import { TooltipLine } from "../tooltip";
 import { getTemperatureLineBaseProps } from "./temperature-base";
 
 export const TemperatureCombinedBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {

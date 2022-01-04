@@ -36,6 +36,7 @@ import { App } from './app';
 import { appReducerDefaultState, appReducer } from './reducer-app';
 import { isLoadingAction } from "./actions-app";
 import { HashRouter } from "react-router-dom";
+import {dataItem} from "./diagrams/types";
 
 const store = createStore(
   combineReducers({
@@ -46,7 +47,7 @@ const store = createStore(
   }
 );
 
-const ipcMainLoadingListener = (arg: any): void => {
+const ipcMainLoadingListener = (arg: [boolean]): void => {
   store.dispatch(isLoadingAction(arg[0]));
 };
 

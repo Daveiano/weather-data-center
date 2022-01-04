@@ -8,6 +8,7 @@ import async from "async";
 import moment from 'moment';
 import csv from 'csv-parser';
 import Datastore from 'nedb';
+import {dataItem} from "../renderer/diagrams/types";
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
@@ -148,7 +149,7 @@ ipcMain.on('open-file-dialog', (event) => {
     properties: ['openFile']
   }).then(result => {
     if (!result.canceled) {
-      const parsedData: [any?] = [],
+      const parsedData: dataItem[] = [],
         columnsToParseFloat: string[] = ['temperature', 'humidity', 'pressure', 'rain', 'solar', 'wind', 'gust', 'dew_point', 'felt_temperature'],
         columnsToParseInt: string[] = ['uvi', 'wind_direction'];
 
@@ -156,7 +157,7 @@ ipcMain.on('open-file-dialog', (event) => {
         .pipe(csv({
           separator: ',',
           mapHeaders: ({ header}) => columnsToRead.includes(header) ? header : null,
-          mapValues: ({ header, index, value }) => {
+          mapValues: ({ header, value }) => {
             if (header === 'time') {
               return moment(value, 'YYYY/M/D k:m').unix();
             }
@@ -176,7 +177,7 @@ ipcMain.on('open-file-dialog', (event) => {
         .on('end', () => {
           // Check for duplicates.
           let duplicates = 0,
-            deDuplicatedData: any[] = [];
+            deDuplicatedData: dataItem[] = [];
 
           async.each(parsedData, (record, callback) => {
             db.count({ "time": record.time },  (err, count)  => {

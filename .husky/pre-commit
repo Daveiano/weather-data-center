@@ -3,6 +3,7 @@
 
 ./node_modules/.bin/electron-forge package && rm -rf ./out/
 #yarn run test:u
+yarn run lint
 yarn run test
 
 git add *__image_snapshots__*

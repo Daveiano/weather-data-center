@@ -20,7 +20,7 @@ import {
   TableToolbarMenu,
   TableBatchActions,
   TableBatchAction,
-  TooltipIcon
+  TooltipIcon, Tooltip
 } from 'carbon-components-react';
 import type { DataTableSize } from 'carbon-components-react';
 
@@ -277,11 +277,11 @@ const TableBase: React.FC<TableBaseProps> = (props: TableBaseProps): React.React
 
                     {tooltip &&
                       <TooltipIcon
+                        align="start"
                         tooltipText={tooltip}
-                        renderIcon={Information16}
-                        direction="right"
+                        direction="bottom"
                       >
-                        <></>
+                        <Information16 />
                       </TooltipIcon>
                     }
                   </div>

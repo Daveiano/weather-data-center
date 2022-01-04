@@ -183,7 +183,7 @@ exports[`rain manual period diagram with 11-day data 1`] = `
                             </div>
                             <button
                               aria-describedby="icon-tooltip-1"
-                              class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--right bx--tooltip--align-center"
+                              class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-start"
                               style="cursor: default;"
                               type="button"
                             >
@@ -706,7 +706,7 @@ exports[`rain manual period diagram with 11-day data 2`] = `
                             </div>
                             <button
                               aria-describedby="icon-tooltip-4"
-                              class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--right bx--tooltip--align-center"
+                              class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-start"
                               style="cursor: default;"
                               type="button"
                             >
@@ -1309,7 +1309,7 @@ exports[`rain manual period diagram with 11-day data 3`] = `
                             </div>
                             <button
                               aria-describedby="icon-tooltip-7"
-                              class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--right bx--tooltip--align-center"
+                              class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-start"
                               style="cursor: default;"
                               type="button"
                             >
@@ -1812,7 +1812,7 @@ exports[`rain manual period diagram with 11-day data 4`] = `
                             </div>
                             <button
                               aria-describedby="icon-tooltip-10"
-                              class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--right bx--tooltip--align-center"
+                              class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-start"
                               style="cursor: default;"
                               type="button"
                             >
