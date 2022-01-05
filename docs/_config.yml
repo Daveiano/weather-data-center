@@ -1,0 +1,13 @@
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "" # the subpath of your site, e.g. /blog
+title: "Weather data center Docs" # the name of your site, e.g. ACME Corp.
+incremental: true
+sass:
+  style: compressed
+  implementation: sass-embedded
+  sass_dir: _sass
+  load_paths:
+    - _sass
+    - node_modules
+plugins:
+  - jekyll-postcss
