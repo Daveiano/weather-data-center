@@ -7,8 +7,8 @@ sass:
   implementation: sass-embedded
   sass_dir: ./_sass
   load_paths:
-    - ./_sass
-    - ./node_modules
+    - _sass
+    - node_modules
 plugins:
   - jekyll-postcss
 include: ["node_modules/tailwindcss"]
