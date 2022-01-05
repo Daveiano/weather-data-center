@@ -1,9 +1,9 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn run lint
-./node_modules/.bin/electron-forge package && rm -rf ./out/
-yarn run test
+#yarn run lint
+#./node_modules/.bin/electron-forge package && rm -rf ./out/
+#yarn run test
 
 git add *__image_snapshots__*
 git add *__snapshots__*
