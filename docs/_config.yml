@@ -12,3 +12,4 @@ sass:
 plugins:
   - jekyll-postcss
 include: ["node_modules/tailwindcss"]
+exclude: []
