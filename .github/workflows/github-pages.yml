@@ -11,6 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Install Yarn
+        run: npm install -g yarn
+
       # Use GitHub Actions' cache to shorten build times and decrease load on servers
       - uses: actions/cache@v2
         with:
@@ -25,3 +28,7 @@ jobs:
           jekyll_src: 'docs'
           target_branch: 'gh-pages'
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Uninstall Yarn
+        if: always()
+        run: npm uninstall -g yarn
