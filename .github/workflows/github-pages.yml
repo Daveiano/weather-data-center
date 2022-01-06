@@ -11,23 +11,35 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install Yarn
-        run: npm install -g yarn
-
-      # Use GitHub Actions' cache to shorten build times and decrease load on servers
-      - uses: actions/cache@v2
+      - name: 💎 setup ruby
+        uses: ruby/setup-ruby@v1
         with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-  
+          ruby-version: 2.7
 
-      - uses: helaili/jekyll-action@v2
+      - name: 🔨 setup node
+        uses: actions/setup-node@v2
         with:
-          pre_build_commands: 'yarn install'
-          jekyll_src: 'docs'
-          target_branch: 'gh-pages'
-          token: ${{ secrets.GITHUB_TOKEN }}
+          node-version: '14'
+
+      - name: 🔨 install Yarn and dependecies
+        working-directory: ./docs
+        run: |
+          npm install -g yarn
+          yarn install
+
+      - name: 🔨 install dependencies & build site
+        uses: limjh16/jekyll-action-ts@v2
+        with:
+          #enable_cache: true
+          jekyll_src: docs
+          custom_opts: '--trace'
+
+      #- name: 🚀 deploy
+      #  uses: peaceiris/actions-gh-pages@v3
+      #  with:
+      #    github_token: ${{ secrets.GITHUB_TOKEN }}
+      #    publish_branch: gh-pages
+      #    publish_dir: ./_site
 
       - name: Uninstall Yarn
         if: always()

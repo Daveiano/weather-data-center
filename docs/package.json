@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "dependencies": {
+  "devDependencies": {
     "autoprefixer": "^10.4.1",
     "postcss": "^8.4.5",
     "postcss-import": "^14.0.2",

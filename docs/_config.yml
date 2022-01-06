@@ -5,7 +5,6 @@ incremental: true
 sass:
   style: compressed
   implementation: sass-embedded
-  sass_dir: ./_sass
   load_paths:
     - _sass
     - node_modules

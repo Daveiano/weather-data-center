@@ -1,4 +1,6 @@
 module.exports = {
+  syntax: require('postcss-scss'),
+  parser: require('postcss-scss'),
   plugins: [
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     require('postcss-import')({

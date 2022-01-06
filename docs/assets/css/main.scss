@@ -3,8 +3,6 @@
 # only Main files contain this front matter, not partials.
 ---
 
-@import "_main.scss";
-
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
