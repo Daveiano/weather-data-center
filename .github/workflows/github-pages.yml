@@ -27,20 +27,26 @@ jobs:
           npm install -g yarn
           yarn install
 
+      - name: 🔨 move node_modules and configs to root
+        run: |
+          mv ./docs/node_modules ./node_modules
+          mv ./docs/postcss.config.js ./postcss.config.js
+          mv ./docs/tailwind.config.js ./tailwind.config.js
+
       - name: 🔨 install dependencies & build site
         uses: limjh16/jekyll-action-ts@v2
         with:
-          #enable_cache: true
-          jekyll_src: docs
+          enable_cache: true
+          jekyll_src: ./docs
           custom_opts: '--trace'
 
-      #- name: 🚀 deploy
-      #  uses: peaceiris/actions-gh-pages@v3
-      #  with:
-      #    github_token: ${{ secrets.GITHUB_TOKEN }}
-      #    publish_branch: gh-pages
-      #    publish_dir: ./_site
+      - name: 🚀 deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./_site
 
-      - name: Uninstall Yarn
+      - name: 🔨 uninstall Yarn
         if: always()
         run: npm uninstall -g yarn

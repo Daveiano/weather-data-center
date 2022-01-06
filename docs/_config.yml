@@ -6,7 +6,6 @@ sass:
   style: compressed
   implementation: sass-embedded
   load_paths:
-    - _sass
     - node_modules
 plugins:
   - jekyll-postcss
