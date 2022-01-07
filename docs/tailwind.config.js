@@ -1,10 +1,7 @@
 module.exports = {
-  content: [
-    './_includes/**/*.html',
-    './_layouts/**/*.html',
-    './_posts/*.md',
-    './*.html',
-  ],
+  // This is a bit nasty but ensures that everything works also in the gh-actions environment where the config lies
+  // in the root.
+  content: ["./**/*.html"],
   theme: {
     extend: {},
   },
