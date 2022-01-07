@@ -9,5 +9,8 @@
     "postcss-import": "^14.0.2",
     "postcss-scss": "^4.0.2",
     "tailwindcss": "^3.0.9"
-  }
+  },
+  "browserslist": [
+    "defaults"
+  ]
 }

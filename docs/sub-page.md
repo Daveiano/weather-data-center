@@ -1,7 +1,6 @@
 ---
-layout: home
-title: "Home"
-cta_title: "Link to first content section"
+layout: default
+title: "Sub Page"
 ---
 
 ## You're ready to go!

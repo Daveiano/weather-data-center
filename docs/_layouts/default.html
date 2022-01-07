@@ -7,7 +7,20 @@
     <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
   </head>
   <body>
-    <div class="text-center text-red-500 text-2xl">Hello World</div>
-    {{ content }}
+    <header>
+      <nav class="bg-white shadow dark:bg-gray-800">
+        <div class="container px-6 py-4 mx-auto">
+          <div class="lg:flex lg:items-center lg:justify-between">
+            {% include header.html %}
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="container mx-auto py-4 px-6">
+        {{ content }}
+      </section>
+    </main>
   </body>
 </html>
