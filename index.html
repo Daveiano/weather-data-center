@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en-US">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta charset="utf-8">
-        <title>Home - Weather data center Docs</title>
-        <link rel="stylesheet" href="/weather-data-center/assets/css/main.css">
-    </head>
-    <body>
-        <header>
-            <nav class="bg-white shadow dark:bg-gray-800">
-                <div class="container px-6 py-4 mx-auto">
-                    <div class="lg:flex lg:items-center lg:justify-between">
-                        <div class="flex items-center justify-between">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>Home - Weather data center Docs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/weather-data-center/assets/css/main.css">
+  </head>
+  <body>
+    <header>
+      <nav class="bg-white shadow dark:bg-gray-800">
+        <div class="container px-6 py-4 mx-auto">
+          <div class="lg:flex lg:items-center lg:justify-between">
+            <div class="flex items-center justify-between">
     <div class="text-xl font-semibold text-gray-700">
         <a class="text-2xl font-bold text-gray-800 dark:text-white lg:text-3xl hover:text-gray-700 dark:hover:text-gray-300" href="/weather-data-center/">Weather Data Center</a>
     </div>
@@ -28,34 +31,160 @@
 
 <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
 <div class="hidden -mx-4 lg:flex lg:items-center">
-    <a href="/weather-data-center/sub-page.html" class="block mx-4 mt-2 text-sm text-gray-700 capitalize lg:mt-0 dark:text-gray-200 hover:text-blue-600 dark:hover:text-indigo-400">Sub page 1</a>
-    <a href="#" class="block mx-4 mt-2 text-sm text-gray-700 capitalize lg:mt-0 dark:text-gray-200 hover:text-blue-600 dark:hover:text-indigo-400">Sub page 2</a>
-    <a href="#" class="block mx-4 mt-2 text-sm text-gray-700 capitalize lg:mt-0 dark:text-gray-200 hover:text-blue-600 dark:hover:text-indigo-400">Sub page 3</a>
-    <a href="#" class="block mx-4 mt-2 text-sm text-gray-700 capitalize lg:mt-0 dark:text-gray-200 hover:text-blue-600 dark:hover:text-indigo-400">Sub page 4</a>
+    <a href="/weather-data-center/screenshots.html" class="block mx-4 mt-2 text-sm text-gray-700 capitalize lg:mt-0 dark:text-gray-200 hover:text-blue-600 dark:hover:text-indigo-400">Screenshots</a>
 </div>
-                    </div>
-                </div>
-            </nav>
+          </div>
+        </div>
+      </nav>
+    </header>
 
-            <div class="w-full bg-center bg-cover h-96" style="background-image: url(https://images.ctfassets.net/hrltx12pl8hq/6TIZLa1AKeBel0yVO7ReIn/1fc0e2fd9fcc6d66b3cc733aa2547e11/weather-images.jpg?fit=fill&w=800&h=300);">
-                <div class="flex items-center justify-center w-full h-full bg-gray-900 bg-opacity-50">
-                    <div class="text-center">
-                        <h1 class="text-2xl font-semibold text-white uppercase lg:text-3xl">This is great</h1>
-                        <button class="w-full px-4 py-2 mt-4 text-sm font-medium text-white uppercase transition-colors duration-200 transform bg-blue-600 rounded-md lg:w-auto hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
-                            Link to first content section
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </header>
+    <main>
+      <section class="md-content container max-w-3xl mx-auto py-4 px-6">
+        <h1 id="weather-data-center">Weather Data Center</h1>
 
-        <main>
-            <section class="container mx-auto py-4 px-6">
-                <h2 id="youre-ready-to-go">You’re ready to go!</h2>
+<h2 id="introduction">Introduction</h2>
 
-<p>Start developing your Jekyll website.</p>
+<p>Weather Data Center is an application written with TypeScript + React in an Electron environment. This way it is a
+cross-platform Desktop application. The main purpose is to collect, organize, analyze and visualize weather data
+from your backyards weather station.</p>
 
-            </section>
-        </main>
-    </body>
+<p>You need to export/backup the data from your weather station and import them as a .csv file into the app.</p>
+
+<h3 id="supported-characteristics">Supported characteristics</h3>
+
+<ul>
+  <li>Temperature</li>
+  <li>Pressure</li>
+  <li>Humidity</li>
+  <li>Wind direction</li>
+  <li>Wind Speed</li>
+  <li>Guest Speed</li>
+  <li>Felt temperature</li>
+  <li>Dew point temperature</li>
+  <li>Rain</li>
+  <li>Solar radiation</li>
+  <li>UV Index</li>
+</ul>
+
+<h3 id="import-file-requirements">Import file requirements</h3>
+
+<p>Currently, only .csv files with named headers are supported. This is likely to change and be configurable in a
+future release. At the time your csv will need the following structure:</p>
+
+<div class="table-wrap">
+
+  <table>
+    <thead>
+      <tr>
+        <th>time</th>
+        <th>temperature</th>
+        <th>humidity</th>
+        <th>pressure</th>
+        <th>rain</th>
+        <th>solar</th>
+        <th>uvi</th>
+        <th>wind</th>
+        <th>wind_direction</th>
+        <th>gust</th>
+        <th>dew_point</th>
+        <th>felt_temperature</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>2022/1/30 7:21</td>
+        <td>10</td>
+        <td>80</td>
+        <td>950</td>
+        <td>0</td>
+        <td>100.4</td>
+        <td>3</td>
+        <td>15</td>
+        <td>303</td>
+        <td>25</td>
+        <td>8</td>
+        <td>10</td>
+      </tr>
+      <tr>
+        <td>2022/1/30 13:1</td>
+        <td>15.7</td>
+        <td>75</td>
+        <td>951</td>
+        <td>0.9</td>
+        <td>124.9</td>
+        <td>5</td>
+        <td>12</td>
+        <td>187</td>
+        <td>37</td>
+        <td>10</td>
+        <td>15.7</td>
+      </tr>
+      <tr>
+        <td>…</td>
+        <td>…</td>
+        <td>…</td>
+        <td>…</td>
+        <td>…</td>
+        <td>…</td>
+        <td>…</td>
+        <td>…</td>
+        <td>…</td>
+        <td>…</td>
+        <td>…</td>
+        <td>…</td>
+      </tr>
+      <tr>
+        <td>YYYY/M/D k:m, e.g. 2022/1/30 7:21, k = 1 - 24</td>
+        <td>in °C</td>
+        <td>in %</td>
+        <td>in hPa</td>
+        <td>in mm, accumulated per day</td>
+        <td>in w/m²</td>
+        <td>UVI</td>
+        <td>in km/h</td>
+        <td>in degree</td>
+        <td>in km/h</td>
+        <td>in °C</td>
+        <td>in °C</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<h3 id="screenshots">Screenshots</h3>
+
+<h4 id="front-page">Front Page</h4>
+
+<p><img align="center" alt="Weather Data Center Start Page Screenshot" src="https://raw.githubusercontent.com/Daveiano/weather-data-center/develop/src/main/__image_snapshots__/renderer-small-data-test-ts-start-the-app-with-a-small-set-of-data-overview-page-1-snap.png" /></p>
+
+<h2 id="installation">Installation</h2>
+
+<p>Coming soon</p>
+
+<h2 id="faq">FAQ</h2>
+
+<p>Coming soon</p>
+
+<h2 id="development">Development</h2>
+
+<h3 id="upstream-issues">Upstream issues</h3>
+
+<ul>
+  <li>Carbon structure: components-react vs @carbon - https://github.com/carbon-design-system/carbon/issues/9540</li>
+  <li>
+    <s>Carbon DataTable sort all pages, not only current visible - https://github.com/carbon-design-system/carbon/issues/6373</s>
+  </li>
+  <li>
+    <s>Carbon - Support React Link in SideNav - https://github.com/carbon-design-system/carbon/issues/2473</s>
+  </li>
+  <li>Nivo Annotations for line diagram (show min and max value for e.g. temperature) - https://github.com/plouc/nivo/issues/1857</li>
+  <li>playwright: Filechooser not working - https://github.com/microsoft/playwright/issues/5013</li>
+  <li>Carbon: &lt;button&gt; cannot appear as a descendant of &lt;button&gt; when using tooltips in table headers</li>
+</ul>
+
+      </section>
+
+    </main>
+  </body>
 </html>
