@@ -2,6 +2,8 @@ name: Build and deploy Jekyll site to GitHub Pages
 
 on:
   push:
+    paths:
+      - 'docs/**'
     branches:
       - develop
 
@@ -29,9 +31,9 @@ jobs:
 
       - name: 🔨 move node_modules and configs to root
         run: |
-          mv ./docs/node_modules ./node_modules
-          mv ./docs/postcss.config.js ./postcss.config.js
-          mv ./docs/tailwind.config.js ./tailwind.config.js
+          cp -r ./docs/node_modules ./node_modules
+          cp ./docs/postcss.config.js ./postcss.config.js
+          cp ./docs/tailwind.config.js ./tailwind.config.js
 
       - name: 🔨 install dependencies & build site
         uses: limjh16/jekyll-action-ts@v2
@@ -46,6 +48,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: ./_site
+          exclude_assets: '.github,package.json,yarn.lock'
 
       - name: 🔨 uninstall Yarn
         if: always()

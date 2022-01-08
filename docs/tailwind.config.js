@@ -5,6 +5,5 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [require('tailwind-container-break-out')],
-  mode: process.env.NODE_ENV && 'jit',
+  plugins: [require('tailwind-container-break-out')]
 }

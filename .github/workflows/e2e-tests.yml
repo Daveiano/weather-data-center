@@ -4,6 +4,8 @@ name: End-to-end tests
 
 on:
   push:
+    paths:
+      - 'src/**'
     branches: [ develop ]
   pull_request:
     branches: [ develop ]

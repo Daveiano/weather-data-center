@@ -5,11 +5,10 @@
 
 @import "tailwindcss/base";
 @import "tailwindcss/components";
-@import "tailwindcss/utilities"; 
+@import "tailwindcss/utilities";
 
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;1,100&display=swap');
 body, html {
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: "IBM Plex Sans", sans-serif;
   font-size: 16px;
   overflow-x: hidden;
 }
@@ -18,18 +17,18 @@ main section.md-content {
   h1 {
     @apply text-4xl mb-4 font-bold;
   }
-  h2 { 
+  h2 {
     @apply text-2xl mb-3 mt-4 font-bold;
   }
   h3 {
-    @apply text-xl mb-2 mt-4; 
+    @apply text-xl mb-2 mt-4;
   }
   h4 {
     @apply text-lg mb-2 mt-4;
   }
   p {
     @apply mb-3;
-  } 
+  }
   ul {
     @apply pl-4 mb-3;
     li {
