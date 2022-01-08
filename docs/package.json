@@ -12,5 +12,9 @@
   },
   "browserslist": [
     "defaults"
-  ]
+  ],
+  "dependencies": {
+    "@carbon/type": "^10.39.0",
+    "tailwind-container-break-out": "^2.0.1"
+  }
 }

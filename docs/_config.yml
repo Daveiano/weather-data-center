@@ -9,5 +9,5 @@ sass:
     - node_modules
 plugins:
   - jekyll-postcss
-include: ["node_modules/tailwindcss"]
+include: ["node_modules/tailwindcss", "node_modules/@carbon"]
 exclude: []

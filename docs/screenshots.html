@@ -1,0 +1,16 @@
+---
+layout: html
+title: "Screenshots"
+---
+
+<div class="container mx-auto my-8 px-6">
+    <div class="columns-2">
+        {% for screenshot in site.data.screenshots %}
+        <div class="mt-4 first:mt-0 border border-solid border-slate-200">
+            <a href="{{ screenshot.url }}">
+                <img alt="{{ screenshot.name }}" src="{{ screenshot.url }}" /> 
+            </a>
+        </div> 
+        {% endfor %}
+    </div>
+</div>
