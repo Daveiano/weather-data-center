@@ -48,7 +48,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: ./_site
-          exclude_assets: '.github,package.json,yarn.lock'
+          exclude_assets: '.github,package.json,yarn.lock,postcss.config.js,tailwind.config.js'
 
       - name: 🔨 uninstall Yarn
         if: always()
