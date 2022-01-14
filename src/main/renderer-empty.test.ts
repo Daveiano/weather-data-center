@@ -1,10 +1,11 @@
-import { ElectronApplication, Page } from "playwright";
+import type { ElectronApplication, Page } from "playwright";
 import { _electron as electron } from "playwright-core";
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
+import fs from "fs";
 
 expect.extend({ toMatchImageSnapshot });
 
-let window: Page,
+let page: Page,
   electronApp: ElectronApplication;
 
 beforeAll(async () => {
@@ -21,47 +22,46 @@ beforeAll(async () => {
   });
 
   // Get the first window that the app opens, wait if necessary.
-  window = await electronApp.firstWindow();
+  page = await electronApp.firstWindow();
 
   // Wait for frame actually loaded.
-  await window.waitForSelector('main');
+  await page.waitForSelector('main');
 
   // Direct Electron console to Node terminal.
-  window.on('console', console.log);
+  page.on('console', console.log);
 });
 
 afterAll(async () => {
   await electronApp.close();
 });
 
-/*beforeEach(async () => {
-    page = await browser.newPage();
-});
 afterEach(async () => {
-    await page.close();
-});*/
+  await fs.truncateSync(`${__dirname.replace('src/main', '')}tests/data/empty/nedb/data`, 0);
+  await page.click('header.bx--header a.bx--header__name');
+  await page.reload();
+});
 
 it('should start the app on an empty state', async () => {
-  expect(await window.title()).toBe('Weather Data Center');
+  expect(await page.title()).toBe('Weather Data Center');
 
-  const image = await window.screenshot({ fullPage: true });
+  const image = await page.screenshot({ fullPage: true });
   expect(image).toMatchImageSnapshot({
     failureThreshold:3.5,
     failureThresholdType: 'percent',
     dumpDiffToConsole: true
   });
 
-  const mainText = window.locator('.main.bx--content h1');
+  const mainText = page.locator('.main.bx--content h1');
   expect(await mainText.evaluate(node => node.textContent.replace(/(\r\n|\n|\r)/gm, ""))).toBe('No data found');
 
   // Open right sidebar.
-  await window.click('header.bx--header button[aria-label="Upload Data"]');
+  await page.click('header.bx--header button[aria-label="Upload Data"]');
 
   // Expect 0 items to be imported.
-  const numberImported = window.locator('header.bx--header .bx--header-panel .import-data');
+  const numberImported = page.locator('header.bx--header .bx--header-panel .import-data');
   expect(await numberImported.evaluate(node => node.textContent)).toBe('');
 
-  const imageSideBarOpen = await window.screenshot({ fullPage: true });
+  const imageSideBarOpen = await page.screenshot({ fullPage: true });
   expect(imageSideBarOpen).toMatchImageSnapshot({
     failureThreshold: 3.5,
     failureThresholdType: 'percent',
@@ -69,7 +69,42 @@ it('should start the app on an empty state', async () => {
   });
 });
 
-/**
- * @todo Test import new data into empty state.
- * @see https://github.com/microsoft/playwright/issues/5013
- */
+it('should import new data', async () => {
+  await page.click('header.bx--header button[aria-label="Upload Data"]');
+
+  const imageBeforeImport = await page.screenshot({ fullPage: true });
+  expect(imageBeforeImport).toMatchImageSnapshot({
+    failureThreshold: 3.5,
+    failureThresholdType: 'percent',
+    dumpDiffToConsole: true
+  });
+
+  // @see https://github.com/microsoft/playwright/issues/8278
+  /*page.on('filechooser', async (fileChooser) => {
+    await fileChooser.setFiles(`${__dirname.replace('src/main', '')}tests/data/upload-data-start-16-08-21-30-09-21-1196-records.csv`);
+  })*/
+
+  await electronApp.evaluate(
+    ({dialog}, filePaths) => {
+      return dialog.showOpenDialog = () => Promise.resolve({ canceled: false, filePaths });
+    },
+    [`${__dirname.replace('src/main', '')}tests/data/upload-data-16-08-21-30-09-21-1196-records.csv`]
+  );
+
+  await page.click('button#import');
+
+  await page.waitForSelector('data-testid=main-loading', { state: 'hidden' });
+
+  const imageAfterImportLoading = await page.screenshot({ fullPage: true });
+  expect(imageAfterImportLoading).toMatchImageSnapshot({
+    failureThreshold: 3.5,
+    failureThresholdType: 'percent',
+    dumpDiffToConsole: true
+  });
+
+  const numberImported = page.locator('header.bx--header .bx--header-panel .import-data');
+  expect(await numberImported.evaluate(node => node.textContent)).toBe('1196 records in DB');
+});
+
+// @todo duplicate imports
+// @todo imports after imports.

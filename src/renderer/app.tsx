@@ -69,6 +69,7 @@ export const App: React.FC = (): React.ReactElement => {
     <main>
       {loading &&
         <Loading
+          data-testid="main-loading"
           description="Active loading indicator"
           withOverlay={true}
         />

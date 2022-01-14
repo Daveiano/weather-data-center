@@ -1,13 +1,16 @@
-import {Precision} from "./scaling";
+import {Precision, propertyParameter} from "./scaling";
 import type {AnnotationMatcher} from "@nivo/annotations";
 import type {ComputedBarDatum} from "@nivo/bar/dist/types/types";
+import type { ColumnDefaultProps } from "carbon-components-react/lib/components/Grid/Column";
 
-type DiagramBaseProps = {
+type DiagramBaseProps = ColumnDefaultProps & {
   title?: string,
   height: string,
   data: dataItem[],
   precision?: Precision,
-  annotations?: AnnotationMatcher<ComputedBarDatum<dataItem>>[]
+  annotations?: AnnotationMatcher<ComputedBarDatum<dataItem>>[],
+  // @todo Make required.
+  property?: propertyParameter
 };
 
 type dataItem = {

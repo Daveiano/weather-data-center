@@ -10,7 +10,7 @@ import { PressureBase } from "../diagrams/pressure/pressure-base";
 import { RainBase } from "../diagrams/rain/rain-base";
 import { SolarBase } from "../diagrams/solar/solar-base";
 import { UviBase } from "../diagrams/uvi/uvi-base";
-import { WindBase } from "../diagrams/wind/wind-base";
+import WindBase from "../diagrams/wind/wind-base";
 import { WindDirectionBase } from "../diagrams/wind-direction/wind-direction-base";
 import { DewPointBase } from "../diagrams/temperature/dew-point-base";
 import { FeltTemperatureBase } from "../diagrams/temperature/felt-temperature-base";
@@ -40,7 +40,7 @@ export const Start:React.FC = (): React.ReactElement => {
 
   if (data.length > 0) {
     return (
-      <div className="page">
+      <div className="page" data-testid="overview-page">
         <Row>
           <Column>
             <h1>Overview</h1>
@@ -122,14 +122,12 @@ export const Start:React.FC = (): React.ReactElement => {
               <HumidityBase data={data} title="Humidity" height="340px" />
             </Tile>
           </Column>
+
+          <WindBase title="Wind speed" height="340px" data={data} property="wind" />
+
           <Column sm={6} lg={6} max={4}>
             <Tile>
-              <WindBase title="Wind speed" height="340px" data={data} />
-            </Tile>
-          </Column>
-          <Column sm={6} lg={6} max={4}>
-            <Tile>
-              <WindDirectionBase title="Wind direction" height="340px" data={data} />
+              <WindDirectionBase title="Wind direction" height="340px" data={data} sm={6} lg={6} max={4} />
             </Tile>
           </Column>
           <Column sm={6} lg={6} max={4}>

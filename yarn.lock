@@ -9856,6 +9856,11 @@ playwright-core@=1.17.2, playwright-core@>=1.2.0:
     yauzl "^2.10.0"
     yazl "^2.5.1"
 
+playwright-fake-dialog@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/playwright-fake-dialog/-/playwright-fake-dialog-0.1.0.tgz#d7eb2f35844e514a43c26ad2b29e176c64ec39cd"
+  integrity sha512-lUTk9Y40Vk2Ryg6FrALL1/xNJBZ7Xv9yqCEg52Vh7bS6Oaoyi+DKovGw3wSJIEgI2Pm0L9PycOxGtzecyW5gzw==
+
 playwright@^1.16.3:
   version "1.17.2"
   resolved "https://registry.yarnpkg.com/playwright/-/playwright-1.17.2.tgz#918b9a7e43ac8640fa3e2162ce0cb8b395c55fb7"

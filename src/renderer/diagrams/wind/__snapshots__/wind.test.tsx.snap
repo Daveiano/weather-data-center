@@ -3,32 +3,40 @@
 exports[`wind diagram with 11-day data 1`] = `
 <div>
   <div
-    data-testid="wind-diagram"
+    class="bx--col"
   >
-    <h3>
-      <svg
-        aria-hidden="true"
-        fill="currentColor"
-        focusable="false"
-        height="32"
-        preserveAspectRatio="xMidYMid meet"
-        viewBox="0 0 32 32"
-        width="32"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M21 15H8V13H21a3 3 0 10-3-3H16a5 5 0 115 5zM23 28a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H4V18H23a5 5 0 010 10z"
-        />
-      </svg>
-      Wind & Gust
-    </h3>
     <div
-      class="diagram"
-      style="height: 300px;"
+      class="bx--tile"
     >
       <div
-        style="width: 100%; height: 100%;"
-      />
+        data-testid="wind-diagram"
+      >
+        <h3>
+          <svg
+            aria-hidden="true"
+            fill="currentColor"
+            focusable="false"
+            height="32"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 32 32"
+            width="32"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M21 15H8V13H21a3 3 0 10-3-3H16a5 5 0 115 5zM23 28a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H4V18H23a5 5 0 010 10z"
+            />
+          </svg>
+          Wind & Gust
+        </h3>
+        <div
+          class="diagram"
+          style="height: 300px;"
+        >
+          <div
+            style="width: 100%; height: 100%;"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </div>

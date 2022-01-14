@@ -5,7 +5,7 @@ import {Column, Row, Tile} from "carbon-components-react";
 import {RootState} from "../renderer";
 import {Empty} from "../components/empty";
 import {Stats} from "../components/stats/stats";
-import {WindBase} from "../diagrams/wind/wind-base";
+import WindBase from "../diagrams/wind/wind-base";
 import {WindDirectionBase} from "../diagrams/wind-direction/wind-direction-base";
 import TableBase from "../components/table-base/table-base";
 import {dataItem} from "../diagrams/types";
@@ -116,11 +116,9 @@ export const WindPage: React.FC = (): React.ReactElement => {
                   </Column>
                 </Row>
               </Column>
-              <Column sm={12} lg={12} max={12}>
-                <Tile>
-                  <WindBase height="600px" data={data} title="Wind and Gust speed" />
-                </Tile>
-              </Column>
+
+              <WindBase height="600px" data={data} title="Wind and Gust speed" sm={12} lg={12} max={12} />
+
               <Column sm={12} lg={12} max={12}>
                 <Tile id="wind-01-direction">
                   <WindDirectionBase height="600px" data={data} title="Wind direction (Ø per day)" />

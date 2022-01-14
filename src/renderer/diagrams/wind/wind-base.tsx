@@ -7,8 +7,9 @@ import { Windy32 } from "@carbon/icons-react";
 import { dataItem, DiagramBaseProps } from "../types";
 import { getTimeDifferenceInDays, scaleAverage, scaleMax } from "../scaling";
 import { TooltipLine } from "../tooltip";
+import { withEmptyCheck } from "../hoc";
 
-export const WindBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
+const WindBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
   const [dataWind, setDataWind] = useState(props.data);
   const [dataGust, setDataGust] = useState(props.data);
   const [loading, setLoading] = useState(false);
@@ -163,4 +164,6 @@ export const WindBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseP
 
     </div>
   );
-}
+};
+
+export default withEmptyCheck(WindBase);
