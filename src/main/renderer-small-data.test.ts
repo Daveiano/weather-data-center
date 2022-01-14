@@ -147,19 +147,3 @@ it('should show the number of imported data', async () => {
     dumpDiffToConsole: true
   });
 });
-
-/* @see https://github.com/microsoft/playwright/issues/5013 */
-/*it('should import new data', async () => {
-  await page.click('header.bx--header button[aria-label="Upload Data"]');
-
-  console.log('0');
-
-  const [fileChooser] = await Promise.all([
-    page.waitForEvent('filechooser'),
-    page.click('button#import')
-  ]);
-
-  console.log('1');
-
-  await fileChooser.setFiles(`${__dirname.replace('src/main', '')}tests/data/upload-data-start-16-08-21-30-09-21-1196-records.csv`);
-});*/
