@@ -20,7 +20,7 @@ import {
   TableToolbarMenu,
   TableBatchActions,
   TableBatchAction,
-  TooltipIcon, Tooltip
+  TooltipIcon
 } from 'carbon-components-react';
 import type { DataTableSize } from 'carbon-components-react';
 
@@ -35,13 +35,15 @@ import {
 import Pagination from './components/pagination';
 import { TABLE_SORT_DIRECTION, doesRowMatchSearchString } from './misc';
 import { dataItem } from "../../diagrams/types";
+import {extendedPropertyParameter} from "../../diagrams/scaling";
+import {dataHasRecordsForProperty} from "../../diagrams/hoc";
 
 export type dataItemDataTable = dataItem & { selected: boolean };
 
 interface TableBaseProps {
   collator?: Intl.Collator,
   columns: {
-    id: string,
+    id: extendedPropertyParameter,
     title: string,
     sortCycle?: string,
     small?: string,
@@ -246,7 +248,7 @@ const TableBase: React.FC<TableBaseProps> = (props: TableBaseProps): React.React
               />
             )}
 
-            {props.columns.map(({ id: columnId, sortCycle, title, small, tooltip }) => {
+            {props.columns.filter(item => dataHasRecordsForProperty(item.id, rows)).map(({ id: columnId, sortCycle, title, small, tooltip }) => {
               const sortDirectionForThisCell =
                 sortCycle &&
                 (columnId === sortColumnId
@@ -310,7 +312,7 @@ const TableBase: React.FC<TableBaseProps> = (props: TableBaseProps): React.React
                     onSelect={handleChangeSelection}
                   />
                 )}
-                {props.columns.map(({ id: columnId }) => (
+                {props.columns.filter(item => dataHasRecordsForProperty(item.id, rows)).map(({ id: columnId }) => (
                   <TableCell key={columnId}>
                     {columnId === 'timeParsed' ? (
                       <>

@@ -7,8 +7,9 @@ import { Loading } from "carbon-components-react";
 import {dataItem, DiagramBaseProps} from "../types";
 import { getTimeDifferenceInDays, scaleMax } from "../scaling";
 import { TooltipLine } from "../tooltip";
+import { withEmptyCheck } from "../hoc";
 
-export const UviBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
+const UviBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [daily, setDaily] = useState(false);
@@ -108,4 +109,6 @@ export const UviBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBasePr
       </div>
     </div>
   );
-}
+};
+
+export default withEmptyCheck(UviBase);

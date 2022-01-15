@@ -7,8 +7,9 @@ import { Humidity32 } from "@carbon/icons-react";
 import {dataItem, DiagramBaseProps} from "../types";
 import { getTimeDifferenceInDays, scaleAverage } from "../scaling";
 import { TooltipLine } from "../tooltip";
+import { withEmptyCheck } from "../hoc";
 
-export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
+const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
   const [data, setData] = useState(props.data);
   const [loading, setLoading] = useState(false);
   const [daily, setDaily] = useState(false);
@@ -112,4 +113,6 @@ export const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
 
     </div>
   );
-}
+};
+
+export default withEmptyCheck(HumidityBase);

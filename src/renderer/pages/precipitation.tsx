@@ -5,10 +5,10 @@ import {Column, Row, Tile} from "carbon-components-react";
 
 import {RootState} from "../renderer";
 import {Stats} from "../components/stats/stats";
-import {RainBase} from "../diagrams/rain/rain-base";
+import RainBase from "../diagrams/rain/rain-base";
 import {Empty} from "../components/empty";
-import {RainManualPeriodBase} from "../diagrams/rain/rain-manual-period-base";
-import {HumidityBase} from "../diagrams/humidity/humidity-base";
+import RainManualPeriodBase from "../diagrams/rain/rain-manual-period-base";
+import HumidityBase from "../diagrams/humidity/humidity-base";
 
 export const PrecipitationPage: React.FC = (): React.ReactElement  => {
   const dataFilteredFromStore = useSelector((state: RootState) => state.appState.dataFilteredPerTime);
@@ -116,45 +116,50 @@ export const PrecipitationPage: React.FC = (): React.ReactElement  => {
                         ]}
                       />
                     </Column>
-                    <Column sm={12} lg={12} max={9}>
-                      {/* @todo Add consecutive and maximum annotations. */}
-                      <RainBase
-                        height="500px"
-                        data={data}
-                        precision="day"
-                        annotations={[
-                          {
-                            type: 'dot',
-                            note: 'Most rain per day',
-                            match: (value, index, collection) => {
-                              const max = Math.max(...Array.from(collection).map(item => item.data.value));
 
-                              return value.data.formattedValue === `${max} mm`;
-                            },
-                            noteX: 25,
-                            noteY: -100,
-                            noteTextOffset: -3,
-                            noteWidth: 5,
-                            size: 5
-                          }
-                        ]}
-                      />
-                    </Column>
+                    {/* @todo Add consecutive and maximum annotations. */}
+                    <RainBase
+                      height="500px"
+                      data={data}
+                      precision="day"
+                      annotations={[
+                        {
+                          type: 'dot',
+                          note: 'Most rain per day',
+                          match: (value, index, collection) => {
+                            const max = Math.max(...Array.from(collection).map(item => item.data.value));
+
+                            return value.data.formattedValue === `${max} mm`;
+                          },
+                          noteX: 25,
+                          noteY: -100,
+                          noteTextOffset: -3,
+                          noteWidth: 5,
+                          size: 5
+                        }
+                      ]}
+                      property="rain"
+                      hideTile={true}
+                      sm={12}
+                      lg={12}
+                      max={9}
+                    />
                   </Row>
                 </Tile>
               </Column>
 
-              <Column sm={12} lg={12} max={12}>
-                <Tile className="table-combined" id="rain-02-selectable">
-                  <RainManualPeriodBase height="600px" data={data} />
-                </Tile>
-              </Column>
+              <RainManualPeriodBase
+                height="600px"
+                data={data}
+                property="rain"
+                sm={12}
+                lg={12}
+                max={12}
+                tileClassName="table-combined"
+                tileId="rain-02-selectable"
+              />
 
-              <Column sm={12} lg={12} max={12}>
-                <Tile id="rain-03-humidity">
-                  <HumidityBase height="600px" data={data} title="Humidity (Ø per day)" />
-                </Tile>
-              </Column>
+              <HumidityBase height="600px" data={data} title="Humidity (Ø per day)" sm={12} lg={12} max={12} property="humidity" tileId="rain-03-humidity" />
 
             </Row>
           </Column>

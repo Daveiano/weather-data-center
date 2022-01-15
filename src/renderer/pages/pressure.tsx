@@ -5,7 +5,7 @@ import {Column, Row, Tile} from "carbon-components-react";
 import {RootState} from "../renderer";
 import {Empty} from "../components/empty";
 import {Stats} from "../components/stats/stats";
-import {PressureBase} from "../diagrams/pressure/pressure-base";
+import PressureBase from "../diagrams/pressure/pressure-base";
 import TableBase from "../components/table-base/table-base";
 import {dataItem} from "../diagrams/types";
 import {TABLE_SORT_DIRECTION} from "../components/table-base/misc";
@@ -119,11 +119,8 @@ export const PressurePage: React.FC = (): React.ReactElement => {
                   </Column>
                 </Row>
               </Column>
-              <Column sm={12} lg={12} max={12}>
-                <Tile>
-                  <PressureBase height="600px" data={data} title="Pressure (Ø per day)" />
-                </Tile>
-              </Column>
+
+              <PressureBase height="600px" data={data} title="Pressure (Ø per day)" property="pressure" sm={12} lg={12} max={12} />
             </Row>
           </Column>
         </Row>

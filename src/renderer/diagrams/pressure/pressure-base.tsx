@@ -7,8 +7,9 @@ import { ResponsiveLine } from '@nivo/line'
 import {dataItem, DiagramBaseProps} from "../types";
 import { getTimeDifferenceInDays, scaleAverage } from "../scaling";
 import { TooltipLine } from "../tooltip";
+import { withEmptyCheck } from "../hoc";
 
-export const PressureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
+const PressureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
   const [data, setData] = useState(props.data);
   const [loading, setLoading] = useState(false);
   const [daily, setDaily] = useState(false);
@@ -113,4 +114,6 @@ export const PressureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
 
     </div>
   );
-}
+};
+
+export default withEmptyCheck(PressureBase);

@@ -12,6 +12,7 @@ import type {BarTooltipProps} from "@nivo/bar/dist/types/types";
 import {dataItem, DiagramBaseProps} from "../types";
 import {getTimeDifferenceInDays, Precision, propertyParameter, scaleMax, scaleSum} from "../scaling";
 import { TooltipBar } from "../tooltip";
+import { withEmptyCheck } from "../hoc";
 
 type RainBarBasePropsTypes = {
   indexBy: string,
@@ -115,7 +116,7 @@ export const getRainBarBaseProps = (precision: Precision, data: dataItem[], prop
   return newRainBarBaseProps;
 };
 
-export const RainBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
+const RainBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [precision, setPrecision] = useState(props.precision ? props.precision : 'day');
@@ -180,4 +181,6 @@ export const RainBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseP
       </div>
     </div>
   );
-}
+};
+
+export default withEmptyCheck(RainBase);

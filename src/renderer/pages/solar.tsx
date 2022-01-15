@@ -5,8 +5,8 @@ import {Column, Row, Tile} from "carbon-components-react";
 import {RootState} from "../renderer";
 import {Empty} from "../components/empty";
 import {Stats} from "../components/stats/stats";
-import {SolarBase} from "../diagrams/solar/solar-base";
-import {UviBase} from "../diagrams/uvi/uvi-base";
+import SolarBase from "../diagrams/solar/solar-base";
+import UviBase from "../diagrams/uvi/uvi-base";
 import TableBase from "../components/table-base/table-base";
 import {dataItem} from "../diagrams/types";
 import {TABLE_SORT_DIRECTION} from "../components/table-base/misc";
@@ -118,16 +118,10 @@ export const SolarPage: React.FC = (): React.ReactElement => {
                 </Row>
 
               </Column>
-              <Column sm={12} lg={12} max={12}>
-                <Tile>
-                  <SolarBase height="600px" data={data} title="Solar radiation (Ø per day)" />
-                </Tile>
-              </Column>
-              <Column sm={12} lg={12} max={12}>
-                <Tile id="solar-01-uvi">
-                  <UviBase height="600px" data={data} title="UV Index (Max per day)" />
-                </Tile>
-              </Column>
+
+              <SolarBase height="600px" data={data} title="Solar radiation (Ø per day)" property="solar" sm={12} lg={12} max={12} />
+
+              <UviBase height="600px" data={data} title="UV Index (Max per day)" property="uvi" sm={12} lg={12} max={12} tileId="solar-01-uvi" />
             </Row>
           </Column>
         </Row>

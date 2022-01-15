@@ -9,8 +9,9 @@ import {Precision, scaleMax, scaleSum} from "../scaling";
 import {TABLE_SORT_DIRECTION} from "../../components/table-base/misc";
 import TableBase from "../../components/table-base/table-base";
 import {getRainBarBaseProps} from "./rain-base";
+import { withEmptyCheck } from "../hoc";
 
-export const RainManualPeriodBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
+const RainManualPeriodBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
   const [data, setData] = useState(scaleMax(props.data, 'rain', 'day'));
   const [loading, setLoading] = useState(true);
   const [precision, setPrecision] = useState<Precision>('week');
@@ -129,4 +130,6 @@ export const RainManualPeriodBase:FunctionComponent<DiagramBaseProps> = (props: 
       </Row>
     </div>
   );
-}
+};
+
+export default withEmptyCheck(RainManualPeriodBase);

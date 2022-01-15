@@ -7,7 +7,23 @@ export type dateTimeElement = {
   values: number[]
 }
 
-export type propertyParameter = 'humidity' | 'pressure' | 'temperature' | 'rain' | 'solar' | 'uvi' | 'wind' | 'gust' | 'wind_direction' | 'dew_point' | 'felt_temperature';
+export type propertyParameter = 'humidity' |
+  'pressure' |
+  'temperature' |
+  'rain' |
+  'solar' |
+  'uvi' |
+  'wind' |
+  'gust' |
+  'wind_direction' |
+  'dew_point' |
+  'felt_temperature';
+
+export type extendedPropertyParameter = propertyParameter |
+  'timeParsed' |
+  'temperature_min' |
+  'temperature_max' |
+  'temperature_average';
 
 export type Precision = 'day' | 'week' | 'month' | 'year';
 

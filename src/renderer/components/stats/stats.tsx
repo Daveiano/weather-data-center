@@ -8,6 +8,7 @@ import { dataItem } from "../../diagrams/types";
 import {bundleData, propertyParameter, scale, dateTimeElement, Precision} from "../../diagrams/scaling";
 import { StatsItemNormal } from "./stats-item-normal";
 import { StatsItemCompact } from "./stats-item-compact";
+import {dataHasRecordsForProperty} from "../../diagrams/hoc";
 
 export type statsItem = {
   property: propertyParameter,
@@ -83,183 +84,185 @@ export const Stats: React.FC<StatsProps> = (props: StatsProps): React.ReactEleme
   const output: React.ReactElement[] = [];
 
   for (const statsKey of props.stats) {
-    let date: string,
-      value: string;
+    if (dataHasRecordsForProperty(statsKey.property, props.data)) {
+      let date: string,
+        value: string;
 
-    switch (statsKey.direction) {
-      case "max":
-      case "min": {
-        if (statsKey.scaling) {
-          switch (statsKey.scaling) {
-            case "sum": {
-              const data = scale(
-                scale(props.data, statsKey.property, 'max', 'day'),
-                statsKey.property,
-                statsKey.scaling,
-                statsKey.precision
-              ).sort((a, b) => statsKey.direction === 'max' ? b[statsKey.property] - a[statsKey.property] : a[statsKey.property] - b[statsKey.property]);
+      switch (statsKey.direction) {
+        case "max":
+        case "min": {
+          if (statsKey.scaling) {
+            switch (statsKey.scaling) {
+              case "sum": {
+                const data = scale(
+                  scale(props.data, statsKey.property, 'max', 'day'),
+                  statsKey.property,
+                  statsKey.scaling,
+                  statsKey.precision
+                ).sort((a, b) => statsKey.direction === 'max' ? b[statsKey.property] - a[statsKey.property] : a[statsKey.property] - b[statsKey.property]);
 
-              date = moment(data[0].timeParsed).format(statsKey.dateFormat ? statsKey.dateFormat : "YYYY/MM/DD");
-              value = `${data[0][statsKey.property]} ${statsKey.unit}`;
+                date = moment(data[0].timeParsed).format(statsKey.dateFormat ? statsKey.dateFormat : "YYYY/MM/DD");
+                value = `${data[0][statsKey.property]} ${statsKey.unit}`;
+                break;
+              }
+              default: {
+                const data = scale(props.data, statsKey.property, statsKey.scaling, statsKey.precision)
+                  .sort((a, b) => statsKey.direction === 'max' ? b[statsKey.property] - a[statsKey.property] : a[statsKey.property] - b[statsKey.property]);
+
+                date = moment(data[0].timeParsed).format("YYYY/MM/DD");
+                value = `${data[0][statsKey.property]} ${statsKey.unit}`;
+              }
+            }
+          } else {
+            // Get the min / max value.
+            const data = props.data.slice().sort((a, b) => statsKey.direction === 'max' ? b[statsKey.property] - a[statsKey.property] : a[statsKey.property] - b[statsKey.property]);
+
+            date = moment(data[0].timeParsed).format('YYYY/MM/DD');
+            value = `${data[0][statsKey.property]} ${statsKey.unit}`;
+          }
+
+          break;
+        }
+        case 'day': {
+          const dataBundledPerDay = bundleData(props.data, statsKey.property, 'day');
+
+          switch (statsKey.extra) {
+            case 'storm-days': {
+              const data = Object.values(dataBundledPerDay).slice().filter(item => Math.max(...item.values) >= 62).length;
+
+              value = data.toString();
+
               break;
             }
-            default: {
-              const data = scale(props.data, statsKey.property, statsKey.scaling, statsKey.precision)
-                .sort((a, b) => statsKey.direction === 'max' ? b[statsKey.property] - a[statsKey.property] : a[statsKey.property] - b[statsKey.property]);
+            case 'rain-days': {
+              const data = Object.values(dataBundledPerDay).slice().filter(item => Math.max(...item.values) >= 0.1).length;
 
-              date = moment(data[0].timeParsed).format("YYYY/MM/DD");
-              value = `${data[0][statsKey.property]} ${statsKey.unit}`;
+              value = data.toString();
+              break;
+            }
+            case "frost-days": {
+              const data = Object.values(dataBundledPerDay).slice().filter(item => Math.min(...item.values) < 0).length;
+
+              value = data.toString();
+              break;
+            }
+            case "ice-days": {
+              const data = Object.values(dataBundledPerDay).slice().filter(item => Math.max(...item.values) < 0).length;
+
+              value = data.toString();
+              break;
+            }
+            case 'summer-days': {
+              const data = Object.values(dataBundledPerDay).slice().filter(item => Math.max(...item.values) >= 25).length;
+
+              value = data.toString();
+              break;
+            }
+            case 'hot-days': {
+              const data = Object.values(dataBundledPerDay).slice().filter(item => Math.max(...item.values) >= 30).length;
+
+              value = data.toString();
+              break;
+            }
+            case 'tropical-nights': {
+              const dataBundledPerDay = bundleData(props.data.filter(item => parseInt(moment.unix(item.time).utc().format('HH')) >= 18 || parseInt(moment.unix(item.time).utc().format('HH')) < 6), statsKey.property, 'day'),
+                data = Object.values(dataBundledPerDay).slice().filter(item => Math.min(...item.values) >= 20).length;
+
+              value = data.toString();
+              break;
+            }
+            case 'desert-days': {
+              const data = Object.values(dataBundledPerDay).slice().filter(item => Math.max(...item.values) >= 35).length;
+
+              value = data.toString();
+              break;
             }
           }
-        } else {
-          // Get the min / max value.
-          const data = props.data.slice().sort((a, b) => statsKey.direction === 'max' ? b[statsKey.property] - a[statsKey.property] : a[statsKey.property] - b[statsKey.property]);
-
-          date = moment(data[0].timeParsed).format('YYYY/MM/DD');
-          value = `${data[0][statsKey.property]} ${statsKey.unit}`;
+          break;
         }
+        case "extra": {
+          switch (statsKey.extra) {
+            /* @todo Rework min-max-up and down with:
+            *    1. get min value and get indexOf
+            *    2. get max after the index of min
+            *    3. for the other function do the opposite. */
+            case 'min-max-diff-up': {
+              const dataBundledPerDay = Object.values(bundleData(props.data, statsKey.property, 'day')).map(item => ({
+                ...item,
+                min: item.values[0],
+                max: item.values[item.values.length - 1],
+                rise: item.values[item.values.length - 1] - item.values[0]
+              })).sort((a, b) => b.rise - a.rise);
 
-        break;
-      }
-      case 'day': {
-        const dataBundledPerDay = bundleData(props.data, statsKey.property, 'day');
+              date = moment.unix(dataBundledPerDay[0].time).utc().format('YYYY/MM/DD');
+              value = `+ ${dataBundledPerDay[0].rise.toFixed(1)} ${statsKey.unit}`;
+              statsKey.tooltip = `Min: ${dataBundledPerDay[0].min.toFixed(1)} hPa, Max: ${dataBundledPerDay[0].max.toFixed(1)} hPa`;
+              break;
+            }
+            case 'min-max-diff-down': {
+              const dataBundledPerDay = Object.values(bundleData(props.data, statsKey.property, 'day')).map(item => ({
+                ...item,
+                min: item.values[item.values.length - 1],
+                max: item.values[0],
+                fall: item.values[item.values.length - 1] - item.values[0]
+              })).sort((a, b) => a.fall - b.fall);
 
-        switch (statsKey.extra) {
-          case 'storm-days': {
-            const data = Object.values(dataBundledPerDay).slice().filter(item => Math.max(...item.values) >= 62).length;
+              date = moment.unix(dataBundledPerDay[0].time).utc().format('YYYY/MM/DD');
+              value = `${dataBundledPerDay[0].fall.toFixed(1)} ${statsKey.unit}`;
+              statsKey.tooltip = `Min: ${dataBundledPerDay[0].min.toFixed(1)} hPa, Max: ${dataBundledPerDay[0].max.toFixed(1)} hPa`;
+              break;
+            }
+            case 'rain-days-consecutive': {
+              const periods = getRainPeriods(props.data, statsKey.property);
 
-            value = data.toString();
+              value = periods[0].length.toString();
+              statsKey.tooltip = periods.map(item =>
+                `${moment.unix(item[0].time).utc().format('YYYY/MM/DD')} - ${moment.unix(item[item.length - 1].time).utc().format('YYYY/MM/DD')}`
+              ).join(', ');
+              break;
+            }
+            case 'rain-days-consecutive-sum': {
+              const periods = getRainPeriods(props.data, statsKey.property);
+              const amount = periods.map(item => ({
+                ...item,
+                amount: item.reduce((a, b) => a + Math.max(...b.values), 0)
+              })).sort((a, b) => b.amount - a.amount);
 
-            break;
-          }
-          case 'rain-days': {
-            const data = Object.values(dataBundledPerDay).slice().filter(item => Math.max(...item.values) >= 0.1).length;
-
-            value = data.toString();
-            break;
-          }
-          case "frost-days": {
-            const data = Object.values(dataBundledPerDay).slice().filter(item => Math.min(...item.values) < 0).length;
-
-            value = data.toString();
-            break;
-          }
-          case "ice-days": {
-            const data = Object.values(dataBundledPerDay).slice().filter(item => Math.max(...item.values) < 0).length;
-
-            value = data.toString();
-            break;
-          }
-          case 'summer-days': {
-            const data = Object.values(dataBundledPerDay).slice().filter(item => Math.max(...item.values) >= 25).length;
-
-            value = data.toString();
-            break;
-          }
-          case 'hot-days': {
-            const data = Object.values(dataBundledPerDay).slice().filter(item => Math.max(...item.values) >= 30).length;
-
-            value = data.toString();
-            break;
-          }
-          case 'tropical-nights': {
-            const dataBundledPerDay = bundleData(props.data.filter(item => parseInt(moment.unix(item.time).utc().format('HH')) >= 18 || parseInt(moment.unix(item.time).utc().format('HH')) < 6), statsKey.property, 'day'),
-              data = Object.values(dataBundledPerDay).slice().filter(item => Math.min(...item.values) >= 20).length;
-
-            value = data.toString();
-            break;
-          }
-          case 'desert-days': {
-            const data = Object.values(dataBundledPerDay).slice().filter(item => Math.max(...item.values) >= 35).length;
-
-            value = data.toString();
-            break;
-          }
-        }
-        break;
-      }
-      case "extra": {
-        switch (statsKey.extra) {
-          /* @todo Rework min-max-up and down with:
-          *    1. get min value and get indexOf
-          *    2. get max after the index of min
-          *    3. for the other function do the opposite. */
-          case 'min-max-diff-up': {
-            const dataBundledPerDay = Object.values(bundleData(props.data, statsKey.property, 'day')).map(item => ({
-              ...item,
-              min: item.values[0],
-              max: item.values[item.values.length - 1],
-              rise: item.values[item.values.length - 1] - item.values[0]
-            })).sort((a, b) => b.rise - a.rise);
-
-            date = moment.unix(dataBundledPerDay[0].time).utc().format('YYYY/MM/DD');
-            value = `+ ${dataBundledPerDay[0].rise.toFixed(1)} ${statsKey.unit}`;
-            statsKey.tooltip = `Min: ${dataBundledPerDay[0].min.toFixed(1)} hPa, Max: ${dataBundledPerDay[0].max.toFixed(1)} hPa`;
-            break;
-          }
-          case 'min-max-diff-down': {
-            const dataBundledPerDay = Object.values(bundleData(props.data, statsKey.property, 'day')).map(item => ({
-              ...item,
-              min: item.values[item.values.length - 1],
-              max: item.values[0],
-              fall: item.values[item.values.length - 1] - item.values[0]
-            })).sort((a, b) => a.fall - b.fall);
-
-            date = moment.unix(dataBundledPerDay[0].time).utc().format('YYYY/MM/DD');
-            value = `${dataBundledPerDay[0].fall.toFixed(1)} ${statsKey.unit}`;
-            statsKey.tooltip = `Min: ${dataBundledPerDay[0].min.toFixed(1)} hPa, Max: ${dataBundledPerDay[0].max.toFixed(1)} hPa`;
-            break;
-          }
-          case 'rain-days-consecutive': {
-            const periods = getRainPeriods(props.data, statsKey.property);
-
-            value = periods[0].length.toString();
-            statsKey.tooltip = periods.map(item =>
-              `${moment.unix(item[0].time).utc().format('YYYY/MM/DD')} - ${moment.unix(item[item.length - 1].time).utc().format('YYYY/MM/DD')}`
-            ).join(', ');
-            break;
-          }
-          case 'rain-days-consecutive-sum': {
-            const periods = getRainPeriods(props.data, statsKey.property);
-            const amount = periods.map(item => ({
-              ...item,
-              amount: item.reduce((a, b) => a + Math.max(...b.values), 0)
-            })).sort((a, b) => b.amount - a.amount);
-
-            value = `${amount[0].amount.toString()} ${statsKey.unit}`;
-            statsKey.tooltip = `${moment.unix(periods[0][0].time).utc().format('YYYY/MM/DD')} - ${moment.unix(periods[0][periods[0].length - 1].time).utc().format('YYYY/MM/DD')}`;
-            break;
+              value = `${amount[0].amount.toString()} ${statsKey.unit}`;
+              statsKey.tooltip = `${moment.unix(periods[0][0].time).utc().format('YYYY/MM/DD')} - ${moment.unix(periods[0][periods[0].length - 1].time).utc().format('YYYY/MM/DD')}`;
+              break;
+            }
           }
         }
       }
-    }
 
-    switch (props.size) {
-      case "compact": {
-        output.push(
-          <StatsItemCompact
-            key={`${statsKey.property}${statsKey.direction}${statsKey.extra}${statsKey.precision}${statsKey.scaling}`}
-            columnSpanLg={props.columnSpanLg}
-            columnSpan={props.columnSpan}
-            item={statsKey}
-            date={date ? date : false}
-            value={value}
-            tooltip={statsKey.tooltip}
-          />
-        );
-        break;
-      }
-      default: {
-        output.push(
-          <StatsItemNormal
-            key={`${statsKey.property}${statsKey.direction}${statsKey.extra}${statsKey.precision}${statsKey.scaling}`}
-            columnSpanLg={props.columnSpanLg}
-            columnSpan={props.columnSpan}
-            item={statsKey}
-            date={date}
-            value={value}
-          />
-        );
+      switch (props.size) {
+        case "compact": {
+          output.push(
+            <StatsItemCompact
+              key={`${statsKey.property}${statsKey.direction}${statsKey.extra}${statsKey.precision}${statsKey.scaling}`}
+              columnSpanLg={props.columnSpanLg}
+              columnSpan={props.columnSpan}
+              item={statsKey}
+              date={date ? date : false}
+              value={value}
+              tooltip={statsKey.tooltip}
+            />
+          );
+          break;
+        }
+        default: {
+          output.push(
+            <StatsItemNormal
+              key={`${statsKey.property}${statsKey.direction}${statsKey.extra}${statsKey.precision}${statsKey.scaling}`}
+              columnSpanLg={props.columnSpanLg}
+              columnSpan={props.columnSpan}
+              item={statsKey}
+              date={date}
+              value={value}
+            />
+          );
+        }
       }
     }
   }

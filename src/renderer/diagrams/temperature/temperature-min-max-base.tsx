@@ -9,10 +9,10 @@ import { scaleMinMaxAvg } from "../scaling";
 import { getTemperatureLineBaseProps } from './temperature-base';
 import TableBase from "../../components/table-base/table-base";
 import { TABLE_SORT_DIRECTION } from "../../components/table-base/misc";
-
+import { withEmptyCheck } from "../hoc";
 
 // @todo Make series deactivatable like in temperature-combined.
-export const TemperatureMinMaxBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
+const TemperatureMinMaxBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
   const [data, setData] = useState(scaleMinMaxAvg(props.data, 'temperature', 'day'));
   const [loading, setLoading] = useState(true);
   const [precision, setPrecision] = useState('daily');
@@ -198,4 +198,6 @@ export const TemperatureMinMaxBase:FunctionComponent<DiagramBaseProps> = (props:
 
     </div>
   );
-}
+};
+
+export default withEmptyCheck(TemperatureMinMaxBase);

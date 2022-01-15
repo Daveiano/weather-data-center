@@ -7,8 +7,9 @@ import { ResponsiveLine} from '@nivo/line'
 import { dataItem, DiagramBaseProps } from "../types";
 import { getTimeDifferenceInDays, scaleAverage } from "../scaling";
 import { getTemperatureLineBaseProps } from "./temperature-base";
+import { withEmptyCheck } from "../hoc";
 
-export const TemperatureCombinedBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
+const TemperatureCombinedBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
   const [dataTemp, setDataTemp] = useState([]);
   const [dataDew, setDataDew] = useState([]);
   const [dataFelt, setDataFelt] = useState([]);
@@ -138,4 +139,6 @@ export const TemperatureCombinedBase:FunctionComponent<DiagramBaseProps> = (prop
 
     </div>
   );
-}
+};
+
+export default withEmptyCheck(TemperatureCombinedBase);

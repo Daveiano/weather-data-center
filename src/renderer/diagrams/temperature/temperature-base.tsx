@@ -11,6 +11,7 @@ import type { AxisProps } from "@nivo/axes";
 import { dataItem, DiagramBaseProps } from "../types";
 import {getTimeDifferenceInDays, propertyParameter, scaleAverage} from "../scaling";
 import { TooltipLine } from "../tooltip";
+import { withEmptyCheck } from "../hoc";
 
 type TemperatureLineBasePropsTypes = {
   xScale: ScaleTimeSpec,
@@ -162,7 +163,7 @@ export const getTemperatureLineBaseProps = (precision: string, data: dataItem[],
   return newTemperatureLineBaseProps;
 }
 
-export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
+const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [daily, setDaily] = useState(false);
@@ -230,4 +231,6 @@ export const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: Diagr
 
     </div>
   );
-}
+};
+
+export default withEmptyCheck(TemperatureBase);

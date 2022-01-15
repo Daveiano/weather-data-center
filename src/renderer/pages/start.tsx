@@ -4,16 +4,16 @@ import { useSelector } from 'react-redux'
 import { Row, Column, Tile } from 'carbon-components-react';
 import { TemperatureHigh, TemperatureLow, Windy, RainyHeavy, Weather, Sunny } from '@carbon/pictograms-react';
 
-import { TemperatureBase } from '../diagrams/temperature/temperature-base';
-import { HumidityBase } from "../diagrams/humidity/humidity-base";
-import { PressureBase } from "../diagrams/pressure/pressure-base";
-import { RainBase } from "../diagrams/rain/rain-base";
-import { SolarBase } from "../diagrams/solar/solar-base";
-import { UviBase } from "../diagrams/uvi/uvi-base";
+import TemperatureBase from '../diagrams/temperature/temperature-base';
+import HumidityBase from "../diagrams/humidity/humidity-base";
+import PressureBase from "../diagrams/pressure/pressure-base";
+import RainBase from "../diagrams/rain/rain-base";
+import SolarBase from "../diagrams/solar/solar-base";
+import UviBase from "../diagrams/uvi/uvi-base";
 import WindBase from "../diagrams/wind/wind-base";
-import { WindDirectionBase } from "../diagrams/wind-direction/wind-direction-base";
-import { DewPointBase } from "../diagrams/temperature/dew-point-base";
-import { FeltTemperatureBase } from "../diagrams/temperature/felt-temperature-base";
+import WindDirectionBase from "../diagrams/wind-direction/wind-direction-base";
+import DewPointBase from "../diagrams/temperature/dew-point-base";
+import FeltTemperatureBase from "../diagrams/temperature/felt-temperature-base";
 
 import { Stats } from "../components/stats/stats";
 
@@ -24,6 +24,7 @@ import { RootState } from "../renderer";
 import { dataItem } from "../diagrams/types";
 import { Empty } from "../components/empty";
 
+// @todo Add tests for pages, wrap with redux provider to simulate missing data for wind.
 export const Start:React.FC = (): React.ReactElement => {
   const dataFilteredFromStore = useSelector((state: RootState) => state.appState.dataFilteredPerTime);
   const loading = useSelector((state: RootState) => state.appState.loading);
@@ -102,55 +103,28 @@ export const Start:React.FC = (): React.ReactElement => {
               />
             </Tile>
           </Column>
-          <Column sm={6} lg={6} max={4}>
-            <Tile>
-              <TemperatureBase data={data} title="Temperature" height="340px" />
-            </Tile>
-          </Column>
-          <Column sm={6} lg={6} max={4}>
-            <Tile>
-              <PressureBase data={data} title="Pressure" height="340px" />
-            </Tile>
-          </Column>
-          <Column sm={6} lg={6} max={4}>
-            <Tile>
-              <RainBase data={data} title="Rain" height="340px" />
-            </Tile>
-          </Column>
-          <Column sm={6} lg={6} max={4}>
-            <Tile>
-              <HumidityBase data={data} title="Humidity" height="340px" />
-            </Tile>
-          </Column>
 
-          <WindBase title="Wind speed" height="340px" data={data} property="wind" />
+          <TemperatureBase data={data} title="Temperature" height="340px" property="temperature" sm={6} lg={6} max={4} />
 
-          <Column sm={6} lg={6} max={4}>
-            <Tile>
-              <WindDirectionBase title="Wind direction" height="340px" data={data} sm={6} lg={6} max={4} />
-            </Tile>
-          </Column>
-          <Column sm={6} lg={6} max={4}>
-            <Tile>
-              <FeltTemperatureBase data={data} title="Felt temperature" height="340px" />
-            </Tile>
-          </Column>
-          <Column sm={6} lg={6} max={4}>
-            <Tile>
-              <SolarBase data={data} title="Solar" height="340px" />
-            </Tile>
-          </Column>
-          <Column sm={6} lg={6} max={4}>
-            <Tile>
-              <UviBase data={data} title="UVI" height="340px" />
-            </Tile>
-          </Column>
-          <Column sm={6} lg={6} max={4}>
-            <Tile>
-              <DewPointBase data={data} title="Dew point" height="340px" />
-            </Tile>
-          </Column>
+          <PressureBase data={data} title="Pressure" height="340px" property="pressure" sm={6} lg={6} max={4} />
+
+          <RainBase data={data} title="Rain" height="340px" property="rain" sm={6} lg={6} max={4} />
+
+          <HumidityBase data={data} title="Humidity" height="340px" sm={6} lg={6} max={4} property="humidity" />
+
+          <WindBase title="Wind speed" height="340px" data={data} sm={6} lg={6} max={4} property="wind" />
+
+          <WindDirectionBase title="Wind direction" height="340px" data={data} sm={6} lg={6} max={4} property="wind_direction" />
+
+          <FeltTemperatureBase data={data} title="Felt temperature" height="340px" property="temperature" sm={6} lg={6} max={4} />
+
+          <SolarBase data={data} title="Solar" height="340px" property="solar" sm={6} lg={6} max={4} />
+
+          <UviBase data={data} title="UVI" height="340px" property="uvi" sm={6} lg={6} max={4} />
+
+          <DewPointBase data={data} title="Dew point" height="340px" property="dew_point" sm={6} lg={6} max={4} />
         </Row>
+
         <Row className="start-tables">
           <Column>
             <TableBase

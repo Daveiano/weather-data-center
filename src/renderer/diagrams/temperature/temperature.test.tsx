@@ -3,14 +3,14 @@ import {fireEvent, render, screen} from '@testing-library/react'
 
 import data from "../../../../tests/data/scaling-input.json";
 
-import { TemperatureBase } from './temperature-base';
-import { DewPointBase } from './dew-point-base';
-import { FeltTemperatureBase } from "./felt-temperature-base";
-import { TemperatureCombinedBase } from "./temperature-combined-base";
-import { TemperatureMinMaxBase } from "./temperature-min-max-base";
+import TemperatureBase from './temperature-base';
+import DewPointBase from './dew-point-base';
+import FeltTemperatureBase from "./felt-temperature-base";
+import TemperatureCombinedBase from "./temperature-combined-base";
+import TemperatureMinMaxBase from "./temperature-min-max-base";
 
 test('temperature diagram with 11-day data', async () => {
-  const { container } = render(<TemperatureBase title="Temperature" height="300px" data={data} />);
+  const { container } = render(<TemperatureBase title="Temperature" height="300px" data={data} property="temperature" />);
 
   expect(screen.getByTestId('temperature-diagram')).toHaveTextContent("Temperature");
 
@@ -18,7 +18,7 @@ test('temperature diagram with 11-day data', async () => {
 });
 
 test('dew point diagram with 11-day data', async () => {
-  const { container } = render(<DewPointBase title="Dew point" height="300px" data={data} />);
+  const { container } = render(<DewPointBase title="Dew point" height="300px" data={data} property="dew_point" />);
 
   expect(screen.getByTestId('dew-point-diagram')).toHaveTextContent("Dew point");
 
@@ -26,7 +26,7 @@ test('dew point diagram with 11-day data', async () => {
 });
 
 test('felt temperature diagram with 11-day data', async () => {
-  const { container } = render(<FeltTemperatureBase title="Felt temperature" height="300px" data={data} />);
+  const { container } = render(<FeltTemperatureBase title="Felt temperature" height="300px" data={data} property="felt_temperature" />);
 
   expect(screen.getByTestId('felt-temperature-diagram')).toHaveTextContent("Felt temperature");
 
@@ -39,6 +39,7 @@ test('temperature combined diagram with 11-day data', async () => {
       title="Temperature, Felt temperature and Dew point (Ø per day)"
       height="300px"
       data={data}
+      property="temperature"
     />
   );
 
@@ -53,6 +54,7 @@ test('temperature min max diagram with 11-day data', async () => {
       title="Minimum, maximum and average temperature"
       height="300px"
       data={data}
+      property="temperature"
     />
   );
 

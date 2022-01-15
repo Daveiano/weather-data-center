@@ -7,8 +7,9 @@ import { TemperatureFeelsLike32 } from "@carbon/icons-react";
 import { dataItem, DiagramBaseProps } from "../types";
 import { getTimeDifferenceInDays, scaleMin, scaleMax } from "../scaling";
 import { getTemperatureLineBaseProps } from './temperature-base';
+import { withEmptyCheck } from "../hoc";
 
-export const FeltTemperatureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
+const FeltTemperatureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
   const [dataMin, setDataMin] = useState([]);
   const [dataMax, setDataMax] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -93,4 +94,6 @@ export const FeltTemperatureBase:FunctionComponent<DiagramBaseProps> = (props: D
 
     </div>
   );
-}
+};
+
+export default withEmptyCheck(FeltTemperatureBase);

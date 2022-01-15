@@ -8,8 +8,9 @@ import { dataItem, DiagramBaseProps } from "../types";
 import { getTimeDifferenceInDays, scaleAverage } from "../scaling";
 import { TooltipLine} from "../tooltip";
 import { getTemperatureLineBaseProps } from "./temperature-base";
+import { withEmptyCheck } from "../hoc";
 
-export const DewPointBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
+const DewPointBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [daily, setDaily] = useState(false);
@@ -75,4 +76,6 @@ export const DewPointBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
 
     </div>
   );
-}
+};
+
+export default withEmptyCheck(DewPointBase);

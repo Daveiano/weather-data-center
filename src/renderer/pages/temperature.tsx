@@ -7,13 +7,13 @@ import { TemperatureLow } from '@carbon/pictograms-react';
 import { RootState } from "../renderer";
 import { Stats } from "../components/stats/stats";
 import { Empty } from "../components/empty";
-import {TemperatureBase} from "../diagrams/temperature/temperature-base";
+import TemperatureBase from "../diagrams/temperature/temperature-base";
 import TableBase from "../components/table-base/table-base";
 import {TABLE_SORT_DIRECTION} from "../components/table-base/misc";
 import {dataItem} from "../diagrams/types";
-import {TemperatureCombinedBase} from "../diagrams/temperature/temperature-combined-base";
-import {FeltTemperatureBase} from "../diagrams/temperature/felt-temperature-base";
-import {TemperatureMinMaxBase} from "../diagrams/temperature/temperature-min-max-base";
+import TemperatureCombinedBase from "../diagrams/temperature/temperature-combined-base";
+import FeltTemperatureBase from "../diagrams/temperature/felt-temperature-base";
+import TemperatureMinMaxBase from "../diagrams/temperature/temperature-min-max-base";
 
 /**
  * @see https://www.dwd.de/DE/service/lexikon/Functions/glossar.html?lv2=101334&lv3=101452
@@ -120,28 +120,47 @@ export const TemperaturePage: React.FC = (): React.ReactElement  => {
                         ]}
                       />
                     </Column>
-                    <Column sm={12} lg={12} max={9}>
-                      {/* @todo Add annotations. */}
-                      <TemperatureBase height="450px" data={data} />
-                    </Column>
+
+                    {/* @todo Add annotations. */}
+                    <TemperatureBase height="450px" data={data} property="temperature" sm={12} lg={12} max={9} hideTile={true} />
                   </Row>
                 </Tile>
               </Column>
-              <Column sm={12} lg={12} max={12}>
-                <Tile id="temp-01-felt-dew">
-                  <TemperatureCombinedBase data={data} title="Temperature, Felt temperature and Dew point (Ø per day)" height="600px" />
-                </Tile>
-              </Column>
-              <Column sm={12} lg={12} max={12}>
-                <Tile id="temp-02-min-max-felt">
-                  <FeltTemperatureBase height="600px" data={data} title="Felt temperature Minimum & Maximum (Min/Max per day)" />
-                </Tile>
-              </Column>
-              <Column sm={12} lg={12} max={12}>
-                <Tile className="table-combined" id="temp-03-combined">
-                  <TemperatureMinMaxBase height="650px" data={data} title="Minimum, maximum and average temperature" />
-                </Tile>
-              </Column>
+
+              <TemperatureCombinedBase
+                data={data}
+                title="Temperature, Felt temperature and Dew point (Ø per day)"
+                height="600px"
+                property="temperature"
+                sm={12}
+                lg={12}
+                max={12}
+                tileId="temp-01-felt-dew"
+              />
+
+              <FeltTemperatureBase
+                height="600px"
+                data={data}
+                title="Felt temperature Minimum & Maximum (Min/Max per day)"
+                property="felt_temperature"
+                sm={12}
+                lg={12}
+                max={12}
+                tileId="temp-02-min-max-felt"
+              />
+
+              <TemperatureMinMaxBase
+                height="650px"
+                data={data}
+                title="Minimum, maximum and average temperature"
+                property="temperature"
+                sm={12}
+                lg={12}
+                max={12}
+                tileClassName="table-combined"
+                tileId="temp-03-combined"
+              />
+
               <Column sm={12} lg={12} max={12} id="temp-04-table">
                 <TableBase
                   start={0}

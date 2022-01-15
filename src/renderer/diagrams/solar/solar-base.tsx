@@ -7,8 +7,9 @@ import { Loading } from "carbon-components-react";
 import {dataItem, DiagramBaseProps} from "../types";
 import { getTimeDifferenceInDays, scaleAverage } from "../scaling";
 import { TooltipLine } from "../tooltip";
+import { withEmptyCheck } from "../hoc";
 
-export const SolarBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
+const SolarBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [daily, setDaily] = useState(false);
@@ -110,4 +111,6 @@ export const SolarBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBase
       </div>
     </div>
   );
-}
+};
+
+export default withEmptyCheck(SolarBase);

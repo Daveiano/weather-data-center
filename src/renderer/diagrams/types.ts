@@ -9,8 +9,10 @@ type DiagramBaseProps = ColumnDefaultProps & {
   data: dataItem[],
   precision?: Precision,
   annotations?: AnnotationMatcher<ComputedBarDatum<dataItem>>[],
-  // @todo Make required.
-  property?: propertyParameter
+  property: propertyParameter,
+  tileId?: string,
+  tileClassName?: string,
+  hideTile?: boolean
 };
 
 type dataItem = {

@@ -7,6 +7,7 @@ import { ResponsiveLine } from "@nivo/line";
 import {dataItem, DiagramBaseProps} from "../types";
 import { getTimeDifferenceInDays, scaleAverage } from "../scaling";
 import { TooltipLine } from "../tooltip";
+import { withEmptyCheck } from "../hoc";
 
 const degToCompass = (deg: number): string => {
   const value = Math.floor((deg / 22.5) + 0.5),
@@ -15,7 +16,7 @@ const degToCompass = (deg: number): string => {
   return compass[(value % 16)];
 };
 
-export const WindDirectionBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
+const WindDirectionBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [daily, setDaily] = useState(false);
@@ -117,4 +118,6 @@ export const WindDirectionBase:FunctionComponent<DiagramBaseProps> = (props: Dia
       </div>
     </div>
   );
-}
+};
+
+export default withEmptyCheck(WindDirectionBase);
