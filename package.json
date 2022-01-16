@@ -152,6 +152,7 @@
     "date-fns": "^2.19.0",
     "dotenv": "^10.0.0",
     "electron-squirrel-startup": "^1.0.0",
+    "formik": "^2.2.9",
     "moment": "^2.29.1",
     "query-string": "^7.0.0",
     "react": "^17.0.1",
@@ -162,6 +163,7 @@
     "react-router-hash-link": "^2.4.3",
     "react-spinners": "^0.10.6",
     "redux": "^4.0.5",
-    "use-debounce": "^7.0.1"
+    "use-debounce": "^7.0.1",
+    "yup": "^0.32.11"
   }
 }

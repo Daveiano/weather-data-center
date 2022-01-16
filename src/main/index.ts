@@ -1,17 +1,21 @@
-import { app, BrowserWindow, ipcMain, dialog, session } from 'electron';
+import { app, BrowserWindow, ipcMain, dialog, session, shell } from 'electron';
 import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 
-
 import fs from 'fs';
-
 import async from "async";
 import moment from 'moment';
 import csv from 'csv-parser';
 import Datastore from '@seald-io/nedb';
+
 import { dataItem } from "../renderer/diagrams/types";
+import { ImportSettingsFormValues } from "../renderer/components/import-settings-modal";
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
+
+type ConfigRecord = {
+  type: string,
+} & ImportSettingsFormValues;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -22,6 +26,37 @@ const db = new Datastore({
   autoload: true,
   // On ubuntu this is /home/{username}/.config/weather-data-center.
   filename: `${app.getPath('userData')}/nedb/data`
+});
+
+// Check if config record is present, if not create it.
+let config: ConfigRecord = {
+  type: 'config',
+  unit_temperature: '°C',
+  header_temperature: 'temperature',
+  header_felt: 'felt_temperature',
+  header_dew_point: 'dew_point',
+  unit_rain: 'mm',
+  header_rain: 'rain',
+  unit_humidity: '%',
+  header_humidity: 'humidity',
+  unit_pressure: 'hPa',
+  header_pressure: 'pressure',
+  unit_wind: 'wind',
+  unit_wind_direction: '°',
+  header_wind: 'wind',
+  header_wind_direction: 'wind_direction',
+  header_gust: 'gust',
+  unit_solar: 'w/m²',
+  header_solar: 'solar',
+  header_uvi: 'uvi'
+};
+
+db.find({ type: 'config' }).limit(1).exec((err, docs: ConfigRecord[]) => {
+  if (docs.length) {
+    config = docs[0];
+  } else {
+    db.insert(config);
+  }
 });
 
 type asyncCallback = (error: string|null, results: number|string) => void;
@@ -62,6 +97,12 @@ const createWindow = (): void => {
       contextIsolation: true,
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
     }
+  });
+
+  // Open weblinks in browser, not in electron mainWindow.
+  mainWindow.webContents.setWindowOpenHandler(({ url }) => {
+    shell.openExternal(url);
+    return { action: 'deny' };
   });
 
   async.parallel({
@@ -124,7 +165,20 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
-const columnsToRead: string[] = ['time', 'temperature', 'humidity', 'pressure', 'rain', 'solar', 'uvi', 'wind', 'wind_direction', 'gust', 'dew_point', 'felt_temperature'];
+const columnsToRead: string[] = [
+  'time',
+  'temperature',
+  'humidity',
+  'pressure',
+  'rain',
+  'solar',
+  'uvi',
+  'wind',
+  'wind_direction',
+  'gust',
+  'dew_point',
+  'felt_temperature'
+];
 
 ipcMain.on('query-data',(event) => {
   db.find({ time: { $exists: true } }).sort({ time: 1 }).exec((err, docs: { time: number }[]) => {
@@ -138,6 +192,17 @@ ipcMain.on('query-data',(event) => {
         }))
     );
   });
+});
+
+ipcMain.on('config', (event, args) => {
+  if (!args) {
+    event.reply('config', config);
+  } else {
+    db.update({ type: 'config' }, { $set: args[0] }, {}, () => {
+      config = args[0];
+      event.reply('config-saved');
+    });
+  }
 });
 
 ipcMain.on('open-file-dialog', (event) => {
@@ -201,8 +266,8 @@ ipcMain.on('open-file-dialog', (event) => {
                     }))
                 );
 
+                event.reply('number-of-duplicates', [duplicates, deDuplicatedData.length]);
                 event.reply('app-is-loading', false);
-                event.reply('number-of-duplicates', duplicates);
               });
             });
           });

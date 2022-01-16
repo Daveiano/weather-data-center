@@ -31,7 +31,7 @@ import {
   Pressure32
 } from "@carbon/icons-react";
 
-import Import from "./import";
+import { Import } from "./import";
 import { userSetDateAction } from "../actions-app";
 import { RootState } from "../renderer";
 import {dataHasRecordsForProperty} from "../diagrams/hoc";
@@ -296,14 +296,6 @@ export const AppHeader: React.FC = (): React.ReactElement => {
             <HeaderPanel aria-label="Header Panel" expanded={headerPanelExpanded}>
               <Column>
                 <Import />
-
-                <div className="import-data">
-                  {dataFromStore.length > 0 &&
-                  <div>
-                    {dataFromStore.length} records in DB
-                  </div>
-                  }
-                </div>
               </Column>
             </HeaderPanel>
           </Header>

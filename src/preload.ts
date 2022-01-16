@@ -1,6 +1,13 @@
 import { contextBridge, ipcRenderer } from 'electron';
 
-const validChannels = ["open-file-dialog", "loaded-raw-csv-data", "app-is-loading", "query-data", "number-of-duplicates"];
+const validChannels = [
+  "open-file-dialog",
+  "app-is-loading",
+  "query-data",
+  "number-of-duplicates",
+  'config',
+  'config-saved'
+];
 
 declare global {
   interface Window {

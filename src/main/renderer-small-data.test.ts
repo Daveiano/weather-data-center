@@ -138,7 +138,7 @@ it('should show the number of imported data', async () => {
   await page.click('header.bx--header button[aria-label="Upload Data"]');
 
   const numberImported = page.locator('header.bx--header .bx--header-panel .import-data');
-  expect(await numberImported.evaluate(node => node.textContent)).toBe('4162 records in DB');
+  expect(await numberImported.evaluate(node => node.textContent)).toBe('4162 records imported');
 
   const imageSideBarOpen = await page.screenshot({ fullPage: true });
   expect(imageSideBarOpen).toMatchImageSnapshot({

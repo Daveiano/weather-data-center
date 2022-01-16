@@ -81,11 +81,18 @@ header.bx--header {
     }
   }
   .bx--header-panel--expanded {
-    width: 25rem;
-    #import {
-      display: block;
-      width: 100%;
-      max-width: 100%;
+    width: 27rem;
+    hr {
+      width: 24rem;
+    }
+    .import-action {
+      display: flex;
+      flex-direction: column;
+      .bx--btn-set {
+        button {
+          max-width: 12.5rem;
+        }
+      }
     }
   }
 }

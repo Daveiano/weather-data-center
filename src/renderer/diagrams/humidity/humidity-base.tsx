@@ -19,7 +19,7 @@ const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProp
 
     let newData: dataItem[];
 
-    // Calculate daily average by summing all measurements an dividing by the
+    // Calculate daily average by summing all measurements and dividing by the
     // number of values.
     if (timeDifferenceInDays > 14) {
       setDaily(true);

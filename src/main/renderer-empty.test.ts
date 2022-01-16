@@ -42,6 +42,7 @@ describe('empty', () => {
     await page.click('header.bx--header a.bx--header__name');
     await page.reload();
   });
+
   it('should start the app on an empty state', async () => {
     expect(await page.title()).toBe('Weather Data Center');
 
@@ -69,6 +70,7 @@ describe('empty', () => {
       dumpDiffToConsole: true
     });
   });
+
   it('should import new data', async () => {
     await page.click('header.bx--header button[aria-label="Upload Data"]');
 
@@ -103,7 +105,7 @@ describe('empty', () => {
     });
 
     const numberImported = page.locator('header.bx--header .bx--header-panel .import-data');
-    expect(await numberImported.evaluate(node => node.textContent)).toBe('1196 records in DB');
+    expect(await numberImported.evaluate(node => node.textContent)).toBe('1196 records imported');
   });
 });
 
@@ -112,11 +114,12 @@ describe('empty', () => {
  */
 it('should not import duplicates', async () => {
   const numberImported = page.locator('header.bx--header .bx--header-panel .import-data');
-  expect(await numberImported.evaluate(node => node.textContent)).toBe('1196 records in DB');
+  expect(await numberImported.evaluate(node => node.textContent)).toBe('1196 records imported');
 
   const imageBeforeImport = await page.screenshot({ fullPage: true });
   expect(imageBeforeImport).toMatchImageSnapshot({
-    failureThreshold: 3.5,
+    // @todo Try to decrease the failureThreshold on all image snapshots.
+    failureThreshold: 1,
     failureThresholdType: 'percent',
     dumpDiffToConsole: true
   });
@@ -140,7 +143,7 @@ it('should not import duplicates', async () => {
   });
 
   const numberImportedAfterSecondImport = page.locator('header.bx--header .bx--header-panel .import-data');
-  expect(await numberImportedAfterSecondImport.evaluate(node => node.textContent)).toBe('1196 records in DB');
+  expect(await numberImportedAfterSecondImport.evaluate(node => node.textContent)).toBe('1196 records imported');
 
   const duplicateItems = page.locator('header.bx--header .bx--header-panel .import-action .bx--inline-notification__subtitle');
   expect(await duplicateItems.evaluate(node => node.textContent)).toBe('1196 items were duplicate and are not imported.');
@@ -151,7 +154,7 @@ it('should not import duplicates', async () => {
  */
 it('should import new data when data still exists', async () => {
   const numberImported = page.locator('header.bx--header .bx--header-panel .import-data');
-  expect(await numberImported.evaluate(node => node.textContent)).toBe('1196 records in DB');
+  expect(await numberImported.evaluate(node => node.textContent)).toBe('1196 records imported');
 
   const imageBeforeImport = await page.screenshot({ fullPage: true });
   expect(imageBeforeImport).toMatchImageSnapshot({
@@ -179,5 +182,5 @@ it('should import new data when data still exists', async () => {
   });
 
   const numberImportedAfterSecondImport = page.locator('header.bx--header .bx--header-panel .import-data');
-  expect(await numberImportedAfterSecondImport.evaluate(node => node.textContent)).toBe('2393 records in DB');
+  expect(await numberImportedAfterSecondImport.evaluate(node => node.textContent)).toBe('2393 records imported');
 });
