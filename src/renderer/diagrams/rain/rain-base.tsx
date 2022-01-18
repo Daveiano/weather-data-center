@@ -41,7 +41,6 @@ const RainBarBaseProps: RainBarBasePropsTypes = {
   valueScale: { type: 'linear' },
   indexScale: { type: 'band', round: false },
   minValue: 0,
-  valueFormat: value => `${value} mm`,
   margin: { top: 20, right: 10, bottom: 20, left: 40 },
   enableLabel: false,
   labelSkipHeight: 50,
@@ -58,8 +57,11 @@ const RainBarBaseProps: RainBarBasePropsTypes = {
   isInteractive: true
 };
 
-export const getRainBarBaseProps = (precision: Precision, data: dataItem[], property: propertyParameter): RainBarBasePropsTypes => {
+export const getRainBarBaseProps = (precision: Precision, data: dataItem[], property: propertyParameter, unit: string): RainBarBasePropsTypes => {
   const newRainBarBaseProps = RainBarBaseProps;
+
+  newRainBarBaseProps.valueFormat = value => `${value} ${unit}`;
+  newRainBarBaseProps.axisLeft.legend = unit;
 
   newRainBarBaseProps.maxValue = Math.max(...data.map(item => item[property] )) + 5;
   newRainBarBaseProps.theme = {
@@ -174,7 +176,7 @@ const RainBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): 
 
       <div style={{ height: props.height }} className="diagram">
         <ResponsiveBar
-          {...getRainBarBaseProps(precision, data, 'rain')}
+          {...getRainBarBaseProps(precision, data, 'rain', props.config.unit_rain)}
           data={data}
           annotations={props.annotations}
         />

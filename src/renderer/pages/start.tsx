@@ -28,6 +28,7 @@ import { Empty } from "../components/empty";
 export const Start:React.FC = (): React.ReactElement => {
   const dataFilteredFromStore = useSelector((state: RootState) => state.appState.dataFilteredPerTime);
   const loading = useSelector((state: RootState) => state.appState.loading);
+  const config = useSelector((state: RootState) => state.appState.config);
 
   const [data, setData] = useState(dataFilteredFromStore);
 
@@ -61,42 +62,42 @@ export const Start:React.FC = (): React.ReactElement => {
                     property: 'temperature',
                     direction: 'max',
                     label: 'Maximum Temperature',
-                    unit: '°C',
+                    unit: config.unit_temperature,
                     icon: <TemperatureHigh />
                   },
                   {
                     property: 'temperature',
                     direction: 'min',
                     label: 'Minimum Temperature',
-                    unit: '°C',
+                    unit: config.unit_temperature,
                     icon: <TemperatureLow />
                   },
                   {
                     property: 'gust',
                     direction: 'max',
                     label: 'Maximum Gust',
-                    unit: ' km/h',
+                    unit: config.unit_wind,
                     icon: <Windy />
                   },
                   {
                     property: 'rain',
                     direction: 'max',
                     label: 'Maximum Rain in one day',
-                    unit: ' mm',
+                    unit: config.unit_rain,
                     icon: <RainyHeavy />
                   },
                   {
                     property: 'pressure',
                     direction: 'max',
                     label: 'Maximum Pressure',
-                    unit: ' hPa',
+                    unit: config.unit_pressure,
                     icon: <Sunny />
                   },
                   {
                     property: 'pressure',
                     direction: 'min',
                     label: 'Minimum Pressure',
-                    unit: ' hPa',
+                    unit: config.unit_pressure,
                     icon: <Weather />
                   }
                 ]}
@@ -104,25 +105,25 @@ export const Start:React.FC = (): React.ReactElement => {
             </Tile>
           </Column>
 
-          <TemperatureBase data={data} title="Temperature" height="340px" property="temperature" sm={6} lg={6} max={4} />
+          <TemperatureBase data={data} title="Temperature" height="340px" property="temperature" sm={6} lg={6} max={4} config={config} />
 
-          <PressureBase data={data} title="Pressure" height="340px" property="pressure" sm={6} lg={6} max={4} />
+          <PressureBase data={data} title="Pressure" height="340px" property="pressure" sm={6} lg={6} max={4} config={config} />
 
-          <RainBase data={data} title="Rain" height="340px" property="rain" sm={6} lg={6} max={4} />
+          <RainBase data={data} title="Rain" height="340px" property="rain" sm={6} lg={6} max={4} config={config} />
 
-          <HumidityBase data={data} title="Humidity" height="340px" sm={6} lg={6} max={4} property="humidity" />
+          <HumidityBase data={data} title="Humidity" height="340px" sm={6} lg={6} max={4} property="humidity" config={config} />
 
-          <WindBase title="Wind speed" height="340px" data={data} sm={6} lg={6} max={4} property="wind" />
+          <WindBase title="Wind speed" height="340px" data={data} sm={6} lg={6} max={4} property="wind" config={config} />
 
-          <WindDirectionBase title="Wind direction" height="340px" data={data} sm={6} lg={6} max={4} property="wind_direction" />
+          <WindDirectionBase title="Wind direction" height="340px" data={data} sm={6} lg={6} max={4} property="wind_direction" config={config} />
 
-          <FeltTemperatureBase data={data} title="Felt temperature" height="340px" property="temperature" sm={6} lg={6} max={4} />
+          <FeltTemperatureBase data={data} title="Felt temperature" height="340px" property="temperature" sm={6} lg={6} max={4} config={config} />
 
-          <SolarBase data={data} title="Solar" height="340px" property="solar" sm={6} lg={6} max={4} />
+          <SolarBase data={data} title="Solar" height="340px" property="solar" sm={6} lg={6} max={4} config={config} />
 
-          <UviBase data={data} title="UVI" height="340px" property="uvi" sm={6} lg={6} max={4} />
+          <UviBase data={data} title="UVI" height="340px" property="uvi" sm={6} lg={6} max={4} config={config} />
 
-          <DewPointBase data={data} title="Dew point" height="340px" property="dew_point" sm={6} lg={6} max={4} />
+          <DewPointBase data={data} title="Dew point" height="340px" property="dew_point" sm={6} lg={6} max={4} config={config} />
         </Row>
 
         <Row className="start-tables">
@@ -144,56 +145,56 @@ export const Start:React.FC = (): React.ReactElement => {
                 },
                 {
                   title: 'Temperature',
-                  small: 'in °C',
+                  small: `in ${config.unit_temperature}`,
                   id: 'temperature',
                   sortCycle: 'tri-states-from-ascending',
                 },
                 {
                   title: 'Felt temperature',
-                  small: 'in °C',
+                  small: `in ${config.unit_temperature}`,
                   id: 'felt_temperature',
                   sortCycle: 'tri-states-from-ascending',
                 },
                 {
                   title: 'Dew point',
-                  small: 'in °C',
+                  small: `in ${config.unit_temperature}`,
                   id: 'dew_point',
                   sortCycle: 'tri-states-from-ascending',
                 },
                 {
                   title: 'Pressure',
-                  small: 'in hPa',
+                  small: `in ${config.unit_pressure}`,
                   id: 'pressure',
                   sortCycle: 'tri-states-from-ascending',
                 },
                 {
                   title: 'Humidity',
-                  small: 'in %',
+                  small: `in ${config.unit_humidity}`,
                   id: 'humidity',
                   sortCycle: 'tri-states-from-ascending',
                 },
                 {
                   title: 'Rain',
-                  small: 'in mm',
+                  small: `in ${config.unit_rain}`,
                   id: 'rain',
                   tooltip: 'Accumulated during the day',
                   sortCycle: 'tri-states-from-ascending',
                 },
                 {
                   title: 'Wind',
-                  small: 'in km/h',
+                  small: `in ${config.unit_wind}`,
                   id: 'wind',
                   sortCycle: 'tri-states-from-ascending',
                 },
                 {
                   title: 'Gust',
-                  small: 'in km/h',
+                  small: `in ${config.unit_wind}`,
                   id: 'gust',
                   sortCycle: 'tri-states-from-ascending',
                 },
                 {
                   title: 'Solar irradiation',
-                  small: 'in w/m²',
+                  small: `in ${config.unit_solar}`,
                   id: 'solar',
                   sortCycle: 'tri-states-from-ascending',
                 },

@@ -21,6 +21,7 @@ import TemperatureMinMaxBase from "../diagrams/temperature/temperature-min-max-b
 export const TemperaturePage: React.FC = (): React.ReactElement  => {
   const dataFilteredFromStore = useSelector((state: RootState) => state.appState.dataFilteredPerTime);
   const loading = useSelector((state: RootState) => state.appState.loading);
+  const config = useSelector((state: RootState) => state.appState.config);
 
   const [data, setData] = useState(dataFilteredFromStore);
 
@@ -59,13 +60,13 @@ export const TemperaturePage: React.FC = (): React.ReactElement  => {
                             property: 'temperature',
                             direction: 'max',
                             label: 'Maximum',
-                            unit: '°C'
+                            unit: config.unit_temperature
                           },
                           {
                             property: 'temperature',
                             direction: 'min',
                             label: 'Minimum',
-                            unit: '°C',
+                            unit: config.unit_temperature,
                             icon: <TemperatureLow />
                           },
                           {
@@ -74,7 +75,7 @@ export const TemperaturePage: React.FC = (): React.ReactElement  => {
                             extra: 'summer-days',
                             label: 'Summer days',
                             description: 'T<sub>max</sub> ≥ 25 °C',
-                            unit: '°C'
+                            unit: config.unit_temperature
                           },
                           {
                             property: 'temperature',
@@ -82,7 +83,7 @@ export const TemperaturePage: React.FC = (): React.ReactElement  => {
                             extra: 'frost-days',
                             label: 'Frost days',
                             description: 'T<sub>min</sub> < 0 °C',
-                            unit: '°C'
+                            unit: config.unit_temperature
                           },
                           {
                             property: 'temperature',
@@ -90,7 +91,7 @@ export const TemperaturePage: React.FC = (): React.ReactElement  => {
                             extra: 'hot-days',
                             label: 'Hot days',
                             description: 'T<sub>max</sub> ≥ 30 °C',
-                            unit: '°C'
+                            unit: config.unit_temperature
                           },
                           {
                             property: 'temperature',
@@ -98,7 +99,7 @@ export const TemperaturePage: React.FC = (): React.ReactElement  => {
                             extra: 'ice-days',
                             label: 'Ice days',
                             description: 'T<sub>max</sub> < 0 °C',
-                            unit: '°C'
+                            unit: config.unit_temperature
                           },
                           {
                             property: 'temperature',
@@ -107,7 +108,7 @@ export const TemperaturePage: React.FC = (): React.ReactElement  => {
                             label: 'Tropical nights',
                             description: 'T<sub>min</sub> ≥ 20 °C',
                             tooltip: '18:00 UTC - 06:00 UTC',
-                            unit: '°C'
+                            unit: config.unit_temperature
                           },
                           {
                             property: 'temperature',
@@ -115,14 +116,14 @@ export const TemperaturePage: React.FC = (): React.ReactElement  => {
                             extra: 'desert-days',
                             label: 'Desert days',
                             description: 'T<sub>max</sub> ≥ 35 °C',
-                            unit: '°C'
+                            unit: config.unit_temperature
                           }
                         ]}
                       />
                     </Column>
 
                     {/* @todo Add annotations. */}
-                    <TemperatureBase height="450px" data={data} property="temperature" sm={12} lg={12} max={9} hideTile={true} />
+                    <TemperatureBase height="450px" data={data} property="temperature" sm={12} lg={12} max={9} hideTile={true} config={config} />
                   </Row>
                 </Tile>
               </Column>
@@ -136,6 +137,7 @@ export const TemperaturePage: React.FC = (): React.ReactElement  => {
                 lg={12}
                 max={12}
                 tileId="temp-01-felt-dew"
+                config={config}
               />
 
               <FeltTemperatureBase
@@ -147,6 +149,7 @@ export const TemperaturePage: React.FC = (): React.ReactElement  => {
                 lg={12}
                 max={12}
                 tileId="temp-02-min-max-felt"
+                config={config}
               />
 
               <TemperatureMinMaxBase
@@ -159,6 +162,7 @@ export const TemperaturePage: React.FC = (): React.ReactElement  => {
                 max={12}
                 tileClassName="table-combined"
                 tileId="temp-03-combined"
+                config={config}
               />
 
               <Column sm={12} lg={12} max={12} id="temp-04-table">
@@ -178,19 +182,19 @@ export const TemperaturePage: React.FC = (): React.ReactElement  => {
                     },
                     {
                       title: 'Temperature',
-                      small: 'in °C',
+                      small: `in ${config.unit_temperature}`,
                       id: 'temperature',
                       sortCycle: 'tri-states-from-ascending',
                     },
                     {
                       title: 'Felt temperature',
-                      small: 'in °C',
+                      small: `in ${config.unit_temperature}`,
                       id: 'felt_temperature',
                       sortCycle: 'tri-states-from-ascending',
                     },
                     {
                       title: 'Dew point',
-                      small: 'in °C',
+                      small: `in ${config.unit_temperature}`,
                       id: 'dew_point',
                       sortCycle: 'tri-states-from-ascending',
                     }

@@ -78,7 +78,7 @@ const SolarBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps):
             type: "linear",
             max: Math.max.apply(Math, data.map(item => item.solar)) + 25
           }}
-          yFormat={value => `${value} w/m²`}
+          yFormat={value => `${value} ${props.config.unit_solar}`}
           margin={{ top: 20, right: 10, bottom: 20, left: 40 }}
           curve="basis"
           // @todo theme={}
@@ -91,7 +91,7 @@ const SolarBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps):
           enablePointLabel={false}
           pointLabel="yFormatted"
           axisLeft={{
-            legend: 'w/m²',
+            legend: props.config.unit_solar,
             legendOffset: -35,
             legendPosition: 'middle',
             tickSize: 0,

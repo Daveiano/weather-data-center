@@ -84,7 +84,8 @@ const TemperatureCombinedBase:FunctionComponent<DiagramBaseProps> = (props: Diag
               ...dataTemp
             ],
             'temperature',
-            true
+            true,
+            props.config.unit_temperature
           )}
           data={[
             {

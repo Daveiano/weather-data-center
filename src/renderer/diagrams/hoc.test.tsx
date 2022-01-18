@@ -2,6 +2,7 @@ import React from 'react'
 import { render } from '@testing-library/react'
 
 import data from "../../../tests/data/scaling-input.json";
+import config from "../../../tests/data/config.json";
 
 import TemperatureBase from "./temperature/temperature-base";
 
@@ -18,6 +19,7 @@ test('hoc no render when data is not available', async () => {
         rain: item.rain
       }))}
       property="temperature"
+      config={config}
     />
   );
 

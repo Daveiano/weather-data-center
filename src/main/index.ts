@@ -14,7 +14,7 @@ declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 
 type ConfigRecord = {
-  type: string,
+  type: string
 } & ImportSettingsFormValues;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -31,6 +31,8 @@ const db = new Datastore({
 // Check if config record is present, if not create it.
 let config: ConfigRecord = {
   type: 'config',
+  import_date_format: 'YYYY/M/D k:m',
+  header_time: 'time',
   unit_temperature: '°C',
   header_temperature: 'temperature',
   header_felt: 'felt_temperature',
@@ -41,7 +43,7 @@ let config: ConfigRecord = {
   header_humidity: 'humidity',
   unit_pressure: 'hPa',
   header_pressure: 'pressure',
-  unit_wind: 'wind',
+  unit_wind: 'km/h',
   unit_wind_direction: '°',
   header_wind: 'wind',
   header_wind_direction: 'wind_direction',

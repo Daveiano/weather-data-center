@@ -2,6 +2,7 @@ import React from 'react'
 import {fireEvent, render, screen} from '@testing-library/react'
 
 import data from "../../../../tests/data/scaling-input.json";
+import config from "../../../../tests/data/config.json";
 
 import TemperatureBase from './temperature-base';
 import DewPointBase from './dew-point-base';
@@ -10,7 +11,7 @@ import TemperatureCombinedBase from "./temperature-combined-base";
 import TemperatureMinMaxBase from "./temperature-min-max-base";
 
 test('temperature diagram with 11-day data', async () => {
-  const { container } = render(<TemperatureBase title="Temperature" height="300px" data={data} property="temperature" />);
+  const { container } = render(<TemperatureBase title="Temperature" height="300px" data={data} property="temperature" config={config} />);
 
   expect(screen.getByTestId('temperature-diagram')).toHaveTextContent("Temperature");
 
@@ -18,7 +19,7 @@ test('temperature diagram with 11-day data', async () => {
 });
 
 test('dew point diagram with 11-day data', async () => {
-  const { container } = render(<DewPointBase title="Dew point" height="300px" data={data} property="dew_point" />);
+  const { container } = render(<DewPointBase title="Dew point" height="300px" data={data} property="dew_point" config={config} />);
 
   expect(screen.getByTestId('dew-point-diagram')).toHaveTextContent("Dew point");
 
@@ -26,7 +27,7 @@ test('dew point diagram with 11-day data', async () => {
 });
 
 test('felt temperature diagram with 11-day data', async () => {
-  const { container } = render(<FeltTemperatureBase title="Felt temperature" height="300px" data={data} property="felt_temperature" />);
+  const { container } = render(<FeltTemperatureBase title="Felt temperature" height="300px" data={data} property="felt_temperature" config={config} />);
 
   expect(screen.getByTestId('felt-temperature-diagram')).toHaveTextContent("Felt temperature");
 
@@ -40,6 +41,7 @@ test('temperature combined diagram with 11-day data', async () => {
       height="300px"
       data={data}
       property="temperature"
+      config={config}
     />
   );
 
@@ -55,6 +57,7 @@ test('temperature min max diagram with 11-day data', async () => {
       height="300px"
       data={data}
       property="temperature"
+      config={config}
     />
   );
 

@@ -90,7 +90,7 @@ const WindBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): 
             type: "linear",
             max: Math.max.apply(Math, dataGust.map(item => item.gust)) + 5
           }}
-          yFormat={value => `${value} km/h`}
+          yFormat={value => `${value} ${props.config.unit_wind}`}
           margin={{ top: 20, right: 10, bottom: 20, left: 40 }}
           curve="cardinal"
           // @todo theme={}
@@ -104,7 +104,7 @@ const WindBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): 
           enablePointLabel={false}
           pointLabel="yFormatted"
           axisLeft={{
-            legend: 'km/h',
+            legend: props.config.unit_wind,
             legendOffset: -35,
             legendPosition: 'middle',
             tickSize: 0,

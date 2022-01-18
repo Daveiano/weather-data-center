@@ -13,6 +13,7 @@ import HumidityBase from "../diagrams/humidity/humidity-base";
 export const PrecipitationPage: React.FC = (): React.ReactElement  => {
   const dataFilteredFromStore = useSelector((state: RootState) => state.appState.dataFilteredPerTime);
   const loading = useSelector((state: RootState) => state.appState.loading);
+  const config = useSelector((state: RootState) => state.appState.config);
 
   const [data, setData] = useState(dataFilteredFromStore);
 
@@ -62,13 +63,13 @@ export const PrecipitationPage: React.FC = (): React.ReactElement  => {
                             precision: 'month',
                             dateFormat: 'MMM YY',
                             label: 'Driest month',
-                            unit: 'mm',
+                            unit: config.unit_rain
                           },
                           {
                             property: 'rain',
                             direction: 'max',
                             label: 'Maximum per day',
-                            unit: 'mm'
+                            unit: config.unit_rain
                           },
                           {
                             property: 'rain',
@@ -77,7 +78,7 @@ export const PrecipitationPage: React.FC = (): React.ReactElement  => {
                             precision: 'week',
                             dateFormat: '\\Www\\/YY',
                             label: 'Maximum per week',
-                            unit: 'mm'
+                            unit: config.unit_rain
                           },
                           {
                             property: 'rain',
@@ -86,7 +87,7 @@ export const PrecipitationPage: React.FC = (): React.ReactElement  => {
                             precision: 'month',
                             dateFormat: 'MMM YY',
                             label: 'Maximum per month',
-                            unit: 'mm'
+                            unit: config.unit_rain
                           },
                           {
                             property: 'rain',
@@ -95,7 +96,7 @@ export const PrecipitationPage: React.FC = (): React.ReactElement  => {
                             precision: 'year',
                             dateFormat: 'YYYY',
                             label: 'Maximum per year',
-                            unit: 'mm'
+                            unit: config.unit_rain
                           },
                           {
                             property: 'rain',
@@ -111,7 +112,7 @@ export const PrecipitationPage: React.FC = (): React.ReactElement  => {
                             extra: 'rain-days-consecutive-sum',
                             label: 'Longest rain period amount',
                             description: 'Consecutive days with rain',
-                            unit: 'mm',
+                            unit: config.unit_rain
                           }
                         ]}
                       />
@@ -129,7 +130,7 @@ export const PrecipitationPage: React.FC = (): React.ReactElement  => {
                           match: (value, index, collection) => {
                             const max = Math.max(...Array.from(collection).map(item => item.data.value));
 
-                            return value.data.formattedValue === `${max} mm`;
+                            return value.data.formattedValue === `${max} ${config.unit_rain}`;
                           },
                           noteX: 25,
                           noteY: -100,
@@ -143,6 +144,7 @@ export const PrecipitationPage: React.FC = (): React.ReactElement  => {
                       sm={12}
                       lg={12}
                       max={9}
+                      config={config}
                     />
                   </Row>
                 </Tile>
@@ -157,9 +159,10 @@ export const PrecipitationPage: React.FC = (): React.ReactElement  => {
                 max={12}
                 tileClassName="table-combined"
                 tileId="rain-02-selectable"
+                config={config}
               />
 
-              <HumidityBase height="600px" data={data} title="Humidity (Ø per day)" sm={12} lg={12} max={12} property="humidity" tileId="rain-03-humidity" />
+              <HumidityBase height="600px" data={data} title="Humidity (Ø per day)" sm={12} lg={12} max={12} property="humidity" tileId="rain-03-humidity" config={config} />
 
             </Row>
           </Column>

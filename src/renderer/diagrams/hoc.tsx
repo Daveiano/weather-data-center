@@ -11,6 +11,7 @@ export const dataHasRecordsForProperty = (property: extendedPropertyParameter, d
 
 export const withEmptyCheck = (Component: React.JSXElementConstructor<DiagramBaseProps>): React.JSXElementConstructor<DiagramBaseProps> => {
   const WithEmptyCheckComponent = (props: DiagramBaseProps) => {
+
     if (!dataHasRecordsForProperty(props.property, props.data)) {
       return null;
     }
@@ -31,6 +32,7 @@ export const withEmptyCheck = (Component: React.JSXElementConstructor<DiagramBas
             title={props.title}
             height={props.height}
             property={props.property}
+            config={props.config}
           />
         </Tile>
       </Column>

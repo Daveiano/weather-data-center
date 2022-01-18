@@ -1,4 +1,10 @@
 import {dataItem} from "./diagrams/types";
+import {ImportSettingsFormValues} from "./components/import-settings-modal";
+
+/**
+ * @todo Refactor to use @reduxjs/toolkit
+ * @see https://redux-toolkit.js.org/api/createslice
+ */
 
 const isLoadingAction = (loading: boolean): { loading: boolean, type: string } => ({
     loading,
@@ -19,6 +25,10 @@ const isLoadingAction = (loading: boolean): { loading: boolean, type: string } =
   dateAction = (date: Date[]): { date: Date[], type: string } => ({
     date,
     type: 'DATE'
+  }),
+  configAction = (config: ImportSettingsFormValues): { config: ImportSettingsFormValues, type: string } => ({
+    config,
+    type: 'CONFIG'
   });
 
-export { isLoadingAction, dataAction, dataFilteredPerTimeAction, userSetDateAction, dateAction };
+export { isLoadingAction, dataAction, dataFilteredPerTimeAction, userSetDateAction, dateAction, configAction };

@@ -61,7 +61,7 @@ const FeltTemperatureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
 
       <div style={{ height: props.height }} className="diagram">
         <ResponsiveLine
-          {...getTemperatureLineBaseProps(daily ? 'daily' : '', [...dataMin, ...dataMax], 'felt_temperature', true)}
+          {...getTemperatureLineBaseProps(daily ? 'daily' : '', [...dataMin, ...dataMax], 'felt_temperature', true, props.config.unit_temperature)}
           data={[
             {
               id: 'Min',

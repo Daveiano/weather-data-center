@@ -93,7 +93,7 @@ const RainManualPeriodBase:FunctionComponent<DiagramBaseProps> = (props: Diagram
               },
               {
                 title: 'Rain',
-                small: 'in mm',
+                small: `in ${props.config.unit_rain}`,
                 id: 'rain',
                 sortCycle: 'tri-states-from-ascending',
               }
@@ -120,9 +120,8 @@ const RainManualPeriodBase:FunctionComponent<DiagramBaseProps> = (props: Diagram
         </Column>
         <Column sm={12} lg={12} max={8}>
           <div style={{ height: props.height }} className="diagram">
-            {/* @todo Create base object, like temperbaselinepropsthingstuff. */}
             <ResponsiveBar
-              {...getRainBarBaseProps(precision, data, 'rain')}
+              {...getRainBarBaseProps(precision, data, 'rain', props.config.unit_rain)}
               data={data}
             />
           </div>

@@ -17,7 +17,7 @@ type TemperatureLineBasePropsTypes = {
   xScale: ScaleTimeSpec,
   yScale?: ScaleLinearSpec,
   xFormat?: ValueFormat<DatumValue>,
-  yFormat: ValueFormat<DatumValue>,
+  yFormat?: ValueFormat<DatumValue>,
   axisLeft: AxisProps,
   axisBottom?: AxisProps,
   markers: CartesianMarkerProps[],
@@ -53,7 +53,6 @@ const TemperatureLineBaseProps: TemperatureLineBasePropsTypes = {
     format: "%Y-%m-%dT%H:%M:%S.000Z",
     precision: 'minute'
   },
-  yFormat: value => `${value} °C`,
   axisLeft: {
     legend: '°C',
     legendOffset: -35,
@@ -89,13 +88,16 @@ const TemperatureLineBaseProps: TemperatureLineBasePropsTypes = {
   margin: { top: 20, right: 10, bottom: 20, left: 40 }
 };
 
-export const getTemperatureLineBaseProps = (precision: string, data: dataItem[], property: propertyParameter, combinedTooltip: boolean): TemperatureLineBasePropsTypes => {
+export const getTemperatureLineBaseProps = (precision: string, data: dataItem[], property: propertyParameter, combinedTooltip: boolean, unit: string): TemperatureLineBasePropsTypes => {
   const newTemperatureLineBaseProps = TemperatureLineBaseProps;
 
   newTemperatureLineBaseProps.axisBottom = {
     tickSize: 0,
     tickPadding: 5
   };
+
+  newTemperatureLineBaseProps.yFormat = value => `${value} ${unit}`;
+  newTemperatureLineBaseProps.axisLeft.legend = unit;
 
   // @see https://github.com/d3/d3-time-format
   switch (precision) {
@@ -213,7 +215,7 @@ const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseP
 
       <div style={{ height: props.height }} className="diagram">
         <ResponsiveLine
-          {...getTemperatureLineBaseProps(daily ? 'daily' : '', data, 'temperature', false)}
+          {...getTemperatureLineBaseProps(daily ? 'daily' : '', data, 'temperature', false, props.config.unit_temperature)}
           data={[
             {
               id: 'temperature',

@@ -14,6 +14,7 @@ import {TABLE_SORT_DIRECTION} from "../components/table-base/misc";
 export const SolarPage: React.FC = (): React.ReactElement => {
   const dataFilteredFromStore = useSelector((state: RootState) => state.appState.dataFilteredPerTime);
   const loading = useSelector((state: RootState) => state.appState.loading);
+  const config = useSelector((state: RootState) => state.appState.config);
 
   const [data, setData] = useState(dataFilteredFromStore);
 
@@ -48,7 +49,7 @@ export const SolarPage: React.FC = (): React.ReactElement => {
                             property: 'solar',
                             direction: 'max',
                             label: 'Max Solar radiation',
-                            unit: 'w/m²'
+                            unit: config.unit_solar
                           },
                           {
                             property: 'uvi',
@@ -63,7 +64,7 @@ export const SolarPage: React.FC = (): React.ReactElement => {
                             precision: 'day',
                             label: 'Brightest day',
                             tooltip: 'Highest Ø from all data',
-                            unit: 'w/m²'
+                            unit: config.unit_solar
                           },
                           {
                             property: 'solar',
@@ -72,7 +73,7 @@ export const SolarPage: React.FC = (): React.ReactElement => {
                             precision: 'day',
                             label: 'Darkest day',
                             tooltip: 'Lowest Ø from all data',
-                            unit: 'w/m²'
+                            unit: config.unit_solar
                           }
                         ]}
                       />
@@ -95,7 +96,7 @@ export const SolarPage: React.FC = (): React.ReactElement => {
                         },
                         {
                           title: 'Solar radiation',
-                          small: 'in w/m²',
+                          small: `in ${config.unit_solar}`,
                           id: 'solar',
                           sortCycle: 'tri-states-from-ascending',
                         },
@@ -119,9 +120,9 @@ export const SolarPage: React.FC = (): React.ReactElement => {
 
               </Column>
 
-              <SolarBase height="600px" data={data} title="Solar radiation (Ø per day)" property="solar" sm={12} lg={12} max={12} />
+              <SolarBase height="600px" data={data} title="Solar radiation (Ø per day)" property="solar" sm={12} lg={12} max={12} config={config} />
 
-              <UviBase height="600px" data={data} title="UV Index (Max per day)" property="uvi" sm={12} lg={12} max={12} tileId="solar-01-uvi" />
+              <UviBase height="600px" data={data} title="UV Index (Max per day)" property="uvi" sm={12} lg={12} max={12} tileId="solar-01-uvi" config={config} />
             </Row>
           </Column>
         </Row>

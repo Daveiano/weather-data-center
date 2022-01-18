@@ -13,6 +13,7 @@ import {TABLE_SORT_DIRECTION} from "../components/table-base/misc";
 export const PressurePage: React.FC = (): React.ReactElement => {
   const dataFilteredFromStore = useSelector((state: RootState) => state.appState.dataFilteredPerTime);
   const loading = useSelector((state: RootState) => state.appState.loading);
+  const config = useSelector((state: RootState) => state.appState.config);
 
   const [data, setData] = useState(dataFilteredFromStore);
 
@@ -48,27 +49,27 @@ export const PressurePage: React.FC = (): React.ReactElement => {
                             property: 'pressure',
                             direction: 'max',
                             label: 'Maximum',
-                            unit: 'hPa'
+                            unit: config.unit_pressure
                           },
                           {
                             property: 'pressure',
                             direction: 'min',
                             label: 'Minimum',
-                            unit: 'hPa',
+                            unit: config.unit_pressure
                           },
                           {
                             property: 'pressure',
                             direction: 'extra',
                             extra: 'min-max-diff-down',
                             label: 'Biggest fall per day',
-                            unit: 'hPa',
+                            unit: config.unit_pressure
                           },
                           {
                             property: 'pressure',
                             direction: 'extra',
                             extra: 'min-max-diff-up',
                             label: 'Biggest rise per day',
-                            unit: 'hPa',
+                            unit: config.unit_pressure
                           }
                         ]}
                       />
@@ -91,19 +92,19 @@ export const PressurePage: React.FC = (): React.ReactElement => {
                         },
                         {
                           title: 'Pressure',
-                          small: 'in hPa',
+                          small: `in ${config.unit_pressure}`,
                           id: 'pressure',
                           sortCycle: 'tri-states-from-ascending',
                         },
                         {
                           title: 'Wind',
-                          small: 'in km/h',
+                          small: `in ${config.unit_wind}`,
                           id: 'wind',
                           sortCycle: 'tri-states-from-ascending',
                         },
                         {
                           title: 'Temperature',
-                          small: 'in °C',
+                          small: `in ${config.unit_temperature}`,
                           id: 'temperature',
                           sortCycle: 'tri-states-from-ascending',
                         },
@@ -120,7 +121,7 @@ export const PressurePage: React.FC = (): React.ReactElement => {
                 </Row>
               </Column>
 
-              <PressureBase height="600px" data={data} title="Pressure (Ø per day)" property="pressure" sm={12} lg={12} max={12} />
+              <PressureBase height="600px" data={data} title="Pressure (Ø per day)" property="pressure" sm={12} lg={12} max={12} config={config} />
             </Row>
           </Column>
         </Row>

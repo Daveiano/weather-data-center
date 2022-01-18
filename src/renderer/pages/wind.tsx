@@ -14,6 +14,7 @@ import {TABLE_SORT_DIRECTION} from "../components/table-base/misc";
 export const WindPage: React.FC = (): React.ReactElement => {
   const dataFilteredFromStore = useSelector((state: RootState) => state.appState.dataFilteredPerTime);
   const loading = useSelector((state: RootState) => state.appState.loading);
+  const config = useSelector((state: RootState) => state.appState.config);
 
   const [data, setData] = useState(dataFilteredFromStore);
 
@@ -49,7 +50,7 @@ export const WindPage: React.FC = (): React.ReactElement => {
                             property: 'gust',
                             direction: 'max',
                             label: 'Maximum Gust',
-                            unit: 'km/h'
+                            unit: config.unit_wind
                           },
                           {
                             property: 'gust',
@@ -65,7 +66,7 @@ export const WindPage: React.FC = (): React.ReactElement => {
                             precision: 'day',
                             label: 'Windiest day',
                             tooltip: 'Highest Ø from all data',
-                            unit: 'km/h',
+                            unit: config.unit_wind
                           }
                         ]}
                       />
@@ -88,19 +89,19 @@ export const WindPage: React.FC = (): React.ReactElement => {
                         },
                         {
                           title: 'Wind',
-                          small: 'in km/h',
+                          small: `in ${config.unit_wind}`,
                           id: 'wind',
                           sortCycle: 'tri-states-from-ascending',
                         },
                         {
                           title: 'Gust',
-                          small: 'in km/h',
+                          small: `in ${config.unit_wind}`,
                           id: 'gust',
                           sortCycle: 'tri-states-from-ascending',
                         },
                         {
                           title: 'Wind direction',
-                          small: 'in °',
+                          small: `in ${config.unit_wind_direction}`,
                           id: 'wind_direction',
                           sortCycle: 'tri-states-from-ascending',
                         },
@@ -117,9 +118,19 @@ export const WindPage: React.FC = (): React.ReactElement => {
                 </Row>
               </Column>
 
-              <WindBase height="600px" data={data} title="Wind and Gust speed" sm={12} lg={12} max={12} property="wind" />
+              <WindBase height="600px" data={data} title="Wind and Gust speed" sm={12} lg={12} max={12} property="wind" config={config} />
 
-              <WindDirectionBase height="600px" data={data} title="Wind direction (Ø per day)" property="wind_direction" sm={12} lg={12} max={12} tileId="wind-01-direction" />
+              <WindDirectionBase
+                height="600px"
+                data={data}
+                title="Wind direction (Ø per day)"
+                property="wind_direction"
+                sm={12}
+                lg={12}
+                max={12}
+                tileId="wind-01-direction"
+                config={config}
+              />
             </Row>
           </Column>
         </Row>

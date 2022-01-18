@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Button, ButtonSet, InlineNotification, SwitcherDivider} from 'carbon-components-react';
 import {Settings16, Upload16} from "@carbon/icons-react";
 
-import { isLoadingAction } from '../actions-app';
+import { isLoadingAction, configAction } from '../actions-app';
 import {ImportSettingsModal} from "./import-settings-modal";
 import {RootState} from "../renderer";
 
@@ -36,6 +36,7 @@ export const Import: React.FC = (): React.ReactElement => {
 
   const configListener = (event: any, arg: any): void => {
     setConfig(arg[0]);
+    dispatch(configAction(arg[0]));
   };
 
   return (
@@ -85,7 +86,7 @@ export const Import: React.FC = (): React.ReactElement => {
             kind='secondary'
             onClick={() => setOpen(true)}
           >
-            Import settings
+            Settings
           </Button>
           <Button
             disabled={loading}

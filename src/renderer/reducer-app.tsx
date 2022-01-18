@@ -1,10 +1,26 @@
 import queryString from 'query-string';
 import moment from "moment";
 import { dataItem } from "./diagrams/types";
+import {ImportSettingsFormValues} from "./components/import-settings-modal";
+
+interface RootState {
+  loading: boolean,
+  dateSetByUser: {
+    start: string | string[],
+    end: string | string[],
+  },
+  date: {
+    start: string | string[],
+    end: string | string[],
+  },
+  data: dataItem[] | [],
+  dataFilteredPerTime: dataItem[] | [],
+  config: ImportSettingsFormValues | null,
+}
 
 const { end, start } = queryString.parse(window.location.search);
 
-const appReducerDefaultState = {
+const appReducerDefaultState: RootState = {
     loading: false,
     dateSetByUser: {
       start: start,
@@ -14,13 +30,17 @@ const appReducerDefaultState = {
       start: start,
       end: end
     },
-    data: [] as dataItem[],
-    dataFilteredPerTime: [] as dataItem[]
+    data: [],
+    dataFilteredPerTime: [],
+    config: null,
   },
-  appReducer = (state = appReducerDefaultState, action: any) => {
+  appReducer = (state = appReducerDefaultState, action: any): RootState => {
     switch (action.type) {
       case 'IS_LOADING': {
         return Object.assign({}, state, { loading: action.loading });
+      }
+      case 'CONFIG': {
+        return Object.assign({}, state, { config: action.config });
       }
       case 'DATE': {
         return Object.assign({}, state, { date: {

@@ -79,7 +79,7 @@ const PressureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProp
             min: Math.min.apply(Math, data.map(item => item.pressure)) - 3,
             max: Math.max.apply(Math, data.map(item => item.pressure)) + 3
           }}
-          yFormat={value => `${value} hPa`}
+          yFormat={value => `${value} ${props.config.unit_pressure}`}
           margin={{ top: 20, right: 10, bottom: 20, left: 40 }}
           curve="cardinal"
           // @todo theme={}
@@ -93,7 +93,7 @@ const PressureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProp
           enablePointLabel={false}
           pointLabel="yFormatted"
           axisLeft={{
-            legend: 'hPa',
+            legend: props.config.unit_pressure,
             legendOffset: -35,
             legendPosition: 'middle',
             tickSize: 0,

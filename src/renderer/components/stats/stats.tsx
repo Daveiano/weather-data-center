@@ -196,7 +196,7 @@ export const Stats: React.FC<StatsProps> = (props: StatsProps): React.ReactEleme
 
               date = moment.unix(dataBundledPerDay[0].time).utc().format('YYYY/MM/DD');
               value = `+ ${dataBundledPerDay[0].rise.toFixed(1)} ${statsKey.unit}`;
-              statsKey.tooltip = `Min: ${dataBundledPerDay[0].min.toFixed(1)} hPa, Max: ${dataBundledPerDay[0].max.toFixed(1)} hPa`;
+              statsKey.tooltip = `Min: ${dataBundledPerDay[0].min.toFixed(1)} ${statsKey.unit}, Max: ${dataBundledPerDay[0].max.toFixed(1)} ${statsKey.unit}`;
               break;
             }
             case 'min-max-diff-down': {
@@ -209,7 +209,7 @@ export const Stats: React.FC<StatsProps> = (props: StatsProps): React.ReactEleme
 
               date = moment.unix(dataBundledPerDay[0].time).utc().format('YYYY/MM/DD');
               value = `${dataBundledPerDay[0].fall.toFixed(1)} ${statsKey.unit}`;
-              statsKey.tooltip = `Min: ${dataBundledPerDay[0].min.toFixed(1)} hPa, Max: ${dataBundledPerDay[0].max.toFixed(1)} hPa`;
+              statsKey.tooltip = `Min: ${dataBundledPerDay[0].min.toFixed(1)} ${statsKey.unit}, Max: ${dataBundledPerDay[0].max.toFixed(1)} ${statsKey.unit}`;
               break;
             }
             case 'rain-days-consecutive': {

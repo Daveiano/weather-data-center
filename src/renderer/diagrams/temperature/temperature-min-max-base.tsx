@@ -89,19 +89,19 @@ const TemperatureMinMaxBase:FunctionComponent<DiagramBaseProps> = (props: Diagra
               },
               {
                 title: 'Minimum',
-                small: 'in °C',
+                small: `in ${props.config.unit_temperature}`,
                 id: 'temperature_min',
                 sortCycle: 'tri-states-from-ascending',
               },
               {
                 title: 'Average',
-                small: 'in °C',
+                small: `in ${props.config.unit_temperature}`,
                 id: 'temperature_average',
                 sortCycle: 'tri-states-from-ascending',
               },
               {
                 title: 'Maximum',
-                small: 'in °C',
+                small: `in ${props.config.unit_temperature}`,
                 id: 'temperature_max',
                 sortCycle: 'tri-states-from-ascending',
               },
@@ -139,7 +139,8 @@ const TemperatureMinMaxBase:FunctionComponent<DiagramBaseProps> = (props: Diagra
                     })),
                   ],
                   'temperature',
-                  true
+                  true,
+                  props.config.unit_temperature
                 )}
                 data={[
                   {

@@ -84,7 +84,7 @@ const WindDirectionBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBas
             min: 0,
             max: 360
           }}
-          yFormat={value => `${value}°`}
+          yFormat={value => `${value}${props.config.unit_wind_direction}`}
           margin={{ top: 20, right: 10, bottom: 20, left: 40 }}
           curve="basis"
           // @todo theme={}
@@ -97,7 +97,7 @@ const WindDirectionBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBas
           enablePointLabel={false}
           pointLabel="yFormatted"
           axisLeft={{
-            legend: '°',
+            legend: props.config.unit_wind_direction,
             legendOffset: -35,
             legendPosition: 'middle',
             tickSize: 0,

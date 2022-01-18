@@ -2,9 +2,8 @@ import React, {FunctionComponent, useEffect, useRef, useState} from 'react';
 
 import {Formik} from "formik";
 import * as Yup from 'yup';
-import type {FormikHelpers} from "formik";
 
-import {Form, TextInput, Modal, FormGroup, Row, Column, Loading, InlineNotification} from "carbon-components-react";
+import {Form, TextInput, Modal, Row, Column, Loading, InlineNotification} from "carbon-components-react";
 
 type ImportSettingsModalProps = {
   open: boolean,
@@ -13,6 +12,8 @@ type ImportSettingsModalProps = {
 };
 
 export interface ImportSettingsFormValues {
+  import_date_format: string,
+  header_time: string,
   unit_temperature: string,
   header_temperature: string,
   header_felt: string,
@@ -39,6 +40,8 @@ export const ImportSettingsModal:FunctionComponent<ImportSettingsModalProps> = (
   const form = useRef(null);
   const modal = useRef(null);
   const initialValues: ImportSettingsFormValues = props.config ? props.config : {
+    import_date_format: '',
+    header_time: '',
     unit_temperature: '',
     header_temperature: '',
     header_felt: '',
@@ -89,8 +92,8 @@ export const ImportSettingsModal:FunctionComponent<ImportSettingsModalProps> = (
     <div ref={modal}>
       <Modal
         open={props.open}
-        modalHeading="Import settings"
-        modalLabel="Units & Headers"
+        modalHeading="Settings"
+        modalLabel="Units & Import"
         primaryButtonText="Save"
         secondaryButtonText="Cancel"
         onRequestClose={() => props.setOpen(false)}
@@ -112,6 +115,8 @@ export const ImportSettingsModal:FunctionComponent<ImportSettingsModalProps> = (
           initialValues={initialValues}
           onSubmit={submissionHandler}
           validationSchema={Yup.object().shape({
+            header_time: Yup.string().required(),
+            import_date_format: Yup.string().required(),
             unit_temperature: Yup.string().required(),
             header_temperature: Yup.string().required(),
             header_felt: Yup.string().required(),
@@ -154,256 +159,282 @@ export const ImportSettingsModal:FunctionComponent<ImportSettingsModalProps> = (
                   />
                 }
 
+                <h3 className="bx--type-productive-heading-02" style={{ marginBottom: '0.5rem' }}>Units</h3>
                 <Row>
                   <Column sm={6} lg={6} max={6}>
-                    <FormGroup legendText="Pressure">
-                      <div style={{marginBottom: '1rem'}}>
-                        <TextInput
-                          id="unit_pressure"
-                          type="text"
-                          name="unit_pressure"
-                          labelText="Unit"
-                          placeholder="hPa"
-                          value={values.unit_pressure}
-                          invalidText={errors.unit_pressure}
-                          invalid={Boolean(touched.unit_pressure && errors.unit_pressure)}
-                          disabled={isSubmitting}
-                        />
-                      </div>
-                      <div style={{marginBottom: '1rem'}}>
-                        <TextInput
-                          id="header_pressure"
-                          type="text"
-                          name="header_pressure"
-                          labelText="Header Pressure"
-                          placeholder="pressure"
-                          value={values.header_pressure}
-                          invalidText={errors.header_pressure}
-                          invalid={Boolean(touched.header_pressure && errors.header_pressure)}
-                          disabled={isSubmitting}
-                        />
-                      </div>
-                    </FormGroup>
-                    <FormGroup legendText="Solar">
-                      <div style={{marginBottom: '1rem'}}>
-                        <TextInput
-                          id="unit_solar"
-                          type="text"
-                          name="unit_solar"
-                          labelText="Unit solar radiation"
-                          placeholder="w/m²"
-                          value={values.unit_solar}
-                          invalidText={errors.unit_solar}
-                          invalid={Boolean(touched.unit_solar && errors.unit_solar)}
-                          disabled={isSubmitting}
-                        />
-                      </div>
-                      <div style={{marginBottom: '1rem'}}>
-                        <TextInput
-                          id="header_solar"
-                          type="text"
-                          name="header_solar"
-                          labelText="Header solar"
-                          placeholder="solar"
-                          value={values.header_solar}
-                          invalidText={errors.header_solar}
-                          invalid={Boolean(touched.header_solar && errors.header_solar)}
-                          disabled={isSubmitting}
-                        />
-                      </div>
-                      <div style={{marginBottom: '1rem'}}>
-                        <TextInput
-                          id="header_uvi"
-                          type="text"
-                          name="header_uvi"
-                          labelText="Header UVI"
-                          placeholder="uvi"
-                          value={values.header_uvi}
-                          invalidText={errors.header_uvi}
-                          invalid={Boolean(touched.header_uvi && errors.header_uvi)}
-                          disabled={isSubmitting}
-                        />
-                      </div>
-                    </FormGroup>
-                    <FormGroup legendText="Temperature">
-                      <div style={{marginBottom: '1rem'}}>
-                        <TextInput
-                          id="unit_temperature"
-                          type="text"
-                          name="unit_temperature"
-                          labelText="Unit"
-                          placeholder="°C, °F, ..."
-                          value={values.unit_temperature}
-                          invalidText={errors.unit_temperature}
-                          invalid={Boolean(touched.unit_temperature && errors.unit_temperature)}
-                          disabled={isSubmitting}
-                        />
-                      </div>
-                      <div style={{marginBottom: '1rem'}}>
-                        <TextInput
-                          id="header_temperature"
-                          type="text"
-                          name="header_temperature"
-                          labelText="Header temperature"
-                          placeholder="temperature"
-                          value={values.header_temperature}
-                          invalidText={errors.header_temperature}
-                          invalid={Boolean(touched.header_temperature && errors.header_temperature)}
-                          disabled={isSubmitting}
-                        />
-                      </div>
-                      <div style={{marginBottom: '1rem'}}>
-                        <TextInput
-                          id="header_felt"
-                          type="text"
-                          name="header_felt"
-                          labelText="Header felt temperature"
-                          placeholder="felt_temperature"
-                          value={values.header_felt}
-                          invalidText={errors.header_felt}
-                          invalid={Boolean(touched.header_felt && errors.header_felt)}
-                          disabled={isSubmitting}
-                        />
-                      </div>
-                      <div style={{marginBottom: '1rem'}}>
-                        <TextInput
-                          id="header_dew_point"
-                          type="text"
-                          name="header_dew_point"
-                          labelText="Header dew point temperature"
-                          placeholder="dew_point"
-                          value={values.header_dew_point}
-                          invalidText={errors.header_dew_point}
-                          invalid={Boolean(touched.header_dew_point && errors.header_dew_point)}
-                          disabled={isSubmitting}
-                        />
-                      </div>
-                    </FormGroup>
+                    <div style={{marginBottom: '1rem'}}>
+                      <TextInput
+                        id="unit_pressure"
+                        type="text"
+                        name="unit_pressure"
+                        labelText="Unit pressure"
+                        placeholder="hPa"
+                        value={values.unit_pressure}
+                        invalidText={errors.unit_pressure}
+                        invalid={Boolean(touched.unit_pressure && errors.unit_pressure)}
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                    <div style={{marginBottom: '1rem'}}>
+                      <TextInput
+                        id="unit_solar"
+                        type="text"
+                        name="unit_solar"
+                        labelText="Unit solar radiation"
+                        placeholder="w/m²"
+                        value={values.unit_solar}
+                        invalidText={errors.unit_solar}
+                        invalid={Boolean(touched.unit_solar && errors.unit_solar)}
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                    <div style={{marginBottom: '1rem'}}>
+                      <TextInput
+                        id="unit_wind"
+                        type="text"
+                        name="unit_wind"
+                        labelText="Unit wind"
+                        placeholder="km/h"
+                        value={values.unit_wind}
+                        invalidText={errors.unit_wind}
+                        invalid={Boolean(touched.unit_wind && errors.unit_wind)}
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                    <div style={{marginBottom: '1rem'}}>
+                      <TextInput
+                        id="unit_humidity"
+                        type="text"
+                        name="unit_humidity"
+                        labelText="Unit humidity"
+                        placeholder="%"
+                        value={values.unit_humidity}
+                        invalidText={errors.unit_humidity}
+                        invalid={Boolean(touched.unit_humidity && errors.unit_humidity)}
+                        disabled={isSubmitting}
+                      />
+                    </div>
                   </Column>
                   <Column sm={6} lg={6} max={6}>
-                    <FormGroup legendText="Rain">
-                      <div style={{marginBottom: '1rem'}}>
-                        <TextInput
-                          id="unit_rain"
-                          type="text"
-                          name="unit_rain"
-                          labelText="Unit"
-                          placeholder="mm, l, ..."
-                          value={values.unit_rain}
-                          invalidText={errors.unit_rain}
-                          invalid={Boolean(touched.unit_rain && errors.unit_rain)}
-                          disabled={isSubmitting}
-                        />
-                      </div>
-                      <div style={{marginBottom: '1rem'}}>
-                        <TextInput
-                          id="header_rain"
-                          type="text"
-                          name="header_rain"
-                          labelText="Header Rain"
-                          placeholder="rain"
-                          value={values.header_rain}
-                          invalidText={errors.header_rain}
-                          invalid={Boolean(touched.header_rain && errors.header_rain)}
-                          disabled={isSubmitting}
-                        />
-                      </div>
-                    </FormGroup>
-                    <FormGroup legendText="Humidity">
-                      <div style={{marginBottom: '1rem'}}>
-                        <TextInput
-                          id="unit_humidity"
-                          type="text"
-                          name="unit_humidity"
-                          labelText="Unit"
-                          placeholder="%"
-                          value={values.unit_humidity}
-                          invalidText={errors.unit_humidity}
-                          invalid={Boolean(touched.unit_humidity && errors.unit_humidity)}
-                          disabled={isSubmitting}
-                        />
-                      </div>
-                      <div style={{marginBottom: '1rem'}}>
-                        <TextInput
-                          id="header_humidity"
-                          type="text"
-                          name="header_humidity"
-                          labelText="Header Humidity"
-                          placeholder="humidity"
-                          value={values.header_humidity}
-                          invalidText={errors.header_humidity}
-                          invalid={Boolean(touched.header_humidity && errors.header_humidity)}
-                          disabled={isSubmitting}
-                        />
-                      </div>
-                    </FormGroup>
-                    <FormGroup legendText="Wind">
-                      <div style={{marginBottom: '1rem'}}>
-                        <TextInput
-                          id="unit_wind"
-                          type="text"
-                          name="unit_wind"
-                          labelText="Unit wind"
-                          placeholder="km/h"
-                          value={values.unit_wind}
-                          invalidText={errors.unit_wind}
-                          invalid={Boolean(touched.unit_wind && errors.unit_wind)}
-                          disabled={isSubmitting}
-                        />
-                      </div>
-                      <div style={{marginBottom: '1rem'}}>
-                        <TextInput
-                          id="unit_wind_direction"
-                          type="text"
-                          name="unit_wind_direction"
-                          labelText="Unit wind direction"
-                          placeholder="°"
-                          value={values.unit_wind_direction}
-                          invalidText={errors.unit_wind_direction}
-                          invalid={Boolean(touched.unit_wind_direction && errors.unit_wind_direction)}
-                          disabled={isSubmitting}
-                        />
-                      </div>
-                      <div style={{marginBottom: '1rem'}}>
-                        <TextInput
-                          id="header_wind"
-                          type="text"
-                          name="header_wind"
-                          labelText="Header wind"
-                          placeholder="wind"
-                          value={values.header_wind}
-                          invalidText={errors.header_wind}
-                          invalid={Boolean(touched.header_wind && errors.header_wind)}
-                          disabled={isSubmitting}
-                        />
-                      </div>
-                      <div style={{marginBottom: '1rem'}}>
-                        <TextInput
-                          id="header_gust"
-                          type="text"
-                          name="header_gust"
-                          labelText="Header gust"
-                          placeholder="gust"
-                          value={values.header_gust}
-                          invalidText={errors.header_gust}
-                          invalid={Boolean(touched.header_gust && errors.header_gust)}
-                          disabled={isSubmitting}
-                        />
-                      </div>
-                      <div style={{marginBottom: '1rem'}}>
-                        <TextInput
-                          id="header_wind_direction"
-                          type="text"
-                          name="header_wind_direction"
-                          labelText="Header wind direction"
-                          placeholder="wind_direction"
-                          value={values.header_wind_direction}
-                          invalidText={errors.header_wind_direction}
-                          invalid={Boolean(touched.header_wind_direction && errors.header_wind_direction)}
-                          disabled={isSubmitting}
-                        />
-                      </div>
-                    </FormGroup>
+                    <div style={{marginBottom: '1rem'}}>
+                      <TextInput
+                        id="unit_temperature"
+                        type="text"
+                        name="unit_temperature"
+                        labelText="Unit temperature"
+                        placeholder="°C, F, ..."
+                        value={values.unit_temperature}
+                        invalidText={errors.unit_temperature}
+                        invalid={Boolean(touched.unit_temperature && errors.unit_temperature)}
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                    <div style={{marginBottom: '1rem'}}>
+                      <TextInput
+                        id="unit_rain"
+                        type="text"
+                        name="unit_rain"
+                        labelText="Unit rain"
+                        placeholder="mm, l, ..."
+                        value={values.unit_rain}
+                        invalidText={errors.unit_rain}
+                        invalid={Boolean(touched.unit_rain && errors.unit_rain)}
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                    <div style={{marginBottom: '1rem'}}>
+                      <TextInput
+                        id="unit_wind_direction"
+                        type="text"
+                        name="unit_wind_direction"
+                        labelText="Unit wind direction"
+                        placeholder="°"
+                        value={values.unit_wind_direction}
+                        invalidText={errors.unit_wind_direction}
+                        invalid={Boolean(touched.unit_wind_direction && errors.unit_wind_direction)}
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                  </Column>
+                </Row>
+
+                <h3 className="bx--type-productive-heading-02" style={{ marginBottom: '0.5rem' }}>Import</h3>
+                <Row>
+                  <Column sm={12} lg={12} max={12}>
+                    <div style={{marginBottom: '1rem'}}>
+                      <TextInput
+                        id="header_time"
+                        type="text"
+                        name="header_time"
+                        labelText="Header time"
+                        placeholder="time"
+                        value={values.header_time}
+                        invalidText={errors.header_time}
+                        invalid={Boolean(touched.header_time && errors.header_time)}
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                    {/* @todo Add help about date format. */}
+                    <div style={{marginBottom: '1rem'}}>
+                      <TextInput
+                        id="import_date_format"
+                        type="text"
+                        name="import_date_format"
+                        labelText="Time format"
+                        placeholder="YYYY/M/D k:m"
+                        value={values.import_date_format}
+                        invalidText={errors.import_date_format}
+                        invalid={Boolean(touched.import_date_format && errors.import_date_format)}
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                  </Column>
+                  <Column sm={6} lg={6} max={6}>
+                    <div style={{marginBottom: '1rem'}}>
+                      <TextInput
+                        id="header_pressure"
+                        type="text"
+                        name="header_pressure"
+                        labelText="Header Pressure"
+                        placeholder="pressure"
+                        value={values.header_pressure}
+                        invalidText={errors.header_pressure}
+                        invalid={Boolean(touched.header_pressure && errors.header_pressure)}
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                    <div style={{marginBottom: '1rem'}}>
+                      <TextInput
+                        id="header_solar"
+                        type="text"
+                        name="header_solar"
+                        labelText="Header solar"
+                        placeholder="solar"
+                        value={values.header_solar}
+                        invalidText={errors.header_solar}
+                        invalid={Boolean(touched.header_solar && errors.header_solar)}
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                    <div style={{marginBottom: '1rem'}}>
+                      <TextInput
+                        id="header_uvi"
+                        type="text"
+                        name="header_uvi"
+                        labelText="Header UVI"
+                        placeholder="uvi"
+                        value={values.header_uvi}
+                        invalidText={errors.header_uvi}
+                        invalid={Boolean(touched.header_uvi && errors.header_uvi)}
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                    <div style={{marginBottom: '1rem'}}>
+                      <TextInput
+                        id="header_temperature"
+                        type="text"
+                        name="header_temperature"
+                        labelText="Header temperature"
+                        placeholder="temperature"
+                        value={values.header_temperature}
+                        invalidText={errors.header_temperature}
+                        invalid={Boolean(touched.header_temperature && errors.header_temperature)}
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                    <div style={{marginBottom: '1rem'}}>
+                      <TextInput
+                        id="header_felt"
+                        type="text"
+                        name="header_felt"
+                        labelText="Header felt temperature"
+                        placeholder="felt_temperature"
+                        value={values.header_felt}
+                        invalidText={errors.header_felt}
+                        invalid={Boolean(touched.header_felt && errors.header_felt)}
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                    <div style={{marginBottom: '1rem'}}>
+                      <TextInput
+                        id="header_dew_point"
+                        type="text"
+                        name="header_dew_point"
+                        labelText="Header dew point temperature"
+                        placeholder="dew_point"
+                        value={values.header_dew_point}
+                        invalidText={errors.header_dew_point}
+                        invalid={Boolean(touched.header_dew_point && errors.header_dew_point)}
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                  </Column>
+                  <Column sm={6} lg={6} max={6}>
+                    <div style={{marginBottom: '1rem'}}>
+                      <TextInput
+                        id="header_rain"
+                        type="text"
+                        name="header_rain"
+                        labelText="Header Rain"
+                        placeholder="rain"
+                        value={values.header_rain}
+                        invalidText={errors.header_rain}
+                        invalid={Boolean(touched.header_rain && errors.header_rain)}
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                    <div style={{marginBottom: '1rem'}}>
+                      <TextInput
+                        id="header_humidity"
+                        type="text"
+                        name="header_humidity"
+                        labelText="Header Humidity"
+                        placeholder="humidity"
+                        value={values.header_humidity}
+                        invalidText={errors.header_humidity}
+                        invalid={Boolean(touched.header_humidity && errors.header_humidity)}
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                    <div style={{marginBottom: '1rem'}}>
+                      <TextInput
+                        id="header_wind"
+                        type="text"
+                        name="header_wind"
+                        labelText="Header wind"
+                        placeholder="wind"
+                        value={values.header_wind}
+                        invalidText={errors.header_wind}
+                        invalid={Boolean(touched.header_wind && errors.header_wind)}
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                    <div style={{marginBottom: '1rem'}}>
+                      <TextInput
+                        id="header_gust"
+                        type="text"
+                        name="header_gust"
+                        labelText="Header gust"
+                        placeholder="gust"
+                        value={values.header_gust}
+                        invalidText={errors.header_gust}
+                        invalid={Boolean(touched.header_gust && errors.header_gust)}
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                    <div style={{marginBottom: '1rem'}}>
+                      <TextInput
+                        id="header_wind_direction"
+                        type="text"
+                        name="header_wind_direction"
+                        labelText="Header wind direction"
+                        placeholder="wind_direction"
+                        value={values.header_wind_direction}
+                        invalidText={errors.header_wind_direction}
+                        invalid={Boolean(touched.header_wind_direction && errors.header_wind_direction)}
+                        disabled={isSubmitting}
+                      />
+                    </div>
                   </Column>
                 </Row>
 

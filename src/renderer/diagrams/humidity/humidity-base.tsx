@@ -79,7 +79,7 @@ const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProp
             min: 0,
             max: 103
           }}
-          yFormat={value => `${value} %`}
+          yFormat={value => `${value} ${props.config.unit_humidity}`}
           margin={{ top: 20, right: 10, bottom: 20, left: 40 }}
           curve="cardinal"
           // @todo theme={}
@@ -92,7 +92,7 @@ const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProp
           enablePointLabel={false}
           pointLabel="yFormatted"
           axisLeft={{
-            legend: '%',
+            legend: props.config.unit_humidity,
             legendOffset: -35,
             legendPosition: 'middle',
             tickSize: 0,

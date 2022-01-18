@@ -2,6 +2,7 @@ import {Precision, propertyParameter} from "./scaling";
 import type {AnnotationMatcher} from "@nivo/annotations";
 import type {ComputedBarDatum} from "@nivo/bar/dist/types/types";
 import type { ColumnDefaultProps } from "carbon-components-react/lib/components/Grid/Column";
+import {ImportSettingsFormValues} from "../components/import-settings-modal";
 
 type DiagramBaseProps = ColumnDefaultProps & {
   title?: string,
@@ -12,7 +13,8 @@ type DiagramBaseProps = ColumnDefaultProps & {
   property: propertyParameter,
   tileId?: string,
   tileClassName?: string,
-  hideTile?: boolean
+  hideTile?: boolean,
+  config: ImportSettingsFormValues
 };
 
 type dataItem = {
