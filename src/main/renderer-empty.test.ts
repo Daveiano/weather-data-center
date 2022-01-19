@@ -5,6 +5,8 @@ import fs from "fs";
 
 expect.extend({ toMatchImageSnapshot });
 
+jest.setTimeout(25000);
+
 let page: Page,
   electronApp: ElectronApplication;
 
@@ -38,9 +40,29 @@ afterAll(async () => {
 
 describe('empty', () => {
   beforeEach(async () => {
+    await electronApp.close();
     await fs.truncateSync(`${__dirname.replace('src/main', '')}tests/data/empty/nedb/data`, 0);
-    await page.click('header.bx--header a.bx--header__name');
-    await page.reload();
+
+    // Launch Electron app.
+    electronApp = await electron.launch({
+      args: [
+        '.',
+        `--user-data-dir=${__dirname.replace('src/main', '')}tests/data/empty`,
+        '--window-size=1920,1000'
+      ],
+      env: {
+        ...process.env
+      },
+    });
+
+    // Get the first window that the app opens, wait if necessary.
+    page = await electronApp.firstWindow();
+
+    // Wait for frame actually loaded.
+    await page.waitForSelector('main');
+
+    // Direct Electron console to Node terminal.
+    page.on('console', console.log);
   });
 
   it('should start the app on an empty state', async () => {
@@ -69,6 +91,103 @@ describe('empty', () => {
       failureThresholdType: 'percent',
       dumpDiffToConsole: true
     });
+  });
+
+  it('should import data with custom settings', async () => {
+    await page.click('header.bx--header button[aria-label="Upload Data"]');
+
+    await page.click('button#edit-import');
+
+    const imageSettingsModal = await page.screenshot({ fullPage: true });
+    expect(imageSettingsModal).toMatchImageSnapshot({
+      failureThreshold: 3.5,
+      failureThresholdType: 'percent',
+      dumpDiffToConsole: true
+    });
+
+    // Set custom units.
+    await page.fill('#unit_pressure', 'bar');
+    await page.fill('#unit_solar', 'custom solar');
+    await page.fill('#unit_wind', 'mp/h');
+    await page.fill('#unit_humidity', '%%');
+    await page.fill('#unit_temperature', 'CC');
+    await page.fill('#unit_rain', 'l');
+    await page.fill('#unit_wind_direction', 'degrees');
+
+    // Set custom date header and format.
+    await page.fill('#header_time', 'Zeit');
+    await page.fill('#import_date_format', 'YYYY/M/D k:m');
+
+    // Set custom headers.
+    await page.fill('#header_pressure', 'Luftdruck');
+    await page.fill('#header_solar', 'Sonneneinstrahlung(w/m2)');
+    await page.fill('#header_uvi', 'UVI');
+    await page.fill('#header_temperature', 'Temperatur Außen');
+    await page.fill('#header_felt_temperature', 'Gefühlte Temperatur(℃)');
+    await page.fill('#header_dew_point', 'Taupunkt(℃)');
+    await page.fill('#header_rain', 'Regen/Tag');
+    await page.fill('#header_humidity', 'Luftfeuchtigkeit');
+    await page.fill('#header_wind', 'Wind(km/h)');
+    await page.fill('#header_gust', 'Böe(km/h)');
+    await page.fill('#header_wind_direction', 'Windrichtung(°)');
+
+    // Save.
+    await page.click('.bx--modal button.bx--btn--primary');
+    await page.waitForSelector('data-testid=modal-loading', { state: 'hidden' });
+
+    const imageSettingsModalSaved = await page.screenshot({ fullPage: true });
+    expect(imageSettingsModalSaved).toMatchImageSnapshot({
+      failureThreshold: 3.5,
+      failureThresholdType: 'percent',
+      dumpDiffToConsole: true
+    });
+
+    // Close modal and import data.
+    await page.click('.bx--modal button.bx--modal-close');
+
+    await electronApp.evaluate(
+      ({dialog}, filePaths) => {
+        return dialog.showOpenDialog = () => Promise.resolve({ canceled: false, filePaths });
+      },
+      [`${__dirname.replace('src/main', '')}tests/data/upload-data-04-03-21-14-03-21-145-records.CSV`]
+    );
+
+    await page.click('button#import');
+
+    await page.waitForSelector('data-testid=main-loading', { state: 'hidden' });
+
+    const imageAfterImportLoading = await page.screenshot({ fullPage: true });
+    expect(imageAfterImportLoading).toMatchImageSnapshot({
+      failureThreshold: 1.5,
+      failureThresholdType: 'percent',
+      dumpDiffToConsole: true
+    });
+
+    const numberImported = page.locator('header.bx--header .bx--header-panel .import-data');
+    expect(await numberImported.evaluate(node => node.textContent)).toBe('145 records imported');
+
+    // Close sidebar.
+    await page.click('header.bx--header button[aria-label="Upload Data"]');
+
+    const imageCustomHeaders = await page.screenshot({ fullPage: true });
+    expect(imageCustomHeaders).toMatchImageSnapshot({
+      failureThreshold: 1.5,
+      failureThresholdType: 'percent',
+      dumpDiffToConsole: true
+    });
+
+    // Test values (headers) and units.
+    const temperature_stat = page.locator('.tiles .stats .stat-tile:nth-child(1) .value');
+    expect(await temperature_stat.evaluate(node => node.textContent)).toBe('10.3 CC');
+
+    const wind_stat = page.locator('.tiles .stats .stat-tile:nth-child(3) .value');
+    expect(await wind_stat.evaluate(node => node.textContent)).toBe('33.1 mp/h');
+
+    const rain_stat = page.locator('.tiles .stats .stat-tile:nth-child(4) .value');
+    expect(await rain_stat.evaluate(node => node.textContent)).toBe('5.4 l');
+
+    const pressure_stat = page.locator('.tiles .stats .stat-tile:nth-child(5) .value');
+    expect(await pressure_stat.evaluate(node => node.textContent)).toBe('1000.6 bar');
   });
 
   it('should import new data', async () => {

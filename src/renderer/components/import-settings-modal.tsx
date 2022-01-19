@@ -157,6 +157,7 @@ export const ImportSettingsModal:FunctionComponent<ImportSettingsModalProps> = (
                   <Loading
                     description="Saving config..."
                     withOverlay={true}
+                    data-testid="modal-loading"
                   />
                 }
 
