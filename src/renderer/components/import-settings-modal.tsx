@@ -1,9 +1,10 @@
 import React, {FunctionComponent, useEffect, useRef, useState} from 'react';
 
+import {Form, TextInput, Modal, Row, Column, Loading, InlineNotification} from "carbon-components-react";
+
 import {Formik} from "formik";
 import * as Yup from 'yup';
-
-import {Form, TextInput, Modal, Row, Column, Loading, InlineNotification} from "carbon-components-react";
+import moment from "moment";
 
 type ImportSettingsModalProps = {
   open: boolean,
@@ -16,7 +17,7 @@ export interface ImportSettingsFormValues {
   header_time: string,
   unit_temperature: string,
   header_temperature: string,
-  header_felt: string,
+  header_felt_temperature: string,
   header_dew_point: string,
   unit_rain: string,
   header_rain: string,
@@ -44,7 +45,7 @@ export const ImportSettingsModal:FunctionComponent<ImportSettingsModalProps> = (
     header_time: '',
     unit_temperature: '',
     header_temperature: '',
-    header_felt: '',
+    header_felt_temperature: '',
     header_dew_point: '',
     unit_rain: '',
     header_rain: '',
@@ -119,7 +120,7 @@ export const ImportSettingsModal:FunctionComponent<ImportSettingsModalProps> = (
             import_date_format: Yup.string().required(),
             unit_temperature: Yup.string().required(),
             header_temperature: Yup.string().required(),
-            header_felt: Yup.string().required(),
+            header_felt_temperature: Yup.string().required(),
             header_dew_point: Yup.string().required(),
             unit_rain: Yup.string().required(),
             header_rain: Yup.string().required(),
@@ -274,13 +275,18 @@ export const ImportSettingsModal:FunctionComponent<ImportSettingsModalProps> = (
                         disabled={isSubmitting}
                       />
                     </div>
-                    {/* @todo Add help about date format. */}
                     <div style={{marginBottom: '1rem'}}>
                       <TextInput
                         id="import_date_format"
                         type="text"
                         name="import_date_format"
-                        labelText="Time format"
+                        labelText="Date format"
+                        helperText={
+                          <>
+                            Date format of you input date. The default of YYYY/M/D k:m is equivalent to
+                            {moment().format('YYYY/M/D k:m')}. For more info visit the <a target="_blank" href="https://daveiano.github.io/weather-data-center/" rel="noreferrer">docs</a>.
+                          </>
+                        }
                         placeholder="YYYY/M/D k:m"
                         value={values.import_date_format}
                         invalidText={errors.import_date_format}
@@ -344,14 +350,14 @@ export const ImportSettingsModal:FunctionComponent<ImportSettingsModalProps> = (
                     </div>
                     <div style={{marginBottom: '1rem'}}>
                       <TextInput
-                        id="header_felt"
+                        id="header_felt_temperature"
                         type="text"
-                        name="header_felt"
+                        name="header_felt_temperature"
                         labelText="Header felt temperature"
                         placeholder="felt_temperature"
-                        value={values.header_felt}
-                        invalidText={errors.header_felt}
-                        invalid={Boolean(touched.header_felt && errors.header_felt)}
+                        value={values.header_felt_temperature}
+                        invalidText={errors.header_felt_temperature}
+                        invalid={Boolean(touched.header_felt_temperature && errors.header_felt_temperature)}
                         disabled={isSubmitting}
                       />
                     </div>

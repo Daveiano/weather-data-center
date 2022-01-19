@@ -4,7 +4,7 @@
   "header_time": "time",
   "unit_temperature": "°C",
   "header_temperature": "temperature",
-  "header_felt": "felt_temperature",
+  "header_felt_temperature": "felt_temperature",
   "header_dew_point": "dew_point",
   "unit_rain": "mm",
   "header_rain": "rain",

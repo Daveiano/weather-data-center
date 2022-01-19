@@ -52,6 +52,8 @@ Coming soon
 
 Coming soon
 
+* How can I configure the import date format?
+
 ## Development
 
 ### Upstream issues

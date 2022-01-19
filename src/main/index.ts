@@ -35,7 +35,7 @@ let config: ConfigRecord = {
   header_time: 'time',
   unit_temperature: '°C',
   header_temperature: 'temperature',
-  header_felt: 'felt_temperature',
+  header_felt_temperature: 'felt_temperature',
   header_dew_point: 'dew_point',
   unit_rain: 'mm',
   header_rain: 'rain',
@@ -167,21 +167,6 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
-const columnsToRead: string[] = [
-  'time',
-  'temperature',
-  'humidity',
-  'pressure',
-  'rain',
-  'solar',
-  'uvi',
-  'wind',
-  'wind_direction',
-  'gust',
-  'dew_point',
-  'felt_temperature'
-];
-
 ipcMain.on('query-data',(event) => {
   db.find({ time: { $exists: true } }).sort({ time: 1 }).exec((err, docs: { time: number }[]) => {
     event.reply(
@@ -208,6 +193,21 @@ ipcMain.on('config', (event, args) => {
 });
 
 ipcMain.on('open-file-dialog', (event) => {
+  const columnsToRead = {
+    [config.header_time]: 'time',
+    [config.header_temperature]: 'temperature',
+    [config.header_humidity]: 'humidity',
+    [config.header_pressure]: 'pressure',
+    [config.header_rain]: 'rain',
+    [config.header_solar]: 'solar',
+    [config.header_uvi]: 'uvi',
+    [config.header_wind]: 'wind',
+    [config.header_wind_direction]: 'wind_direction',
+    [config.header_gust]: 'gust',
+    [config.header_dew_point]: 'dew_point',
+    [config.header_felt_temperature]: 'felt_temperature'
+  };
+
   dialog.showOpenDialog({
     title: 'Select your data',
     filters: [
@@ -217,16 +217,29 @@ ipcMain.on('open-file-dialog', (event) => {
   }).then(result => {
     if (!result.canceled) {
       const parsedData: dataItem[] = [],
-        columnsToParseFloat: string[] = ['temperature', 'humidity', 'pressure', 'rain', 'solar', 'wind', 'gust', 'dew_point', 'felt_temperature'],
-        columnsToParseInt: string[] = ['uvi', 'wind_direction'];
+        columnsToParseFloat = [
+          'temperature',
+          'humidity',
+          'pressure',
+          'rain',
+          'solar',
+          'wind',
+          'gust',
+          'dew_point',
+          'felt_temperature'
+        ],
+        columnsToParseInt = [
+          'uvi',
+          'wind_direction',
+        ];
 
       fs.createReadStream(result.filePaths[0])
         .pipe(csv({
           separator: ',',
-          mapHeaders: ({ header}) => columnsToRead.includes(header) ? header : null,
+          mapHeaders: ({ header}) => Object.keys(columnsToRead).includes(header) ? columnsToRead[header] : null,
           mapValues: ({ header, value }) => {
             if (header === 'time') {
-              return moment(value, 'YYYY/M/D k:m').unix();
+              return moment(value, config.import_date_format).unix();
             }
 
             if (columnsToParseFloat.includes(header)) {
