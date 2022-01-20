@@ -34,8 +34,9 @@ import { combineReducers, createStore } from 'redux';
 
 import { App } from './app';
 import { appReducerDefaultState, appReducer } from './reducer-app';
-import { isLoadingAction } from "./actions-app";
+import {configAction, isLoadingAction} from "./actions-app";
 import { HashRouter } from "react-router-dom";
+import {ImportSettingsFormValues} from "./components/import-settings-modal";
 
 const store = createStore(
   combineReducers({
@@ -49,8 +50,14 @@ const store = createStore(
 const ipcMainLoadingListener = (arg: [boolean]): void => {
   store.dispatch(isLoadingAction(arg[0]));
 };
+const configListener = (arg: [ImportSettingsFormValues]): void => {
+  store.dispatch(configAction(arg[0]));
+};
 
 window.electron.IpcOn('app-is-loading', (event, arg) => ipcMainLoadingListener(arg));
+window.electron.IpcOn('config', (event, arg) => configListener(arg));
+
+window.electron.IpcSend('config', null);
 
 console.log('👋 This message is being logged by "renderer.js", included via webpack');
 

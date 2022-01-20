@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Button, ButtonSet, InlineNotification, SwitcherDivider} from 'carbon-components-react';
 import {Settings16, Upload16} from "@carbon/icons-react";
 
-import { isLoadingAction, configAction } from '../actions-app';
+import { isLoadingAction } from '../actions-app';
 import {ImportSettingsModal} from "./import-settings-modal";
 import {RootState} from "../renderer";
 
@@ -12,16 +12,18 @@ export const Import: React.FC = (): React.ReactElement => {
   const [numberOfDuplicated, setNumberOfDuplicated] = useState(0);
   const [numberOfLastImported, setNumberOfLastImported] = useState(0);
   const [open, setOpen] = useState(false);
-  const [config, setConfig] = useState(null);
+  const config = useSelector((state: RootState) => state.appState.config);
 
   const dataFromStore = useSelector((state: RootState) => state.appState.data);
   const loading = useSelector((state: RootState) => state.appState.loading);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    window.electron.IpcOn('number-of-duplicates', uploadFileListener);
-    window.electron.IpcOn('config', configListener);
-    window.electron.IpcSend('config', null);
+    const removeEventListenerDuplicates = window.electron.IpcOn('number-of-duplicates', (event, args) => uploadFileListener(args));
+
+    return () => {
+      removeEventListenerDuplicates();
+    };
   }, []);
 
   const selectFile = (): void => {
@@ -29,14 +31,9 @@ export const Import: React.FC = (): React.ReactElement => {
     window.electron.IpcSend('open-file-dialog', null);
   };
 
-  const uploadFileListener = (event: any, arg: any): void => {
+  const uploadFileListener = (arg: [number[]]): void => {
     setNumberOfDuplicated(arg[0][0]);
     setNumberOfLastImported(arg[0][1]);
-  };
-
-  const configListener = (event: any, arg: any): void => {
-    setConfig(arg[0]);
-    dispatch(configAction(arg[0]));
   };
 
   return (

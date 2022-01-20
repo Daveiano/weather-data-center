@@ -30,6 +30,8 @@ export const Start:React.FC = (): React.ReactElement => {
   const loading = useSelector((state: RootState) => state.appState.loading);
   const config = useSelector((state: RootState) => state.appState.config);
 
+  console.log(config);
+
   const [data, setData] = useState(dataFilteredFromStore);
 
   useEffect(() => {

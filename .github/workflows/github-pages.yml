@@ -5,7 +5,7 @@ on:
     paths:
       - 'docs/**'
     branches:
-      - develop
+      - 1.x
 
 jobs:
   github-pages:

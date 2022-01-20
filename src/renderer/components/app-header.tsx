@@ -22,13 +22,13 @@ import {
   DatePickerInput, SideNavMenu, SideNavMenuItem
 } from "carbon-components-react";
 import {
-  DocumentAdd20,
   Temperature32,
   ChartTreemap32,
   Rain32,
   Windy32,
   UvIndexAlt32,
-  Pressure32
+  Pressure32,
+  DataBase20
 } from "@carbon/icons-react";
 
 import { Import } from "./import";
@@ -107,10 +107,10 @@ export const AppHeader: React.FC = (): React.ReactElement => {
             <HeaderGlobalBar>
               <HeaderGlobalAction
                 aria-label="Upload Data"
-                isActive={true}
+                isActive={headerPanelExpanded}
                 onClick={() => setHeaderPanelExpanded(!headerPanelExpanded)}
               >
-                <DocumentAdd20 />
+                <DataBase20 />
               </HeaderGlobalAction>
             </HeaderGlobalBar>
             <SideNav

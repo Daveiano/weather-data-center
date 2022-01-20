@@ -50,6 +50,10 @@ $carbon--grid-breakpoints: (
 @include carbon--font-face-sans();
 @include carbon--font-face-serif();
 
+.bx--header__action.bx--btn--icon-only.bx--tooltip__trigger {
+  justify-content: center;
+}
+
 body {
   font-family: carbon--font-family('sans'), sans-serif;
   margin: 0;

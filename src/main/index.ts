@@ -187,6 +187,7 @@ ipcMain.on('config', (event, args) => {
   } else {
     db.update({ type: 'config' }, { $set: args[0] }, {}, () => {
       config = args[0];
+      event.reply('config', config);
       event.reply('config-saved');
     });
   }
