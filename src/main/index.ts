@@ -193,6 +193,27 @@ ipcMain.on('config', (event, args) => {
   }
 });
 
+ipcMain.on('delete', (event, arg) => {
+  db.remove({ _id : { $in:  arg.map((item: dataItem) => item._id)}}, {
+    multi: arg.length > 1
+  }, (error, numRemoved) => {
+    if (!error) {
+      // @todo Duplicated code from query-data ipc call.
+      db.find({ time: { $exists: true } }).sort({ time: 1 }).exec((err, docs: { time: number }[]) => {
+        event.reply(
+          'query-data',
+          docs
+            .map((doc, index) => ({
+              ...doc,
+              timeParsed: moment.unix(doc.time).toISOString(),
+              id: index.toString()
+            }))
+        );
+      });
+    }
+  });
+});
+
 ipcMain.on('open-file-dialog', (event) => {
   const columnsToRead = {
     [config.header_time]: 'time',

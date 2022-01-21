@@ -12,9 +12,9 @@ const useRowSelection = (rows: dataItemDataTable[], searchString: string, setRow
   const setRowSelection = useCallback(
     (rowId, selected) => {
       setRows(
-        rows.map((row) => {
-          const doChange = rowId
-            ? rowId === row.id
+        rows.map((row, index) => {
+          const doChange = rowId !== undefined
+            ? rowId === index
             : !searchString || doesRowMatchSearchString(row, searchString);
           return !doChange ? row : { ...row, selected };
         })

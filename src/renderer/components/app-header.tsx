@@ -28,7 +28,8 @@ import {
   Windy32,
   UvIndexAlt32,
   Pressure32,
-  DataBase20
+  DocumentAdd20,
+  DataBase32
 } from "@carbon/icons-react";
 
 import { Import } from "./import";
@@ -106,11 +107,12 @@ export const AppHeader: React.FC = (): React.ReactElement => {
 
             <HeaderGlobalBar>
               <HeaderGlobalAction
-                aria-label="Upload Data"
+                aria-label="Database / Import"
                 isActive={headerPanelExpanded}
                 onClick={() => setHeaderPanelExpanded(!headerPanelExpanded)}
+                tooltipAlignment="end"
               >
-                <DataBase20 />
+                <DocumentAdd20 />
               </HeaderGlobalAction>
             </HeaderGlobalBar>
             <SideNav
@@ -291,6 +293,15 @@ export const AppHeader: React.FC = (): React.ReactElement => {
                     }
                   </SideNavMenu>
                 }
+                <SideNavLink<HashLinkProps>
+                  aria-current={location.pathname === '/database' ? 'page' : false}
+                  renderIcon={DataBase32}
+                  to="/database#top"
+                  element={HashLink}
+                  scroll={el => scrollWithOffset(el)}
+                >
+                  Database
+                </SideNavLink>
               </SideNavItems>
             </SideNav>
             <HeaderPanel aria-label="Header Panel" expanded={headerPanelExpanded}>

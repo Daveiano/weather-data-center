@@ -135,7 +135,7 @@ describe('Start the app with a small set of data', () => {
 
 it('should show the number of imported data', async () => {
   // Open right sidebar.
-  await page.click('header.bx--header button[aria-label="Upload Data"]');
+  await page.click('header.bx--header button[aria-label="Database / Import"]');
 
   const numberImported = page.locator('header.bx--header .bx--header-panel .import-data');
   expect(await numberImported.evaluate(node => node.textContent)).toBe('4162 records imported');

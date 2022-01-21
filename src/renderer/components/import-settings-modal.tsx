@@ -96,6 +96,8 @@ export const ImportSettingsModal:FunctionComponent<ImportSettingsModalProps> = (
         modalHeading="Settings"
         modalLabel="Units & Import"
         primaryButtonText="Save"
+        hasForm={true}
+        hasScrollingContent={true}
         secondaryButtonText="Cancel"
         onRequestClose={() => props.setOpen(false)}
         onRequestSubmit={() => form.current.handleSubmit()}

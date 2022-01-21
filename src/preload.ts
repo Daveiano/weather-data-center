@@ -6,7 +6,8 @@ const validChannels = [
   "query-data",
   "number-of-duplicates",
   'config',
-  'config-saved'
+  'config-saved',
+  'delete'
 ];
 
 declare global {

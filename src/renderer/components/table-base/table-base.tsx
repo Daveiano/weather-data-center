@@ -20,7 +20,7 @@ import {
   TableToolbarMenu,
   TableBatchActions,
   TableBatchAction,
-  TooltipIcon
+  TooltipIcon, Modal
 } from 'carbon-components-react';
 import type { DataTableSize } from 'carbon-components-react';
 
@@ -94,6 +94,7 @@ interface TableBaseProps {
  */
 const TableBase: React.FC<TableBaseProps> = (props: TableBaseProps): React.ReactElement  => {
   const [rows, setRows] = useState(props.rows);
+  const [modalOpen, setModalOpen] = useState(false);
   const [sortInfo, setSortInfo] = useSortInfo(props.sortInfo);
   const [filteredRows, searchString, setSearchString] = useFilteredRows(rows);
   const [setRowSelection] = useRowSelection(
@@ -177,13 +178,9 @@ const TableBase: React.FC<TableBaseProps> = (props: TableBaseProps): React.React
     [setStart]
   );
 
-  const handleDeleteRows = useCallback(() => {
-    setRows(
-      rows.filter(
-        (row) => !row.selected || !doesRowMatchSearchString(row, searchString)
-      )
-    );
-  }, [rows, searchString]);
+  const handleDeleteRows = () => {
+    setModalOpen(true);
+  };
 
   useEffect(() => {
     setRows(props.rows);
@@ -195,160 +192,180 @@ const TableBase: React.FC<TableBaseProps> = (props: TableBaseProps): React.React
   }
 
   return (
-    <TableContainer
-      title={props.title}
-      description={description}
-    >
-      {hasBatchActions &&
-        <TableToolbar>
-          <TableBatchActions
-            shouldShowBatchActions={hasBatchActions}
-            totalSelected={selectedRowsCountInFiltered}
-            onCancel={handleCancelSelection}>
-            <TableBatchAction
-              tabIndex={hasBatchActions ? 0 : -1}
-              renderIcon={Delete}
-              onClick={handleDeleteRows}>
-              Delete
-            </TableBatchAction>
-          </TableBatchActions>
-          <TableToolbarContent>
-            <TableToolbarSearch
-              tabIndex={hasBatchActions ? -1 : 0}
-              onChange={handleChangeSearchString}
-            />
-            <TableToolbarMenu tabIndex={hasBatchActions ? -1 : 0}>
-              <TableToolbarAction onClick={() => alert('Alert 1')}>
-                Action 1
-              </TableToolbarAction>
-              <TableToolbarAction onClick={() => alert('Alert 2')}>
-                Action 2
-              </TableToolbarAction>
-              <TableToolbarAction onClick={() => alert('Alert 3')}>
-                Action 3
-              </TableToolbarAction>
-            </TableToolbarMenu>
-          </TableToolbarContent>
-        </TableToolbar>
+    <>
+      {props.hasSelection &&
+        <Modal
+          size="xs"
+          danger={true}
+          modalHeading={`Are you sure? This will delete ${rows.filter(row => row.selected).length} record(s).`}
+          open={modalOpen}
+          closeButtonLabel="Cancel"
+          primaryButtonText="Delete"
+          secondaryButtonText="Cancel"
+          onRequestClose={() => setModalOpen(false)}
+          onRequestSubmit={() => {
+            window.electron.IpcSend('delete', rows.filter(row => row.selected));
+            setModalOpen(false);
+          }}
+        >
+
+        </Modal>
       }
-
-      <Table size={props.size} isSortable useZebraStyles={props.zebra}>
-        <TableHead>
-          <TableRow>
-            {props.hasSelection && (
-              <TableSelectAll
-                id={`${elementId}--select-all`}
-                checked={selectedAllInFiltered}
-                indeterminate={
-                  selectedRowsCountInFiltered > 0 && !selectedAllInFiltered
-                }
-                ariaLabel="Select all rows"
-                name={selectionAllName}
-                onSelect={handleChangeSelectionAll}
+      <TableContainer
+        title={props.title}
+        description={description}
+      >
+        {hasBatchActions &&
+          <TableToolbar>
+            <TableBatchActions
+              shouldShowBatchActions={hasBatchActions}
+              totalSelected={selectedRowsCountInFiltered}
+              onCancel={handleCancelSelection}>
+              <TableBatchAction
+                tabIndex={hasBatchActions ? 0 : -1}
+                renderIcon={Delete}
+                onClick={handleDeleteRows}>
+                Delete
+              </TableBatchAction>
+            </TableBatchActions>
+            <TableToolbarContent>
+              <TableToolbarSearch
+                tabIndex={hasBatchActions ? -1 : 0}
+                onChange={handleChangeSearchString}
               />
-            )}
+              <TableToolbarMenu tabIndex={hasBatchActions ? -1 : 0}>
+                <TableToolbarAction onClick={() => alert('Alert 1')}>
+                  Action 1
+                </TableToolbarAction>
+                <TableToolbarAction onClick={() => alert('Alert 2')}>
+                  Action 2
+                </TableToolbarAction>
+                <TableToolbarAction onClick={() => alert('Alert 3')}>
+                  Action 3
+                </TableToolbarAction>
+              </TableToolbarMenu>
+            </TableToolbarContent>
+          </TableToolbar>
+        }
 
-            {props.columns.filter(item => dataHasRecordsForProperty(item.id, rows)).map(({ id: columnId, sortCycle, title, small, tooltip }) => {
-              const sortDirectionForThisCell =
-                sortCycle &&
-                (columnId === sortColumnId
-                  ? sortDirection
-                  : TABLE_SORT_DIRECTION.NONE);
-              return (
-                <TableHeader
-                  key={columnId}
-                  isSortable={Boolean(sortCycle)}
-                  isSortHeader={sortCycle && columnId === sortColumnId}
-                  sortDirection={sortDirectionForThisCell}
-                  data-column-id={columnId}
-                  data-sort-cycle={sortCycle}
-                  data-sort-direction={sortDirectionForThisCell}
-                  onClick={handleChangeSort}
-                >
-                  <div style={{
-                    display: 'flex',
-                    alignItems: "center",
-                    justifyContent: 'space-between'
-                  }}>
-                    <div style={{ marginRight: "20px" }}>
-                      {title} <br/>
-                      <span className="bx--type-helper-text-01">
+        <Table size={props.size} isSortable useZebraStyles={props.zebra}>
+          <TableHead>
+            <TableRow>
+              {props.hasSelection && (
+                <TableSelectAll
+                  id={`${elementId}--select-all`}
+                  checked={selectedAllInFiltered}
+                  indeterminate={
+                    selectedRowsCountInFiltered > 0 && !selectedAllInFiltered
+                  }
+                  ariaLabel="Select all rows"
+                  name={selectionAllName}
+                  onSelect={handleChangeSelectionAll}
+                />
+              )}
+
+              {props.columns.filter(item => dataHasRecordsForProperty(item.id, rows)).map(({ id: columnId, sortCycle, title, small, tooltip }) => {
+                const sortDirectionForThisCell =
+                  sortCycle &&
+                  (columnId === sortColumnId
+                    ? sortDirection
+                    : TABLE_SORT_DIRECTION.NONE);
+                return (
+                  <TableHeader
+                    key={columnId}
+                    isSortable={Boolean(sortCycle)}
+                    isSortHeader={sortCycle && columnId === sortColumnId}
+                    sortDirection={sortDirectionForThisCell}
+                    data-column-id={columnId}
+                    data-sort-cycle={sortCycle}
+                    data-sort-direction={sortDirectionForThisCell}
+                    onClick={handleChangeSort}
+                  >
+                    <div style={{
+                      display: 'flex',
+                      alignItems: "center",
+                      justifyContent: 'space-between'
+                    }}>
+                      <div style={{ marginRight: "20px" }}>
+                        {title} <br/>
+                        <span className="bx--type-helper-text-01">
                         {small}
                       </span>
-                    </div>
+                      </div>
 
-                    {tooltip &&
-                      <TooltipIcon
-                        align="start"
-                        tooltipText={tooltip}
-                        direction="bottom"
-                      >
-                        <Information16 />
-                      </TooltipIcon>
-                    }
-                  </div>
-                </TableHeader>
+                      {tooltip &&
+                        <TooltipIcon
+                          align="start"
+                          tooltipText={tooltip}
+                          direction="bottom"
+                        >
+                          <Information16 />
+                        </TooltipIcon>
+                      }
+                    </div>
+                  </TableHeader>
+                );
+              })}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {sortedRows.slice(start, start + pageSize).map((row: any) => {
+              const { id: rowId, selected } = row;
+              const selectionName = !props.hasSelection
+                ? undefined
+                : `__custom-data-table_${elementId}_${rowId}`;
+              return (
+                <TableRow
+                  key={rowId}
+                  isSelected={props.hasSelection && selected}
+                  data-row-id={rowId}>
+                  {props.hasSelection && (
+                    <TableSelectRow
+                      id={`${elementId}--select-${rowId}`}
+                      checked={Boolean(selected)}
+                      name={selectionName}
+                      ariaLabel="Select row"
+                      onSelect={handleChangeSelection}
+                    />
+                  )}
+                  {props.columns.filter(item => dataHasRecordsForProperty(item.id, rows)).map(({ id: columnId }) => (
+                    <TableCell key={columnId}>
+                      {columnId === 'timeParsed' ? (
+                        <>
+                          {props.dateFormat ? (
+                            <>
+                              {moment(row[columnId]).format(props.dateFormat)}
+                            </>
+                          ) : (
+                            <>
+                              {moment(row[columnId]).format('YYYY/MM/DD HH:mm')}
+                            </>
+                          )}
+                        </>
+                      ) : (
+                        <>
+                          {row[columnId]}
+                        </>
+                      )}
+                    </TableCell>
+                  ))}
+                </TableRow>
               );
             })}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {sortedRows.slice(start, start + pageSize).map((row: any) => {
-            const { id: rowId, selected } = row;
-            const selectionName = !props.hasSelection
-              ? undefined
-              : `__custom-data-table_${elementId}_${rowId}`;
-            return (
-              <TableRow
-                key={rowId}
-                isSelected={props.hasSelection && selected}
-                data-row-id={rowId}>
-                {props.hasSelection && (
-                  <TableSelectRow
-                    id={`${elementId}--select-${rowId}`}
-                    checked={Boolean(selected)}
-                    name={selectionName}
-                    ariaLabel="Select row"
-                    onSelect={handleChangeSelection}
-                  />
-                )}
-                {props.columns.filter(item => dataHasRecordsForProperty(item.id, rows)).map(({ id: columnId }) => (
-                  <TableCell key={columnId}>
-                    {columnId === 'timeParsed' ? (
-                      <>
-                        {props.dateFormat ? (
-                          <>
-                            {moment(row[columnId]).format(props.dateFormat)}
-                          </>
-                        ) : (
-                          <>
-                            {moment(row[columnId]).format('YYYY/MM/DD HH:mm')}
-                          </>
-                        )}
-                      </>
-                    ) : (
-                      <>
-                        {row[columnId]}
-                      </>
-                    )}
-                  </TableCell>
-                ))}
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-      {typeof pageSize !== 'undefined' && (
-        <Pagination
-          start={start}
-          count={filteredRows.length}
-          pageSize={pageSize}
-          pageSizes={props.pageSizes ? props.pageSizes : [10, 15, 20, 25, 50, 100]}
-          onChangePageSize={handleChangePageSize}
-          onChangeStart={handleChangeStart}
-        />
-      )}
-    </TableContainer>
+          </TableBody>
+        </Table>
+        {typeof pageSize !== 'undefined' && (
+          <Pagination
+            start={start}
+            count={filteredRows.length}
+            pageSize={pageSize}
+            pageSizes={props.pageSizes ? props.pageSizes : [10, 15, 20, 25, 50, 100]}
+            onChangePageSize={handleChangePageSize}
+            onChangeStart={handleChangeStart}
+          />
+        )}
+      </TableContainer>
+    </>
   );
 };
 
