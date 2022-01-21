@@ -393,7 +393,7 @@ it('should delete all records', async () => {
 
   await page.locator('text=dangerDelete').click();
 
-  const imageAfterDelete = await page.screenshot({ fullPage: true });
+  const imageAfterDelete = await page.screenshot({ fullPage: false });
   expect(imageAfterDelete).toMatchImageSnapshot({
     failureThreshold: 1.5,
     failureThresholdType: 'percent',
