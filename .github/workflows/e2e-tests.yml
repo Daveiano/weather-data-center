@@ -19,9 +19,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '12'
-      - name: 🔨 Install Yarn
-        run: npm install -g yarn
-      - run: yarn install
+      - name: 🔨 install yarn and dependecies
+        run: |
+          npm install -g yarn
+          yarn install
       - run: npx playwright install-deps
       - name: yarn test:e2e:ci
         run: yarn test:e2e:ci

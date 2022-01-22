@@ -1,5 +1,5 @@
 {
-  "name": "weather-data-center-electron-forge",
+  "name": "weather-data-center",
   "productName": "weather-data-center",
   "version": "1.0.0-alpha1",
   "description": "App built with Electron + React + TypeScript to collect, organize and analyse weather data.",
@@ -50,11 +50,33 @@
         },
         {
           "name": "@electron-forge/maker-deb",
-          "config": {}
+          "config": {
+            "options": {
+              "categories": [
+                "Science"
+              ],
+              "homepage": "https://daveiano.github.io/weather-data-center/",
+              "icon": "",
+              "maintainer": "David Baetge"
+            }
+          }
         },
         {
           "name": "@electron-forge/maker-rpm",
           "config": {}
+        }
+      ],
+      "publishers": [
+        {
+          "name": "@electron-forge/publisher-github",
+          "config": {
+            "repository": {
+              "owner": "daveiano",
+              "name": "weather-data-center"
+            },
+            "draft": true,
+            "prerelease": true
+          }
         }
       ],
       "plugins": [
@@ -91,6 +113,7 @@
     "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
     "@electron-forge/maker-zip": "^6.0.0-beta.54",
     "@electron-forge/plugin-webpack": "6.0.0-beta.54",
+    "@electron-forge/publisher-github": "^6.0.0-beta.63",
     "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
     "@testing-library/jest-dom": "^5.15.1",
     "@testing-library/react": "^12.1.2",
