@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, dialog, session, shell } from 'electron';
+import {app, BrowserWindow, ipcMain, dialog, session, shell, IpcMainEvent} from 'electron';
 import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 
 import fs from 'fs';
@@ -167,7 +167,7 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
-ipcMain.on('query-data',(event) => {
+const queryData = (event: IpcMainEvent): void => {
   db.find({ time: { $exists: true } }).sort({ time: 1 }).exec((err, docs: { time: number }[]) => {
     event.reply(
       'query-data',
@@ -179,6 +179,10 @@ ipcMain.on('query-data',(event) => {
         }))
     );
   });
+};
+
+ipcMain.on('query-data',(event) => {
+  queryData(event);
 });
 
 ipcMain.on('config', (event, args) => {
@@ -196,20 +200,9 @@ ipcMain.on('config', (event, args) => {
 ipcMain.on('delete', (event, arg) => {
   db.remove({ _id : { $in:  arg.map((item: dataItem) => item._id)}}, {
     multi: arg.length > 1
-  }, (error, numRemoved) => {
+  }, (error) => {
     if (!error) {
-      // @todo Duplicated code from query-data ipc call.
-      db.find({ time: { $exists: true } }).sort({ time: 1 }).exec((err, docs: { time: number }[]) => {
-        event.reply(
-          'query-data',
-          docs
-            .map((doc, index) => ({
-              ...doc,
-              timeParsed: moment.unix(doc.time).toISOString(),
-              id: index.toString()
-            }))
-        );
-      });
+      queryData(event);
     }
   });
 });
@@ -292,6 +285,7 @@ ipcMain.on('open-file-dialog', (event) => {
             });
           }, () => {
             db.insert(deDuplicatedData, () => {
+              // @todo same as queryData().
               db.find({ time: { $exists: true } }).sort({ time: 1 }).exec((err, docs: { time: number }[]) => {
                 event.reply(
                   'query-data',

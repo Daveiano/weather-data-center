@@ -33,7 +33,7 @@ import {
   useUniqueId,
 } from './hooks';
 import Pagination from './components/pagination';
-import { TABLE_SORT_DIRECTION, doesRowMatchSearchString } from './misc';
+import { TABLE_SORT_DIRECTION } from './misc';
 import { dataItem } from "../../diagrams/types";
 import {extendedPropertyParameter} from "../../diagrams/scaling";
 import {dataHasRecordsForProperty} from "../../diagrams/hoc";

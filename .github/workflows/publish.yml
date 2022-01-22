@@ -40,3 +40,7 @@ jobs:
         #env:
         #  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: yarn make
+
+      - name: 🔨 Uninstall Yarn
+        if: always()
+        run: npm uninstall -g yarn

@@ -53,7 +53,7 @@ describe('Start the app with a small set of data', () => {
 
     const image = await page.screenshot({ fullPage: true });
     expect(image).toMatchImageSnapshot({
-      failureThreshold: 3.5,
+      failureThreshold: 1,
       failureThresholdType: 'percent',
       dumpDiffToConsole: true
     });
@@ -67,7 +67,7 @@ describe('Start the app with a small set of data', () => {
 
     const image = await page.screenshot({ fullPage: true });
     expect(image).toMatchImageSnapshot({
-      failureThreshold: 3.5,
+      failureThreshold: 1,
       failureThresholdType: 'percent',
       dumpDiffToConsole: true
     });
@@ -81,7 +81,7 @@ describe('Start the app with a small set of data', () => {
 
     const image = await page.screenshot({ fullPage: true });
     expect(image).toMatchImageSnapshot({
-      failureThreshold: 3.5,
+      failureThreshold: 1,
       failureThresholdType: 'percent',
       dumpDiffToConsole: true
     });
@@ -95,7 +95,7 @@ describe('Start the app with a small set of data', () => {
 
     const image = await page.screenshot({ fullPage: true });
     expect(image).toMatchImageSnapshot({
-      failureThreshold: 3.5,
+      failureThreshold: 1,
       failureThresholdType: 'percent',
       dumpDiffToConsole: true
     });
@@ -109,7 +109,7 @@ describe('Start the app with a small set of data', () => {
 
     const image = await page.screenshot({ fullPage: true });
     expect(image).toMatchImageSnapshot({
-      failureThreshold: 3.5,
+      failureThreshold: 1,
       failureThresholdType: 'percent',
       dumpDiffToConsole: true
     });
@@ -123,7 +123,7 @@ describe('Start the app with a small set of data', () => {
 
     const image = await page.screenshot({ fullPage: true });
     expect(image).toMatchImageSnapshot({
-      failureThreshold: 3.5,
+      failureThreshold: 1,
       failureThresholdType: 'percent',
       dumpDiffToConsole: true
     });
@@ -142,7 +142,7 @@ it('should show the number of imported data', async () => {
 
   const imageSideBarOpen = await page.screenshot({ fullPage: true });
   expect(imageSideBarOpen).toMatchImageSnapshot({
-    failureThreshold: 3.5,
+    failureThreshold: 1,
     failureThresholdType: 'percent',
     dumpDiffToConsole: true
   });

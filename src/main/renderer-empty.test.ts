@@ -77,7 +77,7 @@ describe('empty', () => {
 
     const image = await page.screenshot({ fullPage: true });
     expect(image).toMatchImageSnapshot({
-      failureThreshold:3.5,
+      failureThreshold: 1,
       failureThresholdType: 'percent',
       dumpDiffToConsole: true
     });
@@ -94,7 +94,7 @@ describe('empty', () => {
 
     const imageSideBarOpen = await page.screenshot({ fullPage: true });
     expect(imageSideBarOpen).toMatchImageSnapshot({
-      failureThreshold: 3.5,
+      failureThreshold: 1,
       failureThresholdType: 'percent',
       dumpDiffToConsole: true
     });
@@ -107,7 +107,7 @@ describe('empty', () => {
 
     const imageSettingsModal = await page.screenshot({ fullPage: true });
     expect(imageSettingsModal).toMatchImageSnapshot({
-      failureThreshold: 3.5,
+      failureThreshold: 1,
       failureThresholdType: 'percent',
       dumpDiffToConsole: true
     });
@@ -144,7 +144,7 @@ describe('empty', () => {
 
     const imageSettingsModalSaved = await page.screenshot({ fullPage: true });
     expect(imageSettingsModalSaved).toMatchImageSnapshot({
-      failureThreshold: 3.5,
+      failureThreshold: 1,
       failureThresholdType: 'percent',
       dumpDiffToConsole: true
     });
@@ -165,7 +165,7 @@ describe('empty', () => {
 
     const imageAfterImportLoading = await page.screenshot({ fullPage: true });
     expect(imageAfterImportLoading).toMatchImageSnapshot({
-      failureThreshold: 1.5,
+      failureThreshold: 1,
       failureThresholdType: 'percent',
       dumpDiffToConsole: true
     });
@@ -178,7 +178,7 @@ describe('empty', () => {
 
     const imageCustomHeaders = await page.screenshot({ fullPage: true });
     expect(imageCustomHeaders).toMatchImageSnapshot({
-      failureThreshold: 1.5,
+      failureThreshold: 1,
       failureThresholdType: 'percent',
       dumpDiffToConsole: true
     });
@@ -202,7 +202,7 @@ describe('empty', () => {
 
     const imageBeforeImport = await page.screenshot({ fullPage: true });
     expect(imageBeforeImport).toMatchImageSnapshot({
-      failureThreshold: 3.5,
+      failureThreshold: 1,
       failureThresholdType: 'percent',
       dumpDiffToConsole: true
     });
@@ -225,7 +225,7 @@ describe('empty', () => {
 
     const imageAfterImportLoading = await page.screenshot({ fullPage: true });
     expect(imageAfterImportLoading).toMatchImageSnapshot({
-      failureThreshold: 3.5,
+      failureThreshold: 1,
       failureThresholdType: 'percent',
       dumpDiffToConsole: true
     });
@@ -244,7 +244,6 @@ it('should not import duplicates', async () => {
 
   const imageBeforeImport = await page.screenshot({ fullPage: true });
   expect(imageBeforeImport).toMatchImageSnapshot({
-    // @todo Try to decrease the failureThreshold on all image snapshots.
     failureThreshold: 1,
     failureThresholdType: 'percent',
     dumpDiffToConsole: true
@@ -263,7 +262,7 @@ it('should not import duplicates', async () => {
 
   const imageAfterImportLoading = await page.screenshot({ fullPage: true });
   expect(imageAfterImportLoading).toMatchImageSnapshot({
-    failureThreshold: 3.5,
+    failureThreshold: 1,
     failureThresholdType: 'percent',
     dumpDiffToConsole: true
   });
@@ -284,7 +283,7 @@ it('should import new data when data still exists', async () => {
 
   const imageBeforeImport = await page.screenshot({ fullPage: true });
   expect(imageBeforeImport).toMatchImageSnapshot({
-    failureThreshold: 3.5,
+    failureThreshold: 1,
     failureThresholdType: 'percent',
     dumpDiffToConsole: true
   });
@@ -302,7 +301,7 @@ it('should import new data when data still exists', async () => {
 
   const imageAfterImportLoading = await page.screenshot({ fullPage: true });
   expect(imageAfterImportLoading).toMatchImageSnapshot({
-    failureThreshold: 3.5,
+    failureThreshold: 1,
     failureThresholdType: 'percent',
     dumpDiffToConsole: true
   });
@@ -320,7 +319,7 @@ it('should delete single records', async () => {
 
   const imageBeforeDelete = await page.screenshot({ fullPage: true });
   expect(imageBeforeDelete).toMatchImageSnapshot({
-    failureThreshold: 1.5,
+    failureThreshold: 1,
     failureThresholdType: 'percent',
     dumpDiffToConsole: true
   });
@@ -344,7 +343,7 @@ it('should delete single records', async () => {
 
   const imageConfirmation = await page.screenshot({ fullPage: true });
   expect(imageConfirmation).toMatchImageSnapshot({
-    failureThreshold: 1.5,
+    failureThreshold: 1,
     failureThresholdType: 'percent',
     dumpDiffToConsole: true
   });
@@ -353,7 +352,7 @@ it('should delete single records', async () => {
 
   const imageAfterDelete = await page.screenshot({ fullPage: true });
   expect(imageAfterDelete).toMatchImageSnapshot({
-    failureThreshold: 1.5,
+    failureThreshold: 1,
     failureThresholdType: 'percent',
     dumpDiffToConsole: true
   });
@@ -367,7 +366,7 @@ it('should delete single records', async () => {
 it('should delete all records', async () => {
   const imageBeforeDelete = await page.screenshot({ fullPage: true });
   expect(imageBeforeDelete).toMatchImageSnapshot({
-    failureThreshold: 1.5,
+    failureThreshold: 1,
     failureThresholdType: 'percent',
     dumpDiffToConsole: true
   });
@@ -386,7 +385,7 @@ it('should delete all records', async () => {
 
   const imageConfirmation = await page.screenshot({ fullPage: true });
   expect(imageConfirmation).toMatchImageSnapshot({
-    failureThreshold: 1.5,
+    failureThreshold: 1,
     failureThresholdType: 'percent',
     dumpDiffToConsole: true
   });
@@ -395,7 +394,7 @@ it('should delete all records', async () => {
 
   const imageAfterDelete = await page.screenshot({ fullPage: false });
   expect(imageAfterDelete).toMatchImageSnapshot({
-    failureThreshold: 1.5,
+    failureThreshold: 1,
     failureThresholdType: 'percent',
     dumpDiffToConsole: true
   });
