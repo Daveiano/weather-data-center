@@ -258,7 +258,7 @@ test('stats (compact size) with rain items', async () => {
   expect(container.querySelector('.bx--row.stats .stat-tile:nth-child(3) .date')).toHaveTextContent('2021/03/12');
 
   // Maximum per week.
-  expect(container.querySelector('.bx--row.stats .stat-tile:nth-child(4) .value')).toHaveTextContent('13.2 mm');
+  expect(container.querySelector('.bx--row.stats .stat-tile:nth-child(4) .value')).toHaveTextContent('13.0 mm');
   expect(container.querySelector('.bx--row.stats .stat-tile:nth-child(4) .date')).toHaveTextContent('W11/21');
 
   // Maximum per month.

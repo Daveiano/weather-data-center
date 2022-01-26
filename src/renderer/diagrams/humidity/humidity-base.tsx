@@ -82,7 +82,6 @@ const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProp
           yFormat={value => `${value} ${props.config.unit_humidity}`}
           margin={{ top: 20, right: 10, bottom: 20, left: 40 }}
           curve="cardinal"
-          // @todo theme={}
           colors= {['#0099CC']}
           lineWidth={2}
           enableArea={true}

@@ -80,8 +80,10 @@ export const getRainBarBaseProps = (precision: Precision, data: dataItem[], prop
 
           return moment(value).format("Do");
         case 'week':
-          // @todo add month on 1st.
-          return moment(value).format("\\Www\\/YY");
+          if (parseInt(moment(value).format("D")) <= 6) {
+            return moment(value).format("MMM - [W]W\\/YY");
+          }
+          return moment(value).format("[W]W\\/YY");
         case 'month':
           return moment(value).format("MMM YY");
         case 'year':
@@ -90,7 +92,7 @@ export const getRainBarBaseProps = (precision: Precision, data: dataItem[], prop
     },
     tickSize: 0,
     tickPadding: 5,
-    tickRotation: precision === 'day' || precision === 'week' ? -65 : 0
+    tickRotation: precision === 'day' || precision === 'week' ? -65 : 0,
   };
 
   newRainBarBaseProps.tooltip = point => <TooltipBar
@@ -101,8 +103,7 @@ export const getRainBarBaseProps = (precision: Precision, data: dataItem[], prop
         case "day":
           return moment.unix(point.data.time).utc().format("YYYY/MM/DD");
         case "week":
-          // @todo better date display.
-          return moment.unix(point.data.time).utc().format("\\Www YY");
+          return `${moment.unix(point.data.time).utc().format("[W]W\\/YY")} <br/>${moment.unix(point.data.time).utc().day(1).format("YYYY/MM/DD")} - ${moment.unix(point.data.time).utc().day(7).format("YYYY/MM/DD")}`;
         case "month":
           return moment.unix(point.data.time).utc().format("YYYY/MM");
         case "year":
@@ -112,7 +113,7 @@ export const getRainBarBaseProps = (precision: Precision, data: dataItem[], prop
   />
 
   if (precision === 'day' || precision === 'week') {
-    newRainBarBaseProps.margin.bottom = 60;
+    newRainBarBaseProps.margin.bottom = 80;
   }
 
   return newRainBarBaseProps;

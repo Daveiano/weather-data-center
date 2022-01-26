@@ -87,7 +87,6 @@ const WindDirectionBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBas
           yFormat={value => `${value}${props.config.unit_wind_direction}`}
           margin={{ top: 20, right: 10, bottom: 20, left: 40 }}
           curve="basis"
-          // @todo theme={}
           colors= {['#000000']}
           lineWidth={2}
           enableArea={true}

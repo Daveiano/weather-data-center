@@ -113,7 +113,6 @@ const TemperatureCombinedBase:FunctionComponent<DiagramBaseProps> = (props: Diag
               color: hiddenSeries.includes('Felt') ? 'transparent' : '#C41E3A'
             },
           ]}
-          // @todo theme={}
           colors={d => d.color}
           legends={[
             {

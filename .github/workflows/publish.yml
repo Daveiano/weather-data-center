@@ -32,9 +32,13 @@ jobs:
           node-version: '14'
 
       - name: 🔨 install yarn and dependecies
+        uses: borales/actions-yarn@v2.3.0
+        with:
+          cmd: install
+
+      - name: 🔨 install yarn and dependecies
         run: |
           npm install -g yarn
-          yarn install
 
       - name: 🚀 build
         #env:

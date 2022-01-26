@@ -78,7 +78,6 @@ const FeltTemperatureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramB
               }))
             }
           ]}
-          // @todo theme={}
           colors= {['#67C8FF', '#C41E3A']}
           legends={[
             {

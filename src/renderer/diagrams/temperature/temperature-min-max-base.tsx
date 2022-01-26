@@ -11,7 +11,6 @@ import TableBase from "../../components/table-base/table-base";
 import { TABLE_SORT_DIRECTION } from "../../components/table-base/misc";
 import { withEmptyCheck } from "../hoc";
 
-// @todo Make series deactivatable like in temperature-combined.
 const TemperatureMinMaxBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
   const [data, setData] = useState(scaleMinMaxAvg(props.data, 'temperature', 'day'));
   const [loading, setLoading] = useState(true);
@@ -168,7 +167,6 @@ const TemperatureMinMaxBase:FunctionComponent<DiagramBaseProps> = (props: Diagra
                     color: hiddenSeries.includes('Maximum') ? 'transparent' : '#C41E3A'
                   }
                 ]}
-                // @todo theme={}
                 colors={d => d.color}
                 legends={[
                   {

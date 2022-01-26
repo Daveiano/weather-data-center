@@ -81,7 +81,6 @@ const SolarBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps):
           yFormat={value => `${value} ${props.config.unit_solar}`}
           margin={{ top: 20, right: 10, bottom: 20, left: 40 }}
           curve="basis"
-          // @todo theme={}
           colors= {['#ff8c00']}
           lineWidth={2}
           enableArea={true}

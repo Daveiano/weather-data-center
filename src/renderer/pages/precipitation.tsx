@@ -151,7 +151,7 @@ export const PrecipitationPage: React.FC = (): React.ReactElement  => {
               </Column>
 
               <RainManualPeriodBase
-                height="600px"
+                height="700px"
                 data={data}
                 property="rain"
                 sm={12}

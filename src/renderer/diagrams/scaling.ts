@@ -83,7 +83,7 @@ export const bundleData = (data: dataItem[], property: propertyParameter, precis
 
     switch (precision) {
       case 'week': {
-        date = moment.unix(data[key].time).utc().format('wwYYYY');
+        date = moment.unix(data[key].time).utc().format('WWYYYY');
         break;
       }
       case 'month': {

@@ -19,7 +19,7 @@ test('rain manual period diagram with 11-day data', async () => {
   const { container } = render(<RainManualPeriodBase title="Rain Manual test" height="300px" data={data} property="rain" config={config} />);
 
   expect(screen.getByTestId('rain-manual-period-diagram')).toHaveTextContent("Rain Manual test");
-  expect(container.querySelector('.bx--data-table-container .bx--pagination .bx--pagination__items-count')).toHaveTextContent('1–3 of 3 items');
+  expect(container.querySelector('.bx--data-table-container .bx--pagination .bx--pagination__items-count')).toHaveTextContent('1–2 of 2 items');
   expect(container).toMatchSnapshot();
 
   fireEvent.click(screen.getByText('Daily'));

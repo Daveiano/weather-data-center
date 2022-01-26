@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useEffect, useState} from 'react';
+import React, {FunctionComponent, useEffect, useMemo, useState} from 'react';
 
 import { Loading } from "carbon-components-react";
 import { ResponsiveLine } from '@nivo/line'
@@ -15,15 +15,15 @@ const DewPointBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProp
   const [loading, setLoading] = useState(true);
   const [daily, setDaily] = useState(false);
 
-  const scale = () => {
-    const timeDifferenceInDays = getTimeDifferenceInDays(props.data);
+  const scaleData = useMemo(() => scaleAverage(props.data, 'dew_point', 'day'), [props.data]);
+  const timeDifferenceInDays = useMemo(() => getTimeDifferenceInDays(props.data), [props.data]);
 
+  const scale = () => {
     let newData: dataItem[];
 
     if (timeDifferenceInDays > 14) {
       setDaily(true);
-      // @todo useMemo?
-      newData = scaleAverage(props.data, 'dew_point', 'day');
+      newData = scaleData;
     } else {
       setDaily(false);
       newData = props.data;
@@ -68,7 +68,6 @@ const DewPointBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProp
               }))
             }
           ]}
-          // @todo theme={}
           colors= {['#5F9EA0']}
           tooltip={point => <TooltipLine point={point.point} />}
         />

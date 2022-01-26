@@ -82,7 +82,6 @@ const PressureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProp
           yFormat={value => `${value} ${props.config.unit_pressure}`}
           margin={{ top: 20, right: 10, bottom: 20, left: 40 }}
           curve="cardinal"
-          // @todo theme={}
           colors= {['#666666']}
           lineWidth={2}
           enableArea={true}

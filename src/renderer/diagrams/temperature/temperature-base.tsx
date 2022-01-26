@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, {FunctionComponent, useEffect, useMemo, useState} from 'react';
 
 import { Loading } from "carbon-components-react";
 import { Temperature32 } from "@carbon/icons-react";
@@ -170,15 +170,15 @@ const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseP
   const [loading, setLoading] = useState(true);
   const [daily, setDaily] = useState(false);
 
-  const scale = () => {
-    const timeDifferenceInDays = getTimeDifferenceInDays(props.data);
+  const scaledData = useMemo(() => scaleAverage(props.data, 'temperature', 'day'), [props.data]);
+  const timeDifferenceInDays = useMemo(() => getTimeDifferenceInDays(props.data), [props.data]);
 
+  const scale = () => {
     let newData: dataItem[];
 
     if (timeDifferenceInDays > 14) {
       setDaily(true);
-      // @todo useMemo?
-      newData = scaleAverage(props.data, 'temperature', 'day');
+      newData = scaledData;
     } else {
       setDaily(false);
       newData = props.data;
@@ -225,7 +225,6 @@ const TemperatureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseP
               }))
             }
           ]}
-          // @todo theme={}
           colors= {['#8B0000']}
           tooltip={point => <TooltipLine point={point.point} />}
         />

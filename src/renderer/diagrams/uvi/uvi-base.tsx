@@ -79,7 +79,6 @@ const UviBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): R
           yFormat={value => `${value}`}
           margin={{ top: 20, right: 10, bottom: 20, left: 40 }}
           curve="step"
-          // @todo theme={}
           colors= {['#e61919']}
           lineWidth={2}
           enableArea={true}
