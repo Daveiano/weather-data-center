@@ -1,4 +1,4 @@
-name: Publish
+name: Build & release
 
 # @see https://dev.to/erikhofer/build-and-publish-a-multi-platform-electron-app-on-github-3lnd
 # @see https://www.electronforge.io/config/makers
@@ -32,13 +32,10 @@ jobs:
           node-version: '14'
 
       - name: 🔨 install yarn and dependecies
-        uses: borales/actions-yarn@v2.3.0
-        with:
-          cmd: install
-
-      - name: 🔨 install yarn and dependecies
         run: |
-          npm install -g yarn
+          npm i -g corepack
+          yarn set version latest
+          yarn install
 
       - name: 🚀 build
         #env:

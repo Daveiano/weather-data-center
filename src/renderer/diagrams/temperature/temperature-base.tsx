@@ -10,7 +10,7 @@ import type { AxisProps } from "@nivo/axes";
 
 import { dataItem, DiagramBaseProps } from "../types";
 import {getTimeDifferenceInDays, propertyParameter, scaleAverage} from "../scaling";
-import { TooltipLine } from "../tooltip";
+import {sliceTooltip, TooltipLine} from "../tooltip";
 import { withEmptyCheck } from "../hoc";
 
 type TemperatureLineBasePropsTypes = {
@@ -131,35 +131,7 @@ export const getTemperatureLineBaseProps = (precision: string, data: dataItem[],
 
   if (combinedTooltip) {
     newTemperatureLineBaseProps.enableSlices = 'x';
-    newTemperatureLineBaseProps.sliceTooltip = ({ slice }) => {
-      const tooltips = slice.points.map((item, index) =>
-        <TooltipLine
-          slice={true}
-          key={index}
-          point={item}
-        />
-      );
-
-      return (
-        <div
-          style={{
-            background: 'rgb(57 57 57)',
-            boxShadow: `0 2px 6px rgb(57 57 57)`
-          }}
-          className="diagram-tooltip"
-        >
-          <header style={{
-            textAlign: 'right',
-            color: 'white',
-            padding: '7px 7px 14px 20px',
-            fontSize: '1.2em'
-          }}>
-            {slice.points[0].data.xFormatted}
-          </header>
-          {tooltips}
-        </div>
-      );
-    };
+    newTemperatureLineBaseProps.sliceTooltip = (slice) => sliceTooltip(slice);
   }
 
   return newTemperatureLineBaseProps;
