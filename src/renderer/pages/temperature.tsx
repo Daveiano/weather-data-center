@@ -122,7 +122,7 @@ export const TemperaturePage: React.FC = (): React.ReactElement  => {
                       />
                     </Column>
 
-                    {/* @todo Add annotations. */}
+                    {/* @todo Add annotations, @see https://github.com/plouc/nivo/issues/1857 */}
                     <TemperatureBase height="450px" data={data} property="temperature" sm={12} lg={12} max={9} hideTile={true} config={config} />
                   </Row>
                 </Tile>

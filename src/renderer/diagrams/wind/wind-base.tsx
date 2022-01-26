@@ -6,7 +6,7 @@ import { Windy32 } from "@carbon/icons-react";
 
 import { dataItem, DiagramBaseProps } from "../types";
 import { getTimeDifferenceInDays, scaleAverage, scaleMax } from "../scaling";
-import {sliceTooltip, TooltipLine} from "../tooltip";
+import {sliceTooltip} from "../tooltip";
 import { withEmptyCheck } from "../hoc";
 
 const WindBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
