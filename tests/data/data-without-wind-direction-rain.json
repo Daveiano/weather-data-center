@@ -1,35 +1,5 @@
 [
   {
-    "time": 1614898800,
-    "temperature": 0.6,
-    "humidity": 94,
-    "dew_point": -0.4,
-    "felt_temperature": 0.6,
-    "wind": 0,
-    "gust": 0,
-    "pressure": 985.2,
-    "solar": 0,
-    "uvi": 0,
-    "_id": "7TC1C3nVJHjVMjUE",
-    "timeParsed": "2021-03-04T23:00:00.000Z",
-    "id": "0"
-  },
-  {
-    "time": 1614905820,
-    "temperature": 0.2,
-    "humidity": 99,
-    "dew_point": 0,
-    "felt_temperature": 0.2,
-    "wind": 0,
-    "gust": 0,
-    "pressure": 985.5,
-    "solar": 0,
-    "uvi": 0,
-    "_id": "9ORjRcdFIhmLCD4K",
-    "timeParsed": "2021-03-05T00:57:00.000Z",
-    "id": "1"
-  },
-  {
     "time": 1614913020,
     "temperature": 0.4,
     "humidity": 99,

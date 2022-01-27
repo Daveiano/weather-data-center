@@ -10,7 +10,7 @@ const collationFactors = {
   [TABLE_SORT_DIRECTION.DESC]: -1,
 };
 
-type test = {
+type SortInfo = {
   columnId: string, direction: string
 }
 
@@ -20,7 +20,7 @@ type test = {
  * @param {Intl.Collator} collator The g11n collator.
  * @returns {Array} The sorted table rows.
  */
-const useSortedRows = (rows: dataItemDataTable[], sortInfo: test, collator: Intl.Collator): [dataItemDataTable[]] => {
+const useSortedRows = (rows: dataItemDataTable[], sortInfo: SortInfo, collator: Intl.Collator): [dataItemDataTable[]] => {
   const compare = useCollator(collator);
   const { columnId: sortColumnId, direction: sortDirection } = sortInfo;
   const sortedRows =

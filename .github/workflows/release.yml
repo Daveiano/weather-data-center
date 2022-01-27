@@ -35,7 +35,7 @@ jobs:
         run: |
           npm i -g corepack
           yarn set version latest
-          yarn install
+          yarn install --network-timeout 1000000
 
       - name: 🚀 build
         #env:

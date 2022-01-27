@@ -244,7 +244,7 @@ exports[`rendering start page without rain and wind direction 1`] = `
                   <div
                     class="value bx--type-expressive-heading-03"
                   >
-                    985.2 hPa
+                    986.1 hPa
                   </div>
                   <div
                     class="date bx--type-body-short-01"
@@ -611,7 +611,7 @@ exports[`rendering start page without rain and wind direction 1`] = `
             <p
               class="bx--data-table-header__description"
             >
-              from 2021/03/05 00:00 till 2021/03/08 13:57
+              from 2021/03/05 03:57 till 2021/03/08 13:57
             </p>
           </div>
           <div
@@ -1394,74 +1394,6 @@ exports[`rendering start page without rain and wind direction 1`] = `
                 aria-live="polite"
               >
                 <tr
-                  data-row-id="0"
-                >
-                  <td>
-                    2021/03/05 00:00
-                  </td>
-                  <td>
-                    0.6
-                  </td>
-                  <td>
-                    0.6
-                  </td>
-                  <td>
-                    -0.4
-                  </td>
-                  <td>
-                    985.2
-                  </td>
-                  <td>
-                    94
-                  </td>
-                  <td>
-                    0
-                  </td>
-                  <td>
-                    0
-                  </td>
-                  <td>
-                    0
-                  </td>
-                  <td>
-                    0
-                  </td>
-                </tr>
-                <tr
-                  data-row-id="1"
-                >
-                  <td>
-                    2021/03/05 01:57
-                  </td>
-                  <td>
-                    0.2
-                  </td>
-                  <td>
-                    0.2
-                  </td>
-                  <td>
-                    0
-                  </td>
-                  <td>
-                    985.5
-                  </td>
-                  <td>
-                    99
-                  </td>
-                  <td>
-                    0
-                  </td>
-                  <td>
-                    0
-                  </td>
-                  <td>
-                    0
-                  </td>
-                  <td>
-                    0
-                  </td>
-                </tr>
-                <tr
                   data-row-id="2"
                 >
                   <td>
@@ -1903,6 +1835,74 @@ exports[`rendering start page without rain and wind direction 1`] = `
                     0
                   </td>
                 </tr>
+                <tr
+                  data-row-id="15"
+                >
+                  <td>
+                    2021/03/06 01:57
+                  </td>
+                  <td>
+                    -2.8
+                  </td>
+                  <td>
+                    -2.8
+                  </td>
+                  <td>
+                    -6.1
+                  </td>
+                  <td>
+                    998.8
+                  </td>
+                  <td>
+                    78
+                  </td>
+                  <td>
+                    1.4
+                  </td>
+                  <td>
+                    1.8
+                  </td>
+                  <td>
+                    0
+                  </td>
+                  <td>
+                    0
+                  </td>
+                </tr>
+                <tr
+                  data-row-id="16"
+                >
+                  <td>
+                    2021/03/06 03:57
+                  </td>
+                  <td>
+                    -3.2
+                  </td>
+                  <td>
+                    -3.2
+                  </td>
+                  <td>
+                    -6.5
+                  </td>
+                  <td>
+                    998.7
+                  </td>
+                  <td>
+                    78
+                  </td>
+                  <td>
+                    0
+                  </td>
+                  <td>
+                    0
+                  </td>
+                  <td>
+                    0
+                  </td>
+                  <td>
+                    0
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -1994,7 +1994,7 @@ exports[`rendering start page without rain and wind direction 1`] = `
               <span
                 class="bx--pagination__text bx--pagination__items-count"
               >
-                1–15 of 50 items
+                1–15 of 48 items
               </span>
             </div>
             <div
