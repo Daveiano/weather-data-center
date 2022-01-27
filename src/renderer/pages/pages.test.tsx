@@ -1,6 +1,7 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 
+import moment from 'moment-timezone';
 import {combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
 
@@ -11,6 +12,8 @@ import {appReducer, appReducerDefaultState} from "../reducer-app";
 import data from "../../../tests/data/data-without-wind-direction-rain.json";
 import config from "../../../tests/data/config.json";
 
+moment.tz.setDefault("Europe/Berlin");
+
 const store = createStore(
   combineReducers({
     appState: appReducer
@@ -20,9 +23,9 @@ const store = createStore(
   }
 );
 
+store.dispatch(configAction(config));
 store.dispatch(dataAction(data));
 store.dispatch(dataFilteredPerTimeAction(data));
-store.dispatch(configAction(config));
 
 test('rendering start page without rain and wind direction', () => {
   const { container } = render(
