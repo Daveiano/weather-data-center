@@ -1,13 +1,14 @@
-import { useCallback, useState } from 'react';
+import {useCallback, useState} from 'react';
 import {
   TABLE_SORT_CYCLE,
   TABLE_SORT_CYCLES,
   TABLE_SORT_DIRECTION,
 } from '../misc';
+import { DataTableSortState } from "carbon-components-react/lib/components/DataTable/state/sorting";
 
 interface getNextSortProps {
   sortCycle: string | undefined,
-  oldDirection: string
+  oldDirection: DataTableSortState
 }
 
 /**
@@ -16,7 +17,7 @@ interface getNextSortProps {
  * @param options.oldDirection The old sort direction.
  * @returns The next sort direction.
  */
-const getNextSort = (options: getNextSortProps) => {
+const getNextSort = (options: getNextSortProps): DataTableSortState => {
   const sortCycle = options.sortCycle === undefined ? TABLE_SORT_CYCLE.TRI_STATES_FROM_ASCENDING : options.sortCycle;
   if (!options.oldDirection) {
     throw new TypeError(
@@ -44,7 +45,7 @@ const getNextSort = (options: getNextSortProps) => {
  * @returns {Array} The current table sort info and the setter for the table
  * sort info.
  */
-const useSortInfo = (initialSortInfo: { columnId: string, direction: string }): any[] => {
+const useSortInfo = (initialSortInfo: { columnId: string, direction: DataTableSortState }): [{ columnId: string, direction: DataTableSortState }, ({ columnId, sortCycle, oldDirection }: getNextSortProps & { columnId: string }) => void] => {
   const [sortInfo, setSortInfo] = useState(initialSortInfo);
   const invokeSetSortInfo = useCallback(
     ({ columnId, sortCycle, oldDirection }) => {

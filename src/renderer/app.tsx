@@ -6,7 +6,7 @@ import { Loading, Grid, Row, Column } from 'carbon-components-react';
 import moment from "moment";
 
 import { AppHeader } from './components/app-header';
-import { Start } from './pages/start';
+import { StartPage } from './pages/start';
 import { TemperaturePage } from "./pages/temperature";
 import {PrecipitationPage} from "./pages/precipitation";
 import {PressurePage} from "./pages/pressure";
@@ -49,8 +49,8 @@ export const App: React.FC = (): React.ReactElement => {
   }, []);
 
   const filterDataPerTime = (): void => {
-    const startDate = moment(dateSetByUser.start, 'DD-MM-YYYY').unix();
-    const endDate = moment(dateSetByUser.end, 'DD-MM-YYYY').unix();
+    const startDate = moment(dateSetByUser.start, 'DD-MM-YYYY').set({ hour: 0, minute: 0, second: 0 }).unix();
+    const endDate = moment(dateSetByUser.end, 'DD-MM-YYYY').set({ hour: 23, minute: 59, second: 59 }).unix();
 
     const filteredData = dataFromStore.filter((dataItem: dataItem) => dataItem.time >= startDate && dataItem.time <= endDate);
 
@@ -83,7 +83,7 @@ export const App: React.FC = (): React.ReactElement => {
           <Row>
             <Column>
               <Switch>
-                <Route path="/" exact component={Start} />
+                <Route path="/" exact component={StartPage} />
                 <Route path="/temperature" component={TemperaturePage} />
                 <Route path="/precipitation" component={PrecipitationPage} />
                 <Route path="/pressure" component={PressurePage} />

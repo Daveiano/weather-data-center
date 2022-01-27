@@ -37,7 +37,7 @@ exports[`stats (compact size) with pressure items 1`] = `
                 class="bx--assistive-text"
                 id="icon-tooltip-4"
               >
-                Min: 968.6 hPa, Max: 981.5 hPa
+                Min: 967.2 hPa, Max: 981.5 hPa
               </span>
               <svg
                 aria-hidden="true"
@@ -61,7 +61,7 @@ exports[`stats (compact size) with pressure items 1`] = `
           <div
             class="value"
           >
-            -12.9 hPa
+            -14.3 hPa
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {Dispatch, SetStateAction, useState} from 'react';
 
 /**
  * @param {number} initialStart The initial start row index, zero-based.
@@ -7,7 +7,7 @@ import { useState } from 'react';
  * @returns {Array} The start row index, page size, the setter for the start
  * row index, the setter for the page size.
  */
-const usePageInfo = (initialStart: number, initialPageSize: number, count: number): any[] => {
+const usePageInfo = (initialStart: number, initialPageSize: number, count: number): [number, number, Dispatch<SetStateAction<number>>, Dispatch<SetStateAction<number>>] => {
   const [start, setStart] = useState(initialStart);
   const [pageSize, setPageSize] = useState(initialPageSize);
   // Copes with `start` going beyond the row count

@@ -307,9 +307,9 @@ test('stats (compact size) with pressure items', async () => {
   );
 
   // Fall per day.
-  expect(container.querySelector('.bx--row.stats .stat-tile:nth-child(1) .value')).toHaveTextContent('-12.9 hPa');
+  expect(container.querySelector('.bx--row.stats .stat-tile:nth-child(1) .value')).toHaveTextContent('-14.3 hPa');
   expect(container.querySelector('.bx--row.stats .stat-tile:nth-child(1) .date')).toHaveTextContent('2021/03/11');
-  expect(container.querySelector('.bx--row.stats .stat-tile:nth-child(1) .bx--tooltip__trigger .bx--assistive-text')).toHaveTextContent('Min: 968.6 hPa, Max: 981.5 hPa');
+  expect(container.querySelector('.bx--row.stats .stat-tile:nth-child(1) .bx--tooltip__trigger .bx--assistive-text')).toHaveTextContent('Min: 967.2 hPa, Max: 981.5 hPa');
 
   // Rise per day.
   expect(container.querySelector('.bx--row.stats .stat-tile:nth-child(2) .value')).toHaveTextContent('+ 13.0 hPa');

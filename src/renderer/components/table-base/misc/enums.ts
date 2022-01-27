@@ -1,3 +1,5 @@
+import type {DataTableSortState} from "carbon-components-react/lib/components/DataTable/state/sorting";
+
 /**
  * Table size.
  */
@@ -26,7 +28,7 @@ export const TABLE_SIZE = {
 /**
  * Table sort state.
  */
-export const TABLE_SORT_DIRECTION = {
+export const TABLE_SORT_DIRECTION: { NONE: DataTableSortState, ASC: DataTableSortState, DESC: DataTableSortState } = {
   /**
    * Not sorted.
    */
@@ -35,12 +37,12 @@ export const TABLE_SORT_DIRECTION = {
   /**
    * Sorted in ascending order.
    */
-  ASCENDING: 'ASC',
+  ASC: 'ASC',
 
   /**
    * Sorted in descending order.
    */
-  DESCENDING: 'DESC',
+  DESC: 'DESC',
 };
 
 /**
@@ -58,21 +60,21 @@ export const TABLE_SORT_CYCLE = {
  */
 export const TABLE_SORT_CYCLES = {
   [TABLE_SORT_CYCLE.BI_STATES_FROM_ASCENDING]: [
-    TABLE_SORT_DIRECTION.ASCENDING,
-    TABLE_SORT_DIRECTION.DESCENDING,
+    TABLE_SORT_DIRECTION.ASC,
+    TABLE_SORT_DIRECTION.DESC,
   ],
   [TABLE_SORT_CYCLE.BI_STATES_FROM_DESCENDING]: [
-    TABLE_SORT_DIRECTION.DESCENDING,
-    TABLE_SORT_DIRECTION.ASCENDING,
+    TABLE_SORT_DIRECTION.DESC,
+    TABLE_SORT_DIRECTION.ASC,
   ],
   [TABLE_SORT_CYCLE.TRI_STATES_FROM_ASCENDING]: [
     TABLE_SORT_DIRECTION.NONE,
-    TABLE_SORT_DIRECTION.ASCENDING,
-    TABLE_SORT_DIRECTION.DESCENDING,
+    TABLE_SORT_DIRECTION.ASC,
+    TABLE_SORT_DIRECTION.DESC,
   ],
   [TABLE_SORT_CYCLE.TRI_STATES_FROM_DESCENDING]: [
     TABLE_SORT_DIRECTION.NONE,
-    TABLE_SORT_DIRECTION.DESCENDING,
-    TABLE_SORT_DIRECTION.ASCENDING,
+    TABLE_SORT_DIRECTION.DESC,
+    TABLE_SORT_DIRECTION.ASC,
   ],
 };

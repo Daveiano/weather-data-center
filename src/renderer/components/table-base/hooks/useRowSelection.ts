@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import {useCallback} from 'react';
 import doesRowMatchSearchString from '../misc/doesRowMatchSearchString';
 import {dataItemDataTable} from "../table-base";
 
@@ -8,7 +8,7 @@ import {dataItemDataTable} from "../table-base";
  * @param {Function} setRows The setter for the table rows.
  * @returns {Array} The setter for the table row selection.
  */
-const useRowSelection = (rows: dataItemDataTable[], searchString: string, setRows: (a: dataItemDataTable[]) => void) => {
+const useRowSelection = (rows: dataItemDataTable[], searchString: string, setRows: (a: dataItemDataTable[]) => void): ((rowId: number, selected: boolean) => void)[] => {
   const setRowSelection = useCallback(
     (rowId, selected) => {
       setRows(

@@ -167,7 +167,7 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
-const queryData = (event: IpcMainEvent): void => {
+const queryData = (event: IpcMainEvent, replies?: {name: string, data: boolean | number[]}[]): void => {
   db.find({ time: { $exists: true } }).sort({ time: 1 }).exec((err, docs: { time: number }[]) => {
     event.reply(
       'query-data',
@@ -178,6 +178,10 @@ const queryData = (event: IpcMainEvent): void => {
           id: index.toString()
         }))
     );
+
+    if (replies.length) {
+      replies.forEach((reply) => event.reply(reply.name, reply.data));
+    }
   });
 };
 
@@ -285,21 +289,10 @@ ipcMain.on('open-file-dialog', (event) => {
             });
           }, () => {
             db.insert(deDuplicatedData, () => {
-              // @todo same as queryData().
-              db.find({ time: { $exists: true } }).sort({ time: 1 }).exec((err, docs: { time: number }[]) => {
-                event.reply(
-                  'query-data',
-                  docs
-                    .map((doc, index) => ({
-                      ...doc,
-                      timeParsed: moment.unix(doc.time).toISOString(),
-                      id: index.toString()
-                    }))
-                );
-
-                event.reply('number-of-duplicates', [duplicates, deDuplicatedData.length]);
-                event.reply('app-is-loading', false);
-              });
+              queryData(event, [
+                {name: 'number-of-duplicates', data: [duplicates, deDuplicatedData.length]},
+                {name: 'app-is-loading', data: false},
+              ]);
             });
           });
         });

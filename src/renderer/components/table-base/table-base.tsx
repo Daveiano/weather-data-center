@@ -23,6 +23,7 @@ import {
   TooltipIcon, Modal
 } from 'carbon-components-react';
 import type { DataTableSize } from 'carbon-components-react';
+import {DataTableSortState} from "carbon-components-react/lib/components/DataTable/state/sorting";
 
 import {
   useFilteredRows,
@@ -56,7 +57,7 @@ interface TableBaseProps {
   size?: DataTableSize,
   sortInfo: {
     columnId: string,
-    direction: string
+    direction: DataTableSortState
   },
   start: number,
   zebra?: boolean,
@@ -111,7 +112,7 @@ const TableBase: React.FC<TableBaseProps> = (props: TableBaseProps): React.React
 
   const elementId = useUniqueId(props.id);
   const selectedRowsCountInFiltered = filteredRows.filter(
-    (row: any) => row.selected
+    (row) => row.selected
   ).length;
   const selectedAllInFiltered =
     selectedRowsCountInFiltered > 0 &&
@@ -266,7 +267,6 @@ const TableBase: React.FC<TableBaseProps> = (props: TableBaseProps): React.React
 
               {props.columns.filter(item => dataHasRecordsForProperty(item.id, rows)).map(({ id: columnId, sortCycle, title, small, tooltip }) => {
                 const sortDirectionForThisCell =
-                  sortCycle &&
                   (columnId === sortColumnId
                     ? sortDirection
                     : TABLE_SORT_DIRECTION.NONE);
@@ -309,7 +309,7 @@ const TableBase: React.FC<TableBaseProps> = (props: TableBaseProps): React.React
             </TableRow>
           </TableHead>
           <TableBody>
-            {sortedRows.slice(start, start + pageSize).map((row: any) => {
+            {sortedRows.slice(start, start + pageSize).map((row) => {
               const { id: rowId, selected } = row;
               const selectionName = !props.hasSelection
                 ? undefined

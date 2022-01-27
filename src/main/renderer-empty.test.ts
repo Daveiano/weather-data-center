@@ -325,8 +325,7 @@ it('should delete single records', async () => {
   });
 
   const tableRows = page.locator('.bx--data-table-container .bx--pagination .bx--pagination__items-count');
-  // @todo Should be 2393?
-  expect(await tableRows.evaluate(node => node.textContent)).toBe('1–100 of 2368 items');
+  expect(await tableRows.evaluate(node => node.textContent)).toBe('1–100 of 2393 items');
 
   // Check 5 single records.
   await page.check('.bx--data-table-content tbody label[aria-label="Select row"] >> nth=0');
@@ -357,7 +356,7 @@ it('should delete single records', async () => {
     dumpDiffToConsole: true
   });
 
-  expect(await tableRows.evaluate(node => node.textContent)).toBe('1–100 of 2363 items');
+  expect(await tableRows.evaluate(node => node.textContent)).toBe('1–100 of 2388 items');
 });
 
 /**
@@ -372,7 +371,7 @@ it('should delete all records', async () => {
   });
 
   const tableRows = page.locator('.bx--data-table-container .bx--pagination .bx--pagination__items-count');
-  expect(await tableRows.evaluate(node => node.textContent)).toBe('1–100 of 2363 items');
+  expect(await tableRows.evaluate(node => node.textContent)).toBe('1–100 of 2388 items');
 
   // Check all records.
   await page.check('.bx--data-table-content thead label[aria-label="Select all rows"]');
@@ -381,7 +380,7 @@ it('should delete all records', async () => {
   await page.waitForSelector('.bx--modal.bx--modal-tall.bx--modal--danger h3', {state: 'visible'});
 
   const modalText = page.locator('.bx--modal.bx--modal-tall.is-visible.bx--modal--danger h3.bx--modal-header__heading');
-  expect(await modalText.evaluate(node => node.textContent)).toBe('Are you sure? This will delete 2363 record(s).');
+  expect(await modalText.evaluate(node => node.textContent)).toBe('Are you sure? This will delete 2388 record(s).');
 
   const imageConfirmation = await page.screenshot({ fullPage: true });
   expect(imageConfirmation).toMatchImageSnapshot({

@@ -101,7 +101,7 @@ const RainManualPeriodBase:FunctionComponent<DiagramBaseProps> = (props: Diagram
             hasSelection={false}
             sortInfo={{
               columnId: 'timeParsed',
-              direction: TABLE_SORT_DIRECTION.ASCENDING,
+              direction: TABLE_SORT_DIRECTION.ASC,
             }}
             size="short"
             dateFormat={(() => {

@@ -10,15 +10,15 @@ import {dataItem} from "../diagrams/types";
 import {TABLE_SORT_DIRECTION} from "../components/table-base/misc";
 
 export const DataBasePage: React.FC = (): React.ReactElement => {
-  const dataFilteredFromStore = useSelector((state: RootState) => state.appState.dataFilteredPerTime);
+  const dataFromStore = useSelector((state: RootState) => state.appState.data);
   const loading = useSelector((state: RootState) => state.appState.loading);
   const config = useSelector((state: RootState) => state.appState.config);
 
-  const [data, setData] = useState(dataFilteredFromStore);
+  const [data, setData] = useState(dataFromStore);
 
   useEffect(() => {
-    setData(dataFilteredFromStore);
-  }, [dataFilteredFromStore]);
+    setData(dataFromStore);
+  }, [dataFromStore]);
 
   if (loading) {
     return null;
@@ -116,7 +116,7 @@ export const DataBasePage: React.FC = (): React.ReactElement => {
               hasSelection={true}
               sortInfo={{
                 columnId: 'timeParsed',
-                direction: TABLE_SORT_DIRECTION.ASCENDING,
+                direction: TABLE_SORT_DIRECTION.ASC,
               }}
             />
           </Column>

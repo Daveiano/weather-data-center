@@ -6,8 +6,8 @@ import { dataItemDataTable } from "../table-base";
  * The map of how sorting direction affects sorting order.
  */
 const collationFactors = {
-  [TABLE_SORT_DIRECTION.ASCENDING]: 1,
-  [TABLE_SORT_DIRECTION.DESCENDING]: -1,
+  [TABLE_SORT_DIRECTION.ASC]: 1,
+  [TABLE_SORT_DIRECTION.DESC]: -1,
 };
 
 type test = {
@@ -20,7 +20,7 @@ type test = {
  * @param {Intl.Collator} collator The g11n collator.
  * @returns {Array} The sorted table rows.
  */
-const useSortedRows = (rows: dataItemDataTable[], sortInfo: test, collator: Intl.Collator) => {
+const useSortedRows = (rows: dataItemDataTable[], sortInfo: test, collator: Intl.Collator): [dataItemDataTable[]] => {
   const compare = useCollator(collator);
   const { columnId: sortColumnId, direction: sortDirection } = sortInfo;
   const sortedRows =

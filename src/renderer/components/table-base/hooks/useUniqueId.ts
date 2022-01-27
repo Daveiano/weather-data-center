@@ -5,7 +5,7 @@ import { useMemo } from 'react';
  * auto-generated and the given one will be used.
  * @returns {string} The auto-generated unique ID.
  */
-const useUniqueId = (id: string) => {
+const useUniqueId = (id: string): string => {
   const uniqueId = useMemo(() => Math.random().toString(36).slice(2), []);
   return id || uniqueId;
 };

@@ -24,8 +24,7 @@ import { RootState } from "../renderer";
 import { dataItem } from "../diagrams/types";
 import { Empty } from "../components/empty";
 
-// @todo Add tests for pages, wrap with redux provider to simulate missing data for wind.
-export const Start:React.FC = (): React.ReactElement => {
+export const StartPage:React.FC = (): React.ReactElement => {
   const dataFilteredFromStore = useSelector((state: RootState) => state.appState.dataFilteredPerTime);
   const loading = useSelector((state: RootState) => state.appState.loading);
   const config = useSelector((state: RootState) => state.appState.config);
@@ -208,7 +207,7 @@ export const Start:React.FC = (): React.ReactElement => {
               hasSelection={false}
               sortInfo={{
                 columnId: 'timeParsed',
-                direction: TABLE_SORT_DIRECTION.ASCENDING,
+                direction: TABLE_SORT_DIRECTION.ASC,
               }}
             />
           </Column>

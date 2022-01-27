@@ -34,7 +34,7 @@ jobs:
       - name: 🔨 install yarn and dependecies
         run: |
           npm i -g corepack
-          yarn set version stable
+          yarn set version latest
           yarn install
 
       - name: 🚀 build
@@ -44,4 +44,4 @@ jobs:
 
       - name: 🔨 Uninstall Yarn
         if: always()
-        run: npm uninstall -g corepack
+        run: npm uninstall -g yarn

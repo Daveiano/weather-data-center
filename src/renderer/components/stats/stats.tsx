@@ -79,7 +79,6 @@ const getRainPeriods = (input: dataItem[], property: propertyParameter) => {
   return splitIntoSeries.filter(item => item.length === maxPeriod);
 };
 
-// @todo Property 'property' makes no sense for 'extra' - it's everytime property bound.
 export const Stats: React.FC<StatsProps> = (props: StatsProps): React.ReactElement  => {
   const output: React.ReactElement[] = [];
 
@@ -182,17 +181,20 @@ export const Stats: React.FC<StatsProps> = (props: StatsProps): React.ReactEleme
         }
         case "extra": {
           switch (statsKey.extra) {
-            /* @todo Rework min-max-up and down with:
-            *    1. get min value and get indexOf
-            *    2. get max after the index of min
-            *    3. for the other function do the opposite. */
             case 'min-max-diff-up': {
-              const dataBundledPerDay = Object.values(bundleData(props.data, statsKey.property, 'day')).map(item => ({
-                ...item,
-                min: item.values[0],
-                max: item.values[item.values.length - 1],
-                rise: item.values[item.values.length - 1] - item.values[0]
-              })).sort((a, b) => b.rise - a.rise);
+              console.log(Object.values(bundleData(props.data, statsKey.property, 'day')));
+              const dataBundledPerDay = Object.values(bundleData(props.data, statsKey.property, 'day')).map(item => {
+                const minIndex = item.values.lastIndexOf(Math.min(...item.values)),
+                  maxValue = Math.max(...item.values.slice(minIndex, item.values.length)),
+                  minValue = Math.min(...item.values);
+
+                return {
+                  ...item,
+                  min: minValue,
+                  max: maxValue,
+                  rise: maxValue - minValue
+                };
+              }).sort((a, b) => b.rise - a.rise);
 
               date = moment.unix(dataBundledPerDay[0].time).utc().format('YYYY/MM/DD');
               value = `+ ${dataBundledPerDay[0].rise.toFixed(1)} ${statsKey.unit}`;
@@ -200,12 +202,18 @@ export const Stats: React.FC<StatsProps> = (props: StatsProps): React.ReactEleme
               break;
             }
             case 'min-max-diff-down': {
-              const dataBundledPerDay = Object.values(bundleData(props.data, statsKey.property, 'day')).map(item => ({
-                ...item,
-                min: item.values[item.values.length - 1],
-                max: item.values[0],
-                fall: item.values[item.values.length - 1] - item.values[0]
-              })).sort((a, b) => a.fall - b.fall);
+              const dataBundledPerDay = Object.values(bundleData(props.data, statsKey.property, 'day')).map(item => {
+                const maxIndex = item.values.lastIndexOf(Math.max(...item.values)),
+                  minValue = Math.min(...item.values.slice(maxIndex, item.values.length)),
+                  maxValue = Math.max(...item.values);
+
+                return {
+                  ...item,
+                  min: minValue,
+                  max: maxValue,
+                  fall: minValue - maxValue
+                };
+              }).sort((a, b) => a.fall - b.fall);
 
               date = moment.unix(dataBundledPerDay[0].time).utc().format('YYYY/MM/DD');
               value = `${dataBundledPerDay[0].fall.toFixed(1)} ${statsKey.unit}`;
