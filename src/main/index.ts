@@ -91,8 +91,9 @@ const createWindow = (): void => {
   const mainWindow = new BrowserWindow({
     height: 1000,
     width: 1920,
-    minHeight: 600,
-    minWidth: 1200,
+    minHeight: 768,
+    minWidth: 1330,
+    autoHideMenuBar: true,
     webPreferences: {
       //nodeIntegration: true,
       enableRemoteModule: true,
@@ -179,7 +180,7 @@ const queryData = (event: IpcMainEvent, replies?: {name: string, data: boolean |
         }))
     );
 
-    if (replies.length) {
+    if (replies && replies.length) {
       replies.forEach((reply) => event.reply(reply.name, reply.data));
     }
   });

@@ -9,7 +9,7 @@ import type { CartesianMarkerProps, Box, ValueFormat } from "@nivo/core";
 import type { AxisProps } from "@nivo/axes";
 
 import { dataItem, DiagramBaseProps } from "../types";
-import {getTimeDifferenceInDays, propertyParameter, scaleAverage} from "../scaling";
+import {getTimeDifferenceInDays, propertyParameter, scaleAverage, getTimeAxisScaling} from "../scaling";
 import {sliceTooltip, TooltipLine} from "../tooltip";
 import { withEmptyCheck } from "../hoc";
 
@@ -51,7 +51,7 @@ const TemperatureLineBaseProps: TemperatureLineBasePropsTypes = {
     type: "time",
     useUTC: true,
     format: "%Y-%m-%dT%H:%M:%S.000Z",
-    precision: 'minute'
+    precision: 'day'
   },
   axisLeft: {
     legend: '°C',
@@ -93,7 +93,8 @@ export const getTemperatureLineBaseProps = (precision: string, data: dataItem[],
 
   newTemperatureLineBaseProps.axisBottom = {
     tickSize: 0,
-    tickPadding: 5
+    tickPadding: 5,
+    ...getTimeAxisScaling(data)
   };
 
   newTemperatureLineBaseProps.yFormat = value => `${value} ${unit}`;
@@ -102,24 +103,20 @@ export const getTemperatureLineBaseProps = (precision: string, data: dataItem[],
   // @see https://github.com/d3/d3-time-format
   switch (precision) {
     case 'yearly':
+      newTemperatureLineBaseProps.xScale.precision = "year";
       newTemperatureLineBaseProps.xFormat = "time:%Y";
-      newTemperatureLineBaseProps.axisBottom.format = "%Y";
-      newTemperatureLineBaseProps.axisBottom.tickValues = "every year";
       break;
     case 'monthly':
+      newTemperatureLineBaseProps.xScale.precision = "month";
       newTemperatureLineBaseProps.xFormat = "time:%Y/%m";
-      newTemperatureLineBaseProps.axisBottom.format = "%b %Y";
-      newTemperatureLineBaseProps.axisBottom.tickValues = "every month";
       break;
     case 'daily':
+      newTemperatureLineBaseProps.xScale.precision = "day";
       newTemperatureLineBaseProps.xFormat = "time:%Y/%m/%d";
-      newTemperatureLineBaseProps.axisBottom.format = "%b %Y";
-      newTemperatureLineBaseProps.axisBottom.tickValues = "every month";
       break;
     default:
+      newTemperatureLineBaseProps.xScale.precision = "minute";
       newTemperatureLineBaseProps.xFormat = "time:%Y/%m/%d %H:%M";
-      newTemperatureLineBaseProps.axisBottom.format = "%e";
-      newTemperatureLineBaseProps.axisBottom.tickValues = "every 3 days";
       break;
   }
 

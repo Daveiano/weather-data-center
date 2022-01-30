@@ -134,7 +134,7 @@ export const PrecipitationPage: React.FC = (): React.ReactElement  => {
                           },
                           noteX: 25,
                           noteY: -100,
-                          noteTextOffset: -3,
+                          noteTextOffset: -1,
                           noteWidth: 5,
                           size: 5
                         }

@@ -5,7 +5,7 @@ import { Loading } from "carbon-components-react";
 import { ResponsiveLine } from "@nivo/line";
 
 import {dataItem, DiagramBaseProps} from "../types";
-import { getTimeDifferenceInDays, scaleAverage } from "../scaling";
+import {getTimeAxisScaling, getTimeDifferenceInDays, scaleAverage} from "../scaling";
 import { TooltipLine } from "../tooltip";
 import { withEmptyCheck } from "../hoc";
 
@@ -104,8 +104,7 @@ const WindDirectionBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBas
             format: value => degToCompass(value)
           }}
           axisBottom={{
-            format: daily ? "%b %Y" : "%e",
-            tickValues: daily ? "every month" : "every 3 days",
+            ...getTimeAxisScaling(data),
             tickSize: 0,
             tickPadding: 5
           }}

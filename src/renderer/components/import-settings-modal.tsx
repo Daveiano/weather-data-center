@@ -96,12 +96,12 @@ export const ImportSettingsModal:FunctionComponent<ImportSettingsModalProps> = (
         modalHeading="Settings"
         modalLabel="Units & Import"
         primaryButtonText="Save"
-        hasForm={true}
         hasScrollingContent={true}
         secondaryButtonText="Cancel"
         onRequestClose={() => props.setOpen(false)}
         onRequestSubmit={() => form.current.handleSubmit()}
         primaryButtonDisabled={isSubmitting}
+        aria-label="Units & Import"
       >
         <div className="bx--type-body-short-01" style={{marginBottom: '2rem'}}>
           Here you can change the name of the headers for each characteristic. For example the software will look

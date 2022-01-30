@@ -10,7 +10,7 @@ import type {AxisProps} from "@nivo/axes";
 import type {BarTooltipProps} from "@nivo/bar/dist/types/types";
 
 import {dataItem, DiagramBaseProps} from "../types";
-import {getTimeDifferenceInDays, Precision, propertyParameter, scaleMax, scaleSum} from "../scaling";
+import {getTimeDifferenceInDays, getTimeDifferenceInMonths, Precision, propertyParameter, scaleMax, scaleSum} from "../scaling";
 import { TooltipBar } from "../tooltip";
 import { withEmptyCheck } from "../hoc";
 
@@ -59,6 +59,7 @@ const RainBarBaseProps: RainBarBasePropsTypes = {
 
 export const getRainBarBaseProps = (precision: Precision, data: dataItem[], property: propertyParameter, unit: string): RainBarBasePropsTypes => {
   const newRainBarBaseProps = RainBarBaseProps;
+  const rotateTicks = precision === 'day' || precision === 'week' || getTimeDifferenceInMonths(data) >= 11;
 
   newRainBarBaseProps.valueFormat = value => `${value} ${unit}`;
   newRainBarBaseProps.axisLeft.legend = unit;
@@ -67,6 +68,7 @@ export const getRainBarBaseProps = (precision: Precision, data: dataItem[], prop
   newRainBarBaseProps.theme = {
     fontSize: precision === 'day' ? 10 : 11
   };
+
   newRainBarBaseProps.axisBottom = {
     format: value => {
       switch (precision) {
@@ -92,7 +94,7 @@ export const getRainBarBaseProps = (precision: Precision, data: dataItem[], prop
     },
     tickSize: 0,
     tickPadding: 5,
-    tickRotation: precision === 'day' || precision === 'week' ? -65 : 0,
+    tickRotation: rotateTicks ? -65 : 0,
   };
 
   newRainBarBaseProps.tooltip = point => <TooltipBar
@@ -112,8 +114,12 @@ export const getRainBarBaseProps = (precision: Precision, data: dataItem[], prop
     })()}
   />
 
-  if (precision === 'day' || precision === 'week') {
+  if (rotateTicks) {
     newRainBarBaseProps.margin.bottom = 80;
+  }
+
+  if (rotateTicks && precision === 'month') {
+    newRainBarBaseProps.margin.bottom = 40;
   }
 
   return newRainBarBaseProps;

@@ -1,5 +1,6 @@
 import { dataItem } from './types';
 import moment from "moment";
+import {AxisProps} from "@nivo/axes";
 
 export type dateTimeElement = {
   time: number,
@@ -30,6 +31,67 @@ export type Precision = 'day' | 'week' | 'month' | 'year';
 interface Dates {
   [key: string]: dateTimeElement
 }
+
+/**
+ * Calculate axis bottom time series ticks for line charts.
+ *
+ * @param data the data to process.
+ */
+export const getTimeAxisScaling = (data: dataItem[]): AxisProps => {
+  const timeDifferenceInDays = getTimeDifferenceInDays(data);
+  const axisBottom: AxisProps = {};
+
+  if (timeDifferenceInDays <= 2) {
+    axisBottom.format = "%H:%M";
+    axisBottom.tickValues = "every 6 hours";
+  }
+  else if (timeDifferenceInDays <= 6) {
+    axisBottom.format = "%d %b";
+    axisBottom.tickValues = "every day";
+  }
+  else if (timeDifferenceInDays <= 20) {
+    axisBottom.format = "%d %b";
+    axisBottom.tickValues = "every 2 days";
+  }
+  else if (timeDifferenceInDays <= 40) {
+    axisBottom.format = "%d %b";
+    axisBottom.tickValues = "every 5 days";
+  }
+  else if (timeDifferenceInDays <= 80) {
+    axisBottom.format = "%d %b";
+    axisBottom.tickValues = "every 10 days";
+  }
+  else if (timeDifferenceInDays <= 300) {
+    axisBottom.format = "%b %y";
+    axisBottom.tickValues = "every month";
+  }
+  else {
+    axisBottom.format = "%b %y";
+    axisBottom.tickValues = "every 2 months";
+  }
+
+  return axisBottom;
+};
+
+/**
+ * Calculates the time difference in months of the first and the last element in
+ * a data array.
+ *
+ * @todo Add tests.
+ *
+ * @param data the data to process.
+ */
+export const getTimeDifferenceInMonths = (data: dataItem[]): number => {
+  const firstDate = moment.unix(data[0].time),
+    lastDate = moment.unix(data[data.length - 1].time);
+
+  let diff = (lastDate.year() - firstDate.year()) * 12;
+
+  diff -= firstDate.month();
+  diff += lastDate.month() + 1;
+
+  return diff;
+};
 
 /**
  * Calculates the time difference in days of the first and the last element in

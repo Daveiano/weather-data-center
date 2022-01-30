@@ -5,7 +5,7 @@ import { Pressure32 } from "@carbon/icons-react";
 import { ResponsiveLine } from '@nivo/line'
 
 import {dataItem, DiagramBaseProps} from "../types";
-import { getTimeDifferenceInDays, scaleAverage } from "../scaling";
+import {getTimeAxisScaling, getTimeDifferenceInDays, scaleAverage} from "../scaling";
 import { TooltipLine } from "../tooltip";
 import { withEmptyCheck } from "../hoc";
 
@@ -99,8 +99,7 @@ const PressureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProp
             tickPadding: 5
           }}
           axisBottom={{
-            format: daily ? "%b %Y" : "%e",
-            tickValues: daily ? "every month" : "every 3 days",
+            ...getTimeAxisScaling(data),
             tickSize: 0,
             tickPadding: 5
           }}

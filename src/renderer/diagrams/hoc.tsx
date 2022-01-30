@@ -33,6 +33,8 @@ export const withEmptyCheck = (Component: React.JSXElementConstructor<DiagramBas
             height={props.height}
             property={props.property}
             config={props.config}
+            precision={props.precision}
+            annotations={props.annotations}
           />
         </Tile>
       </Column>
