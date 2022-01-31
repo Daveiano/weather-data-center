@@ -41,7 +41,7 @@ jobs:
       - name: 🚀 build & publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: yarn publish
+        run: yarn run publish
 
       - name: 🔨 Uninstall Yarn
         if: always()
