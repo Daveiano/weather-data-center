@@ -94,6 +94,7 @@ const createWindow = (): void => {
     minHeight: 768,
     minWidth: 1330,
     autoHideMenuBar: true,
+    //icon: `${__dirname.replace('.webpack/main', '')}src/assets/weather-data-center-icon.png`,
     webPreferences: {
       //nodeIntegration: true,
       enableRemoteModule: true,

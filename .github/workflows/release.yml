@@ -3,10 +3,10 @@ name: Build & release
 # @see https://dev.to/erikhofer/build-and-publish-a-multi-platform-electron-app-on-github-3lnd
 # @see https://www.electronforge.io/config/makers
 
-on: push
-#  push:
-#    tags:
-#      - 'v*'
+on:
+  push:
+    tags:
+      - 'v*'
 
 jobs:
   release:
@@ -37,10 +37,10 @@ jobs:
           yarn set version latest
           yarn install --network-timeout 1000000
 
-      - name: 🚀 build
-        #env:
-        #  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: yarn make
+      - name: 🚀 build & publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: yarn publish
 
       - name: 🔨 Uninstall Yarn
         if: always()

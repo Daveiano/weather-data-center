@@ -182,7 +182,6 @@ export const Stats: React.FC<StatsProps> = (props: StatsProps): React.ReactEleme
         case "extra": {
           switch (statsKey.extra) {
             case 'min-max-diff-up': {
-              console.log(Object.values(bundleData(props.data, statsKey.property, 'day')));
               const dataBundledPerDay = Object.values(bundleData(props.data, statsKey.property, 'day')).map(item => {
                 const minIndex = item.values.lastIndexOf(Math.min(...item.values)),
                   maxValue = Math.max(...item.values.slice(minIndex, item.values.length)),

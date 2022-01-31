@@ -1,6 +1,6 @@
 import { dataItem } from './types';
 import moment from "moment";
-import {AxisProps} from "@nivo/axes";
+import type {AxisProps} from "@nivo/axes";
 
 export type dateTimeElement = {
   time: number,

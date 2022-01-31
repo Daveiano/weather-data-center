@@ -75,7 +75,7 @@
           "name": "@electron-forge/publisher-github",
           "config": {
             "repository": {
-              "owner": "daveiano",
+              "owner": "Daveiano",
               "name": "weather-data-center"
             },
             "draft": true,
