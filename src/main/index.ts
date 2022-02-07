@@ -86,6 +86,8 @@ const end = (callback: asyncCallback) => {
   });
 };
 
+console.log(__dirname);
+
 const createWindow = (): void => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
@@ -94,7 +96,7 @@ const createWindow = (): void => {
     minHeight: 768,
     minWidth: 1330,
     autoHideMenuBar: true,
-    //icon: `${__dirname.replace('.webpack/main', '')}src/assets/weather-data-center-icon.png`,
+    icon: `${__dirname.replace('.webpack/main', '').replace('out/weather-data-center-linux-x64/resources/app/', '')}src/assets/weather-data-center-icon.png`,
     webPreferences: {
       //nodeIntegration: true,
       enableRemoteModule: true,

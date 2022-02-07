@@ -5,7 +5,7 @@
   "description": "App built with Electron + React + TypeScript to collect, organize and analyse weather data.",
   "main": ".webpack/main",
   "scripts": {
-    "start": "electron-forge start & yarn test:unit:watch",
+    "start": "yarn run icons && electron-forge start & yarn test:unit:watch",
     "lint": "eslint --ext .ts,.tsx .",
     "test": "jest",
     "test:u": "jest --updateSnapshot",
@@ -15,6 +15,7 @@
     "test:unit": "jest --selectProjects \"Unit & integration tests\"",
     "test:unit:watch": "jest --selectProjects \"Unit & integration tests\" --watch --verbose",
     "test:unit:ci": "jest --ci --selectProjects \"Unit & integration tests\"",
+    "icons": "./node_modules/.bin/electron-icon-builder --input=./src/assets/weather-data-center-icon.png --output=./assets --flatten",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
@@ -34,7 +35,9 @@
   "license": "MIT",
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+        "icon": "./assets/icons/icon"
+      },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
@@ -60,14 +63,16 @@
                 "Science"
               ],
               "homepage": "https://daveiano.github.io/weather-data-center/",
-              "icon": "",
+              "icon": "./assets/icons/icon/1024x1024.png",
               "maintainer": "David Baetge"
             }
           }
         },
         {
           "name": "@electron-forge/maker-rpm",
-          "config": {}
+          "config": {
+            "icon": "./assets/icons/icon/1024x1024.png"
+          }
         }
       ],
       "publishers": [
@@ -141,6 +146,7 @@
     "css-loader": "^5.1.2",
     "electron": "12.1.0",
     "electron-devtools-installer": "^3.1.1",
+    "electron-icon-builder": "^2.0.1",
     "eslint": "^7.6.0",
     "eslint-plugin-import": "^2.20.0",
     "eslint-plugin-react": "^7.22.0",

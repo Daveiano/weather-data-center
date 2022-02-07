@@ -38,6 +38,9 @@ jobs:
           yarn set version latest
           yarn install --network-timeout 1000000
 
+      - name: 🖼️ build icons
+        run: ./node_modules/.bin/electron-icon-builder --input=./src/assets/weather-data-center-icon.png --output=./assets
+
       - name: 🚀 build & publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
