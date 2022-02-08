@@ -3,6 +3,21 @@ layout: html
 title: "Screenshots"
 ---
 
+<!-- This example requires Tailwind CSS v2.0+ -->
+<div class="relative bg-gray-200">
+    <div class="absolute inset-0">
+        <img class="w-full h-full object-cover" src={{ "/assets/images/IMG_1508.jpg" | relative_url }} alt="">
+        <div class="absolute inset-0 bg-gray-200 mix-blend-multiply" aria-hidden="true"></div>
+    </div>
+    <div class="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
+        <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">Live Screenshots</h1>
+        <p class="mt-6 text-xl text-indigo-100 max-w-3xl">
+            These screenshots are updated on every code change. What you see here is the current state of
+            the development.
+        </p>
+    </div>
+</div>
+
 <div class="container mx-auto my-8 px-6">
     <div class="columns-2">
         {% for screenshot in site.data.screenshots %}

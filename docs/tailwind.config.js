@@ -5,5 +5,8 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [require('tailwind-container-break-out')]
+  plugins: [
+    require('tailwind-container-break-out'),
+    require('@tailwindcss/typography'),
+  ]
 }

@@ -1,19 +1,108 @@
-<div class="flex items-center justify-between">
-    <div class="text-xl font-semibold text-gray-700">
-        <a class="text-2xl font-bold text-gray-800 dark:text-white lg:text-3xl hover:text-gray-700 dark:hover:text-gray-300" href="{% link index.md %}">Weather Data Center</a>
-    </div>
+<script>
+    function toggleMobileMenu() {
+        let mobileMenu = document.querySelector("#mobileMenu"),
+           menuStyle = getComputedStyle(mobileMenu);
 
-    <!-- Mobile menu button -->
-    <div class="flex lg:hidden">
-        <button type="button" class="text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400" aria-label="toggle menu">
-            <svg viewBox="0 0 24 24" class="w-6 h-6 fill-current">
-                <path fill-rule="evenodd" d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path>
-            </svg>
-        </button>
+        if (menuStyle.display === "none") {
+            mobileMenu.classList.remove('hidden');
+        } else {
+            mobileMenu.classList.add('hidden');
+        }
+    }
+</script>
+
+<!-- This example requires Tailwind CSS v2.0+ -->
+<header>
+    <div class="relative bg-white">
+        <div class="flex justify-between items-center px-4 py-6 sm:px-6 md:justify-start md:space-x-10 border-b-2 border-gray-100">
+            <div>
+                <a href="{% link index.html %}" class="flex">
+                    <span class="sr-only">Workflow</span>
+                    <img class="h-8 w-auto sm:h-10" src={{ "/assets/images/48x48.png" | relative_url }} alt="">
+                </a>
+            </div>
+            <div class="-mr-2 -my-2 md:hidden">
+                <button onclick="toggleMobileMenu()" type="button" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-expanded="false">
+                    <span class="sr-only">Open menu</span>
+                    <!-- Heroicon name: outline/menu -->
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+            <div class="hidden md:flex-1 md:flex md:items-center md:justify-between">
+                <nav class="flex space-x-10">
+                    <a href="{% link screenshots.html %}" class="text-base font-medium text-gray-500 hover:text-gray-900"> Manual </a>
+                    <a href="{% link screenshots.html %}" class="text-base font-medium text-gray-500 hover:text-gray-900"> Screenshots </a>
+                    <a href="{% link faq.html %}" class="text-base font-medium text-gray-500 hover:text-gray-900"> FAQ </a>
+                </nav>
+                <div class="flex items-center md:ml-12">
+                    <a href="https://github.com/Daveiano/weather-data-center" target="_blank" class="text-base font-medium text-gray-500 hover:text-gray-900"> Source code </a>
+                    <a href="https://github.com/Daveiano/weather-data-center/releases" target="_blank" class="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"> Download </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!--
+    @todo Mobile menu, show/hide based on mobile menu state.
+
+    Entering: "duration-200 ease-out"
+      From: "opacity-0 scale-95"
+      To: "opacity-100 scale-100"
+    Leaving: "duration-100 ease-in"
+      From: "opacity-100 scale-100"
+      To: "opacity-0 scale-95"
+  -->
+<div class="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden z-10 hidden" id="mobileMenu">
+    <div class="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
+        <div class="pt-5 pb-6 px-5">
+            <div class="flex items-center justify-between">
+                <div>
+                    <a href="{% link index.html %}">
+                        <img class="h-8 w-auto" src={{ "/assets/images/48x48.png" | relative_url }} alt="Home" />
+                    </a>
+                </div>
+                <div class="-mr-2">
+                    <button onclick="toggleMobileMenu()" type="button" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                        <span class="sr-only">Close menu</span>
+                        <!-- Heroicon name: outline/x -->
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="mt-6">
+                <nav class="grid gap-6">
+                    <a href="{% link screenshots.html %}" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50">
+                        <div class="text-base font-medium text-gray-900">Manual</div>
+                    </a>
+                    <a href="{% link screenshots.html %}" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50">
+                        <div class="text-base font-medium text-gray-900">Screenshots</div>
+                    </a>
+                    <a href="{% link faq.html %}" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50">
+                        <div class="text-base font-medium text-gray-900">FAQ</div>
+                    </a>
+                </nav>
+            </div>
+        </div>
+        <div class="py-6 px-5">
+            <div class="grid grid-cols-2 gap-4">
+                <a target="_blank" href="https://github.com/Daveiano/weather-data-center/issues/new?assignees=&labels=&template=bug_report.md&title=%5BBUG%5D+%5BIssuetitle%5D" class="text-base font-medium text-gray-900 hover:text-gray-700"> Bug report </a>
+
+                <a target="_blank" href="https://github.com/Daveiano/weather-data-center/issues/new?assignees=&labels=&template=feature_request.md&title=%5BFeature%5D+%5BIssuetitle%5D" class="text-base font-medium text-gray-900 hover:text-gray-700"> Feature request </a>
+
+                <a class="text-base font-medium text-gray-900 hover:text-gray-700"> Lorem ipsum </a>
+            </div>
+            <div class="mt-6">
+                <a href="https://github.com/Daveiano/weather-data-center/releases" target="_blank" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"> Download </a>
+                <p class="mt-6 text-center text-base font-medium text-gray-500">
+                    Join development?
+                    <a href="https://github.com/Daveiano/weather-data-center" target="_blank" class="text-indigo-600 hover:text-indigo-500"> Source code </a>
+                </p>
+            </div>
+        </div>
     </div>
 </div>
-
-<!-- Mobile Menu open: "block", Menu closed: "hidden" -->
-<div class="hidden -mx-4 lg:flex lg:items-center">
-    <a href="{% link screenshots.html %}" class="block mx-4 mt-2 text-sm text-gray-700 capitalize lg:mt-0 dark:text-gray-200 hover:text-blue-600 dark:hover:text-indigo-400">Screenshots</a>
 </div>

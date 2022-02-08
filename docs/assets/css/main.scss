@@ -13,52 +13,6 @@ body, html {
   overflow-x: hidden;
 }
 
-main section.md-content {
-  h1 {
-    @apply text-4xl mb-4 font-bold;
-  }
-  h2 {
-    @apply text-2xl mb-3 mt-4 font-bold;
-  }
-  h3 {
-    @apply text-xl mb-2 mt-4;
-  }
-  h4 {
-    @apply text-lg mb-2 mt-4;
-  }
-  p {
-    @apply mb-3;
-  }
-  ul {
-    @apply pl-4 mb-3;
-    li {
-      @apply relative before:content-["\002013"] before:-left-4 before:absolute;
-    }
-  }
-  div.table-wrap {
-    @apply mx-break-out overflow-x-scroll;
-  }
-  table {
-    @apply mb-3 table-fixed;
-    thead {
-      @apply bg-slate-200;
-      tr {
-        th {
-          @apply font-bold px-4 py-2 text-left;
-        }
-      }
-    }
-    tbody {
-      @apply bg-slate-100;
-      tr {
-        @apply border-b-black border-solid border;
-        td {
-          @apply px-4 py-2;
-        }
-      }
-    }
-  }
-  img {
-    @apply border border-solid border-slate-200;
-  }
+div.table-wrap {
+  @apply mx-break-out overflow-x-scroll;
 }

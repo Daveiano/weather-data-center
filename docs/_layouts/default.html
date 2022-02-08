@@ -8,17 +8,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
+    <link rel="icon" type="image/x-icon" href={{ "/assets/images/favicon.ico" | relative_url }}>
   </head>
   <body>
-    <header>
-      <nav class="bg-white shadow dark:bg-gray-800">
-        <div class="container px-6 py-4 mx-auto">
-          <div class="lg:flex lg:items-center lg:justify-between">
-            {% include header.html %}
-          </div>
-        </div>
-      </nav>
-    </header>
+    {% include header.html %}
 
     <main>
       <section class="md-content container max-w-3xl mx-auto py-4 px-6">

@@ -26,17 +26,13 @@ You need to export/backup the data from your weather station and import them as 
 * Solar radiation
 * UV Index
 
-### Import file requirements
+### Import file & App settings
 
-Currently, only .csv files with named headers are supported. This is likely to change and be configurable in a
-future release. At the time your csv will need the following structure:
-
-| time                                          | temperature | humidity | pressure | rain                       | solar   | uvi | wind    | wind_direction | gust    | dew_point | felt_temperature |
-|-----------------------------------------------|-------------|----------|----------|----------------------------|---------|-----|---------|----------------|---------|-----------|------------------|
-| 2022/1/30 7:21                                | 10          | 80       | 950      | 0                          | 100.4   | 3   | 15      | 303            | 25      | 8         | 10               |
-| 2022/1/30 13:1                                | 15.7        | 75       | 951      | 0.9                        | 124.9   | 5   | 12      | 187            | 37      | 10        | 15.7             |
-| ...                                           | ...         | ...      | ...      | ...                        | ...     | ... | ...     | ...            | ...     | ...       | ...              |
-| YYYY/M/D k:m, e.g. 2022/1/30 7:21, k = 1 - 24 | in °C       | in %     | in hPa   | in mm, accumulated per day | in w/m² | UVI | in km/h | in degree      | in km/h | in °C     | in °C            |
+Currently, only .csv files with named headers are supported. You can manage the header names and the units within
+the app settings. You can also configure the input date and time format (this is important because various personal
+weather stations backup their data in different date formats). For the rain, you need to provide the data in a form 
+where the data is accumulated per day, so the last entry of the day is the total amount of rain. See the
+[Docs](https://daveiano.github.io/weather-data-center/manual.html) for more info.
 
 ### Screenshots
 
@@ -48,11 +44,7 @@ future release. At the time your csv will need the following structure:
 
 Coming soon
 
-## FAQ
-
-Coming soon
-
-* How can I configure the import date format?
+## [FAQ](https://daveiano.github.io/weather-data-center/faq.html)
 
 ## Development
 
