@@ -1,10 +1,13 @@
 import React from 'react'
 import { render } from '@testing-library/react'
+import moment from 'moment-timezone';
 
 import data from "../../../../tests/data/scaling-input.json";
 
 import { Stats } from "./stats";
 import {RainyHeavy, Sunny, TemperatureHigh, TemperatureLow, Weather, Windy} from "@carbon/pictograms-react";
+
+moment.tz.setDefault("Europe/Berlin");
 
 test('stats (normal size) with overview items', async () => {
   const { container } = render(
