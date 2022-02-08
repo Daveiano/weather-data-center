@@ -1,190 +1,384 @@
 <!DOCTYPE html>
 <html lang="en-US">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="utf-8">
-    <title>Home - Weather data center Docs</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/weather-data-center/assets/css/main.css">
-  </head>
-  <body>
-    <header>
-      <nav class="bg-white shadow dark:bg-gray-800">
-        <div class="container px-6 py-4 mx-auto">
-          <div class="lg:flex lg:items-center lg:justify-between">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
+        <title>Home - Weather data center Docs</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/weather-data-center/assets/css/main.css">
+        <link rel="icon" type="image/x-icon" href=/weather-data-center/assets/images/favicon.ico>
+    </head>
+    <body>
+        <script>
+    function toggleMobileMenu() {
+        let mobileMenu = document.querySelector("#mobileMenu"),
+           menuStyle = getComputedStyle(mobileMenu);
+
+        if (menuStyle.display === "none") {
+            mobileMenu.classList.remove('hidden');
+        } else {
+            mobileMenu.classList.add('hidden');
+        }
+    }
+</script>
+
+<!-- This example requires Tailwind CSS v2.0+ -->
+<header>
+    <div class="relative bg-white">
+        <div class="flex justify-between items-center px-4 py-6 sm:px-6 md:justify-start md:space-x-10 border-b-2 border-gray-100">
+            <div>
+                <a href="/weather-data-center/" class="flex">
+                    <span class="sr-only">Workflow</span>
+                    <img class="h-8 w-auto sm:h-10" src=/weather-data-center/assets/images/48x48.png alt="">
+                </a>
+            </div>
+            <div class="-mr-2 -my-2 md:hidden">
+                <button onclick="toggleMobileMenu()" type="button" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-expanded="false">
+                    <span class="sr-only">Open menu</span>
+                    <!-- Heroicon name: outline/menu -->
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+            <div class="hidden md:flex-1 md:flex md:items-center md:justify-between">
+                <nav class="flex space-x-10">
+                    <a href="/weather-data-center/screenshots.html" class="text-base font-medium text-gray-500 hover:text-gray-900"> Manual </a>
+                    <a href="/weather-data-center/screenshots.html" class="text-base font-medium text-gray-500 hover:text-gray-900"> Screenshots </a>
+                    <a href="/weather-data-center/faq.html" class="text-base font-medium text-gray-500 hover:text-gray-900"> FAQ </a>
+                </nav>
+                <div class="flex items-center md:ml-12">
+                    <a href="https://github.com/Daveiano/weather-data-center" target="_blank" class="text-base font-medium text-gray-500 hover:text-gray-900"> Source code </a>
+                    <a href="https://github.com/Daveiano/weather-data-center/releases" target="_blank" class="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"> Download </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!--
+    @todo Mobile menu, show/hide based on mobile menu state.
+
+    Entering: "duration-200 ease-out"
+      From: "opacity-0 scale-95"
+      To: "opacity-100 scale-100"
+    Leaving: "duration-100 ease-in"
+      From: "opacity-100 scale-100"
+      To: "opacity-0 scale-95"
+  -->
+<div class="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden z-10 hidden" id="mobileMenu">
+    <div class="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
+        <div class="pt-5 pb-6 px-5">
             <div class="flex items-center justify-between">
-    <div class="text-xl font-semibold text-gray-700">
-        <a class="text-2xl font-bold text-gray-800 dark:text-white lg:text-3xl hover:text-gray-700 dark:hover:text-gray-300" href="/weather-data-center/">Weather Data Center</a>
-    </div>
+                <div>
+                    <a href="/weather-data-center/">
+                        <img class="h-8 w-auto" src=/weather-data-center/assets/images/48x48.png alt="Home" />
+                    </a>
+                </div>
+                <div class="-mr-2">
+                    <button onclick="toggleMobileMenu()" type="button" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                        <span class="sr-only">Close menu</span>
+                        <!-- Heroicon name: outline/x -->
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="mt-6">
+                <nav class="grid gap-6">
+                    <a href="/weather-data-center/screenshots.html" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50">
+                        <div class="text-base font-medium text-gray-900">Manual</div>
+                    </a>
+                    <a href="/weather-data-center/screenshots.html" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50">
+                        <div class="text-base font-medium text-gray-900">Screenshots</div>
+                    </a>
+                    <a href="/weather-data-center/faq.html" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50">
+                        <div class="text-base font-medium text-gray-900">FAQ</div>
+                    </a>
+                </nav>
+            </div>
+        </div>
+        <div class="py-6 px-5">
+            <div class="grid grid-cols-2 gap-4">
+                <a target="_blank" href="https://github.com/Daveiano/weather-data-center/issues/new?assignees=&labels=&template=bug_report.md&title=%5BBUG%5D+%5BIssuetitle%5D" class="text-base font-medium text-gray-900 hover:text-gray-700"> Bug report </a>
 
-    <!-- Mobile menu button -->
-    <div class="flex lg:hidden">
-        <button type="button" class="text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400" aria-label="toggle menu">
-            <svg viewBox="0 0 24 24" class="w-6 h-6 fill-current">
-                <path fill-rule="evenodd" d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path>
-            </svg>
-        </button>
+                <a target="_blank" href="https://github.com/Daveiano/weather-data-center/issues/new?assignees=&labels=&template=feature_request.md&title=%5BFeature%5D+%5BIssuetitle%5D" class="text-base font-medium text-gray-900 hover:text-gray-700"> Feature request </a>
+
+                <a class="text-base font-medium text-gray-900 hover:text-gray-700"> Lorem ipsum </a>
+            </div>
+            <div class="mt-6">
+                <a href="https://github.com/Daveiano/weather-data-center/releases" target="_blank" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"> Download </a>
+                <p class="mt-6 text-center text-base font-medium text-gray-500">
+                    Join development?
+                    <a href="https://github.com/Daveiano/weather-data-center" target="_blank" class="text-indigo-600 hover:text-indigo-500"> Source code </a>
+                </p>
+            </div>
+        </div>
     </div>
 </div>
-
-<!-- Mobile Menu open: "block", Menu closed: "hidden" -->
-<div class="hidden -mx-4 lg:flex lg:items-center">
-    <a href="/weather-data-center/screenshots.html" class="block mx-4 mt-2 text-sm text-gray-700 capitalize lg:mt-0 dark:text-gray-200 hover:text-blue-600 dark:hover:text-indigo-400">Screenshots</a>
 </div>
+
+        <main>
+            <!--
+  This example requires Tailwind CSS v2.0+
+
+  This example requires some changes to your config:
+
+  ```
+  // tailwind.config.js
+  const colors = require('tailwindcss/colors')
+
+  module.exports = {
+    // ...
+    theme: {
+      extend: {
+        colors: {
+          rose: colors.rose,
+        },
+      },
+    },
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ],
+  }
+  ```
+-->
+<div class="bg-white mb-12">
+  <!-- Hero section -->
+  <div class="pt-8 overflow-hidden sm:pt-12 lg:relative lg:py-48">
+    <div class="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl lg:grid lg:grid-cols-2 lg:gap-24">
+      <div>
+        <div>
+          <img class="h-11 w-auto" src=/weather-data-center/assets/images/48x48.png alt="Workflow">
+        </div>
+        <div class="mt-10">
+          <div class="mt-6 sm:max-w-xl">
+            <h1 class="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">Weather Data Center</h1>
+            <p class="mt-6 text-xl text-gray-500">A cross-platform application to analyze your personal weather station data. Available for Windows, Mac and Linux.</p>
+          </div>
+          <div class="mt-12 sm:max-w-lg sm:w-full sm:flex">
+            <a href="https://github.com/Daveiano/weather-data-center/releases" target="_blank" class="table rounded-md border border-transparent px-5 py-3 text-white bg-indigo-600 hover:bg-indigo-700 text-base font-medium shadow focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 sm:px-10">Download</a>
           </div>
         </div>
-      </nav>
-    </header>
+      </div>
+    </div>
 
-    <main>
-      <section class="md-content container max-w-3xl mx-auto py-4 px-6">
-        <h1 id="weather-data-center">Weather Data Center</h1>
-
-<h2 id="introduction">Introduction</h2>
-
-<p>Weather Data Center is an application written with TypeScript + React in an Electron environment. This way it is a
-cross-platform Desktop application. The main purpose is to collect, organize, analyze and visualize weather data
-from your backyards weather station.</p>
-
-<p>You need to export/backup the data from your weather station and import them as a .csv file into the app.</p>
-
-<h3 id="supported-characteristics">Supported characteristics</h3>
-
-<ul>
-  <li>Temperature</li>
-  <li>Pressure</li>
-  <li>Humidity</li>
-  <li>Wind direction</li>
-  <li>Wind Speed</li>
-  <li>Guest Speed</li>
-  <li>Felt temperature</li>
-  <li>Dew point temperature</li>
-  <li>Rain</li>
-  <li>Solar radiation</li>
-  <li>UV Index</li>
-</ul>
-
-<h3 id="import-file-requirements">Import file requirements</h3>
-
-<p>Currently, only .csv files with named headers are supported. This is likely to change and be configurable in a
-future release. At the time your csv will need the following structure:</p>
-
-<div class="table-wrap">
-
-  <table>
-    <thead>
-      <tr>
-        <th>time</th>
-        <th>temperature</th>
-        <th>humidity</th>
-        <th>pressure</th>
-        <th>rain</th>
-        <th>solar</th>
-        <th>uvi</th>
-        <th>wind</th>
-        <th>wind_direction</th>
-        <th>gust</th>
-        <th>dew_point</th>
-        <th>felt_temperature</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>2022/1/30 7:21</td>
-        <td>10</td>
-        <td>80</td>
-        <td>950</td>
-        <td>0</td>
-        <td>100.4</td>
-        <td>3</td>
-        <td>15</td>
-        <td>303</td>
-        <td>25</td>
-        <td>8</td>
-        <td>10</td>
-      </tr>
-      <tr>
-        <td>2022/1/30 13:1</td>
-        <td>15.7</td>
-        <td>75</td>
-        <td>951</td>
-        <td>0.9</td>
-        <td>124.9</td>
-        <td>5</td>
-        <td>12</td>
-        <td>187</td>
-        <td>37</td>
-        <td>10</td>
-        <td>15.7</td>
-      </tr>
-      <tr>
-        <td>…</td>
-        <td>…</td>
-        <td>…</td>
-        <td>…</td>
-        <td>…</td>
-        <td>…</td>
-        <td>…</td>
-        <td>…</td>
-        <td>…</td>
-        <td>…</td>
-        <td>…</td>
-        <td>…</td>
-      </tr>
-      <tr>
-        <td>YYYY/M/D k:m, e.g. 2022/1/30 7:21, k = 1 - 24</td>
-        <td>in °C</td>
-        <td>in %</td>
-        <td>in hPa</td>
-        <td>in mm, accumulated per day</td>
-        <td>in w/m²</td>
-        <td>UVI</td>
-        <td>in km/h</td>
-        <td>in degree</td>
-        <td>in km/h</td>
-        <td>in °C</td>
-        <td>in °C</td>
-      </tr>
-    </tbody>
-  </table>
-
+    <div class="sm:mx-auto sm:max-w-3xl sm:px-6">
+        <div class="py-12 sm:relative sm:mt-12 sm:py-16 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+          <div class="hidden sm:block">
+            <div class="absolute inset-y-0 left-1/2 w-screen bg-gray-50 rounded-l-3xl lg:left-80 lg:right-0 lg:w-full"></div>
+            <svg class="absolute top-8 right-1/2 -mr-3 lg:m-0 lg:left-0" width="404" height="392" fill="none" viewBox="0 0 404 392">
+              <defs>
+                <pattern id="837c3e70-6c3a-44e6-8854-cc48c737b659" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                  <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
+                </pattern>
+              </defs>
+              <rect width="404" height="392" fill="url(#837c3e70-6c3a-44e6-8854-cc48c737b659)" />
+            </svg>
+          </div>
+          <div class="relative pl-4 -mr-40 sm:mx-auto sm:max-w-3xl sm:px-0 lg:max-w-none lg:h-full lg:pl-12">
+            <img class="w-full rounded-md shadow-xl ring-1 ring-black ring-opacity-5 lg:h-full lg:w-auto lg:max-w-none" src=/weather-data-center/assets/images/home-screenshot-2-rows.png alt="" />
+          </div>
+        </div>
+      </div>
+  </div>
 </div>
 
-<h3 id="screenshots">Screenshots</h3>
+<!-- This example requires Tailwind CSS v2.0+ -->
+<div class="bg-indigo-50">
+  <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-24 lg:px-8 lg:flex lg:items-center lg:justify-between">
+    <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 md:text-4xl">
+      <span class="block">Need help?</span>
+      <span class="block text-indigo-600">Please have a look at the manual.</span>
+    </h2>
+    <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
+      <div class="inline-flex rounded-md shadow">
+        <a href="#" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"> Read the manual </a>
+      </div>
+    </div>
+  </div>
+</div>
 
-<h4 id="front-page">Front Page</h4>
+<div class="bg-white mb-12">
+  <!-- Hero section -->
+  <div class="pt-8 overflow-hidden sm:pt-12 lg:relative lg:py-36">
+    <div class="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl lg:grid lg:grid-cols-2 lg:gap-24">
+      <div></div>
+      <div>
+        <div class="mt-10">
+          <div class="mt-6 sm:max-w-xl">
+            <h1 class="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">Your data at a glance.</h1>
+            <p class="mt-6 text-xl text-gray-500">
+              Detailed data visualizations for every supported characteristic. Featuring climatological days and
+              automatic calculation of interesting stats and events.
+              <br/><br/>
+              View detailed reports in a visualized way or filter through cleaned up data tables.
+            </p>
+          </div>
+          <div class="mt-12 sm:max-w-lg sm:w-full sm:flex">
+            <a href="/weather-data-center/screenshots.html" class="table rounded-md border border-transparent px-5 py-3 text-white bg-indigo-600 hover:bg-indigo-700 text-base font-medium shadow focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 sm:px-10">Browse Screenshots</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<p><img align="center" alt="Weather Data Center Start Page Screenshot" src="https://raw.githubusercontent.com/Daveiano/weather-data-center/develop/src/main/__image_snapshots__/renderer-small-data-test-ts-start-the-app-with-a-small-set-of-data-overview-page-1-snap.png" /></p>
+    <div class="sm:mx-auto sm:max-w-3xl sm:px-6">
+      <div class="py-12 sm:relative sm:mt-12 sm:py-16 lg:absolute lg:inset-y-0 lg:left-0 lg:w-1/2">
+        <div class="hidden sm:block">
+          <div class="absolute inset-y-0 right-1/2 w-screen bg-gray-50 rounded-r-3xl lg:right-80 lg:right-0 lg:w-full"></div>
+          <svg class="absolute top-8 left-1/2 -mr-3 lg:m-0 lg:right-0" width="404" height="392" fill="none" viewBox="0 0 404 392">
+            <defs>
+              <pattern id="837c3e70-6c3a-44e6-8854-cc48c737b659" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
+              </pattern>
+            </defs>
+            <rect width="404" height="392" fill="url(#837c3e70-6c3a-44e6-8854-cc48c737b659)" />
+          </svg>
+        </div>
+        <div class="relative pl-4 -mr-40 sm:mx-auto sm:max-w-3xl sm:px-0 lg:max-w-none lg:h-full lg:pr-12">
+          <img class="w-full rounded-md shadow-xl ring-1 ring-black ring-opacity-5 lg:h-full lg:w-auto lg:max-w-none lg:right-0 lg:absolute" src=/weather-data-center/assets/images/temp-screenshot-2-rows.png alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<h2 id="installation">Installation</h2>
+<!-- This example requires Tailwind CSS v2.0+ -->
+<div class="bg-indigo-50">
+  <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-24 lg:px-8 lg:flex lg:items-center lg:justify-between">
+    <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 md:text-4xl">
+      <span class="block">Found a bug?</span>
+      <span class="block text-indigo-600">Or got an idea for a new feature?</span>
+    </h2>
+    <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
+      <div class="inline-flex rounded-md shadow">
+        <a target="_blank" href="https://github.com/Daveiano/weather-data-center/issues/new?assignees=&labels=&template=bug_report.md&title=%5BBUG%5D+%5BIssuetitle%5D" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"> Bug report </a>
+      </div>
+      <div class="ml-3 inline-flex rounded-md shadow">
+        <a target="_blank" href="https://github.com/Daveiano/weather-data-center/issues/new?assignees=&labels=&template=feature_request.md&title=%5BFeature%5D+%5BIssuetitle%5D" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50"> Feature request </a>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>Coming soon</p>
+<!--
+  This example requires Tailwind CSS v2.0+
 
-<h2 id="faq">FAQ</h2>
+  This example requires some changes to your config:
 
-<p>Coming soon</p>
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/typography'),
+    ],
+  }
+  ```
+-->
+<div class="relative py-16 bg-white overflow-hidden">
+  <div class="hidden lg:block lg:absolute lg:inset-y-0 lg:h-full lg:w-full">
+    <div class="relative h-full text-lg max-w-prose mx-auto" aria-hidden="true">
+      <svg class="absolute top-12 left-full transform translate-x-32" width="404" height="384" fill="none" viewBox="0 0 404 384">
+        <defs>
+          <pattern id="74b3fd99-0a6f-4271-bef2-e80eeafdf357" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+            <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
+          </pattern>
+        </defs>
+        <rect width="404" height="384" fill="url(#74b3fd99-0a6f-4271-bef2-e80eeafdf357)" />
+      </svg>
+      <svg class="absolute top-1/2 right-full transform -translate-y-1/2 -translate-x-32" width="404" height="384" fill="none" viewBox="0 0 404 384">
+        <defs>
+          <pattern id="f210dbf6-a58d-4871-961e-36d5016a0f49" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+            <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
+          </pattern>
+        </defs>
+        <rect width="404" height="384" fill="url(#f210dbf6-a58d-4871-961e-36d5016a0f49)" />
+      </svg>
+      <svg class="absolute bottom-12 left-full transform translate-x-32" width="404" height="384" fill="none" viewBox="0 0 404 384">
+        <defs>
+          <pattern id="d3eb07ae-5182-43e6-857d-35c643af9034" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+            <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
+          </pattern>
+        </defs>
+        <rect width="404" height="384" fill="url(#d3eb07ae-5182-43e6-857d-35c643af9034)" />
+      </svg>
+    </div>
+  </div>
+  <div class="relative px-4 sm:px-6 lg:px-8">
+    <div class="text-lg max-w-prose mx-auto">
+      <h1>
+        <span class="block text-base text-center text-indigo-600 font-semibold tracking-wide uppercase">Introduction</span>
+        <span class="mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">Beautify your data</span>
+      </h1>
+      <p class="mt-8 text-xl text-gray-500 leading-8">
+        The goal of the app is to collect, organize, analyze and visualize weather data from your backyards weather station.
+      </p>
+    </div>
+    <div class="mt-6 prose prose-indigo prose-lg text-gray-500 mx-auto">
+      <p>
+        You need to export/backup the data from your weather station and import them as a .csv file into the app.
+      </p>
+      <h2>Supported characteristics</h2>
+      <ul role="list">
+        <li>Temperature</li>
+        <li>Pressure</li>
+        <li>Humidity</li>
+        <li>Wind direction</li>
+        <li>Wind Speed</li>
+        <li>Guest Speed</li>
+        <li>Felt temperature</li>
+        <li>Dew point temperature</li>
+        <li>Rain</li>
+        <li>Solar radiation</li>
+        <li>UV Index</li>
+      </ul>
+      <h2>
+        Import file & App settings
+      </h2>
+      <p>
+        Currently, only .csv files with named headers are supported. You can manage the header names and the units within
+        the app settings. You can also configure the input date and time format (this is important because various personal
+        weather stations backup their data in different date formats).
+      </p>
+    </div>
+  </div>
+</div>
 
-<h2 id="development">Development</h2>
+        </main>
 
-<h3 id="upstream-issues">Upstream issues</h3>
+        <!-- Footer section -->
+<footer class="bg-gray-900">
+    <div class="mx-auto max-w-md py-12 px-4 overflow-hidden sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8">
+        <nav class="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
+            <div class="px-5 py-2">
+                <a href="#" class="text-base text-gray-400 hover:text-gray-300"> Manual </a>
+            </div>
 
-<ul>
-  <li>Carbon structure: components-react vs @carbon - https://github.com/carbon-design-system/carbon/issues/9540</li>
-  <li>
-    <s>Carbon DataTable sort all pages, not only current visible - https://github.com/carbon-design-system/carbon/issues/6373</s>
-  </li>
-  <li>
-    <s>Carbon - Support React Link in SideNav - https://github.com/carbon-design-system/carbon/issues/2473</s>
-  </li>
-  <li>Nivo Annotations for line diagram (show min and max value for e.g. temperature) - https://github.com/plouc/nivo/issues/1857</li>
-  <li>playwright: Filechooser not working - https://github.com/microsoft/playwright/issues/5013</li>
-  <li>Carbon: &lt;button&gt; cannot appear as a descendant of &lt;button&gt; when using tooltips in table headers</li>
-</ul>
+            <div class="px-5 py-2">
+                <a href="/weather-data-center/screenshots.html" class="text-base text-gray-400 hover:text-gray-300"> Screenshots </a>
+            </div>
 
-      </section>
+            <div class="px-5 py-2">
+                <a href="/weather-data-center/faq.html" class="text-base text-gray-400 hover:text-gray-300"> FAQ </a>
+            </div>
+        </nav>
+        <div class="mt-8 flex justify-center space-x-6">
 
-    </main>
-  </body>
+            <a target="_blank" href="https://github.com/Daveiano/weather-data-center" class="text-gray-400 hover:text-gray-300">
+                <span class="sr-only">GitHub</span>
+                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+                </svg>
+            </a>
+
+        </div>
+        <p class="mt-8 text-center text-base text-gray-400">&copy; 2022 David Bätge. All rights reserved.</p>
+    </div>
+</footer>
+    </body>
 </html>
