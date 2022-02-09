@@ -22,7 +22,7 @@
                 </a>
             </div>
             <div class="-mr-2 -my-2 md:hidden">
-                <button onclick="toggleMobileMenu()" type="button" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-expanded="false">
+                <button onclick="toggleMobileMenu()" type="button" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500" aria-expanded="false">
                     <span class="sr-only">Open menu</span>
                     <!-- Heroicon name: outline/menu -->
                     <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -32,13 +32,45 @@
             </div>
             <div class="hidden md:flex-1 md:flex md:items-center md:justify-between">
                 <nav class="flex space-x-10">
-                    <a href="{% link screenshots.html %}" class="text-base font-medium text-gray-500 hover:text-gray-900"> Manual </a>
+                    <a href="{% link manual.html %}" class="text-base font-medium text-gray-500 hover:text-gray-900"> Manual </a>
                     <a href="{% link screenshots.html %}" class="text-base font-medium text-gray-500 hover:text-gray-900"> Screenshots </a>
                     <a href="{% link faq.html %}" class="text-base font-medium text-gray-500 hover:text-gray-900"> FAQ </a>
                 </nav>
+
+                <button
+                   id="theme-toggle"
+                   type="button"
+                   class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5"
+                >
+                    <svg
+                       id="theme-toggle-dark-icon"
+                       class="w-5 h-5 hidden"
+                       fill="currentColor"
+                       viewBox="0 0 20 20"
+                       xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                           d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
+                        ></path>
+                    </svg>
+                    <svg
+                       id="theme-toggle-light-icon"
+                       class="w-5 h-5 hidden"
+                       fill="currentColor"
+                       viewBox="0 0 20 20"
+                       xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                           d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                           fill-rule="evenodd"
+                           clip-rule="evenodd"
+                        ></path>
+                    </svg>
+                </button>
+
                 <div class="flex items-center md:ml-12">
                     <a href="https://github.com/Daveiano/weather-data-center" target="_blank" class="text-base font-medium text-gray-500 hover:text-gray-900"> Source code </a>
-                    <a href="https://github.com/Daveiano/weather-data-center/releases" target="_blank" class="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"> Download </a>
+                    <a href="https://github.com/Daveiano/weather-data-center/releases" target="_blank" class="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700"> Download </a>
                 </div>
             </div>
         </div>
@@ -64,7 +96,7 @@
                     </a>
                 </div>
                 <div class="-mr-2">
-                    <button onclick="toggleMobileMenu()" type="button" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                    <button onclick="toggleMobileMenu()" type="button" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
                         <span class="sr-only">Close menu</span>
                         <!-- Heroicon name: outline/x -->
                         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -75,7 +107,7 @@
             </div>
             <div class="mt-6">
                 <nav class="grid gap-6">
-                    <a href="{% link screenshots.html %}" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50">
+                    <a href="{% link manual.html %}" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50">
                         <div class="text-base font-medium text-gray-900">Manual</div>
                     </a>
                     <a href="{% link screenshots.html %}" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50">
@@ -96,13 +128,12 @@
                 <a class="text-base font-medium text-gray-900 hover:text-gray-700"> Lorem ipsum </a>
             </div>
             <div class="mt-6">
-                <a href="https://github.com/Daveiano/weather-data-center/releases" target="_blank" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"> Download </a>
+                <a href="https://github.com/Daveiano/weather-data-center/releases" target="_blank" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700"> Download </a>
                 <p class="mt-6 text-center text-base font-medium text-gray-500">
                     Join development?
-                    <a href="https://github.com/Daveiano/weather-data-center" target="_blank" class="text-indigo-600 hover:text-indigo-500"> Source code </a>
+                    <a href="https://github.com/Daveiano/weather-data-center" target="_blank" class="text-blue-600 hover:text-blue-500"> Source code </a>
                 </p>
             </div>
         </div>
     </div>
-</div>
 </div>

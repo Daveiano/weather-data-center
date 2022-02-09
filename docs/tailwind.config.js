@@ -3,7 +3,9 @@ module.exports = {
   // in the root.
   content: ["./**/*.html"],
   theme: {
-    extend: {},
+    extend: {
+
+    },
   },
   plugins: [
     require('tailwind-container-break-out'),

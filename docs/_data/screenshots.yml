@@ -17,4 +17,10 @@
   url: https://raw.githubusercontent.com/Daveiano/weather-data-center/develop/src/main/__image_snapshots__/renderer-small-data-test-ts-start-the-app-with-a-small-set-of-data-solar-page-1-snap.png  
 
 - name: Right Sidebar
-  url: https://raw.githubusercontent.com/Daveiano/weather-data-center/develop/src/main/__image_snapshots__/renderer-small-data-test-ts-should-show-the-number-of-imported-data-1-snap.png  
+  url: https://raw.githubusercontent.com/Daveiano/weather-data-center/develop/src/main/__image_snapshots__/renderer-small-data-test-ts-should-show-the-number-of-imported-data-1-snap.png
+
+- name: Settings Modal
+  url: https://raw.githubusercontent.com/Daveiano/weather-data-center/1.x/src/main/__image_snapshots__/renderer-empty-test-ts-empty-should-import-data-with-custom-settings-1-snap.png
+
+- name: Complete Database
+  url: https://raw.githubusercontent.com/Daveiano/weather-data-center/1.x/src/main/__image_snapshots__/renderer-empty-test-ts-should-delete-all-records-1-snap.png

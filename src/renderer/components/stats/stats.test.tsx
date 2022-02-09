@@ -408,7 +408,7 @@ test('stats (compact size) with solar items', async () => {
 
   // Max UV Index.
   expect(container.querySelector('.bx--row.stats .stat-tile:nth-child(2) .value')).toHaveTextContent('4 UVI');
-  expect(container.querySelector('.bx--row.stats .stat-tile:nth-child(2) .date')).toHaveTextContent('2021/03/08');
+  expect(container.querySelector('.bx--row.stats .stat-tile:nth-child(2) .date')).toHaveTextContent('2021/03/06');
 
   // Brightest day.
   expect(container.querySelector('.bx--row.stats .stat-tile:nth-child(3) .value')).toHaveTextContent('89.0 w/m²');
