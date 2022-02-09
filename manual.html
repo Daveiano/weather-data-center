@@ -3,7 +3,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="utf-8">
-        <title>FAQ - Weather data center Docs</title>
+        <title>Manual - Weather data center Docs</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;600&display=swap" rel="stylesheet">
@@ -152,71 +152,94 @@
 </div>
 
         <main>
-            <script>
-    function toggleQuestion(element) {
-        let questionAnswerBlock = element.closest('dl'),
-          answer = questionAnswerBlock.querySelector('dd'),
-          chevron = questionAnswerBlock.querySelector('svg'),
-          answerStyle = getComputedStyle(answer);
-
-      if (answerStyle.display === "none") {
-        answer.classList.remove('hidden');
-        chevron.classList.add('-rotate-180');
-        chevron.classList.remove('rotate-0');
-      } else {
-        answer.classList.add('hidden');
-        chevron.classList.add('rotate-0');
-        chevron.classList.remove('-rotate-180');
-      }
-    }
-</script>
-
-<!-- This example requires Tailwind CSS v2.0+ -->
+            <!-- This example requires Tailwind CSS v2.0+ -->
 <div class="relative bg-gray-400">
     <div class="absolute inset-0">
-        <img class="w-full h-full object-cover" src=/weather-data-center/assets/images/IMG_9057.jpg alt="">
+        <img class="w-full h-full object-cover" src=/weather-data-center/assets/images/EOS%20450D_2212.jpg alt="">
         <div class="absolute inset-0 bg-gray-400 mix-blend-multiply" aria-hidden="true"></div>
     </div>
     <div class="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
-        <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">Ask your questions</h1>
+        <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">Manual</h1>
         <p class="mt-6 text-xl text-gray-100 max-w-3xl">
-            Here we have collected the most asked questions for you.
+            Read the docs.
         </p>
     </div>
 </div>
 
-<!-- This example requires Tailwind CSS v2.0+ -->
-<div class="bg-gray-50">
-    <div class="max-w-7xl mx-auto py-12 px-4 sm:py-16 sm:px-6 lg:px-8">
-        <div class="max-w-3xl mx-auto divide-y-2 divide-gray-200">
-            <h2 class="text-center text-3xl font-extrabold text-gray-900 sm:text-4xl">Frequently asked questions</h2>
-            <dl class="mt-6 space-y-6 divide-y divide-gray-200">
-                <div class="pt-6">
-                    <dt class="text-lg">
-                        <!-- Expand/collapse question button -->
-                        <button onclick="toggleQuestion(this)" type="button" class="text-left w-full flex justify-between items-start text-gray-400" aria-controls="faq-0" aria-expanded="false">
-                            <span class="font-medium text-gray-900"> Question 1 </span>
-                            <span class="ml-6 h-7 flex items-center">
-                            <!--
-                              Expand/collapse icon, toggle classes based on question open state.
+<!--
+  This example requires Tailwind CSS v2.0+
 
-                              Heroicon name: outline/chevron-down
+  This example requires some changes to your config:
 
-                              Open: "-rotate-180", Closed: "rotate-0"
-                            -->
-                            <svg class="rotate-0 h-6 w-6 transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                            </svg>
-                          </span>
-                        </button>
-                    </dt>
-                    <dd class="mt-2 pr-12 hidden" id="faq-0">
-                        <p class="text-base text-gray-500">Answer 1.</p>
-                    </dd>
-                </div>
-
-                <!-- More questions... -->
-            </dl>
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/typography'),
+    ],
+  }
+  ```
+-->
+<div class="relative py-16 bg-white overflow-hidden">
+    <div class="hidden lg:block lg:absolute lg:inset-y-0 lg:h-full lg:w-full">
+        <div class="relative h-full text-lg max-w-prose mx-auto" aria-hidden="true">
+            <svg class="absolute top-12 left-full transform translate-x-32" width="404" height="384" fill="none" viewBox="0 0 404 384">
+                <defs>
+                    <pattern id="74b3fd99-0a6f-4271-bef2-e80eeafdf357" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
+                    </pattern>
+                </defs>
+                <rect width="404" height="384" fill="url(#74b3fd99-0a6f-4271-bef2-e80eeafdf357)" />
+            </svg>
+            <svg class="absolute top-1/2 right-full transform -translate-y-1/2 -translate-x-32" width="404" height="384" fill="none" viewBox="0 0 404 384">
+                <defs>
+                    <pattern id="f210dbf6-a58d-4871-961e-36d5016a0f49" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
+                    </pattern>
+                </defs>
+                <rect width="404" height="384" fill="url(#f210dbf6-a58d-4871-961e-36d5016a0f49)" />
+            </svg>
+            <svg class="absolute bottom-12 left-full transform translate-x-32" width="404" height="384" fill="none" viewBox="0 0 404 384">
+                <defs>
+                    <pattern id="d3eb07ae-5182-43e6-857d-35c643af9034" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
+                    </pattern>
+                </defs>
+                <rect width="404" height="384" fill="url(#d3eb07ae-5182-43e6-857d-35c643af9034)" />
+            </svg>
+        </div>
+    </div>
+    <div class="relative px-4 sm:px-6 lg:px-8">
+        <div class="text-lg max-w-prose mx-auto">
+            <h1>
+                <span class="block text-base text-center text-blue-600 font-semibold tracking-wide uppercase">Introducing</span>
+                <span class="mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">JavaScript for Beginners</span>
+            </h1>
+            <p class="mt-8 text-xl text-gray-500 leading-8">Aliquet nec orci mattis amet quisque ullamcorper neque, nibh sem. At arcu, sit dui mi, nibh dui, diam eget aliquam. Quisque id at vitae feugiat egestas ac. Diam nulla orci at in viverra scelerisque eget. Eleifend egestas fringilla sapien.</p>
+        </div>
+        <div class="mt-6 prose prose-blue prose-lg text-gray-500 mx-auto">
+            <p>Faucibus commodo massa rhoncus, volutpat. <strong>Dignissim</strong> sed <strong>eget risus enim</strong>. Mattis mauris semper sed amet vitae sed turpis id. Id dolor praesent donec est. Odio penatibus risus viverra tellus varius sit neque erat velit. Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget risus enim. <a href="#">Mattis mauris semper</a> sed amet vitae sed turpis id.</p>
+            <ul role="list">
+                <li>Quis elit egestas venenatis mattis dignissim.</li>
+                <li>Cras cras lobortis vitae vivamus ultricies facilisis tempus.</li>
+                <li>Orci in sit morbi dignissim metus diam arcu pretium.</li>
+            </ul>
+            <p>Quis semper vulputate aliquam venenatis egestas sagittis quisque orci. Donec commodo sit viverra aliquam porttitor ultrices gravida eu. Tincidunt leo, elementum mattis elementum ut nisl, justo, amet, mattis. Nunc purus, diam commodo tincidunt turpis. Amet, duis sed elit interdum dignissim.</p>
+            <h2>From beginner to expert in 30 days</h2>
+            <p>Id orci tellus laoreet id ac. Dolor, aenean leo, ac etiam consequat in. Convallis arcu ipsum urna nibh. Pharetra, euismod vitae interdum mauris enim, consequat vulputate nibh. Maecenas pellentesque id sed tellus mauris, ultrices mauris. Tincidunt enim cursus ridiculus mi. Pellentesque nam sed nullam sed diam turpis ipsum eu a sed convallis diam.</p>
+            <blockquote>
+                <p>Sagittis scelerisque nulla cursus in enim consectetur quam. Dictum urna sed consectetur neque tristique pellentesque. Blandit amet, sed aenean erat arcu morbi.</p>
+            </blockquote>
+            <p>Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget risus enim. Mattis mauris semper sed amet vitae sed turpis id. Id dolor praesent donec est. Odio penatibus risus viverra tellus varius sit neque erat velit.</p>
+            <figure>
+                <img class="w-full rounded-lg" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=facearea&w=1310&h=873&q=80&facepad=3" alt="" width="1310" height="873">
+                <figcaption>Sagittis scelerisque nulla cursus in enim consectetur quam.</figcaption>
+            </figure>
+            <h2>Everything you need to get up and running</h2>
+            <p>Purus morbi dignissim senectus mattis <a href="#">adipiscing</a>. Amet, massa quam varius orci dapibus volutpat cras. In amet eu ridiculus leo sodales cursus tristique. Tincidunt sed tempus ut viverra ridiculus non molestie. Gravida quis fringilla amet eget dui tempor dignissim. Facilisis auctor venenatis varius nunc, congue erat ac. Cras fermentum convallis quam.</p>
+            <p>Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget risus enim. Mattis mauris semper sed amet vitae sed turpis id. Id dolor praesent donec est. Odio penatibus risus viverra tellus varius sit neque erat velit.</p>
         </div>
     </div>
 </div>
