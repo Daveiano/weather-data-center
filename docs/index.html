@@ -3,9 +3,10 @@ layout: html
 title: "Home"
 ---
 
-<div class="relative flex items-center justify-center h-[calc(100vh-92px)] overflow-hidden">
+<!-- Video Hero -->
+<div class="relative flex items-center justify-center h-[50vh] lg:h-[calc(100vh-92px)] overflow-hidden">
   <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8 z-30">
-    <div class="hidden sm:block">
+    <div class="hidden lg:block">
       <svg class="absolute top-2 -mr-3 lg:m-0 left-2" width="404" height="392" fill="none" viewBox="0 0 404 392">
         <defs>
           <pattern id="837c3e70-6c3a-44e6-8854-cc48c737b659" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
@@ -15,7 +16,7 @@ title: "Home"
         <rect width="404" height="392" fill="url(#837c3e70-6c3a-44e6-8854-cc48c737b659)" />
       </svg>
     </div>
-    <div class="hidden sm:block">
+    <div class="hidden lg:block">
       <svg class="absolute bottom-1 -ml-3 lg:m-0 right-2" width="404" height="392" fill="none" viewBox="0 0 404 392">
         <defs>
           <pattern id="837c3e70-6c3a-44e6-8854-cc48c737b659" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
@@ -34,7 +35,7 @@ title: "Home"
       </p>
     </div>
     <div class="mt-12 flex justify-center">
-      <a href="https://github.com/Daveiano/weather-data-center/releases" target="_blank" class="table rounded-md border border-transparent px-5 py-3 text-blue-900 bg-white hover:bg-slate-300 text-base font-medium shadow focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:px-10">Download</a>
+      <a href="https://github.com/Daveiano/weather-data-center/releases" target="_blank" class="table rounded-md border border-transparent px-5 py-3 text-blue-900 bg-white hover:bg-blue-800 hover:text-white hover:border-white dark:bg-blue-800 dark:text-white dark:hover:bg-white dark:hover:text-blue-800 dark:hover:border-blue-800 text-base font-medium shadow focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:px-10">Download</a>
     </div>
   </div>
   <div class="absolute top-0 left-0 w-full h-full z-20 opacity-50 bg-blue-700 dark:opacity-70 dark:bg-blue-900"></div>
@@ -45,14 +46,16 @@ title: "Home"
           class="absolute z-10 w-auto min-w-full min-h-full max-w-none"
   >
     <source
-            src='{{ "/assets/videos/MVI_4523_comp.mp4" | relative_url }}'
+            src='{{ "/assets/videos/MVI_4539-1_comp.mp4" | relative_url }}'
             type="video/mp4"
     />
     Your browser does not support the video tag.
   </video>
   <!-- @todo Placeholder image. -->
 </div>
+<!-- /Video Hero -->
 
+<!-- Hero section -->
 <!--
   This example requires Tailwind CSS v2.0+
 
@@ -79,7 +82,6 @@ title: "Home"
   ```
 -->
 <div class="bg-white dark:bg-gray-700 pb-12">
-  <!-- Hero section -->
   <div class="pt-8 overflow-hidden sm:pt-12 lg:relative lg:py-48">
     <div class="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl lg:grid lg:grid-cols-2 lg:gap-24">
       <div>
@@ -106,7 +108,7 @@ title: "Home"
             <svg class="absolute top-8 right-1/2 -mr-3 lg:m-0 lg:left-0" width="404" height="392" fill="none" viewBox="0 0 404 392">
               <defs>
                 <pattern id="837c3e70-6c3a-44e6-8854-cc48c737b659" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                  <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
+                  <rect x="0" y="0" width="4" height="4" class="text-gray-200 dark:text-blue-900" fill="currentColor" />
                 </pattern>
               </defs>
               <rect width="404" height="392" fill="url(#837c3e70-6c3a-44e6-8854-cc48c737b659)" />
@@ -119,10 +121,12 @@ title: "Home"
       </div>
   </div>
 </div>
+<!-- /Hero section -->
 
+<!-- CTA -->
 <!-- This example requires Tailwind CSS v2.0+ -->
 <div class="bg-blue-50 dark:bg-blue-600">
-  <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-24 lg:px-8 lg:flex lg:items-center lg:justify-between">
+  <div class="mx-auto py-12 px-4 sm:px-6 lg:py-24 lg:px-8 lg:flex lg:items-center lg:justify-between max-w-md sm:max-w-3xl lg:max-w-7xl">
     <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white md:text-4xl">
       <span class="block">Need help?</span>
       <span class="block text-blue-600 dark:text-black">Please have a look at the manual.</span>
@@ -134,9 +138,10 @@ title: "Home"
     </div>
   </div>
 </div>
+<!-- /CTA -->
 
+<!-- Hero section -->
 <div class="bg-white dark:bg-gray-700 pb-12">
-  <!-- Hero section -->
   <div class="pt-8 overflow-hidden sm:pt-12 lg:relative lg:py-36">
     <div class="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl lg:grid lg:grid-cols-2 lg:gap-24">
       <div></div>
@@ -161,7 +166,7 @@ title: "Home"
       <div class="py-12 sm:relative sm:mt-12 sm:py-16 lg:absolute lg:inset-y-0 lg:left-0 lg:w-1/2">
         <div class="hidden sm:block">
           <div class="absolute inset-y-0 right-1/2 w-screen bg-gray-50 rounded-r-3xl lg:right-80 lg:right-0 lg:w-full"></div>
-          <svg class="absolute top-8 left-1/2 -mr-3 lg:m-0 lg:right-0" width="404" height="392" fill="none" viewBox="0 0 404 392">
+          <svg class="absolute top-8 left-1/2 -ml-3 lg:m-0 lg:right-0 lg:left-auto" width="404" height="392" fill="none" viewBox="0 0 404 392">
             <defs>
               <pattern id="837c3e70-6c3a-44e6-8854-cc48c737b659" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
                 <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
@@ -170,34 +175,36 @@ title: "Home"
             <rect width="404" height="392" fill="url(#837c3e70-6c3a-44e6-8854-cc48c737b659)" />
           </svg>
         </div>
-        <div class="relative pl-4 -mr-40 sm:mx-auto sm:max-w-3xl sm:px-0 lg:max-w-none lg:h-full lg:pr-12">
-          <img class="w-full rounded-md shadow-xl ring-1 ring-black ring-opacity-5 lg:h-full lg:w-auto lg:max-w-none lg:right-0 lg:absolute" src={{ "/assets/images/temp-screenshot-2-rows.png" | relative_url }} alt="" />
+        <div class="relative pr-4 -ml-40 sm:mx-auto sm:max-w-3xl sm:px-0 lg:max-w-none lg:h-full lg:pr-12">
+          <img class="w-full rounded-md shadow-xl ring-1 ring-black ring-opacity-5 lg:h-full lg:w-auto lg:max-w-none lg:right-10 lg:absolute" src={{ "/assets/images/temp-screenshot-2-rows.png" | relative_url }} alt="" />
         </div>
       </div>
     </div>
   </div>
 </div>
+<!-- /Hero section -->
 
-<!-- This example requires Tailwind CSS v2.0+ -->
-<div class="bg-blue-50 dark:bg-blue-600">
-  <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-24 lg:px-8 lg:flex lg:items-center lg:justify-between">
-    <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white md:text-4xl">
-      <span class="block">Found a bug?</span>
-      <span class="block text-blue-600 dark:text-black">Or got an idea for a new feature?</span>
-    </h2>
-    <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
-      <div class="inline-flex rounded-md shadow">
-        <a target="_blank" href="https://github.com/Daveiano/weather-data-center/issues/new?assignees=&labels=&template=bug_report.md&title=%5BBUG%5D+%5BIssuetitle%5D" class="inline-flex items-center justify-center px-5 py-3 border border-transparent dark:border-white text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"> Bug report </a>
-      </div>
-      <div class="ml-3 inline-flex rounded-md shadow">
-        <a target="_blank" href="https://github.com/Daveiano/weather-data-center/issues/new?assignees=&labels=&template=feature_request.md&title=%5BFeature%5D+%5BIssuetitle%5D" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-blue-200"> Feature request </a>
-      </div>
-    </div>
-  </div>
+<!-- Video section -->
+<div class="relative flex items-center justify-center md:h-[40vh] md:aspect-auto overflow-hidden aspect-video">
+  <div class="absolute top-0 left-0 w-full h-full z-20 opacity-30 bg-blue-600 dark:opacity-70 dark:bg-blue-900"></div>
+  <video
+          autoplay
+          loop
+          muted
+          class="absolute z-10 w-auto min-w-full min-h-full md:max-w-none"
+  >
+    <source
+            src='{{ "/assets/videos/MVI_4550-1_comp.mp4" | relative_url }}'
+            type="video/mp4"
+    />
+    Your browser does not support the video tag.
+  </video>
+  <!-- @todo Placeholder image. -->
 </div>
+<!-- /Video section -->
 
+<!-- Hero section -->
 <div class="bg-white dark:bg-gray-700 pb-12">
-  <!-- Hero section -->
   <div class="pt-8 overflow-hidden sm:pt-12 lg:relative lg:py-48">
     <div class="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl lg:grid lg:grid-cols-2 lg:gap-24">
       <div>
@@ -235,24 +242,29 @@ title: "Home"
     </div>
   </div>
 </div>
+<!-- /Hero section -->
 
-<div class="relative flex items-center justify-center h-[36vh] overflow-hidden">
-  <div class="absolute top-0 left-0 w-full h-full z-20 opacity-30 bg-blue-600 dark:opacity-70 dark:bg-blue-900"></div>
-  <video
-          autoplay
-          loop
-          muted
-          class="absolute z-10 w-auto min-w-full min-h-full max-w-none"
-  >
-    <source
-            src='{{ "/assets/videos/MVI_4535_comp.mp4" | relative_url }}'
-            type="video/mp4"
-    />
-    Your browser does not support the video tag.
-  </video>
-  <!-- @todo Placeholder image. -->
+<!-- CTA -->
+<!-- This example requires Tailwind CSS v2.0+ -->
+<div class="bg-blue-50 dark:bg-blue-600">
+  <div class="mx-auto py-12 px-4 sm:px-6 lg:py-24 lg:px-8 lg:flex lg:items-center lg:justify-between max-w-md sm:max-w-3xl lg:max-w-7xl">
+    <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white md:text-4xl">
+      <span class="block">Found a bug?</span>
+      <span class="block text-blue-600 dark:text-black">Or got an idea for a new feature?</span>
+    </h2>
+    <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
+      <div class="inline-flex rounded-md shadow">
+        <a target="_blank" href="https://github.com/Daveiano/weather-data-center/issues/new?assignees=&labels=&template=bug_report.md&title=%5BBUG%5D+%5BIssuetitle%5D" class="inline-flex items-center justify-center px-5 py-3 border border-transparent dark:border-white text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"> Bug report </a>
+      </div>
+      <div class="ml-3 inline-flex rounded-md shadow">
+        <a target="_blank" href="https://github.com/Daveiano/weather-data-center/issues/new?assignees=&labels=&template=feature_request.md&title=%5BFeature%5D+%5BIssuetitle%5D" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-blue-200 dark:hover:bg-blue-700 dark:hover:text-white dark:hover:border-white"> Feature request </a>
+      </div>
+    </div>
+  </div>
 </div>
+<!-- /CTA -->
 
+<!-- Features -->
 <!-- This example requires Tailwind CSS v2.0+ -->
 <div class="bg-white dark:bg-gray-700">
   <div class="max-w-7xl mx-auto py-16 pt-12 px-4 sm:px-6 lg:py-24 lg:px-8 lg:pt-20">
@@ -275,24 +287,28 @@ title: "Home"
     </dl>
   </div>
 </div>
+<!-- /Features -->
 
-<div class="relative flex items-center justify-center h-[36vh] overflow-hidden">
+<!-- Video section -->
+<div class="relative flex items-center justify-center md:h-[40vh] md:aspect-auto overflow-hidden aspect-video">
   <div class="absolute top-0 left-0 w-full h-full z-20 opacity-30 bg-blue-600 dark:opacity-70 dark:bg-blue-900"></div>
   <video
           autoplay
           loop
           muted
-          class="absolute z-10 w-auto min-w-full min-h-full max-w-none"
+          class="absolute z-10 w-auto min-w-full min-h-full md:max-w-none"
   >
     <source
-            src='{{ "/assets/videos/MVI_4535_comp.mp4" | relative_url }}'
+            src='{{ "/assets/videos/MVI_4544-1_comp.mp4" | relative_url }}'
             type="video/mp4"
     />
     Your browser does not support the video tag.
   </video>
   <!-- @todo Placeholder image. -->
 </div>
+<!-- /Video section -->
 
+<!-- Releases -->
 <!-- This example requires Tailwind CSS v2.0+ -->
 <div class="bg-white dark:bg-gray-700 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
   <div class="relative max-w-lg mx-auto divide-y-2 divide-gray-200 lg:max-w-7xl">
@@ -335,3 +351,4 @@ title: "Home"
     </div>
   </div>
 </div>
+<!-- /Releases -->
