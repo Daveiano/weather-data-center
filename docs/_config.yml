@@ -1,6 +1,12 @@
 url: "https://daveiano.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 baseurl: "/weather-data-center" # the subpath of your site, e.g. /blog
-title: "Weather data center Docs" # the name of your site, e.g. ACME Corp.
+title: "Weather Data Center" # the name of your site, e.g. ACME Corp.
+
+tagline: "A cross-platform application to analyze your personal weather station data."
+description: "A cross-platform application to analyze your personal backyard weather station data. Available for Windows, Mac and Linux."
+google_site_verification: FKcLuysiS0XKd92KPh3gnSE1Hr2tmotE2m7WMBiqhO4
+logo: "/assets/images/1024x1024.png"
+
 incremental: true
 postcss:
   cache: false

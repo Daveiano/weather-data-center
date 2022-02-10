@@ -1,0 +1,21 @@
+- name: Temperature
+
+- name: Pressure
+
+- name: Humidity
+ 
+- name: Wind direction
+
+- name: Wind Speed
+
+- name: Guest Speed
+
+- name: Felt temperature
+
+- name: Dew point temperature
+
+- name: Rain
+
+- name: Solar radiation
+
+- name: UV Index
