@@ -79,7 +79,7 @@
                 <nav class="flex space-x-10">
                     <a href="/weather-data-center/manual.html" class="text-base font-medium text-gray-500 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100"> Manual </a>
                     <a href="/weather-data-center/screenshots.html" class="text-base font-medium text-gray-500 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100"> Screenshots </a>
-                    <a href="/weather-data-center/faq.html" class="text-base font-medium text-gray-500 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100"> FAQ </a>
+                    <a href="/weather-data-center/about.html" class="text-base font-medium text-gray-500 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100"> About </a>
                 </nav>
 
                 <div class="flex items-center md:ml-12">
@@ -191,8 +191,8 @@
                     <a href="/weather-data-center/screenshots.html" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
                         <div class="text-base font-medium text-gray-900 dark:text-gray-200">Screenshots</div>
                     </a>
-                    <a href="/weather-data-center/faq.html" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
-                        <div class="text-base font-medium text-gray-900 dark:text-gray-200">FAQ</div>
+                    <a href="/weather-data-center/about.html" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
+                        <div class="text-base font-medium text-gray-900 dark:text-gray-200">About</div>
                     </a>
                 </nav>
             </div>
@@ -216,9 +216,10 @@
     </div>
 </div>
 
-        <main class="pt-[82px] lg:pt-[92px] bg-white dark:bg-gray-700">
+        <main class="pt-[82px] lg:pt-[92px] bg-white dark:bg-gray-800">
+            
             <!-- Video Hero -->
-<div class="relative flex items-center justify-center h-[50vh] lg:h-[calc(100vh-92px)] overflow-hidden">
+<div class="relative flex items-center justify-center h-auto lg:h-[calc(100vh-92px)] overflow-hidden">
   <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8 z-30">
     <div class="hidden lg:block">
       <svg class="absolute top-2 -mr-3 lg:m-0 left-2" width="404" height="392" fill="none" viewBox="0 0 404 392">
@@ -295,7 +296,7 @@
   }
   ```
 -->
-<div class="bg-white dark:bg-gray-700 pb-12">
+<div class="bg-white dark:bg-gray-800 pb-12">
   <div class="pt-8 overflow-hidden sm:pt-12 lg:relative lg:py-48">
     <div class="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl lg:grid lg:grid-cols-2 lg:gap-24">
       <div>
@@ -355,7 +356,7 @@
 <!-- /CTA -->
 
 <!-- Hero section -->
-<div class="bg-white dark:bg-gray-700 pb-12">
+<div class="bg-white dark:bg-gray-800 pb-12">
   <div class="pt-8 overflow-hidden sm:pt-12 lg:relative lg:py-36">
     <div class="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl lg:grid lg:grid-cols-2 lg:gap-24">
       <div></div>
@@ -418,7 +419,7 @@
 <!-- /Video section -->
 
 <!-- Hero section -->
-<div class="bg-white dark:bg-gray-700 pb-12">
+<div class="bg-white dark:bg-gray-800 pb-12">
   <div class="pt-8 overflow-hidden sm:pt-12 lg:relative lg:py-48">
     <div class="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl lg:grid lg:grid-cols-2 lg:gap-24">
       <div>
@@ -480,7 +481,7 @@
 
 <!-- Features -->
 <!-- This example requires Tailwind CSS v2.0+ -->
-<div class="bg-white dark:bg-gray-700">
+<div class="bg-white dark:bg-gray-800">
   <div class="max-w-7xl mx-auto py-16 pt-12 px-4 sm:px-6 lg:py-24 lg:px-8 lg:pt-20">
     <div class="max-w-3xl mx-auto text-center">
       <h2 class="text-3xl font-extrabold text-gray-900 dark:text-gray-200">Supported characteristics</h2>
@@ -624,7 +625,7 @@
 
 <!-- Releases -->
 <!-- This example requires Tailwind CSS v2.0+ -->
-<div class="bg-white dark:bg-gray-700 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
+<div class="bg-white dark:bg-gray-800 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
   <div class="relative max-w-lg mx-auto divide-y-2 divide-gray-200 lg:max-w-7xl">
     <div>
       <h2 class="text-3xl tracking-tight font-extrabold text-gray-900 dark:text-gray-200 sm:text-4xl">Recent releases</h2>
@@ -632,6 +633,8 @@
         For a full list of all releases, see <a href="https://github.com/Daveiano/weather-data-center/releases" target="_blank">here</a>.
       </p>
     </div>
+
+    
     <div class="mt-12 grid gap-16 pt-12 lg:grid-cols-3 lg:gap-x-5 lg:gap-y-12">
       <div>
         <div>
@@ -640,10 +643,11 @@
           </a>
         </div>
         <a target="_blank" href="https://github.com/Daveiano/weather-data-center/releases/tag/v1.0.0-alpha1" class="block mt-4">
-          <p class="text-xl font-semibold text-gray-900 dark:text-gray-200">First alpha release</p>
-          <p class="mt-3 text-base text-gray-500 dark:text-gray-300">
-            The first working alpha release includes the most basic features and is ready for testing.
-          </p>
+          <p class="text-xl font-semibold text-gray-900 dark:text-gray-200"> First alpha release </p>
+          <div class="mt-3 text-base text-gray-500 dark:text-gray-300">
+            <p>The first working alpha release includes the most basic features and is ready for testing.</p>
+
+          </div>
         </a>
         <div class="mt-6 flex items-center">
           <div class="flex-shrink-0">
@@ -663,6 +667,8 @@
         </div>
       </div>
     </div>
+    
+
   </div>
 </div>
 <!-- /Releases -->
