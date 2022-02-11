@@ -49,7 +49,7 @@ export const Import: React.FC = (): React.ReactElement => {
           in your csv to match the standard ones the software uses, or set custom header names in the settings.
           <br />
           <br />
-          For more info, please visit the <a target="_blank" href="https://daveiano.github.io/weather-data-center/" rel="noreferrer">docs</a>.
+          For more info, please read the <a target="_blank" href="https://daveiano.github.io/weather-data-center/manual.html" rel="noreferrer">manual</a>.
           <br />
           <br />
           <strong>Important:</strong> Please have a look at the settings before hitting &apos;Import from CSV&apos;.

@@ -20,3 +20,6 @@ plugins:
   - jekyll-seo-tag
 include: ["node_modules/tailwindcss"]
 exclude: []
+
+collections:
+  - releases

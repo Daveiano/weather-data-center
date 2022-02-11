@@ -25,7 +25,8 @@
     <body>
         {% include header.html %}
 
-        <main class="pt-[82px] lg:pt-[92px] bg-white dark:bg-gray-700">
+        <main class="pt-[82px] lg:pt-[92px] bg-white dark:bg-gray-800">
+            {% comment %}{% include toc.html html=content %}{% endcomment %}
             {{ content }}
         </main>
 
