@@ -11,7 +11,7 @@ module.exports = {
   // in the root.
   content: [
     "./**/*.html",
-    "./_releases/*.md"
+    "./**/*.md"
   ],
   plugins: [
     require('tailwind-container-break-out'),
