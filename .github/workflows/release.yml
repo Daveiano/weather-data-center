@@ -39,7 +39,7 @@ jobs:
           yarn install --network-timeout 1000000
 
       - name: 🖼️ build icons
-        run: ./node_modules/.bin/electron-icon-builder --input=./src/assets/weather-data-center-icon.png --output=./assets
+        run: ./node_modules/.bin/electron-icon-builder --input=./src/assets/weather-data-center-icon.png --output=./assets --flatten
 
       - name: 🚀 build & publish
         env:
