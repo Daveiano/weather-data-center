@@ -40,11 +40,7 @@ where the data is accumulated per day, so the last entry of the day is the total
 
 <img align="center" alt="Weather Data Center Start Page Screenshot" src="https://raw.githubusercontent.com/Daveiano/weather-data-center/develop/src/main/__image_snapshots__/renderer-small-data-test-ts-start-the-app-with-a-small-set-of-data-overview-page-1-snap.png">
 
-## Installation
-
-Coming soon
-
-## [FAQ](https://daveiano.github.io/weather-data-center/faq.html)
+## [Manual](https://daveiano.github.io/weather-data-center/manual.html)
 
 ## Development
 
