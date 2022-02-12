@@ -123,7 +123,7 @@ const WindBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): 
             {
               anchor: 'top-right',
               direction: 'column',
-              itemWidth: 105,
+              itemWidth: 120,
               itemHeight: 20,
               itemsSpacing: 10
             }

@@ -58,6 +58,8 @@ const RainBarBaseProps: RainBarBasePropsTypes = {
 };
 
 export const getRainBarBaseProps = (precision: Precision, data: dataItem[], property: propertyParameter, unit: string): RainBarBasePropsTypes => {
+  const timeDifferenceInDays = getTimeDifferenceInDays(data);
+  console.log(timeDifferenceInDays);
   const newRainBarBaseProps = RainBarBaseProps;
   const rotateTicks = precision === 'day' || precision === 'week' || getTimeDifferenceInMonths(data) >= 11;
 
@@ -73,14 +75,21 @@ export const getRainBarBaseProps = (precision: Precision, data: dataItem[], prop
     format: value => {
       switch (precision) {
         case 'day':
-          if (parseInt(moment(value).format("D")) % 2 == 0 || moment(value).format("D") === '31') {
+          if (timeDifferenceInDays >= 200) {
+            if (moment(value).format("D") === '1') {
+              return moment(value).format("Do MMM");
+            }
             return '';
-          }
-          if (moment(value).format("D") === '1') {
-            return moment(value).format("Do MMM");
-          }
+          } else {
+            if (parseInt(moment(value).format("D")) % 2 == 0 || moment(value).format("D") === '31') {
+              return '';
+            }
+            if (moment(value).format("D") === '1') {
+              return moment(value).format("Do MMM");
+            }
 
-          return moment(value).format("Do");
+            return moment(value).format("Do");
+          }
         case 'week':
           if (parseInt(moment(value).format("D")) <= 6) {
             return moment(value).format("MMM - [W]W\\/YY");
