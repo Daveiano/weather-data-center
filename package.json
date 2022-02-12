@@ -32,11 +32,12 @@
     "name": "dba",
     "email": "david.baetge@gmail.com"
   },
-  "license": "MIT",
+  "license": "GPL-3.0",
   "config": {
     "forge": {
       "packagerConfig": {
-        "icon": "./assets/icons/icon"
+        "icon": "./assets/icons/icon",
+        "executableName": "weather-data-center"
       },
       "makers": [
         {
