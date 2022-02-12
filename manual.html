@@ -217,20 +217,45 @@
 </div>
 
         <main class="pt-[82px] lg:pt-[92px] bg-white dark:bg-gray-800">
-            
             <!-- This example requires Tailwind CSS v2.0+ -->
-<div class="relative bg-gray-400">
-    <div class="absolute inset-0">
-        <img class="w-full h-full object-cover" src=/weather-data-center/assets/images/EOS%20450D_2212.jpg alt="">
-        <div class="absolute inset-0 bg-gray-400 mix-blend-multiply" aria-hidden="true"></div>
-    </div>
-    <div class="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
-        <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">Manual</h1>
-        <p class="mt-6 text-xl text-gray-100 max-w-3xl">
-            Read the manual.
-        </p>
-    </div>
-</div>
+            <div class="relative bg-gray-400">
+                <div class="absolute inset-0">
+                    <img class="w-full h-full object-cover" src=/weather-data-center/assets/images/EOS%20450D_2212.jpg alt="">
+                    <div class="absolute inset-0 opacity-30 bg-blue-600 dark:opacity-70 dark:bg-blue-900 mix-blend-overlay" aria-hidden="true"></div>
+                </div>
+                <div class="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
+                    <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">Manual</h1>
+                    <p class="mt-6 text-xl text-gray-100 max-w-3xl">
+                        Read the manual.
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-blue-50 dark:bg-blue-600 border-b border-t border-gray-300 sticky top-[93px] z-20">
+                <ul class="toc hidden lg:flex justify-between space-x-10 max-w-7xl mx-auto py-6 text-lg max-w-prose"><li class="text-base font-medium text-gray-500 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100"><a href="#import">
+                Import data
+            </a></li><li class="text-base font-medium text-gray-500 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100"><a href="#navigate">
+                Navigate
+            </a></li><li class="text-base font-medium text-gray-500 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100"><a href="#delete">
+                Deleting records
+            </a></li><li class="text-base font-medium text-gray-500 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100"><a href="#data">
+                Data storage
+            </a></li></ul>
+            </div>
+
+            <script>
+    var anchors = document.querySelectorAll('.toc a');
+
+    anchors.forEach(function(anchor) {
+      anchor.onclick = function(event) {
+        event.preventDefault();
+
+        var y = document.querySelector(this.getAttribute('href')).getBoundingClientRect().top + window.pageYOffset - 185;
+
+        window.scrollTo({top: y, behavior: 'smooth'});
+      };
+    });
+</script>
 
 <!--
   This example requires Tailwind CSS v2.0+
@@ -279,9 +304,8 @@
     </div>
     <div class="relative px-4 sm:px-6 lg:px-8">
         <div class="text-lg max-w-prose mx-auto">
-            <h2>
-                <!--<span class="block text-base text-center text-blue-600 dark:text-blue-400 font-semibold tracking-wide uppercase">Introduction</span>-->
-                <span class="mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl">Import data</span>
+            <h2 id="import" class="mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl">
+                Import data
             </h2>
             <p class="mt-8 text-xl text-gray-500 dark:text-gray-200 leading-8">
                 The goal of the app is to collect, organize, analyze and visualize weather data from your backyards weather station.
@@ -414,13 +438,13 @@
             <p>
                 You likely need to change the option <i>Date format</i> to match your data date and time format.
                 <br/><br/>
-                The default format is <b>YYYY/M/D k:m</b> which translates to <b>2022/2/11 17:38</b>.
+                The default format is <b>YYYY/M/D k:m</b> which translates to <b>2022/2/12 0:57</b>.
                 Other examples would be:
             </p>
             <ul role="list">
-                <li><b>YYYY/MM/DD HH:mm</b> is <b>2022/02/11 17:38</b></li>
-                <li><b>HH:mm - YYYY/DD/MM</b> is <b>17:38 - 2022/11/02</b></li>
-                <li><b>DD.MM.YYYY HH:mm</b> is <b>11.02.2022 17:38</b></li>
+                <li><b>YYYY/MM/DD HH:mm</b> is <b>2022/02/12 00:57</b></li>
+                <li><b>HH:mm - YYYY/DD/MM</b> is <b>00:57 - 2022/12/02</b></li>
+                <li><b>DD.MM.YYYY HH:mm</b> is <b>12.02.2022 00:57</b></li>
             </ul>
             <p>
                 For a full reference, please see <a target="_blank" href="https://momentjs.com/docs/#/displaying/format/">here</a>.
@@ -441,9 +465,8 @@
     </div>
     <div class="relative px-4 sm:px-6 lg:px-8 mt-24 lg:mt-36">
         <div class="text-lg max-w-prose mx-auto">
-            <h2>
-                <!--<span class="block text-base text-center text-blue-600 dark:text-blue-400 font-semibold tracking-wide uppercase">Introduction</span>-->
-                <span class="mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl">Navigate</span>
+            <h2 id="navigate" class="mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl">
+                Navigate
             </h2>
             <p class="mt-8 text-xl text-gray-500 dark:text-gray-200 leading-8">
                 Choose a date range and view every possible diagram for each characteristic.
@@ -516,9 +539,8 @@
     </div>
     <div class="relative px-4 sm:px-6 lg:px-8 mt-24 lg:mt-36">
         <div class="text-lg max-w-prose mx-auto">
-            <h2>
-                <!--<span class="block text-base text-center text-blue-600 dark:text-blue-400 font-semibold tracking-wide uppercase">Introduction</span>-->
-                <span class="mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl">Deleting records</span>
+            <h2 id="delete" class="mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl">
+                Deleting records
             </h2>
             <p class="mt-8 text-xl text-gray-500 dark:text-gray-200 leading-8">
                 You can either remove all records form your database or you can choose and remove single records.
@@ -543,6 +565,31 @@
                     Confirm and delete.
                 </figcaption>
             </figure>
+        </div>
+    </div>
+    <div class="relative px-4 sm:px-6 lg:px-8 mt-24 lg:mt-36">
+        <div class="text-lg max-w-prose mx-auto">
+            <h2 id="data" class="mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl">
+                Data storage
+            </h2>
+            <p class="mt-8 text-xl text-gray-500 dark:text-gray-200 leading-8">
+                All data you upload is stored only on your local filesystem.
+            </p>
+        </div>
+        <div class="mt-6 prose dark:prose-invert prose-lg text-gray-500 dark:text-gray-200 mx-auto">
+            <p>
+                On import, the data gets transformed and saved to your local filesystem. The folder is in your user data
+                directory which is typically
+            </p>
+            <ul role="list">
+                <li>For Linux, in ~/.config/weather-data-center/nedb</li>
+                <li>For Windows, in %LOCALAPPDATA%\weather-data-center\nedb</li>
+                <li>For MacOS, in ~/Library/Application Support/weather-data-center/nedb</li>
+            </ul>
+            <p>
+                Inside that folder you will find a file called data. Simply open it with a text editor of your choice.
+                Please stop the app when editing this file directly.
+            </p>
         </div>
     </div>
 </div>
