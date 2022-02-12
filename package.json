@@ -63,7 +63,7 @@
                 "Science"
               ],
               "homepage": "https://daveiano.github.io/weather-data-center/",
-              "icon": "./assets/icons/icon/1024x1024.png",
+              "icon": "./assets/icons/1024x1024.png",
               "maintainer": "David Baetge"
             }
           }
@@ -71,7 +71,7 @@
         {
           "name": "@electron-forge/maker-rpm",
           "config": {
-            "icon": "./assets/icons/icon/1024x1024.png"
+            "icon": "./assets/icons/1024x1024.png"
           }
         }
       ],
