@@ -34,7 +34,7 @@ jobs:
 
       - name: 🔨 install yarn and dependecies
         run: |
-          npm i -g corepack
+          npm i -g --force corepack
           yarn set version latest
           yarn install --network-timeout 1000000
 
