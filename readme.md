@@ -1,3 +1,5 @@
+<img align="left" width="80" height="80" alt="Weather Data Center" src="https://raw.githubusercontent.com/Daveiano/weather-data-center/1.x/src/assets/weather-data-center-icon.png">
+
 # Weather Data Center
 
 [![Unit & integration tests](https://github.com/Daveiano/weather-data-center/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/Daveiano/weather-data-center/actions/workflows/unit-tests.yml)

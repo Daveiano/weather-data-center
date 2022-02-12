@@ -1,7 +1,7 @@
 {
   "name": "weather-data-center",
   "productName": "weather-data-center",
-  "version": "1.0.0-alpha1",
+  "version": "1.0.0-beta1",
   "description": "App built with Electron + React + TypeScript to collect, organize and analyse weather data.",
   "main": ".webpack/main",
   "scripts": {

@@ -46,7 +46,7 @@ title: "Home"
     class="absolute z-10 w-auto min-w-full min-h-full max-w-none"
   >
     <source
-      src='{{ "/assets/videos/MVI_4539-1_comp.mp4" | relative_url }}'
+      src='{{ "/assets/videos/MVI_4560_comp.mp4" | relative_url }}'
       type="video/mp4"
     />
     Your browser does not support the video tag.
@@ -319,39 +319,39 @@ title: "Home"
       </p>
     </div>
 
-    {% for release in site.releases %}
     <div class="mt-12 grid gap-16 pt-12 lg:grid-cols-3 lg:gap-x-5 lg:gap-y-12">
-      <div>
+      {% for release in site.releases %}
         <div>
-          <a target="_blank" href="{{ release.release_url }}" class="inline-block">
-            <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-red-100 text-red-800"> {{ release.version_string }} </span>
-          </a>
-        </div>
-        <a target="_blank" href="{{ release.release_url }}" class="block mt-4">
-          <p class="text-xl font-semibold text-gray-900 dark:text-gray-200"> {{ release.title }} </p>
-          <div class="mt-3 text-base text-gray-500 dark:text-gray-300">
-            {{ release.content | markdownify }}
-          </div>
-        </a>
-        <div class="mt-6 flex items-center">
-          <div class="flex-shrink-0">
-            <a target="_blank" href="{{ release.author_url }}">
-              <span class="sr-only">{{ release.author }}</span>
-              <img class="h-10 w-10 rounded-full" src="{{ release.author_avatar }}" alt="">
+          <div>
+            <a target="_blank" href="{{ release.release_url }}" class="inline-block">
+              <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium {{ release.badge }}"> {{ release.version_string }} </span>
             </a>
           </div>
-          <div class="ml-3">
-            <p class="text-sm font-medium text-gray-900 dark:text-gray-200">
-              <a target="_blank" href="https://github.com/Daveiano"> {{ release.author }} </a>
-            </p>
-            <div class="flex space-x-1 text-sm text-gray-500 dark:text-gray-300">
-              <time datetime="2020-03-16"> {{ release.release_date }} </time>
+          <a target="_blank" href="{{ release.release_url }}" class="block mt-4">
+            <p class="text-xl font-semibold text-gray-900 dark:text-gray-200"> {{ release.title }} </p>
+            <div class="mt-3 text-base text-gray-500 dark:text-gray-300">
+              {{ release.content | markdownify }}
+            </div>
+          </a>
+          <div class="mt-6 flex items-center">
+            <div class="flex-shrink-0">
+              <a target="_blank" href="{{ release.author_url }}">
+                <span class="sr-only">{{ release.author }}</span>
+                <img class="h-10 w-10 rounded-full" src="{{ release.author_avatar }}" alt="">
+              </a>
+            </div>
+            <div class="ml-3">
+              <p class="text-sm font-medium text-gray-900 dark:text-gray-200">
+                <a target="_blank" href="https://github.com/Daveiano"> {{ release.author }} </a>
+              </p>
+              <div class="flex space-x-1 text-sm text-gray-500 dark:text-gray-300">
+                <time datetime="2020-03-16"> {{ release.release_date }} </time>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      {% endfor %}
     </div>
-    {% endfor %}
 
   </div>
 </div>

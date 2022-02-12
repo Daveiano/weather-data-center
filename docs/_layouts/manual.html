@@ -40,13 +40,13 @@
                 </div>
             </div>
 
-            <div class="bg-blue-50 dark:bg-blue-600 border-b border-t border-gray-300 sticky top-[93px] z-20">
+            <div class="hidden lg:block bg-blue-50 dark:bg-blue-600 border-b border-t border-gray-300 sticky top-[93px] z-20">
                 {%
                 include toc.html
                 html=content
                 h_min=2
                 h_max=2
-                class="toc hidden lg:flex justify-between space-x-10 max-w-7xl mx-auto py-6 text-lg max-w-prose"
+                class="toc flex justify-between space-x-10 max-w-7xl mx-auto py-6 text-lg max-w-prose"
                 item_class="text-base font-medium text-gray-500 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100"
                 %}
             </div>
