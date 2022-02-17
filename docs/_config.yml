@@ -22,4 +22,7 @@ include: ["node_modules/tailwindcss"]
 exclude: []
 
 collections:
-  - releases
+  releases:
+    order:
+      - 1-0-0-beta1.md
+      - 1-0-0-alpha1.md

@@ -16,5 +16,6 @@ module.exports = {
   plugins: [
     require('tailwind-container-break-out'),
     require('@tailwindcss/typography'),
+    require('@tailwindcss/forms'),
   ],
 }

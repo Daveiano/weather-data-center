@@ -14,5 +14,8 @@
   },
   "browserslist": [
     "defaults"
-  ]
+  ],
+  "dependencies": {
+    "@tailwindcss/forms": "^0.4.0"
+  }
 }
