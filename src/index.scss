@@ -65,6 +65,12 @@ body {
 
 /* Header */
 header.bx--header {
+  .bx--header__name {
+    img {
+      max-height: 75%;
+      margin-right: 7px;
+    }
+  }
   .bx--form-item {
     .bx--date-picker-container {
       display: flex;

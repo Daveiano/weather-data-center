@@ -144,6 +144,7 @@
     "@typescript-eslint/parser": "^4.0.1",
     "autoprefixer": "^10.2.5",
     "babel-jest": "^27.4.2",
+    "copy-webpack-plugin": "6",
     "css-loader": "^5.1.2",
     "electron": "12.1.0",
     "electron-devtools-installer": "^3.1.1",

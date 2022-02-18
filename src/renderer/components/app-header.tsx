@@ -66,6 +66,8 @@ export const AppHeader: React.FC = (): React.ReactElement => {
               isActive={isSideNavExpanded}
             />
             <HeaderName<LinkProps> element={Link} to="/" prefix="">
+              {/*@todo Fix image path*/}
+              {/*<img src="/assets/weather-data-center-icon.png" />*/}
               Weather Data Center
             </HeaderName>
             {/*<HeaderNavigation>
