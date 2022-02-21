@@ -46,6 +46,25 @@ where the data is accumulated per day, so the last entry of the day is the total
 
 ## Development
 
+### Local development
+
+```
+yarn install
+yarn run start
+```
+
+### Tests
+
+```
+yarn run test
+```
+
+### Build installable
+
+```
+yarn run make
+```
+
 ### Upstream issues
 
 * Carbon structure: components-react vs @carbon - https://github.com/carbon-design-system/carbon/issues/9540

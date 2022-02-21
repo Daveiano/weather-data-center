@@ -8,16 +8,22 @@ google_site_verification: FKcLuysiS0XKd92KPh3gnSE1Hr2tmotE2m7WMBiqhO4
 logo: "/assets/images/1024x1024.png"
 
 incremental: true
+
 postcss:
   cache: false
+
 sass:
   style: compressed
   implementation: sass-embedded
   load_paths:
     - node_modules
+
 plugins:
   - jekyll-postcss
   - jekyll-seo-tag
+  - jekyll-last-modified-at
+  - jekyll-sitemap
+
 include: ["node_modules/tailwindcss"]
 exclude: []
 
