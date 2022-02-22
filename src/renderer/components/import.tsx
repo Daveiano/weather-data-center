@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
-import {Button, ButtonSet, InlineNotification, SwitcherDivider} from 'carbon-components-react';
-import {Settings16, Upload16} from "@carbon/icons-react";
+import {Button, ButtonSet, InlineNotification, Modal, SwitcherDivider} from 'carbon-components-react';
+import {Settings16, Upload16, TrashCan16} from "@carbon/icons-react";
 
 import { isLoadingAction } from '../actions-app';
 import {ImportSettingsModal} from "./import-settings-modal";
@@ -13,6 +13,7 @@ export const Import: React.FC = (): React.ReactElement => {
   const [numberOfLastImported, setNumberOfLastImported] = useState(0);
   const [open, setOpen] = useState(false);
   const config = useSelector((state: RootState) => state.appState.config);
+  const [confirmDeleteModalOpen, setConfirmDeleteModalOpen] = useState(false);
 
   const dataFromStore = useSelector((state: RootState) => state.appState.data);
   const loading = useSelector((state: RootState) => state.appState.loading);
@@ -30,6 +31,10 @@ export const Import: React.FC = (): React.ReactElement => {
     dispatch(isLoadingAction(true));
     window.electron.IpcSend('open-file-dialog', null);
   };
+
+  const handleClickClearDatabase = (): void => {
+    setConfirmDeleteModalOpen(true);
+  }
 
   const uploadFileListener = (arg: [number[]]): void => {
     setNumberOfDuplicated(arg[0][0]);
@@ -101,9 +106,25 @@ export const Import: React.FC = (): React.ReactElement => {
 
       <div className="import-data">
         {dataFromStore.length > 0 &&
-          <div style={{ textAlign: 'right' }}>
-            {dataFromStore.length} records imported
-          </div>
+          <>
+            <div style={{ textAlign: 'right' }}>
+              {dataFromStore.length} records imported
+            </div>
+            <Button
+              disabled={loading}
+              renderIcon={TrashCan16}
+              id="remove"
+              kind='danger'
+              onClick={() => handleClickClearDatabase()}
+              style={{
+                display: 'block',
+                marginLeft: 'auto',
+                marginTop: '10px'
+              }}
+            >
+              Clear DB
+            </Button>
+          </>
         }
       </div>
 
@@ -114,6 +135,24 @@ export const Import: React.FC = (): React.ReactElement => {
           config={config}
         />
       }
+
+      <Modal
+        size="xs"
+        danger={true}
+        modalHeading={`Are you sure? This will delete all records.`}
+        open={confirmDeleteModalOpen}
+        closeButtonLabel="Cancel"
+        primaryButtonText="Delete all"
+        secondaryButtonText="Cancel"
+        onRequestClose={() => setConfirmDeleteModalOpen(false)}
+        onRequestSubmit={() => {
+          dispatch(isLoadingAction(true));
+          window.electron.IpcSend('delete-all', null);
+          setConfirmDeleteModalOpen(false);
+        }}
+      >
+
+      </Modal>
     </>
   );
 }

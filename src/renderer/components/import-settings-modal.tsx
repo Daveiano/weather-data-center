@@ -286,8 +286,8 @@ export const ImportSettingsModal:FunctionComponent<ImportSettingsModalProps> = (
                         labelText="Date format"
                         helperText={
                           <>
-                            Date format of you input date. The default of YYYY/M/D k:m is equivalent to
-                            {moment().format('YYYY/M/D k:m')}. For more info read the <a target="_blank" href="https://daveiano.github.io/weather-data-center/manual.html" rel="noreferrer">manual</a>.
+                            Date format of you input date. The default of YYYY/M/D k:mm is equivalent to {moment().format('YYYY/M/D k:mm')}.
+                            For more info read the <a target="_blank" href="https://daveiano.github.io/weather-data-center/manual.html" rel="noreferrer">manual</a>.
                           </>
                         }
                         placeholder="YYYY/M/D k:m"

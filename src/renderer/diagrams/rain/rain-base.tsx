@@ -59,7 +59,6 @@ const RainBarBaseProps: RainBarBasePropsTypes = {
 
 export const getRainBarBaseProps = (precision: Precision, data: dataItem[], property: propertyParameter, unit: string): RainBarBasePropsTypes => {
   const timeDifferenceInDays = getTimeDifferenceInDays(data);
-  console.log(timeDifferenceInDays);
   const newRainBarBaseProps = RainBarBaseProps;
   const rotateTicks = precision === 'day' || precision === 'week' || getTimeDifferenceInMonths(data) >= 11;
 

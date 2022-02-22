@@ -50,17 +50,32 @@ const appReducerDefaultState: RootState = {
         });
       }
       case 'DATA': {
-        return Object.assign({}, state, {
-          data: action.data,
-          date: {
-            start: moment.unix(action.data[0].time).format('DD-MM-YYYY'),
-            end: moment.unix(action.data[action.data.length - 1].time).format('DD-MM-YYYY')
-          },
-          dateSetByUser: {
-            start: moment.unix(action.data[0].time).format('DD-MM-YYYY'),
-            end: moment.unix(action.data[action.data.length - 1].time).format('DD-MM-YYYY')
-          }
-        });
+        if (action.data.length > 0) {
+          return Object.assign({}, state, {
+            data: action.data,
+            date: {
+              start: moment.unix(action.data[0].time).format('DD-MM-YYYY'),
+              end: moment.unix(action.data[action.data.length - 1].time).format('DD-MM-YYYY')
+            },
+            dateSetByUser: {
+              start: moment.unix(action.data[0].time).format('DD-MM-YYYY'),
+              end: moment.unix(action.data[action.data.length - 1].time).format('DD-MM-YYYY')
+            }
+          });
+        } else {
+          return Object.assign({}, state, {
+            dataFilteredPerTime: [],
+            data: [],
+            date: {
+              start,
+              end
+            },
+            dateSetByUser: {
+              start,
+              end
+            }
+          });
+        }
       }
       case 'DATA_FILTERED_TIME': {
         return Object.assign({}, state, { dataFilteredPerTime: action.data });

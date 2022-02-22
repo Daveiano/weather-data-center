@@ -1,6 +1,7 @@
 import { ElectronApplication, Page } from "playwright";
 import { _electron as electron } from "playwright-core";
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
+import fs from "fs";
 
 expect.extend({ toMatchImageSnapshot });
 
@@ -16,6 +17,12 @@ const navigate = async (index: number) => {
 };
 
 beforeAll(async () => {
+  // Save a backup of the db, because we will remove all data during the test.
+  await fs.copyFileSync(
+    `${__dirname.replace('src/main', '')}tests/data/small/nedb/data`,
+    `${__dirname.replace('src/main', '')}tests/data/small/nedb/data_backup`,
+  );
+
   // Launch Electron app.
   electronApp = await electron.launch({
     args: [
@@ -40,6 +47,13 @@ beforeAll(async () => {
 
 afterAll(async () => {
   await electronApp.close();
+
+  // Restore the backup.
+  await fs.rmSync(`${__dirname.replace('src/main', '')}tests/data/small/nedb/data`);
+  await fs.renameSync(
+    `${__dirname.replace('src/main', '')}tests/data/small/nedb/data_backup`,
+    `${__dirname.replace('src/main', '')}tests/data/small/nedb/data`
+  );
 });
 
 describe('Start the app with a small set of data', () => {
@@ -137,7 +151,7 @@ it('should show the number of imported data', async () => {
   // Open right sidebar.
   await page.click('header.bx--header button[aria-label="Database / Import"]');
 
-  const numberImported = page.locator('header.bx--header .bx--header-panel .import-data');
+  const numberImported = page.locator('header.bx--header .bx--header-panel .import-data > div');
   expect(await numberImported.evaluate(node => node.textContent)).toBe('4162 records imported');
 
   const imageSideBarOpen = await page.screenshot({ fullPage: true });
@@ -146,4 +160,31 @@ it('should show the number of imported data', async () => {
     failureThresholdType: 'percent',
     dumpDiffToConsole: true
   });
+});
+
+// @todo Add test for "Delete all Button".
+test('Clear DB Button', async () => {
+  await page.locator('text=dangerClear DB').click();
+
+  await page.waitForSelector('.bx--header-panel .bx--modal.bx--modal-tall.bx--modal--danger h3', {state: 'visible'});
+
+  const modalText = page.locator('.bx--header-panel .bx--modal.bx--modal-tall.is-visible.bx--modal--danger h3.bx--modal-header__heading');
+  expect(await modalText.evaluate(node => node.textContent)).toBe('Are you sure? This will delete all records.');
+
+  const imageConfirmation = await page.screenshot({ fullPage: true });
+  expect(imageConfirmation).toMatchImageSnapshot({
+    failureThreshold: 1,
+    failureThresholdType: 'percent',
+    dumpDiffToConsole: true
+  });
+
+  await page.click('.bx--header-panel .bx--modal--danger button.bx--btn--danger');
+
+  const imageAfterDelete = await page.screenshot({ fullPage: true });
+  expect(imageAfterDelete).toMatchImageSnapshot({
+    failureThreshold: 1,
+    failureThresholdType: 'percent',
+    dumpDiffToConsole: true
+  });
+
 });

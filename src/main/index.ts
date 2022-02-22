@@ -31,26 +31,26 @@ const db = new Datastore({
 // Check if config record is present, if not create it.
 let config: ConfigRecord = {
   type: 'config',
-  import_date_format: 'YYYY/M/D k:m',
-  header_time: 'time',
+  import_date_format: 'YYYY/M/D k:mm',
+  header_time: 'Date',
   unit_temperature: '°C',
-  header_temperature: 'temperature',
-  header_felt_temperature: 'felt_temperature',
-  header_dew_point: 'dew_point',
+  header_temperature: 'Outdoor Temperature (°C)',
+  header_felt_temperature: 'Feels Like (°C)',
+  header_dew_point: 'Dew Point (°C)',
   unit_rain: 'mm',
-  header_rain: 'rain',
+  header_rain: 'Daily Rain (mm)',
   unit_humidity: '%',
-  header_humidity: 'humidity',
+  header_humidity: 'Outdoor Humidity (%)',
   unit_pressure: 'hPa',
-  header_pressure: 'pressure',
+  header_pressure: 'Relative Pressure (hPa)',
   unit_wind: 'km/h',
   unit_wind_direction: '°',
-  header_wind: 'wind',
-  header_wind_direction: 'wind_direction',
-  header_gust: 'gust',
+  header_wind: 'Wind Speed (kmh)',
+  header_wind_direction: 'Wind Direction (°)',
+  header_gust: 'Wind Gust (kmh)',
   unit_solar: 'w/m²',
-  header_solar: 'solar',
-  header_uvi: 'uvi'
+  header_solar: 'Solar Radiation (W/m^2)',
+  header_uvi: 'Ultra-Violet Radiation Index'
 };
 
 db.find({ type: 'config' }).limit(1).exec((err, docs: ConfigRecord[]) => {
@@ -85,8 +85,6 @@ const end = (callback: asyncCallback) => {
     callback(null, 0);
   });
 };
-
-console.log(__dirname);
 
 const createWindow = (): void => {
   // Create the browser window.
@@ -211,6 +209,17 @@ ipcMain.on('delete', (event, arg) => {
   }, (error) => {
     if (!error) {
       queryData(event);
+    }
+  });
+});
+
+ipcMain.on('delete-all', (event, arg) => {
+  // @todo Implement & add test
+  db.remove({ type: { $exists: false } }, { multi: true }, (error) => {
+    if (!error) {
+      queryData(event, [
+        {name: 'app-is-loading', data: false},
+      ]);
     }
   });
 });

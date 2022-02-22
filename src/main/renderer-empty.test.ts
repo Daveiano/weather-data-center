@@ -170,7 +170,7 @@ describe('empty', () => {
       dumpDiffToConsole: true
     });
 
-    const numberImported = page.locator('header.bx--header .bx--header-panel .import-data');
+    const numberImported = page.locator('header.bx--header .bx--header-panel .import-data > div');
     expect(await numberImported.evaluate(node => node.textContent)).toBe('145 records imported');
 
     // Close sidebar.
@@ -230,7 +230,7 @@ describe('empty', () => {
       dumpDiffToConsole: true
     });
 
-    const numberImported = page.locator('header.bx--header .bx--header-panel .import-data');
+    const numberImported = page.locator('header.bx--header .bx--header-panel .import-data > div');
     expect(await numberImported.evaluate(node => node.textContent)).toBe('1196 records imported');
   });
 });
@@ -239,7 +239,7 @@ describe('empty', () => {
  * This test must run in the suite. 'should import new data' must run before.
  */
 it('should not import duplicates', async () => {
-  const numberImported = page.locator('header.bx--header .bx--header-panel .import-data');
+  const numberImported = page.locator('header.bx--header .bx--header-panel .import-data > div');
   expect(await numberImported.evaluate(node => node.textContent)).toBe('1196 records imported');
 
   const imageBeforeImport = await page.screenshot({ fullPage: true });
@@ -267,7 +267,7 @@ it('should not import duplicates', async () => {
     dumpDiffToConsole: true
   });
 
-  const numberImportedAfterSecondImport = page.locator('header.bx--header .bx--header-panel .import-data');
+  const numberImportedAfterSecondImport = page.locator('header.bx--header .bx--header-panel .import-data > div');
   expect(await numberImportedAfterSecondImport.evaluate(node => node.textContent)).toBe('1196 records imported');
 
   const duplicateItems = page.locator('header.bx--header .bx--header-panel .import-action .bx--inline-notification__subtitle');
@@ -278,7 +278,7 @@ it('should not import duplicates', async () => {
  * This test must run in the suite. 'should import new data' must run before.
  */
 it('should import new data when data still exists', async () => {
-  const numberImported = page.locator('header.bx--header .bx--header-panel .import-data');
+  const numberImported = page.locator('header.bx--header .bx--header-panel .import-data > div');
   expect(await numberImported.evaluate(node => node.textContent)).toBe('1196 records imported');
 
   const imageBeforeImport = await page.screenshot({ fullPage: true });
@@ -306,7 +306,7 @@ it('should import new data when data still exists', async () => {
     dumpDiffToConsole: true
   });
 
-  const numberImportedAfterSecondImport = page.locator('header.bx--header .bx--header-panel .import-data');
+  const numberImportedAfterSecondImport = page.locator('header.bx--header .bx--header-panel .import-data > div');
   expect(await numberImportedAfterSecondImport.evaluate(node => node.textContent)).toBe('2393 records imported');
 });
 
@@ -335,9 +335,9 @@ it('should delete single records', async () => {
   await page.check('.bx--data-table-content tbody label[aria-label="Select row"] >> nth=5');
 
   await page.click('.bx--batch-actions.bx--batch-actions--active div.bx--action-list button:nth-child(1)');
-  await page.waitForSelector('.bx--modal.bx--modal-tall.bx--modal--danger h3', {state: 'visible'});
+  await page.waitForSelector('.page .start-tables .bx--modal.bx--modal-tall.bx--modal--danger h3', {state: 'visible'});
 
-  const modalText = page.locator('.bx--modal.bx--modal-tall.is-visible.bx--modal--danger h3.bx--modal-header__heading');
+  const modalText = page.locator('.page .start-tables .bx--modal.bx--modal-tall.is-visible.bx--modal--danger h3.bx--modal-header__heading');
   expect(await modalText.evaluate(node => node.textContent)).toBe('Are you sure? This will delete 5 record(s).');
 
   const imageConfirmation = await page.screenshot({ fullPage: true });
@@ -347,7 +347,7 @@ it('should delete single records', async () => {
     dumpDiffToConsole: true
   });
 
-  await page.locator('text=dangerDelete').click();
+  await page.click('.page .start-tables .bx--modal--danger button.bx--btn--danger');
 
   const imageAfterDelete = await page.screenshot({ fullPage: true });
   expect(imageAfterDelete).toMatchImageSnapshot({
@@ -367,7 +367,7 @@ it('should delete all records', async () => {
   expect(imageBeforeDelete).toMatchImageSnapshot({
     failureThreshold: 1,
     failureThresholdType: 'percent',
-    dumpDiffToConsole: true
+    dumpDiffToConsole: false
   });
 
   const tableRows = page.locator('.bx--data-table-container .bx--pagination .bx--pagination__items-count');
@@ -377,9 +377,9 @@ it('should delete all records', async () => {
   await page.check('.bx--data-table-content thead label[aria-label="Select all rows"]');
 
   await page.click('.bx--batch-actions.bx--batch-actions--active div.bx--action-list button:nth-child(1)');
-  await page.waitForSelector('.bx--modal.bx--modal-tall.bx--modal--danger h3', {state: 'visible'});
+  await page.waitForSelector('.page .start-tables .bx--modal.bx--modal-tall.bx--modal--danger h3', {state: 'visible'});
 
-  const modalText = page.locator('.bx--modal.bx--modal-tall.is-visible.bx--modal--danger h3.bx--modal-header__heading');
+  const modalText = page.locator('.page .start-tables .bx--modal.bx--modal-tall.is-visible.bx--modal--danger h3.bx--modal-header__heading');
   expect(await modalText.evaluate(node => node.textContent)).toBe('Are you sure? This will delete 2388 record(s).');
 
   const imageConfirmation = await page.screenshot({ fullPage: true });
@@ -389,7 +389,7 @@ it('should delete all records', async () => {
     dumpDiffToConsole: true
   });
 
-  await page.locator('text=dangerDelete').click();
+  await page.click('.page .start-tables .bx--modal--danger button.bx--btn--danger');
 
   const imageAfterDelete = await page.screenshot({ fullPage: false });
   expect(imageAfterDelete).toMatchImageSnapshot({

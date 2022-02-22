@@ -26,9 +26,7 @@ export const App: React.FC = (): React.ReactElement => {
   const dispatch = useDispatch();
 
   const getData = (arg: [dataItem[]]): void => {
-    if (arg[0].length) {
-      dispatch(dataAction(arg[0]));
-    }
+    dispatch(dataAction(arg[0]));
     dispatch(isLoadingAction(false));
   };
 

@@ -7,7 +7,8 @@ const validChannels = [
   "number-of-duplicates",
   'config',
   'config-saved',
-  'delete'
+  'delete',
+  'delete-all'
 ];
 
 declare global {

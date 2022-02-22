@@ -1,4 +1,4 @@
-time,Temperatur Innen(℃),Luftfeuchtigkeit Innen(%),temperature,humidity,dew_point,felt_temperature,wind,gust,wind_direction,pressure,Rel. Luftdruck(hpa),solar,uvi,Regen/Stunde(mm),Regen Event(mm),rain,Regen/Wochen(mm),Regen/Monat(mm),Regen/Jahre(mm)
+Date,Temperatur Innen(℃),Luftfeuchtigkeit Innen(%),Outdoor Temperature (°C),Outdoor Humidity (%),Dew Point (°C),Feels Like (°C),Wind Speed (kmh),Wind Gust (kmh),Wind Direction (°),Relative Pressure (hPa),Rel. Luftdruck(hpa),Solar Radiation (W/m^2),Ultra-Violet Radiation Index,Regen/Stunde(mm),Regen Event(mm),Daily Rain (mm),Regen/Wochen(mm),Regen/Monat(mm),Regen/Jahre(mm)
 2021/10/1 0:00,19.5,56,9.1,72,4.3,9.1,4.0,5.4,168,995.5,995.5,0.0,0,0.0,0.0,0.0,0.2,0.0,503.9
 2021/10/1 0:24,19.3,55,9.1,72,4.3,9.1,2.2,3.6,177,995.6,995.6,0.0,0,0.0,0.0,0.0,0.2,0.0,503.9
 2021/10/1 1:24,19.4,57,8.7,72,3.9,8.7,2.9,3.6,173,995.5,995.5,0.0,0,0.0,0.0,0.0,0.2,0.0,503.9
