@@ -266,6 +266,8 @@ ipcMain.on('open-file-dialog', (event) => {
         ];
 
       fs.createReadStream(result.filePaths[0])
+        // @todo This could be the point to analyze the data header names and units and automatically set it.
+        //.pipe()
         .pipe(csv({
           separator: ',',
           mapHeaders: ({ header}) => Object.keys(columnsToRead).includes(header) ? columnsToRead[header] : null,

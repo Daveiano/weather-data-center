@@ -36,6 +36,7 @@ import { Import } from "./import";
 import { userSetDateAction } from "../actions-app";
 import { RootState } from "../renderer";
 import {dataHasRecordsForProperty} from "../diagrams/hoc";
+import { Icon } from './icon';
 
 export const AppHeader: React.FC = (): React.ReactElement => {
   const [headerPanelExpanded, setHeaderPanelExpanded] = useState(false);
@@ -66,9 +67,8 @@ export const AppHeader: React.FC = (): React.ReactElement => {
               isActive={isSideNavExpanded}
             />
             <HeaderName<LinkProps> element={Link} to="/" prefix="">
-              {/*@todo Fix image path*/}
-              {/*<img src="/assets/weather-data-center-icon.png" />*/}
-              Weather Data Center
+              <Icon />
+              <span style={{ paddingLeft: '7px' }}>Weather Data Center</span>
             </HeaderName>
             {/*<HeaderNavigation>
               <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
