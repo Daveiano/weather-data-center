@@ -1,15 +1,21 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from "react";
 
 import { Loading } from "carbon-components-react";
 import { Humidity32 } from "@carbon/icons-react";
-import { ResponsiveLine } from '@nivo/line'
+import { ResponsiveLine } from "@nivo/line";
 
-import {dataItem, DiagramBaseProps} from "../types";
-import {getTimeAxisScaling, getTimeDifferenceInDays, scaleAverage} from "../scaling";
+import { dataItem, DiagramBaseProps } from "../types";
+import {
+  getTimeAxisScaling,
+  getTimeDifferenceInDays,
+  scaleAverage,
+} from "../scaling";
 import { TooltipLine } from "../tooltip";
 import { withEmptyCheck } from "../hoc";
 
-const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
+const HumidityBase: FunctionComponent<DiagramBaseProps> = (
+  props: DiagramBaseProps
+): React.ReactElement => {
   const [data, setData] = useState(props.data);
   const [loading, setLoading] = useState(false);
   const [daily, setDaily] = useState(false);
@@ -23,7 +29,7 @@ const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProp
     // number of values.
     if (timeDifferenceInDays > 14) {
       setDaily(true);
-      newData = scaleAverage(props.data, 'humidity', 'day');
+      newData = scaleAverage(props.data, "humidity", "day");
     } else {
       setDaily(false);
       newData = props.data;
@@ -40,11 +46,14 @@ const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProp
 
   if (loading) {
     return (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <Loading
-          description="Active loading indicator"
-          withOverlay={false}
-        />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Loading description="Active loading indicator" withOverlay={false} />
       </div>
     );
   }
@@ -60,29 +69,29 @@ const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProp
         <ResponsiveLine
           data={[
             {
-              id: 'humidity',
-              data: data.map(item => ({
+              id: "humidity",
+              data: data.map((item) => ({
                 x: item.timeParsed,
-                y: item.humidity
-              }))
-            }
+                y: item.humidity,
+              })),
+            },
           ]}
           xScale={{
             type: "time",
             useUTC: true,
             format: "%Y-%m-%dT%H:%M:%S.000Z",
-            precision: 'minute'
+            precision: "minute",
           }}
           xFormat={daily ? "time:%Y/%m/%d" : "time:%Y/%m/%d %H:%M"}
           yScale={{
             type: "linear",
             min: 0,
-            max: 103
+            max: 103,
           }}
-          yFormat={value => `${value} ${props.config.unit_humidity}`}
+          yFormat={(value) => `${value} ${props.config.unit_humidity}`}
           margin={{ top: 20, right: 10, bottom: 20, left: 40 }}
           curve="cardinal"
-          colors= {['#0099CC']}
+          colors={["#0099CC"]}
           lineWidth={2}
           enableArea={true}
           areaOpacity={0.07}
@@ -93,22 +102,21 @@ const HumidityBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProp
           axisLeft={{
             legend: props.config.unit_humidity,
             legendOffset: -35,
-            legendPosition: 'middle',
+            legendPosition: "middle",
             tickSize: 0,
-            tickPadding: 10
+            tickPadding: 10,
           }}
           axisBottom={{
             ...getTimeAxisScaling(data),
             tickSize: 0,
-            tickPadding: 5
+            tickPadding: 5,
           }}
           isInteractive={true}
-          tooltip={point => <TooltipLine point={point.point} />}
+          tooltip={(point) => <TooltipLine point={point.point} />}
           useMesh={true}
           enableCrosshair={true}
         />
       </div>
-
     </div>
   );
 };

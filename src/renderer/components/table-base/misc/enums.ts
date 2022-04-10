@@ -1,4 +1,4 @@
-import type {DataTableSortState} from "carbon-components-react/lib/components/DataTable/state/sorting";
+import type { DataTableSortState } from "carbon-components-react/lib/components/DataTable/state/sorting";
 
 /**
  * Table size.
@@ -7,52 +7,56 @@ export const TABLE_SIZE = {
   /**
    * Compact size.
    */
-  COMPACT: 'compact',
+  COMPACT: "compact",
 
   /**
    * Short size.
    */
-  SHORT: 'short',
+  SHORT: "short",
 
   /**
    * Regular size.
    */
-  REGULAR: 'normal',
+  REGULAR: "normal",
 
   /**
    * Tall size.
    */
-  TALL: 'tall',
+  TALL: "tall",
 };
 
 /**
  * Table sort state.
  */
-export const TABLE_SORT_DIRECTION: { NONE: DataTableSortState, ASC: DataTableSortState, DESC: DataTableSortState } = {
+export const TABLE_SORT_DIRECTION: {
+  NONE: DataTableSortState;
+  ASC: DataTableSortState;
+  DESC: DataTableSortState;
+} = {
   /**
    * Not sorted.
    */
-  NONE: 'NONE',
+  NONE: "NONE",
 
   /**
    * Sorted in ascending order.
    */
-  ASC: 'ASC',
+  ASC: "ASC",
 
   /**
    * Sorted in descending order.
    */
-  DESC: 'DESC',
+  DESC: "DESC",
 };
 
 /**
  * Table sort cycle.
  */
 export const TABLE_SORT_CYCLE = {
-  BI_STATES_FROM_ASCENDING: 'bi-states-from-ascending',
-  BI_STATES_FROM_DESCENDING: 'bi-states-from-descending',
-  TRI_STATES_FROM_ASCENDING: 'tri-states-from-ascending',
-  TRI_STATES_FROM_DESCENDING: 'tri-states-from-descending',
+  BI_STATES_FROM_ASCENDING: "bi-states-from-ascending",
+  BI_STATES_FROM_DESCENDING: "bi-states-from-descending",
+  TRI_STATES_FROM_ASCENDING: "tri-states-from-ascending",
+  TRI_STATES_FROM_DESCENDING: "tri-states-from-descending",
 };
 
 /**

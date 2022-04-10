@@ -1,15 +1,21 @@
-import React, {FunctionComponent, useEffect, useState} from 'react';
+import React, { FunctionComponent, useEffect, useState } from "react";
 
 import { Sun32 } from "@carbon/icons-react";
-import {ResponsiveLine} from "@nivo/line";
+import { ResponsiveLine } from "@nivo/line";
 import { Loading } from "carbon-components-react";
 
-import {dataItem, DiagramBaseProps} from "../types";
-import {getTimeAxisScaling, getTimeDifferenceInDays, scaleAverage} from "../scaling";
+import { dataItem, DiagramBaseProps } from "../types";
+import {
+  getTimeAxisScaling,
+  getTimeDifferenceInDays,
+  scaleAverage,
+} from "../scaling";
 import { TooltipLine } from "../tooltip";
 import { withEmptyCheck } from "../hoc";
 
-const SolarBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
+const SolarBase: FunctionComponent<DiagramBaseProps> = (
+  props: DiagramBaseProps
+): React.ReactElement => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [daily, setDaily] = useState(false);
@@ -21,7 +27,7 @@ const SolarBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps):
 
     if (timeDifferenceInDays > 14) {
       setDaily(true);
-      newData = scaleAverage(props.data, 'solar', 'day');
+      newData = scaleAverage(props.data, "solar", "day");
     } else {
       setDaily(false);
       newData = props.data;
@@ -38,50 +44,57 @@ const SolarBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps):
 
   if (loading) {
     return (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <Loading
-          description="Active loading indicator"
-          withOverlay={false}
-        />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Loading description="Active loading indicator" withOverlay={false} />
       </div>
     );
   }
 
   return (
     <div data-testid="solar-diagram">
-      {props.title &&
+      {props.title && (
         <h3>
           <Sun32 />
           {props.title}
         </h3>
-      }
+      )}
 
       <div style={{ height: props.height }} className="diagram">
         <ResponsiveLine
           data={[
             {
-              id: 'solar',
-              data: data.map(item => ({
+              id: "solar",
+              data: data.map((item) => ({
                 x: item.timeParsed,
-                y: item.solar
-              }))
-            }
+                y: item.solar,
+              })),
+            },
           ]}
           xScale={{
             type: "time",
             useUTC: true,
             format: "%Y-%m-%dT%H:%M:%S.000Z",
-            precision: 'minute'
+            precision: "minute",
           }}
           xFormat={daily ? "time:%Y/%m/%d" : "time:%Y/%m/%d %H:%M"}
           yScale={{
             type: "linear",
-            max: Math.max.apply(Math, data.map(item => item.solar)) + 25
+            max:
+              Math.max.apply(
+                Math,
+                data.map((item) => item.solar)
+              ) + 25,
           }}
-          yFormat={value => `${value} ${props.config.unit_solar}`}
+          yFormat={(value) => `${value} ${props.config.unit_solar}`}
           margin={{ top: 20, right: 10, bottom: 20, left: 40 }}
           curve="basis"
-          colors= {['#ff8c00']}
+          colors={["#ff8c00"]}
           lineWidth={2}
           enableArea={true}
           areaOpacity={0.07}
@@ -92,17 +105,17 @@ const SolarBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps):
           axisLeft={{
             legend: props.config.unit_solar,
             legendOffset: -35,
-            legendPosition: 'middle',
+            legendPosition: "middle",
             tickSize: 0,
-            tickPadding: 5
+            tickPadding: 5,
           }}
           axisBottom={{
             ...getTimeAxisScaling(data),
             tickSize: 0,
-            tickPadding: 5
+            tickPadding: 5,
           }}
           isInteractive={true}
-          tooltip={point => <TooltipLine point={point.point} />}
+          tooltip={(point) => <TooltipLine point={point.point} />}
           useMesh={true}
           enableCrosshair={true}
         />

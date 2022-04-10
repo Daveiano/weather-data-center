@@ -1,15 +1,21 @@
-import React, {FunctionComponent, useEffect, useState} from 'react';
+import React, { FunctionComponent, useEffect, useState } from "react";
 
 import { UvIndex32 } from "@carbon/icons-react";
-import {ResponsiveLine} from "@nivo/line";
+import { ResponsiveLine } from "@nivo/line";
 import { Loading } from "carbon-components-react";
 
-import {dataItem, DiagramBaseProps} from "../types";
-import { getTimeDifferenceInDays, scaleMax, getTimeAxisScaling } from "../scaling";
+import { dataItem, DiagramBaseProps } from "../types";
+import {
+  getTimeDifferenceInDays,
+  scaleMax,
+  getTimeAxisScaling,
+} from "../scaling";
 import { TooltipLine } from "../tooltip";
 import { withEmptyCheck } from "../hoc";
 
-const UviBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
+const UviBase: FunctionComponent<DiagramBaseProps> = (
+  props: DiagramBaseProps
+): React.ReactElement => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [daily, setDaily] = useState(false);
@@ -21,7 +27,7 @@ const UviBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): R
 
     if (timeDifferenceInDays > 14) {
       setDaily(true);
-      newData = scaleMax(props.data, 'uvi', 'day');
+      newData = scaleMax(props.data, "uvi", "day");
     } else {
       setDaily(false);
       newData = props.data;
@@ -38,11 +44,14 @@ const UviBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): R
 
   if (loading) {
     return (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <Loading
-          description="Active loading indicator"
-          withOverlay={false}
-        />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Loading description="Active loading indicator" withOverlay={false} />
       </div>
     );
   }
@@ -58,28 +67,28 @@ const UviBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): R
         <ResponsiveLine
           data={[
             {
-              id: 'uvi',
-              data: data.map(item => ({
+              id: "uvi",
+              data: data.map((item) => ({
                 x: item.timeParsed,
-                y: item.uvi
-              }))
-            }
+                y: item.uvi,
+              })),
+            },
           ]}
           xScale={{
             type: "time",
             useUTC: true,
             format: "%Y-%m-%dT%H:%M:%S.000Z",
-            precision: 'minute'
+            precision: "minute",
           }}
           xFormat={daily ? "time:%Y/%m/%d" : "time:%Y/%m/%d %H:%M"}
           yScale={{
             type: "linear",
-            max: 8
+            max: 8,
           }}
-          yFormat={value => `${value}`}
+          yFormat={(value) => `${value}`}
           margin={{ top: 20, right: 10, bottom: 20, left: 40 }}
           curve="step"
-          colors= {['#e61919']}
+          colors={["#e61919"]}
           lineWidth={2}
           enableArea={true}
           areaOpacity={0.07}
@@ -88,19 +97,19 @@ const UviBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): R
           enablePointLabel={false}
           pointLabel="yFormatted"
           axisLeft={{
-            legend: 'UVI',
+            legend: "UVI",
             legendOffset: -35,
-            legendPosition: 'middle',
+            legendPosition: "middle",
             tickSize: 0,
-            tickPadding: 5
+            tickPadding: 5,
           }}
           axisBottom={{
             ...getTimeAxisScaling(data),
             tickSize: 0,
-            tickPadding: 5
+            tickPadding: 5,
           }}
           isInteractive={true}
-          tooltip={point => <TooltipLine point={point.point} />}
+          tooltip={(point) => <TooltipLine point={point.point} />}
           useMesh={true}
           enableCrosshair={true}
         />

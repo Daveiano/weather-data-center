@@ -1,13 +1,17 @@
-module.exports = api => {
-  const isTest = api.env('test');
+module.exports = (api) => {
+  const isTest = api.env("test");
 
   if (isTest) {
     return {
-      "presets": [['@babel/preset-env', { targets: { node: 'current' } }], "@babel/preset-react", "@babel/preset-typescript"],
+      presets: [
+        ["@babel/preset-env", { targets: { node: "current" } }],
+        "@babel/preset-react",
+        "@babel/preset-typescript",
+      ],
     };
   }
 
   return {
-    "plugins": ["react-hot-loader/babel", "emotion"]
+    plugins: ["react-hot-loader/babel", "emotion"],
   };
 };

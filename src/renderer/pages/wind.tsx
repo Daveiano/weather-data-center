@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-import {Column, Row, Tile} from "carbon-components-react";
-import {RootState} from "../renderer";
-import {Empty} from "../components/empty";
-import {Stats} from "../components/stats/stats";
+import { Column, Row, Tile } from "carbon-components-react";
+import { RootState } from "../renderer";
+import { Empty } from "../components/empty";
+import { Stats } from "../components/stats/stats";
 import WindBase from "../diagrams/wind/wind-base";
 import WindDirectionBase from "../diagrams/wind-direction/wind-direction-base";
 import TableBase from "../components/table-base/table-base";
-import {dataItem} from "../diagrams/types";
-import {TABLE_SORT_DIRECTION} from "../components/table-base/misc";
+import { dataItem } from "../diagrams/types";
+import { TABLE_SORT_DIRECTION } from "../components/table-base/misc";
 
 export const WindPage: React.FC = (): React.ReactElement => {
-  const dataFilteredFromStore = useSelector((state: RootState) => state.appState.dataFilteredPerTime);
+  const dataFilteredFromStore = useSelector(
+    (state: RootState) => state.appState.dataFilteredPerTime
+  );
   const loading = useSelector((state: RootState) => state.appState.loading);
   const config = useSelector((state: RootState) => state.appState.config);
 
@@ -38,7 +40,9 @@ export const WindPage: React.FC = (): React.ReactElement => {
                 <Row>
                   <Column sm={4} lg={4} max={3}>
                     <Tile>
-                      <h3 className="p-left m-bottom">Minimum / Maximum values</h3>
+                      <h3 className="p-left m-bottom">
+                        Minimum / Maximum values
+                      </h3>
 
                       <Stats
                         data={data}
@@ -47,27 +51,27 @@ export const WindPage: React.FC = (): React.ReactElement => {
                         size="compact"
                         stats={[
                           {
-                            property: 'gust',
-                            direction: 'max',
-                            label: 'Maximum Gust',
-                            unit: config.unit_wind
+                            property: "gust",
+                            direction: "max",
+                            label: "Maximum Gust",
+                            unit: config.unit_wind,
                           },
                           {
-                            property: 'gust',
-                            direction: 'day',
-                            extra: 'storm-days',
-                            label: 'Storm days',
-                            description: 'W ≥ 8 Beaufort',
+                            property: "gust",
+                            direction: "day",
+                            extra: "storm-days",
+                            label: "Storm days",
+                            description: "W ≥ 8 Beaufort",
                           },
                           {
-                            property: 'wind',
-                            direction: 'max',
-                            scaling: 'average',
-                            precision: 'day',
-                            label: 'Windiest day',
-                            tooltip: 'Highest Ø from all data',
-                            unit: config.unit_wind
-                          }
+                            property: "wind",
+                            direction: "max",
+                            scaling: "average",
+                            precision: "day",
+                            label: "Windiest day",
+                            tooltip: "Highest Ø from all data",
+                            unit: config.unit_wind,
+                          },
                         ]}
                       />
                     </Tile>
@@ -78,38 +82,38 @@ export const WindPage: React.FC = (): React.ReactElement => {
                       pageSize={15}
                       rows={data.map((item: dataItem) => ({
                         ...item,
-                        selected: false
+                        selected: false,
                       }))}
                       columns={[
                         {
-                          title: 'Time',
-                          id: 'timeParsed',
-                          tooltip: 'Date format is YYYY/MM/DD HH:mm',
-                          sortCycle: 'tri-states-from-ascending',
+                          title: "Time",
+                          id: "timeParsed",
+                          tooltip: "Date format is YYYY/MM/DD HH:mm",
+                          sortCycle: "tri-states-from-ascending",
                         },
                         {
-                          title: 'Wind',
+                          title: "Wind",
                           small: `in ${config.unit_wind}`,
-                          id: 'wind',
-                          sortCycle: 'tri-states-from-ascending',
+                          id: "wind",
+                          sortCycle: "tri-states-from-ascending",
                         },
                         {
-                          title: 'Gust',
+                          title: "Gust",
                           small: `in ${config.unit_wind}`,
-                          id: 'gust',
-                          sortCycle: 'tri-states-from-ascending',
+                          id: "gust",
+                          sortCycle: "tri-states-from-ascending",
                         },
                         {
-                          title: 'Wind direction',
+                          title: "Wind direction",
                           small: `in ${config.unit_wind_direction}`,
-                          id: 'wind_direction',
-                          sortCycle: 'tri-states-from-ascending',
+                          id: "wind_direction",
+                          sortCycle: "tri-states-from-ascending",
                         },
                       ]}
                       title="All data"
                       hasSelection={false}
                       sortInfo={{
-                        columnId: 'timeParsed',
+                        columnId: "timeParsed",
                         direction: TABLE_SORT_DIRECTION.ASC,
                       }}
                       size="short"
@@ -118,7 +122,16 @@ export const WindPage: React.FC = (): React.ReactElement => {
                 </Row>
               </Column>
 
-              <WindBase height="600px" data={data} title="Wind and Gust speed" sm={12} lg={12} max={12} property="wind" config={config} />
+              <WindBase
+                height="600px"
+                data={data}
+                title="Wind and Gust speed"
+                sm={12}
+                lg={12}
+                max={12}
+                property="wind"
+                config={config}
+              />
 
               <WindDirectionBase
                 height="600px"
@@ -138,7 +151,5 @@ export const WindPage: React.FC = (): React.ReactElement => {
     );
   }
 
-  return (
-    <Empty />
-  );
-}
+  return <Empty />;
+};

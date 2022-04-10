@@ -1,8 +1,8 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, { useCallback, useEffect, useState } from "react";
 
 import moment from "moment";
 
-import { Delete16 as Delete, Information16 } from '@carbon/icons-react';
+import { Delete16 as Delete, Information16 } from "@carbon/icons-react";
 import {
   TableContainer,
   Table,
@@ -20,10 +20,11 @@ import {
   TableToolbarMenu,
   TableBatchActions,
   TableBatchAction,
-  TooltipIcon, Modal
-} from 'carbon-components-react';
-import type { DataTableSize } from 'carbon-components-react';
-import {DataTableSortState} from "carbon-components-react/lib/components/DataTable/state/sorting";
+  TooltipIcon,
+  Modal,
+} from "carbon-components-react";
+import type { DataTableSize } from "carbon-components-react";
+import { DataTableSortState } from "carbon-components-react/lib/components/DataTable/state/sorting";
 
 import {
   useFilteredRows,
@@ -32,38 +33,38 @@ import {
   useSortedRows,
   useSortInfo,
   useUniqueId,
-} from './hooks';
-import Pagination from './components/pagination';
-import { TABLE_SORT_DIRECTION } from './misc';
+} from "./hooks";
+import Pagination from "./components/pagination";
+import { TABLE_SORT_DIRECTION } from "./misc";
 import { dataItem } from "../../diagrams/types";
-import {extendedPropertyParameter} from "../../diagrams/scaling";
-import {dataHasRecordsForProperty} from "../../diagrams/hoc";
+import { extendedPropertyParameter } from "../../diagrams/scaling";
+import { dataHasRecordsForProperty } from "../../diagrams/hoc";
 
 export type dataItemDataTable = dataItem & { selected: boolean };
 
 interface TableBaseProps {
-  collator?: Intl.Collator,
+  collator?: Intl.Collator;
   columns: {
-    id: extendedPropertyParameter,
-    title: string,
-    sortCycle?: string,
-    small?: string,
-    tooltip?: string
-  }[],
-  hasSelection?: boolean,
-  id?: string,
-  pageSize: number,
-  rows: dataItemDataTable[],
-  size?: DataTableSize,
+    id: extendedPropertyParameter;
+    title: string;
+    sortCycle?: string;
+    small?: string;
+    tooltip?: string;
+  }[];
+  hasSelection?: boolean;
+  id?: string;
+  pageSize: number;
+  rows: dataItemDataTable[];
+  size?: DataTableSize;
   sortInfo: {
-    columnId: string,
-    direction: DataTableSortState
-  },
-  start: number,
-  zebra?: boolean,
-  title?: string,
-  dateFormat?: string,
-  pageSizes?: number[]
+    columnId: string;
+    direction: DataTableSortState;
+  };
+  start: number;
+  zebra?: boolean;
+  title?: string;
+  dateFormat?: string;
+  pageSizes?: number[];
 }
 
 /**
@@ -93,7 +94,9 @@ interface TableBaseProps {
  * @see https://github.com/carbon-design-system/carbon/issues/6373
  * @see https://github.com/carbon-design-system/carbon/tree/main/packages/react/examples/custom-data-table-state-manager
  */
-const TableBase: React.FC<TableBaseProps> = (props: TableBaseProps): React.ReactElement  => {
+const TableBase: React.FC<TableBaseProps> = (
+  props: TableBaseProps
+): React.ReactElement => {
   const [rows, setRows] = useState(props.rows);
   const [modalOpen, setModalOpen] = useState(false);
   const [sortInfo, setSortInfo] = useSortInfo(props.sortInfo);
@@ -137,7 +140,7 @@ const TableBase: React.FC<TableBaseProps> = (props: TableBaseProps): React.React
   const handleChangeSelection = useCallback(
     (event) => {
       const { currentTarget } = event;
-      const row = currentTarget.closest('tr');
+      const row = currentTarget.closest("tr");
       if (row) {
         setRowSelection(Number(row.dataset.rowId), currentTarget.checked);
       }
@@ -187,45 +190,55 @@ const TableBase: React.FC<TableBaseProps> = (props: TableBaseProps): React.React
     setRows(props.rows);
   }, [props.rows]);
 
-  let description = `from ${moment(rows[0].timeParsed).format('YYYY/MM/DD HH:mm')} till ${moment(rows[rows.length - 1].timeParsed).format('YYYY/MM/DD HH:mm')}`;
+  let description = `from ${moment(rows[0].timeParsed).format(
+    "YYYY/MM/DD HH:mm"
+  )} till ${moment(rows[rows.length - 1].timeParsed).format(
+    "YYYY/MM/DD HH:mm"
+  )}`;
   if (props.dateFormat) {
-    description= `from ${moment(rows[0].timeParsed).format(props.dateFormat)} till ${moment(rows[rows.length - 1].timeParsed).format(props.dateFormat)}`;
+    description = `from ${moment(rows[0].timeParsed).format(
+      props.dateFormat
+    )} till ${moment(rows[rows.length - 1].timeParsed).format(
+      props.dateFormat
+    )}`;
   }
 
   return (
     <>
-      {props.hasSelection &&
+      {props.hasSelection && (
         <Modal
           size="xs"
           danger={true}
-          modalHeading={`Are you sure? This will delete ${rows.filter(row => row.selected).length} record(s).`}
+          modalHeading={`Are you sure? This will delete ${
+            rows.filter((row) => row.selected).length
+          } record(s).`}
           open={modalOpen}
           closeButtonLabel="Cancel"
           primaryButtonText="Delete"
           secondaryButtonText="Cancel"
           onRequestClose={() => setModalOpen(false)}
           onRequestSubmit={() => {
-            window.electron.IpcSend('delete', rows.filter(row => row.selected));
+            window.electron.IpcSend(
+              "delete",
+              rows.filter((row) => row.selected)
+            );
             setModalOpen(false);
           }}
-        >
-
-        </Modal>
-      }
-      <TableContainer
-        title={props.title}
-        description={description}
-      >
-        {hasBatchActions &&
+        ></Modal>
+      )}
+      <TableContainer title={props.title} description={description}>
+        {hasBatchActions && (
           <TableToolbar>
             <TableBatchActions
               shouldShowBatchActions={hasBatchActions}
               totalSelected={selectedRowsCountInFiltered}
-              onCancel={handleCancelSelection}>
+              onCancel={handleCancelSelection}
+            >
               <TableBatchAction
                 tabIndex={hasBatchActions ? 0 : -1}
                 renderIcon={Delete}
-                onClick={handleDeleteRows}>
+                onClick={handleDeleteRows}
+              >
                 Delete
               </TableBatchAction>
             </TableBatchActions>
@@ -235,19 +248,19 @@ const TableBase: React.FC<TableBaseProps> = (props: TableBaseProps): React.React
                 onChange={handleChangeSearchString}
               />
               <TableToolbarMenu tabIndex={hasBatchActions ? -1 : 0}>
-                <TableToolbarAction onClick={() => alert('Alert 1')}>
+                <TableToolbarAction onClick={() => alert("Alert 1")}>
                   Action 1
                 </TableToolbarAction>
-                <TableToolbarAction onClick={() => alert('Alert 2')}>
+                <TableToolbarAction onClick={() => alert("Alert 2")}>
                   Action 2
                 </TableToolbarAction>
-                <TableToolbarAction onClick={() => alert('Alert 3')}>
+                <TableToolbarAction onClick={() => alert("Alert 3")}>
                   Action 3
                 </TableToolbarAction>
               </TableToolbarMenu>
             </TableToolbarContent>
           </TableToolbar>
-        }
+        )}
 
         <Table size={props.size} isSortable useZebraStyles={props.zebra}>
           <TableHead>
@@ -265,47 +278,51 @@ const TableBase: React.FC<TableBaseProps> = (props: TableBaseProps): React.React
                 />
               )}
 
-              {props.columns.filter(item => dataHasRecordsForProperty(item.id, rows)).map(({ id: columnId, sortCycle, title, small, tooltip }) => {
-                const sortDirectionForThisCell =
-                  (columnId === sortColumnId
-                    ? sortDirection
-                    : TABLE_SORT_DIRECTION.NONE);
-                return (
-                  <TableHeader
-                    key={columnId}
-                    isSortable={Boolean(sortCycle)}
-                    isSortHeader={sortCycle && columnId === sortColumnId}
-                    sortDirection={sortDirectionForThisCell}
-                    data-column-id={columnId}
-                    data-sort-cycle={sortCycle}
-                    data-sort-direction={sortDirectionForThisCell}
-                    onClick={handleChangeSort}
-                  >
-                    <div style={{
-                      display: 'flex',
-                      alignItems: "center",
-                      justifyContent: 'space-between'
-                    }}>
-                      <div style={{ marginRight: "20px" }}>
-                        {title} <br/>
-                        <span className="bx--type-helper-text-01">
-                        {small}
-                      </span>
-                      </div>
+              {props.columns
+                .filter((item) => dataHasRecordsForProperty(item.id, rows))
+                .map(({ id: columnId, sortCycle, title, small, tooltip }) => {
+                  const sortDirectionForThisCell =
+                    columnId === sortColumnId
+                      ? sortDirection
+                      : TABLE_SORT_DIRECTION.NONE;
+                  return (
+                    <TableHeader
+                      key={columnId}
+                      isSortable={Boolean(sortCycle)}
+                      isSortHeader={sortCycle && columnId === sortColumnId}
+                      sortDirection={sortDirectionForThisCell}
+                      data-column-id={columnId}
+                      data-sort-cycle={sortCycle}
+                      data-sort-direction={sortDirectionForThisCell}
+                      onClick={handleChangeSort}
+                    >
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <div style={{ marginRight: "20px" }}>
+                          {title} <br />
+                          <span className="bx--type-helper-text-01">
+                            {small}
+                          </span>
+                        </div>
 
-                      {tooltip &&
-                        <TooltipIcon
-                          align="start"
-                          tooltipText={tooltip}
-                          direction="bottom"
-                        >
-                          <Information16 />
-                        </TooltipIcon>
-                      }
-                    </div>
-                  </TableHeader>
-                );
-              })}
+                        {tooltip && (
+                          <TooltipIcon
+                            align="start"
+                            tooltipText={tooltip}
+                            direction="bottom"
+                          >
+                            <Information16 />
+                          </TooltipIcon>
+                        )}
+                      </div>
+                    </TableHeader>
+                  );
+                })}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -318,7 +335,8 @@ const TableBase: React.FC<TableBaseProps> = (props: TableBaseProps): React.React
                 <TableRow
                   key={rowId}
                   isSelected={props.hasSelection && selected}
-                  data-row-id={rowId}>
+                  data-row-id={rowId}
+                >
                   {props.hasSelection && (
                     <TableSelectRow
                       id={`${elementId}--select-${rowId}`}
@@ -328,38 +346,42 @@ const TableBase: React.FC<TableBaseProps> = (props: TableBaseProps): React.React
                       onSelect={handleChangeSelection}
                     />
                   )}
-                  {props.columns.filter(item => dataHasRecordsForProperty(item.id, rows)).map(({ id: columnId }) => (
-                    <TableCell key={columnId}>
-                      {columnId === 'timeParsed' ? (
-                        <>
-                          {props.dateFormat ? (
-                            <>
-                              {moment(row[columnId]).format(props.dateFormat)}
-                            </>
-                          ) : (
-                            <>
-                              {moment(row[columnId]).format('YYYY/MM/DD HH:mm')}
-                            </>
-                          )}
-                        </>
-                      ) : (
-                        <>
-                          {row[columnId]}
-                        </>
-                      )}
-                    </TableCell>
-                  ))}
+                  {props.columns
+                    .filter((item) => dataHasRecordsForProperty(item.id, rows))
+                    .map(({ id: columnId }) => (
+                      <TableCell key={columnId}>
+                        {columnId === "timeParsed" ? (
+                          <>
+                            {props.dateFormat ? (
+                              <>
+                                {moment(row[columnId]).format(props.dateFormat)}
+                              </>
+                            ) : (
+                              <>
+                                {moment(row[columnId]).format(
+                                  "YYYY/MM/DD HH:mm"
+                                )}
+                              </>
+                            )}
+                          </>
+                        ) : (
+                          <>{row[columnId]}</>
+                        )}
+                      </TableCell>
+                    ))}
                 </TableRow>
               );
             })}
           </TableBody>
         </Table>
-        {typeof pageSize !== 'undefined' && (
+        {typeof pageSize !== "undefined" && (
           <Pagination
             start={start}
             count={filteredRows.length}
             pageSize={pageSize}
-            pageSizes={props.pageSizes ? props.pageSizes : [10, 15, 20, 25, 50, 100]}
+            pageSizes={
+              props.pageSizes ? props.pageSizes : [10, 15, 20, 25, 50, 100]
+            }
             onChangePageSize={handleChangePageSize}
             onChangeStart={handleChangeStart}
           />
@@ -373,7 +395,7 @@ TableBase.defaultProps = {
   collator: new Intl.Collator(),
   hasSelection: false,
   pageSize: 5,
-  size: 'normal',
+  size: "normal",
   start: 0,
 };
 

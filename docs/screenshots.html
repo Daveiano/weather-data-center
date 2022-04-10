@@ -5,33 +5,61 @@ title: "Screenshots"
 
 <!-- This example requires Tailwind CSS v2.0+ -->
 <div class="relative bg-gray-200">
-    <div class="absolute inset-0">
-        <img class="w-full h-full object-cover" src={{ "/assets/images/IMG_1508.jpg" | relative_url }} alt="">
-        <div class="absolute inset-0 opacity-30 bg-blue-600 dark:opacity-70 dark:bg-blue-900 mix-blend-overlay" aria-hidden="true"></div>
-    </div>
-    <div class="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
-        <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">Live Screenshots</h1>
-        <p class="mt-6 text-xl text-gray-100 max-w-3xl">
-            These screenshots are updated on every code change. What you see here is the current state of
-            the development.
-        </p>
-    </div>
+  <div class="absolute inset-0">
+    <img class="w-full h-full object-cover" src={{ "/assets/images/IMG_1508.jpg"
+    | relative_url }} alt="">
+    <div
+      class="absolute inset-0 bg-blue-600 opacity-30 mix-blend-overlay dark:bg-blue-900 dark:opacity-70"
+      aria-hidden="true"
+    ></div>
+  </div>
+  <div class="relative mx-auto max-w-7xl py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
+    <h1
+      class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl"
+    >
+      Live Screenshots
+    </h1>
+    <p class="mt-6 max-w-3xl text-xl text-gray-100">
+      These screenshots are updated on every code change. What you see here is
+      the current state of the development.
+    </p>
+  </div>
 </div>
 
-<div class="container mx-auto py-8 px-6 bg-white dark:bg-gray-800">
-    <div class="lg:columns-2">
-        {% for screenshot in site.data.screenshots %}
-        <div class="mt-4 first:mt-0 break-inside-avoid-column">
-            <figcaption class="mb-3 flex text-sm text-gray-500 dark:text-grey-200 items-center">
-                <svg class="flex-none w-5 h-5 text-gray-400" x-description="Heroicon name: solid/camera" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path>
-                </svg>
-                <span class="ml-2 text-gray-900 dark:text-gray-200 text-2xl font-extrabold">{{ screenshot.name }}</span>
-            </figcaption>
-            <a href="{{ screenshot.url }}">
-                <img class="rounded-md shadow-xl ring-1 ring-black dark:ring-white ring-opacity-5" alt="{{ screenshot.name }}" src="{{ screenshot.url }}" />
-            </a>
-        </div> 
-        {% endfor %}
+<div class="container mx-auto bg-white py-8 px-6 dark:bg-gray-800">
+  <div class="lg:columns-2">
+    {% for screenshot in site.data.screenshots %}
+    <div class="mt-4 break-inside-avoid-column first:mt-0">
+      <figcaption
+        class="dark:text-grey-200 mb-3 flex items-center text-sm text-gray-500"
+      >
+        <svg
+          class="h-5 w-5 flex-none text-gray-400"
+          x-description="Heroicon name: solid/camera"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+        <span
+          class="ml-2 text-2xl font-extrabold text-gray-900 dark:text-gray-200"
+          >{{ screenshot.name }}</span
+        >
+      </figcaption>
+      <a href="{{ screenshot.url }}">
+        <img
+          class="rounded-md shadow-xl ring-1 ring-black ring-opacity-5 dark:ring-white"
+          alt="{{ screenshot.name }}"
+          src="{{ screenshot.url }}"
+        />
+      </a>
     </div>
+    {% endfor %}
+  </div>
 </div>

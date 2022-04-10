@@ -1,13 +1,17 @@
-import React from 'react'
-import { render, screen } from '@testing-library/react'
+import React from "react";
+import { render, screen } from "@testing-library/react";
 
-import moment from 'moment-timezone';
-import {combineReducers, createStore} from "redux";
-import {Provider} from "react-redux";
+import moment from "moment-timezone";
+import { combineReducers, createStore } from "redux";
+import { Provider } from "react-redux";
 
-import {StartPage} from "./start";
-import {dataAction, dataFilteredPerTimeAction, configAction} from "../actions-app";
-import {appReducer, appReducerDefaultState} from "../reducer-app";
+import { StartPage } from "./start";
+import {
+  dataAction,
+  dataFilteredPerTimeAction,
+  configAction,
+} from "../actions-app";
+import { appReducer, appReducerDefaultState } from "../reducer-app";
 
 import data from "../../../tests/data/data-without-wind-direction-rain.json";
 import config from "../../../tests/data/config.json";
@@ -16,10 +20,10 @@ moment.tz.setDefault("Europe/Berlin");
 
 const store = createStore(
   combineReducers({
-    appState: appReducer
+    appState: appReducer,
   }),
   {
-    appState: appReducerDefaultState
+    appState: appReducerDefaultState,
   }
 );
 
@@ -27,24 +31,26 @@ store.dispatch(configAction(config));
 store.dispatch(dataAction(data));
 store.dispatch(dataFilteredPerTimeAction(data));
 
-test('rendering start page without rain and wind direction', () => {
+test("rendering start page without rain and wind direction", () => {
   const { container } = render(
     <Provider store={store}>
       <StartPage />
     </Provider>
   );
 
-  expect(screen.getByTestId('temperature-diagram')).toBeInTheDocument();
-  expect(screen.getByTestId('pressure-diagram')).toBeInTheDocument();
-  expect(screen.getByTestId('humidity-diagram')).toBeInTheDocument();
-  expect(screen.getByTestId('wind-diagram')).toBeInTheDocument();
-  expect(screen.getByTestId('felt-temperature-diagram')).toBeInTheDocument();
-  expect(screen.getByTestId('solar-diagram')).toBeInTheDocument();
-  expect(screen.getByTestId('uvi-diagram')).toBeInTheDocument();
-  expect(screen.getByTestId('dew-point-diagram')).toBeInTheDocument();
+  expect(screen.getByTestId("temperature-diagram")).toBeInTheDocument();
+  expect(screen.getByTestId("pressure-diagram")).toBeInTheDocument();
+  expect(screen.getByTestId("humidity-diagram")).toBeInTheDocument();
+  expect(screen.getByTestId("wind-diagram")).toBeInTheDocument();
+  expect(screen.getByTestId("felt-temperature-diagram")).toBeInTheDocument();
+  expect(screen.getByTestId("solar-diagram")).toBeInTheDocument();
+  expect(screen.getByTestId("uvi-diagram")).toBeInTheDocument();
+  expect(screen.getByTestId("dew-point-diagram")).toBeInTheDocument();
 
-  expect(screen.queryByTestId('rain-diagram')).not.toBeInTheDocument();
-  expect(screen.queryByTestId('wind-direction-diagram')).not.toBeInTheDocument();
+  expect(screen.queryByTestId("rain-diagram")).not.toBeInTheDocument();
+  expect(
+    screen.queryByTestId("wind-direction-diagram")
+  ).not.toBeInTheDocument();
 
   expect(container).toMatchSnapshot();
 });

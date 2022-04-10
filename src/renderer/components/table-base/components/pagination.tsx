@@ -1,13 +1,13 @@
-import React, { useCallback } from 'react';
-import { Pagination as CarbonPagination } from 'carbon-components-react';
+import React, { useCallback } from "react";
+import { Pagination as CarbonPagination } from "carbon-components-react";
 
 type PaginationProps = {
-  count: number,
-  start: number,
-  pageSize: number,
-  onChangePageSize: (a: { pageSize: number }) => void
-  onChangeStart: (a: { start: number }) => void,
-  pageSizes: number[],
+  count: number;
+  start: number;
+  pageSize: number;
+  onChangePageSize: (a: { pageSize: number }) => void;
+  onChangeStart: (a: { start: number }) => void;
+  pageSizes: number[];
 };
 
 /**
@@ -31,7 +31,13 @@ const Pagination = (props: PaginationProps): React.ReactElement => {
         }
       }
     },
-    [props.start, props.count, props.pageSize, props.onChangeStart, props.onChangePageSize]
+    [
+      props.start,
+      props.count,
+      props.pageSize,
+      props.onChangeStart,
+      props.onChangePageSize,
+    ]
   );
 
   return (

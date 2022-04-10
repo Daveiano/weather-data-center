@@ -5,16 +5,24 @@ title: "About"
 
 <!-- This example requires Tailwind CSS v2.0+ -->
 <div class="relative bg-gray-400">
-    <div class="absolute inset-0">
-        <img class="w-full h-full object-cover" src={{ "/assets/images/IMG_9057.jpg" | relative_url }} alt="">
-        <div class="absolute inset-0 opacity-30 bg-blue-600 dark:opacity-70 dark:bg-blue-900 mix-blend-overlay" aria-hidden="true"></div>
-    </div>
-    <div class="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
-        <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">About this project</h1>
-        <p class="mt-6 text-xl text-gray-100 max-w-3xl">
-            What Weather Data Center powers.
-        </p>
-    </div>
+  <div class="absolute inset-0">
+    <img class="w-full h-full object-cover" src={{ "/assets/images/IMG_9057.jpg"
+    | relative_url }} alt="">
+    <div
+      class="absolute inset-0 bg-blue-600 opacity-30 mix-blend-overlay dark:bg-blue-900 dark:opacity-70"
+      aria-hidden="true"
+    ></div>
+  </div>
+  <div class="relative mx-auto max-w-7xl py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
+    <h1
+      class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl"
+    >
+      About this project
+    </h1>
+    <p class="mt-6 max-w-3xl text-xl text-gray-100">
+      What Weather Data Center powers.
+    </p>
+  </div>
 </div>
 
 <!--Content-->
@@ -34,127 +42,248 @@ title: "About"
   }
   ```
 -->
-<div class="relative py-16 bg-white dark:bg-gray-800 overflow-hidden">
-    <div class="hidden lg:block lg:absolute lg:inset-y-0 lg:h-full lg:w-full">
-        <div class="relative h-full text-lg max-w-prose mx-auto" aria-hidden="true">
-            <svg class="absolute top-12 left-full transform translate-x-32" width="404" height="384" fill="none" viewBox="0 0 404 384">
-                <defs>
-                    <pattern id="74b3fd99-0a6f-4271-bef2-e80eeafdf357" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                        <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
-                    </pattern>
-                </defs>
-                <rect width="404" height="384" fill="url(#74b3fd99-0a6f-4271-bef2-e80eeafdf357)" />
-            </svg>
-            <svg class="absolute top-1/2 right-full transform -translate-y-1/2 -translate-x-32" width="404" height="384" fill="none" viewBox="0 0 404 384">
-                <defs>
-                    <pattern id="f210dbf6-a58d-4871-961e-36d5016a0f49" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                        <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
-                    </pattern>
-                </defs>
-                <rect width="404" height="384" fill="url(#f210dbf6-a58d-4871-961e-36d5016a0f49)" />
-            </svg>
-            <svg class="absolute bottom-12 left-full transform translate-x-32" width="404" height="384" fill="none" viewBox="0 0 404 384">
-                <defs>
-                    <pattern id="d3eb07ae-5182-43e6-857d-35c643af9034" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                        <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
-                    </pattern>
-                </defs>
-                <rect width="404" height="384" fill="url(#d3eb07ae-5182-43e6-857d-35c643af9034)" />
-            </svg>
-        </div>
+<div class="relative overflow-hidden bg-white py-16 dark:bg-gray-800">
+  <div class="hidden lg:absolute lg:inset-y-0 lg:block lg:h-full lg:w-full">
+    <div class="relative mx-auto h-full max-w-prose text-lg" aria-hidden="true">
+      <svg
+        class="absolute top-12 left-full translate-x-32 transform"
+        width="404"
+        height="384"
+        fill="none"
+        viewBox="0 0 404 384"
+      >
+        <defs>
+          <pattern
+            id="74b3fd99-0a6f-4271-bef2-e80eeafdf357"
+            x="0"
+            y="0"
+            width="20"
+            height="20"
+            patternUnits="userSpaceOnUse"
+          >
+            <rect
+              x="0"
+              y="0"
+              width="4"
+              height="4"
+              class="text-gray-200"
+              fill="currentColor"
+            />
+          </pattern>
+        </defs>
+        <rect
+          width="404"
+          height="384"
+          fill="url(#74b3fd99-0a6f-4271-bef2-e80eeafdf357)"
+        />
+      </svg>
+      <svg
+        class="absolute top-1/2 right-full -translate-y-1/2 -translate-x-32 transform"
+        width="404"
+        height="384"
+        fill="none"
+        viewBox="0 0 404 384"
+      >
+        <defs>
+          <pattern
+            id="f210dbf6-a58d-4871-961e-36d5016a0f49"
+            x="0"
+            y="0"
+            width="20"
+            height="20"
+            patternUnits="userSpaceOnUse"
+          >
+            <rect
+              x="0"
+              y="0"
+              width="4"
+              height="4"
+              class="text-gray-200"
+              fill="currentColor"
+            />
+          </pattern>
+        </defs>
+        <rect
+          width="404"
+          height="384"
+          fill="url(#f210dbf6-a58d-4871-961e-36d5016a0f49)"
+        />
+      </svg>
+      <svg
+        class="absolute bottom-12 left-full translate-x-32 transform"
+        width="404"
+        height="384"
+        fill="none"
+        viewBox="0 0 404 384"
+      >
+        <defs>
+          <pattern
+            id="d3eb07ae-5182-43e6-857d-35c643af9034"
+            x="0"
+            y="0"
+            width="20"
+            height="20"
+            patternUnits="userSpaceOnUse"
+          >
+            <rect
+              x="0"
+              y="0"
+              width="4"
+              height="4"
+              class="text-gray-200"
+              fill="currentColor"
+            />
+          </pattern>
+        </defs>
+        <rect
+          width="404"
+          height="384"
+          fill="url(#d3eb07ae-5182-43e6-857d-35c643af9034)"
+        />
+      </svg>
     </div>
-    <div class="relative px-4 sm:px-6 lg:px-8">
-        <div class="text-lg max-w-prose mx-auto">
-            <h2>
-                <span class="block text-base text-center text-blue-600 font-semibold tracking-wide uppercase">Introducing</span>
-                <span class="mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl">
-                    The story behind
-                </span>
-            </h2>
-            <p class="mt-8 text-xl text-gray-500 dark:text-gray-200 leading-8">
-                I am a software developer with a lot of hobbies, one of them is the weather.
-                So I got my own personal weather station and placed it on a good spot in my backyard.
-            </p>
-        </div>
-        <div class="mt-6 prose dark:prose-invert prose-blue prose-lg text-gray-500 dark:text-gray-200 mx-auto">
-            <p>
-                After a few months with the station gathering data, I was not quite happy about the way I could view
-                and analyze the data. My station supports CSV export or the direct transfer to a 3rd party, e.g.
-                <a href="https://www.wunderground.com/" target="_blank">www.wunderground.com</a>. But this was not I was
-                looking for.
-            </p>
-            <p>
-                What I was looking for, was a simple software to show me my station's data in a modern and nicely
-                visualized way, without the need to submit my data to a 3rd party.
-            </p>
-            <p>
-                So the idea of this app was born!
-            </p>
-
-            <h3>The Tech Stack</h3>
-            <p>
-                I was looking for a good use case for a few technologies I wanted to learn, and I felt that this could
-                work within a weather data analyzation tool. The app uses the following technologies:
-            </p>
-            <ul role="list">
-                <li>Electron</li>
-                <li>ReactJS</li>
-                <li>Carbon IBM Design System</li>
-                <li>nivo for the diagrams</li>
-                <li>Jekyll and tailwind.css for this webpage</li>
-            </ul>
-
-            <h3>Backing</h3>
-            <p>
-                This project is completely developed during my free time. It were half a year (and a lot of coffee,
-                obliviously) from the idea to the first alpha release. I decided to make this open source and free for
-                all, because I felt this could be something other owners of personal weather stations could find
-                useful.
-            </p>
-            <p>
-                So if you like and use Weather Data Center and want to see new features or give me a sign of
-                appreciation for creating this, please consider backing me for the work on WDC.
-            </p>
-            <p>
-                If you are a GitHub user you can sponsor me directly via
-                <a href="https://github.com/sponsors/Daveiano" target="_blank">GitHub</a>.
-            </p>
-            <p>
-                I am also using <a href="https://paypal.me/davidbaetge" target="_blank" rel="noopener">PayPal</a>.
-            </p>
-            <p>
-                And I also know about BTC: 1N32brRvSKse3LCQBechPi3wXG2KCnKuCQ
-            </p>
-            <figure>
-                <img src="http://api.qrserver.com/v1/create-qr-code/?color=000000&amp;bgcolor=FFFFFF&amp;data=1N32brRvSKse3LCQBechPi3wXG2KCnKuCQ&amp;qzone=0&amp;margin=0&amp;size=325x325&amp;ecc=M" alt="qr code" />
-            </figure>
-            <p>
-                You can also help me with starring the project on <a href="https://daveiano.github.io/weather-data-center/" target="_blank">GitHub</a>.
-            </p>
-            <!-- Place this tag where you want the button to render. -->
-            <a class="github-button" href="https://github.com/daveiano/weather-data-center" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star daveiano/weather-data-center on GitHub">Star</a>
-        </div>
+  </div>
+  <div class="relative px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-prose text-lg">
+      <h2>
+        <span
+          class="block text-center text-base font-semibold uppercase tracking-wide text-blue-600"
+          >Introducing</span
+        >
+        <span
+          class="mt-2 block text-center text-3xl font-extrabold leading-8 tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl"
+        >
+          The story behind
+        </span>
+      </h2>
+      <p class="mt-8 text-xl leading-8 text-gray-500 dark:text-gray-200">
+        I am a software developer with a lot of hobbies, one of them is the
+        weather. So I got my own personal weather station and placed it on a
+        good spot in my backyard.
+      </p>
     </div>
+    <div
+      class="prose prose-lg prose-blue mx-auto mt-6 text-gray-500 dark:prose-invert dark:text-gray-200"
+    >
+      <p>
+        After a few months with the station gathering data, I was not quite
+        happy about the way I could view and analyze the data. My station
+        supports CSV export or the direct transfer to a 3rd party, e.g.
+        <a href="https://www.wunderground.com/" target="_blank"
+          >www.wunderground.com</a
+        >. But this was not I was looking for.
+      </p>
+      <p>
+        What I was looking for, was a simple software to show me my station's
+        data in a modern and nicely visualized way, without the need to submit
+        my data to a 3rd party.
+      </p>
+      <p>So the idea of this app was born!</p>
+
+      <h3>The Tech Stack</h3>
+      <p>
+        I was looking for a good use case for a few technologies I wanted to
+        learn, and I felt that this could work within a weather data analyzation
+        tool. The app uses the following technologies:
+      </p>
+      <ul role="list">
+        <li>Electron</li>
+        <li>ReactJS</li>
+        <li>Carbon IBM Design System</li>
+        <li>nivo for the diagrams</li>
+        <li>Jekyll and tailwind.css for this webpage</li>
+      </ul>
+
+      <h3>Backing</h3>
+      <p>
+        This project is completely developed during my free time. It were half a
+        year (and a lot of coffee, obliviously) from the idea to the first alpha
+        release. I decided to make this open source and free for all, because I
+        felt this could be something other owners of personal weather stations
+        could find useful.
+      </p>
+      <p>
+        So if you like and use Weather Data Center and want to see new features
+        or give me a sign of appreciation for creating this, please consider
+        backing me for the work on WDC.
+      </p>
+      <p>
+        If you are a GitHub user you can sponsor me directly via
+        <a href="https://github.com/sponsors/Daveiano" target="_blank">GitHub</a
+        >.
+      </p>
+      <p>
+        I am also using
+        <a href="https://paypal.me/davidbaetge" target="_blank" rel="noopener"
+          >PayPal</a
+        >.
+      </p>
+      <p>And I also know about BTC: 1N32brRvSKse3LCQBechPi3wXG2KCnKuCQ</p>
+      <figure>
+        <img
+          src="http://api.qrserver.com/v1/create-qr-code/?color=000000&amp;bgcolor=FFFFFF&amp;data=1N32brRvSKse3LCQBechPi3wXG2KCnKuCQ&amp;qzone=0&amp;margin=0&amp;size=325x325&amp;ecc=M"
+          alt="qr code"
+        />
+      </figure>
+      <p>
+        You can also help me with starring the project on
+        <a
+          href="https://daveiano.github.io/weather-data-center/"
+          target="_blank"
+          >GitHub</a
+        >.
+      </p>
+      <!-- Place this tag where you want the button to render. -->
+      <a
+        class="github-button"
+        href="https://github.com/daveiano/weather-data-center"
+        data-color-scheme="no-preference: light; light: light; dark: dark;"
+        data-icon="octicon-star"
+        data-size="large"
+        data-show-count="true"
+        aria-label="Star daveiano/weather-data-center on GitHub"
+        >Star</a
+      >
+    </div>
+  </div>
 </div>
 <!--/Content-->
 
 <!-- CTA -->
 <!-- This example requires Tailwind CSS v2.0+ -->
 <div class="bg-blue-50 dark:bg-blue-600">
-    <div class="mx-auto py-12 px-4 sm:px-6 lg:py-24 lg:px-8 lg:flex lg:items-center lg:justify-between max-w-md sm:max-w-3xl lg:max-w-7xl">
-        <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white md:text-4xl">
-            <span class="block">Found a bug?</span>
-            <span class="block text-blue-600 dark:text-black">Or got an idea for a new feature?</span>
-        </h2>
-        <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
-            <div class="inline-flex rounded-md shadow">
-                <a target="_blank" href="https://github.com/Daveiano/weather-data-center/issues/new?assignees=&labels=&template=bug_report.md&title=%5BBUG%5D+%5BIssuetitle%5D" class="inline-flex items-center justify-center px-5 py-3 border border-transparent dark:border-white text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"> Bug report </a>
-            </div>
-            <div class="ml-3 inline-flex rounded-md shadow">
-                <a target="_blank" href="https://github.com/Daveiano/weather-data-center/issues/new?assignees=&labels=&template=feature_request.md&title=%5BFeature%5D+%5BIssuetitle%5D" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-blue-200 dark:hover:bg-blue-700 dark:hover:text-white dark:hover:border-white"> Feature request </a>
-            </div>
-        </div>
+  <div
+    class="mx-auto max-w-md py-12 px-4 sm:max-w-3xl sm:px-6 lg:flex lg:max-w-7xl lg:items-center lg:justify-between lg:py-24 lg:px-8"
+  >
+    <h2
+      class="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white md:text-4xl"
+    >
+      <span class="block">Found a bug?</span>
+      <span class="block text-blue-600 dark:text-black"
+        >Or got an idea for a new feature?</span
+      >
+    </h2>
+    <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
+      <div class="inline-flex rounded-md shadow">
+        <a
+          target="_blank"
+          href="https://github.com/Daveiano/weather-data-center/issues/new?assignees=&labels=&template=bug_report.md&title=%5BBUG%5D+%5BIssuetitle%5D"
+          class="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-5 py-3 text-base font-medium text-white hover:bg-blue-700 dark:border-white"
+        >
+          Bug report
+        </a>
+      </div>
+      <div class="ml-3 inline-flex rounded-md shadow">
+        <a
+          target="_blank"
+          href="https://github.com/Daveiano/weather-data-center/issues/new?assignees=&labels=&template=feature_request.md&title=%5BFeature%5D+%5BIssuetitle%5D"
+          class="inline-flex items-center justify-center rounded-md border border-transparent bg-white px-5 py-3 text-base font-medium text-blue-600 hover:bg-blue-200 dark:hover:border-white dark:hover:bg-blue-700 dark:hover:text-white"
+        >
+          Feature request
+        </a>
+      </div>
     </div>
+  </div>
 </div>
 <!-- /CTA -->
 
@@ -175,60 +304,159 @@ title: "About"
   }
   ```
 -->
-<div class="bg-white dark:bg-gray-800 py-16 px-4 overflow-hidden sm:px-6 lg:px-8 lg:py-24">
-    <div class="relative max-w-xl mx-auto">
-        <svg class="absolute left-full transform translate-x-1/2" width="404" height="404" fill="none" viewBox="0 0 404 404" aria-hidden="true">
-            <defs>
-                <pattern id="85737c0e-0916-41d7-917f-596dc7edfa27" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                    <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
-                </pattern>
-            </defs>
-            <rect width="404" height="404" fill="url(#85737c0e-0916-41d7-917f-596dc7edfa27)" />
-        </svg>
-        <svg class="absolute right-full bottom-0 transform -translate-x-1/2" width="404" height="404" fill="none" viewBox="0 0 404 404" aria-hidden="true">
-            <defs>
-                <pattern id="85737c0e-0916-41d7-917f-596dc7edfa27" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                    <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
-                </pattern>
-            </defs>
-            <rect width="404" height="404" fill="url(#85737c0e-0916-41d7-917f-596dc7edfa27)" />
-        </svg>
-        <div class="text-center">
-            <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl">Contact</h2>
-            <p class="mt-4 text-lg leading-6 text-gray-500 dark:text-gray-300">
-                Got a question that is not answered on this page? Or do you have an idea for the project? Please contact
-                us!
-            </p>
-        </div>
-        <div class="mt-12">
-            <form id="contactForm" action="https://formspree.io/f/xrgjqeja" method="POST" class="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
-                <div class="sm:col-span-2">
-                    <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
-                    <div class="mt-1">
-                        <input type="text" name="name" id="name" autocomplete="name" class="py-3 px-4 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 border-gray-300 rounded-md">
-                    </div>
-                </div>
-                <div class="sm:col-span-2">
-                    <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
-                    <div class="mt-1">
-                        <input id="email" required name="email" type="email" autocomplete="email" class="py-3 px-4 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 border-gray-300 rounded-md">
-                    </div>
-                </div>
-                <div class="sm:col-span-2">
-                    <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Message</label>
-                    <div class="mt-1">
-                        <textarea id="message" required name="message" rows="4" class="py-3 px-4 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 border border-gray-300 rounded-md"></textarea>
-                    </div>
-                </div>
-                <div class="sm:col-span-2">
-                    <button class="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:blue-blue-500">Get in touch</button>
-                </div>
-                <div class="sm:col-span-2">
-                    <p id="my-form-status" class="rounded bg-green-300 text-green-800 p-4 hidden"></p>
-                </div>
-            </form>
-        </div>
+<div
+  class="overflow-hidden bg-white py-16 px-4 dark:bg-gray-800 sm:px-6 lg:px-8 lg:py-24"
+>
+  <div class="relative mx-auto max-w-xl">
+    <svg
+      class="absolute left-full translate-x-1/2 transform"
+      width="404"
+      height="404"
+      fill="none"
+      viewBox="0 0 404 404"
+      aria-hidden="true"
+    >
+      <defs>
+        <pattern
+          id="85737c0e-0916-41d7-917f-596dc7edfa27"
+          x="0"
+          y="0"
+          width="20"
+          height="20"
+          patternUnits="userSpaceOnUse"
+        >
+          <rect
+            x="0"
+            y="0"
+            width="4"
+            height="4"
+            class="text-gray-200"
+            fill="currentColor"
+          />
+        </pattern>
+      </defs>
+      <rect
+        width="404"
+        height="404"
+        fill="url(#85737c0e-0916-41d7-917f-596dc7edfa27)"
+      />
+    </svg>
+    <svg
+      class="absolute right-full bottom-0 -translate-x-1/2 transform"
+      width="404"
+      height="404"
+      fill="none"
+      viewBox="0 0 404 404"
+      aria-hidden="true"
+    >
+      <defs>
+        <pattern
+          id="85737c0e-0916-41d7-917f-596dc7edfa27"
+          x="0"
+          y="0"
+          width="20"
+          height="20"
+          patternUnits="userSpaceOnUse"
+        >
+          <rect
+            x="0"
+            y="0"
+            width="4"
+            height="4"
+            class="text-gray-200"
+            fill="currentColor"
+          />
+        </pattern>
+      </defs>
+      <rect
+        width="404"
+        height="404"
+        fill="url(#85737c0e-0916-41d7-917f-596dc7edfa27)"
+      />
+    </svg>
+    <div class="text-center">
+      <h2
+        class="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl"
+      >
+        Contact
+      </h2>
+      <p class="mt-4 text-lg leading-6 text-gray-500 dark:text-gray-300">
+        Got a question that is not answered on this page? Or do you have an idea
+        for the project? Please contact us!
+      </p>
     </div>
+    <div class="mt-12">
+      <form
+        id="contactForm"
+        action="https://formspree.io/f/xrgjqeja"
+        method="POST"
+        class="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"
+      >
+        <div class="sm:col-span-2">
+          <label
+            for="name"
+            class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+            >Name</label
+          >
+          <div class="mt-1">
+            <input
+              type="text"
+              name="name"
+              id="name"
+              autocomplete="name"
+              class="block w-full rounded-md border-gray-300 py-3 px-4 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            />
+          </div>
+        </div>
+        <div class="sm:col-span-2">
+          <label
+            for="email"
+            class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+            >Email</label
+          >
+          <div class="mt-1">
+            <input
+              id="email"
+              required
+              name="email"
+              type="email"
+              autocomplete="email"
+              class="block w-full rounded-md border-gray-300 py-3 px-4 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            />
+          </div>
+        </div>
+        <div class="sm:col-span-2">
+          <label
+            for="message"
+            class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+            >Message</label
+          >
+          <div class="mt-1">
+            <textarea
+              id="message"
+              required
+              name="message"
+              rows="4"
+              class="block w-full rounded-md border border-gray-300 py-3 px-4 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            ></textarea>
+          </div>
+        </div>
+        <div class="sm:col-span-2">
+          <button
+            class="focus:blue-blue-500 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2"
+          >
+            Get in touch
+          </button>
+        </div>
+        <div class="sm:col-span-2">
+          <p
+            id="my-form-status"
+            class="hidden rounded bg-green-300 p-4 text-green-800"
+          ></p>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 <script>
   var form = document.getElementById("contactForm");
@@ -241,34 +469,39 @@ title: "About"
       method: form.method,
       body: data,
       headers: {
-        'Accept': 'application/json'
-      }
-    }).then(response => {
-      if (response.ok) {
-        status.innerHTML = "Thanks for your submission!";
-        status.classList.add('bg-green-300', 'text-green-800');
-        status.classList.remove('bg-red-300', 'text-red-800');
-        status.classList.remove('hidden');
-        form.reset()
-      } else {
-        response.json().then(data => {
-          if (Object.hasOwn(data, 'errors')) {
-            status.innerHTML = data["errors"].map(error => error["message"]).join(", ")
-            status.classList.remove('hidden');
-            status.classList.remove('bg-green-300', 'text-green-800');
-            status.classList.add('bg-red-300', 'text-red-800');
-          } else {
-            status.innerHTML = "Oops! There was a problem submitting your form"
-            status.classList.remove('hidden');
-            status.classList.remove('bg-green-300', 'text-green-800');
-            status.classList.add('bg-red-300', 'text-red-800');
-          }
-        })
-      }
-    }).catch(error => {
-      status.innerHTML = "Oops! There was a problem submitting your form"
-    });
+        Accept: "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          status.innerHTML = "Thanks for your submission!";
+          status.classList.add("bg-green-300", "text-green-800");
+          status.classList.remove("bg-red-300", "text-red-800");
+          status.classList.remove("hidden");
+          form.reset();
+        } else {
+          response.json().then((data) => {
+            if (Object.hasOwn(data, "errors")) {
+              status.innerHTML = data["errors"]
+                .map((error) => error["message"])
+                .join(", ");
+              status.classList.remove("hidden");
+              status.classList.remove("bg-green-300", "text-green-800");
+              status.classList.add("bg-red-300", "text-red-800");
+            } else {
+              status.innerHTML =
+                "Oops! There was a problem submitting your form";
+              status.classList.remove("hidden");
+              status.classList.remove("bg-green-300", "text-green-800");
+              status.classList.add("bg-red-300", "text-red-800");
+            }
+          });
+        }
+      })
+      .catch((error) => {
+        status.innerHTML = "Oops! There was a problem submitting your form";
+      });
   }
-  form.addEventListener("submit", handleSubmit)
+  form.addEventListener("submit", handleSubmit);
 </script>
 <!--/Contact-->

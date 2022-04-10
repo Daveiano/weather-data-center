@@ -6,7 +6,7 @@ name: Build & release
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
 
 jobs:
   release:
@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ macos-latest, ubuntu-latest, windows-latest ]
+        os: [macos-latest, ubuntu-latest, windows-latest]
 
     steps:
       - name: 🔨 install dependencies (Linux)
@@ -30,7 +30,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           always-auth: true
-          node-version: '14'
+          node-version: "14"
 
       - name: 🔨 install yarn and dependecies
         run: |

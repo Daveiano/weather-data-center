@@ -1,35 +1,37 @@
-import { dataItem } from './types';
+import { dataItem } from "./types";
 import moment from "moment";
-import type {AxisProps} from "@nivo/axes";
+import type { AxisProps } from "@nivo/axes";
 
 export type dateTimeElement = {
-  time: number,
-  date: string,
-  values: number[]
-}
+  time: number;
+  date: string;
+  values: number[];
+};
 
-export type propertyParameter = 'humidity' |
-  'pressure' |
-  'temperature' |
-  'rain' |
-  'solar' |
-  'uvi' |
-  'wind' |
-  'gust' |
-  'wind_direction' |
-  'dew_point' |
-  'felt_temperature';
+export type propertyParameter =
+  | "humidity"
+  | "pressure"
+  | "temperature"
+  | "rain"
+  | "solar"
+  | "uvi"
+  | "wind"
+  | "gust"
+  | "wind_direction"
+  | "dew_point"
+  | "felt_temperature";
 
-export type extendedPropertyParameter = propertyParameter |
-  'timeParsed' |
-  'temperature_min' |
-  'temperature_max' |
-  'temperature_average';
+export type extendedPropertyParameter =
+  | propertyParameter
+  | "timeParsed"
+  | "temperature_min"
+  | "temperature_max"
+  | "temperature_average";
 
-export type Precision = 'day' | 'week' | 'month' | 'year';
+export type Precision = "day" | "week" | "month" | "year";
 
 interface Dates {
-  [key: string]: dateTimeElement
+  [key: string]: dateTimeElement;
 }
 
 /**
@@ -44,28 +46,22 @@ export const getTimeAxisScaling = (data: dataItem[]): AxisProps => {
   if (timeDifferenceInDays <= 2) {
     axisBottom.format = "%H:%M";
     axisBottom.tickValues = "every 6 hours";
-  }
-  else if (timeDifferenceInDays <= 6) {
+  } else if (timeDifferenceInDays <= 6) {
     axisBottom.format = "%d %b";
     axisBottom.tickValues = "every day";
-  }
-  else if (timeDifferenceInDays <= 20) {
+  } else if (timeDifferenceInDays <= 20) {
     axisBottom.format = "%d %b";
     axisBottom.tickValues = "every 2 days";
-  }
-  else if (timeDifferenceInDays <= 40) {
+  } else if (timeDifferenceInDays <= 40) {
     axisBottom.format = "%d %b";
     axisBottom.tickValues = "every 5 days";
-  }
-  else if (timeDifferenceInDays <= 80) {
+  } else if (timeDifferenceInDays <= 80) {
     axisBottom.format = "%d %b";
     axisBottom.tickValues = "every 10 days";
-  }
-  else if (timeDifferenceInDays <= 300) {
+  } else if (timeDifferenceInDays <= 300) {
     axisBottom.format = "%b %y";
     axisBottom.tickValues = "every month";
-  }
-  else {
+  } else {
     axisBottom.format = "%b %y";
     axisBottom.tickValues = "every 2 months";
   }
@@ -103,7 +99,7 @@ export const getTimeDifferenceInDays = (data: dataItem[]): number => {
   const firstDate = moment.unix(data[0].time),
     lastDate = moment.unix(data[data.length - 1].time);
 
-  return lastDate.diff(firstDate, 'days');
+  return lastDate.diff(firstDate, "days");
 };
 
 /**
@@ -112,19 +108,27 @@ export const getTimeDifferenceInDays = (data: dataItem[]): number => {
  * @param dateItem The Element to scale.
  * @param method The method to use.
  */
-export const calculateScaling = (dateItem: dateTimeElement, method: 'max' | 'average' | 'sum' | 'min'): string | number => {
+export const calculateScaling = (
+  dateItem: dateTimeElement,
+  method: "max" | "average" | "sum" | "min"
+): string | number => {
   switch (method) {
-    case 'max': {
+    case "max": {
       return Math.max(...dateItem.values);
     }
-    case 'min': {
+    case "min": {
       return Math.min(...dateItem.values);
     }
-    case 'average': {
-      return (dateItem.values.reduce((a: number, b: number) => a + b, 0) / dateItem.values.length).toFixed(1);
+    case "average": {
+      return (
+        dateItem.values.reduce((a: number, b: number) => a + b, 0) /
+        dateItem.values.length
+      ).toFixed(1);
     }
-    case 'sum': {
-      return (dateItem.values.reduce((a: number, b: number) => a + b, 0)).toFixed(1);
+    case "sum": {
+      return dateItem.values
+        .reduce((a: number, b: number) => a + b, 0)
+        .toFixed(1);
     }
   }
 };
@@ -136,7 +140,11 @@ export const calculateScaling = (dateItem: dateTimeElement, method: 'max' | 'ave
  * @param property The data property, eg. temperature.
  * @param precision The precision to use.
  */
-export const bundleData = (data: dataItem[], property: propertyParameter, precision?: Precision): Dates => {
+export const bundleData = (
+  data: dataItem[],
+  property: propertyParameter,
+  precision?: Precision
+): Dates => {
   let dates: Dates = {};
 
   // Loop over all date elements and create an object to hold all data per day.
@@ -144,20 +152,20 @@ export const bundleData = (data: dataItem[], property: propertyParameter, precis
     let date: string;
 
     switch (precision) {
-      case 'week': {
-        date = moment.unix(data[key].time).utc().format('WWYYYY');
+      case "week": {
+        date = moment.unix(data[key].time).utc().format("WWYYYY");
         break;
       }
-      case 'month': {
-        date = moment.unix(data[key].time).utc().format('MMYYYY');
+      case "month": {
+        date = moment.unix(data[key].time).utc().format("MMYYYY");
         break;
       }
-      case 'year': {
-        date = moment.unix(data[key].time).utc().format('YYYY');
+      case "year": {
+        date = moment.unix(data[key].time).utc().format("YYYY");
         break;
       }
       default: {
-        date = moment.unix(data[key].time).utc().format('DDMMYYYY');
+        date = moment.unix(data[key].time).utc().format("DDMMYYYY");
       }
     }
 
@@ -167,17 +175,17 @@ export const bundleData = (data: dataItem[], property: propertyParameter, precis
         [date]: {
           date: date,
           time: data[key].time,
-          values: []
-        }
+          values: [],
+        },
       };
     }
 
     // Add all values of the day.
-    dates[date].values = [ ...dates[date].values, data[key][property] ];
+    dates[date].values = [...dates[date].values, data[key][property]];
   }
 
   return dates;
-}
+};
 
 /**
  * Build scaled data from input data.
@@ -187,25 +195,37 @@ export const bundleData = (data: dataItem[], property: propertyParameter, precis
  * @param method The scaling method.
  * @param precision The precision to use.
  */
-export const scale = (data: dataItem[], property: propertyParameter, method: 'max' | 'average' | 'sum' | 'min', precision?: Precision): dataItem[] => {
+export const scale = (
+  data: dataItem[],
+  property: propertyParameter,
+  method: "max" | "average" | "sum" | "min",
+  precision?: Precision
+): dataItem[] => {
   let newData: dataItem[] = [];
 
   const dates = bundleData(data, property, precision);
 
   // Create the needed structure.
   for (const [key, dateItem] of Object.entries(dates)) {
-    newData = [...newData, {
-      time: dateItem.time,
-      timeParsed: moment.unix(dateItem.time).toISOString(),
-      [property]: calculateScaling(dateItem, method),
-      id: key.toString(),
-      _id: key
-    }];
+    newData = [
+      ...newData,
+      {
+        time: dateItem.time,
+        timeParsed: moment.unix(dateItem.time).toISOString(),
+        [property]: calculateScaling(dateItem, method),
+        id: key.toString(),
+        _id: key,
+      },
+    ];
   }
 
   // Sort by date.
   newData.sort((a: { timeParsed: string }, b: { timeParsed: string }) => {
-    return (a.timeParsed < b.timeParsed) ? -1 : ((a.timeParsed > b.timeParsed) ? 1 : 0);
+    return a.timeParsed < b.timeParsed
+      ? -1
+      : a.timeParsed > b.timeParsed
+      ? 1
+      : 0;
   });
 
   return newData;
@@ -218,13 +238,12 @@ export const scale = (data: dataItem[], property: propertyParameter, method: 'ma
  * @param property The property to process.
  * @param precision The precision to use.
  */
-export const scaleAverage = (data: dataItem[], property: propertyParameter, precision: Precision): dataItem[] => {
-  return scale(
-    data,
-    property,
-    'average',
-    precision
-  );
+export const scaleAverage = (
+  data: dataItem[],
+  property: propertyParameter,
+  precision: Precision
+): dataItem[] => {
+  return scale(data, property, "average", precision);
 };
 
 /**
@@ -234,14 +253,13 @@ export const scaleAverage = (data: dataItem[], property: propertyParameter, prec
  * @param property The data property, e.g. temperature.
  * @param precision The precision to use.
  */
-export const scaleMin = (data: dataItem[], property: propertyParameter, precision: Precision): dataItem[] => {
-  return scale(
-    data,
-    property,
-    'min',
-    precision
-  );
-}
+export const scaleMin = (
+  data: dataItem[],
+  property: propertyParameter,
+  precision: Precision
+): dataItem[] => {
+  return scale(data, property, "min", precision);
+};
 
 /**
  * Shortcut for max scaling.
@@ -250,14 +268,13 @@ export const scaleMin = (data: dataItem[], property: propertyParameter, precisio
  * @param property The data property, e.g. temperature.
  * @param precision The precision to use.
  */
-export const scaleMax = (data: dataItem[], property: propertyParameter, precision: Precision): dataItem[] => {
-  return scale(
-    data,
-    property,
-    'max',
-    precision
-  );
-}
+export const scaleMax = (
+  data: dataItem[],
+  property: propertyParameter,
+  precision: Precision
+): dataItem[] => {
+  return scale(data, property, "max", precision);
+};
 
 /**
  * Shortcut for sum scaling.
@@ -266,14 +283,13 @@ export const scaleMax = (data: dataItem[], property: propertyParameter, precisio
  * @param property The data property, e.g. temperature.
  * @param precision The precision to use.
  */
-export const scaleSum = (data: dataItem[], property: propertyParameter, precision: 'week' | 'month' | 'year'): dataItem[] => {
-  return scale(
-    scale(data, property, 'max', 'day'),
-    property,
-    'sum',
-    precision
-  );
-}
+export const scaleSum = (
+  data: dataItem[],
+  property: propertyParameter,
+  precision: "week" | "month" | "year"
+): dataItem[] => {
+  return scale(scale(data, property, "max", "day"), property, "sum", precision);
+};
 
 /**
  * Shortcut for scaling min, max and average in one call.
@@ -282,28 +298,39 @@ export const scaleSum = (data: dataItem[], property: propertyParameter, precisio
  * @param property The data property, e.g. temperature.
  * @param precision The precision to use.
  */
-export const scaleMinMaxAvg = (data: dataItem[], property: propertyParameter, precision: Precision): dataItem[] => {
+export const scaleMinMaxAvg = (
+  data: dataItem[],
+  property: propertyParameter,
+  precision: Precision
+): dataItem[] => {
   let newData: dataItem[] = [];
 
   const dates = bundleData(data, property, precision);
 
   // Create the needed structure.
   for (const [key, dateItem] of Object.entries(dates)) {
-    newData = [...newData, {
-      time: dateItem.time,
-      timeParsed: moment.unix(dateItem.time).toISOString(),
-      [`${property}_min`]: calculateScaling(dateItem, 'min'),
-      [`${property}_max`]: calculateScaling(dateItem, 'max'),
-      [`${property}_average`]: calculateScaling(dateItem, 'average'),
-      id: key.toString(),
-      _id: key
-    }];
+    newData = [
+      ...newData,
+      {
+        time: dateItem.time,
+        timeParsed: moment.unix(dateItem.time).toISOString(),
+        [`${property}_min`]: calculateScaling(dateItem, "min"),
+        [`${property}_max`]: calculateScaling(dateItem, "max"),
+        [`${property}_average`]: calculateScaling(dateItem, "average"),
+        id: key.toString(),
+        _id: key,
+      },
+    ];
   }
 
   // Sort by date.
   newData.sort((a: { timeParsed: string }, b: { timeParsed: string }) => {
-    return (a.timeParsed < b.timeParsed) ? -1 : ((a.timeParsed > b.timeParsed) ? 1 : 0);
+    return a.timeParsed < b.timeParsed
+      ? -1
+      : a.timeParsed > b.timeParsed
+      ? 1
+      : 0;
   });
 
   return newData;
-}
+};

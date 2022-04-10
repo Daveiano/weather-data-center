@@ -3,7 +3,7 @@ name: Build and deploy Jekyll site to GitHub Pages
 on:
   push:
     paths:
-      - 'docs/**'
+      - "docs/**"
     branches:
       - 1.x
 
@@ -21,7 +21,7 @@ jobs:
       - name: 🔨 setup node
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: "14"
 
       - name: 🔨 install Yarn and dependecies
         working-directory: ./docs
@@ -40,7 +40,7 @@ jobs:
         with:
           enable_cache: true
           jekyll_src: ./docs
-          custom_opts: '--trace'
+          custom_opts: "--trace"
 
       - name: 🚀 deploy
         uses: peaceiris/actions-gh-pages@v3
@@ -48,7 +48,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: ./_site
-          exclude_assets: '.github,package.json,yarn.lock,postcss.config.js,tailwind.config.js'
+          exclude_assets: ".github,package.json,yarn.lock,postcss.config.js,tailwind.config.js"
 
       - name: 🔨 uninstall Yarn
         if: always()

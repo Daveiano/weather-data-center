@@ -1,27 +1,33 @@
-import React, { useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
+import React, { useEffect } from "react";
+import { Route, Switch } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-import { Loading, Grid, Row, Column } from 'carbon-components-react';
+import { Loading, Grid, Row, Column } from "carbon-components-react";
 import moment from "moment";
 
-import { AppHeader } from './components/app-header';
-import { StartPage } from './pages/start';
+import { AppHeader } from "./components/app-header";
+import { StartPage } from "./pages/start";
 import { TemperaturePage } from "./pages/temperature";
-import {PrecipitationPage} from "./pages/precipitation";
-import {PressurePage} from "./pages/pressure";
-import {WindPage} from "./pages/wind";
-import {SolarPage} from "./pages/solar";
-import {DataBasePage} from "./pages/database";
+import { PrecipitationPage } from "./pages/precipitation";
+import { PressurePage } from "./pages/pressure";
+import { WindPage } from "./pages/wind";
+import { SolarPage } from "./pages/solar";
+import { DataBasePage } from "./pages/database";
 import { RootState } from "./renderer";
 import { dataItem } from "./diagrams/types";
-import { dataAction, dataFilteredPerTimeAction, isLoadingAction } from "./actions-app";
+import {
+  dataAction,
+  dataFilteredPerTimeAction,
+  isLoadingAction,
+} from "./actions-app";
 
 export const App: React.FC = (): React.ReactElement => {
   const loading = useSelector((state: RootState) => state.appState.loading);
 
   const dataFromStore = useSelector((state: RootState) => state.appState.data);
-  const dateSetByUser = useSelector((state: RootState) => state.appState.dateSetByUser);
+  const dateSetByUser = useSelector(
+    (state: RootState) => state.appState.dateSetByUser
+  );
 
   const dispatch = useDispatch();
 
@@ -33,10 +39,13 @@ export const App: React.FC = (): React.ReactElement => {
   // Get data from electron.
   useEffect(() => {
     dispatch(isLoadingAction(true));
-    const removeEventListener = window.electron.IpcOn('query-data', (event, arg) => getData(arg));
+    const removeEventListener = window.electron.IpcOn(
+      "query-data",
+      (event, arg) => getData(arg)
+    );
 
     if (!dataFromStore.length) {
-      window.electron.IpcSend('query-data', null);
+      window.electron.IpcSend("query-data", null);
     } else {
       dispatch(isLoadingAction(false));
     }
@@ -47,10 +56,17 @@ export const App: React.FC = (): React.ReactElement => {
   }, []);
 
   const filterDataPerTime = (): void => {
-    const startDate = moment(dateSetByUser.start, 'DD-MM-YYYY').set({ hour: 0, minute: 0, second: 0 }).unix();
-    const endDate = moment(dateSetByUser.end, 'DD-MM-YYYY').set({ hour: 23, minute: 59, second: 59 }).unix();
+    const startDate = moment(dateSetByUser.start, "DD-MM-YYYY")
+      .set({ hour: 0, minute: 0, second: 0 })
+      .unix();
+    const endDate = moment(dateSetByUser.end, "DD-MM-YYYY")
+      .set({ hour: 23, minute: 59, second: 59 })
+      .unix();
 
-    const filteredData = dataFromStore.filter((dataItem: dataItem) => dataItem.time >= startDate && dataItem.time <= endDate);
+    const filteredData = dataFromStore.filter(
+      (dataItem: dataItem) =>
+        dataItem.time >= startDate && dataItem.time <= endDate
+    );
 
     dispatch(dataFilteredPerTimeAction(filteredData));
     dispatch(isLoadingAction(false));
@@ -66,13 +82,13 @@ export const App: React.FC = (): React.ReactElement => {
 
   return (
     <main>
-      {loading &&
+      {loading && (
         <Loading
           data-testid="main-loading"
           description="Active loading indicator"
           withOverlay={true}
         />
-      }
+      )}
 
       <AppHeader />
 
@@ -93,7 +109,6 @@ export const App: React.FC = (): React.ReactElement => {
           </Row>
         </Grid>
       </section>
-
     </main>
   );
-}
+};

@@ -1,32 +1,43 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from "react";
 
-import { Column, ContentSwitcher, Loading, Row, Switch, Tile } from "carbon-components-react";
-import { ResponsiveLine } from '@nivo/line'
+import {
+  Column,
+  ContentSwitcher,
+  Loading,
+  Row,
+  Switch,
+  Tile,
+} from "carbon-components-react";
+import { ResponsiveLine } from "@nivo/line";
 import { TemperatureMax32, TemperatureMin32 } from "@carbon/icons-react";
 
 import { dataItem, DiagramBaseProps } from "../types";
 import { scaleMinMaxAvg } from "../scaling";
-import { getTemperatureLineBaseProps } from './temperature-base';
+import { getTemperatureLineBaseProps } from "./temperature-base";
 import TableBase from "../../components/table-base/table-base";
 import { TABLE_SORT_DIRECTION } from "../../components/table-base/misc";
 import { withEmptyCheck } from "../hoc";
 
-const TemperatureMinMaxBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
-  const [data, setData] = useState(scaleMinMaxAvg(props.data, 'temperature', 'day'));
+const TemperatureMinMaxBase: FunctionComponent<DiagramBaseProps> = (
+  props: DiagramBaseProps
+): React.ReactElement => {
+  const [data, setData] = useState(
+    scaleMinMaxAvg(props.data, "temperature", "day")
+  );
   const [loading, setLoading] = useState(true);
-  const [precision, setPrecision] = useState('daily');
+  const [precision, setPrecision] = useState("daily");
   const [hiddenSeries, setHiddenSeries] = useState([]);
 
   const scale = () => {
     switch (precision) {
-      case 'daily':
-        setData(scaleMinMaxAvg(props.data, 'temperature', 'day'));
+      case "daily":
+        setData(scaleMinMaxAvg(props.data, "temperature", "day"));
         break;
-      case 'monthly':
-        setData(scaleMinMaxAvg(props.data, 'temperature', 'month'));
+      case "monthly":
+        setData(scaleMinMaxAvg(props.data, "temperature", "month"));
         break;
-      case 'yearly':
-        setData(scaleMinMaxAvg(props.data, 'temperature', 'year'));
+      case "yearly":
+        setData(scaleMinMaxAvg(props.data, "temperature", "year"));
         break;
     }
 
@@ -40,11 +51,14 @@ const TemperatureMinMaxBase:FunctionComponent<DiagramBaseProps> = (props: Diagra
 
   if (loading) {
     return (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <Loading
-          description="Active loading indicator"
-          withOverlay={false}
-        />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Loading description="Active loading indicator" withOverlay={false} />
       </div>
     );
   }
@@ -59,12 +73,10 @@ const TemperatureMinMaxBase:FunctionComponent<DiagramBaseProps> = (props: Diagra
 
       <Row>
         <Column sm={6} lg={6} max={6}>
-          <ContentSwitcher
-            size="md"
-          >
-            <Switch text='Daily' onClick={() => setPrecision('daily')} />
-            <Switch text='Monthly' onClick={() => setPrecision('monthly')} />
-            <Switch text='Yearly' onClick={() => setPrecision('yearly')} />
+          <ContentSwitcher size="md">
+            <Switch text="Daily" onClick={() => setPrecision("daily")} />
+            <Switch text="Monthly" onClick={() => setPrecision("monthly")} />
+            <Switch text="Yearly" onClick={() => setPrecision("yearly")} />
           </ContentSwitcher>
         </Column>
       </Row>
@@ -77,46 +89,46 @@ const TemperatureMinMaxBase:FunctionComponent<DiagramBaseProps> = (props: Diagra
             pageSizes={[20]}
             rows={data.map((item: dataItem) => ({
               ...item,
-              selected: false
+              selected: false,
             }))}
             columns={[
               {
-                title: 'Time',
-                id: 'timeParsed',
-                tooltip: 'Date format is YYYY/MM/DD HH:mm',
-                sortCycle: 'tri-states-from-ascending',
+                title: "Time",
+                id: "timeParsed",
+                tooltip: "Date format is YYYY/MM/DD HH:mm",
+                sortCycle: "tri-states-from-ascending",
               },
               {
-                title: 'Minimum',
+                title: "Minimum",
                 small: `in ${props.config.unit_temperature}`,
-                id: 'temperature_min',
-                sortCycle: 'tri-states-from-ascending',
+                id: "temperature_min",
+                sortCycle: "tri-states-from-ascending",
               },
               {
-                title: 'Average',
+                title: "Average",
                 small: `in ${props.config.unit_temperature}`,
-                id: 'temperature_average',
-                sortCycle: 'tri-states-from-ascending',
+                id: "temperature_average",
+                sortCycle: "tri-states-from-ascending",
               },
               {
-                title: 'Maximum',
+                title: "Maximum",
                 small: `in ${props.config.unit_temperature}`,
-                id: 'temperature_max',
-                sortCycle: 'tri-states-from-ascending',
+                id: "temperature_max",
+                sortCycle: "tri-states-from-ascending",
               },
             ]}
             hasSelection={false}
             sortInfo={{
-              columnId: 'timeParsed',
+              columnId: "timeParsed",
               direction: TABLE_SORT_DIRECTION.ASC,
             }}
             size="short"
             dateFormat={(() => {
-              switch(precision) {
+              switch (precision) {
                 case "daily":
                   return "YYYY/MM/DD";
                 case "monthly":
-                  return "YYYY/MM"
+                  return "YYYY/MM";
                 case "yearly":
                   return "YYYY";
               }
@@ -130,63 +142,72 @@ const TemperatureMinMaxBase:FunctionComponent<DiagramBaseProps> = (props: Diagra
                 {...getTemperatureLineBaseProps(
                   precision,
                   [
-                    ...data.map(item => Object.assign({}, item, {
-                      temperature: item.temperature_max
-                    })),
-                    ...data.map(item => Object.assign({}, item, {
-                      temperature: item.temperature_min
-                    })),
+                    ...data.map((item) =>
+                      Object.assign({}, item, {
+                        temperature: item.temperature_max,
+                      })
+                    ),
+                    ...data.map((item) =>
+                      Object.assign({}, item, {
+                        temperature: item.temperature_min,
+                      })
+                    ),
                   ],
-                  'temperature',
+                  "temperature",
                   true,
                   props.config.unit_temperature
                 )}
                 data={[
                   {
-                    id: 'Minimum',
-                    data: data.map(item => ({
+                    id: "Minimum",
+                    data: data.map((item) => ({
                       x: item.timeParsed,
-                      y: item.temperature_min
+                      y: item.temperature_min,
                     })),
-                    color: hiddenSeries.includes('Minimum') ? 'transparent' : '#67C8FF'
+                    color: hiddenSeries.includes("Minimum")
+                      ? "transparent"
+                      : "#67C8FF",
                   },
                   {
-                    id: 'Average',
-                    data: data.map(item => ({
+                    id: "Average",
+                    data: data.map((item) => ({
                       x: item.timeParsed,
-                      y: item.temperature_average
+                      y: item.temperature_average,
                     })),
-                    color: hiddenSeries.includes('Average') ? 'transparent' : '#000000'
+                    color: hiddenSeries.includes("Average")
+                      ? "transparent"
+                      : "#000000",
                   },
                   {
-                    id: 'Maximum',
-                    data: data.map(item => ({
+                    id: "Maximum",
+                    data: data.map((item) => ({
                       x: item.timeParsed,
-                      y: item.temperature_max
+                      y: item.temperature_max,
                     })),
-                    color: hiddenSeries.includes('Maximum') ? 'transparent' : '#C41E3A'
-                  }
+                    color: hiddenSeries.includes("Maximum")
+                      ? "transparent"
+                      : "#C41E3A",
+                  },
                 ]}
-                colors={d => d.color}
+                colors={(d) => d.color}
                 legends={[
                   {
-                    anchor: 'top-right',
-                    direction: 'row',
+                    anchor: "top-right",
+                    direction: "row",
                     itemWidth: 70,
                     itemHeight: 20,
                     itemsSpacing: 20,
                     onClick: (d) => {
                       let hidden = hiddenSeries;
                       if (hidden.includes(d.id)) {
-                        hidden = hidden.filter(item => item != d.id);
-                      }
-                      else {
+                        hidden = hidden.filter((item) => item != d.id);
+                      } else {
                         hidden = [...hidden, d.id];
                       }
 
                       setHiddenSeries(hidden);
-                    }
-                  }
+                    },
+                  },
                 ]}
                 margin={{ top: 10, right: 10, bottom: 20, left: 40 }}
               />
@@ -194,7 +215,6 @@ const TemperatureMinMaxBase:FunctionComponent<DiagramBaseProps> = (props: Diagra
           </Tile>
         </Column>
       </Row>
-
     </div>
   );
 };

@@ -1,15 +1,17 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from "react";
 
 import { Loading } from "carbon-components-react";
 import { Temperature32 } from "@carbon/icons-react";
-import { ResponsiveLine} from '@nivo/line'
+import { ResponsiveLine } from "@nivo/line";
 
 import { dataItem, DiagramBaseProps } from "../types";
 import { getTimeDifferenceInDays, scaleAverage } from "../scaling";
 import { getTemperatureLineBaseProps } from "./temperature-base";
 import { withEmptyCheck } from "../hoc";
 
-const TemperatureCombinedBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
+const TemperatureCombinedBase: FunctionComponent<DiagramBaseProps> = (
+  props: DiagramBaseProps
+): React.ReactElement => {
   const [dataTemp, setDataTemp] = useState([]);
   const [dataDew, setDataDew] = useState([]);
   const [dataFelt, setDataFelt] = useState([]);
@@ -27,9 +29,9 @@ const TemperatureCombinedBase:FunctionComponent<DiagramBaseProps> = (props: Diag
     if (timeDifferenceInDays > 14) {
       setDaily(true);
       // @todo useMemo?
-      newDataTemp = scaleAverage(props.data, 'temperature', 'day');
-      newDataDew = scaleAverage(props.data, 'dew_point', 'day');
-      newDataFelt = scaleAverage(props.data, 'felt_temperature', 'day');
+      newDataTemp = scaleAverage(props.data, "temperature", "day");
+      newDataDew = scaleAverage(props.data, "dew_point", "day");
+      newDataFelt = scaleAverage(props.data, "felt_temperature", "day");
     } else {
       setDaily(false);
       newDataTemp = props.data;
@@ -50,93 +52,98 @@ const TemperatureCombinedBase:FunctionComponent<DiagramBaseProps> = (props: Diag
 
   if (loading) {
     return (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <Loading
-          description="Active loading indicator"
-          withOverlay={false}
-        />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Loading description="Active loading indicator" withOverlay={false} />
       </div>
     );
   }
 
   return (
     <div data-testid="temperature-combined-diagram">
-      {props.title &&
+      {props.title && (
         <h3>
           <Temperature32 />
           {props.title}
         </h3>
-      }
+      )}
 
       <div style={{ height: props.height }} className="diagram">
         <ResponsiveLine
           {...getTemperatureLineBaseProps(
-            daily ? 'daily' : '',
+            daily ? "daily" : "",
             [
-              ...dataFelt.map(item => {
+              ...dataFelt.map((item) => {
                 item.temperature = item.felt_temperature;
                 return item;
               }),
-              ...dataDew.map(item => {
+              ...dataDew.map((item) => {
                 item.temperature = item.dew_point;
                 return item;
               }),
-              ...dataTemp
+              ...dataTemp,
             ],
-            'temperature',
+            "temperature",
             true,
             props.config.unit_temperature
           )}
           data={[
             {
-              id: 'Temperature',
-              data: dataTemp.map(item => ({
+              id: "Temperature",
+              data: dataTemp.map((item) => ({
                 x: item.timeParsed,
-                y: item.temperature
+                y: item.temperature,
               })),
-              color: hiddenSeries.includes('Temperature') ? 'transparent' : '#000000'
+              color: hiddenSeries.includes("Temperature")
+                ? "transparent"
+                : "#000000",
             },
             {
-              id: 'Dew point',
-              data: dataDew.map(item => ({
+              id: "Dew point",
+              data: dataDew.map((item) => ({
                 x: item.timeParsed,
                 y: item.dew_point,
               })),
-              color: hiddenSeries.includes('Dew point') ? 'transparent' : '#5F9EA0'
+              color: hiddenSeries.includes("Dew point")
+                ? "transparent"
+                : "#5F9EA0",
             },
             {
-              id: 'Felt',
-              data: dataFelt.map(item => ({
+              id: "Felt",
+              data: dataFelt.map((item) => ({
                 x: item.timeParsed,
-                y: item.felt_temperature
+                y: item.felt_temperature,
               })),
-              color: hiddenSeries.includes('Felt') ? 'transparent' : '#C41E3A'
+              color: hiddenSeries.includes("Felt") ? "transparent" : "#C41E3A",
             },
           ]}
-          colors={d => d.color}
+          colors={(d) => d.color}
           legends={[
             {
-              anchor: 'top-right',
-              direction: 'row',
+              anchor: "top-right",
+              direction: "row",
               itemWidth: 100,
               itemHeight: 20,
               itemsSpacing: 10,
               onClick: (d) => {
                 let hidden = hiddenSeries;
                 if (hidden.includes(d.id)) {
-                  hidden = hidden.filter(item => item != d.id);
-                }
-                else {
+                  hidden = hidden.filter((item) => item != d.id);
+                } else {
                   hidden = [...hidden, d.id];
                 }
 
                 setHiddenSeries(hidden);
-              }
-            }
+              },
+            },
           ]}
         />
       </div>
-
     </div>
   );
 };

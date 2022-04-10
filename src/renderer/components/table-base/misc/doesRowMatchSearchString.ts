@@ -5,9 +5,12 @@ import { dataItemDataTable } from "../table-base";
  * @param searchString A search string.
  * @returns `true` if the given table row matches the given search string.
  */
-const doesRowMatchSearchString = (row: dataItemDataTable, searchString: string): boolean =>
+const doesRowMatchSearchString = (
+  row: dataItemDataTable,
+  searchString: string
+): boolean =>
   Object.keys(row).some(
-    (key) => key !== 'id' && String(row[key] ?? '').indexOf(searchString) >= 0
+    (key) => key !== "id" && String(row[key] ?? "").indexOf(searchString) >= 0
   );
 
 export default doesRowMatchSearchString;

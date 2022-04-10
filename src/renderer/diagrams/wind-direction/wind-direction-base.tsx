@@ -1,22 +1,45 @@
-import React, {FunctionComponent, useEffect, useState} from 'react';
+import React, { FunctionComponent, useEffect, useState } from "react";
 
 import { WindStream32 } from "@carbon/icons-react";
 import { Loading } from "carbon-components-react";
 import { ResponsiveLine } from "@nivo/line";
 
-import {dataItem, DiagramBaseProps} from "../types";
-import {getTimeAxisScaling, getTimeDifferenceInDays, scaleAverage} from "../scaling";
+import { dataItem, DiagramBaseProps } from "../types";
+import {
+  getTimeAxisScaling,
+  getTimeDifferenceInDays,
+  scaleAverage,
+} from "../scaling";
 import { TooltipLine } from "../tooltip";
 import { withEmptyCheck } from "../hoc";
 
 const degToCompass = (deg: number): string => {
-  const value = Math.floor((deg / 22.5) + 0.5),
-    compass = ["N","NNE","NE","ENE","E","ESE", "SE", "SSE","S","SSW","SW","WSW","W","WNW","NW","NNW"];
+  const value = Math.floor(deg / 22.5 + 0.5),
+    compass = [
+      "N",
+      "NNE",
+      "NE",
+      "ENE",
+      "E",
+      "ESE",
+      "SE",
+      "SSE",
+      "S",
+      "SSW",
+      "SW",
+      "WSW",
+      "W",
+      "WNW",
+      "NW",
+      "NNW",
+    ];
 
-  return compass[(value % 16)];
+  return compass[value % 16];
 };
 
-const WindDirectionBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
+const WindDirectionBase: FunctionComponent<DiagramBaseProps> = (
+  props: DiagramBaseProps
+): React.ReactElement => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [daily, setDaily] = useState(false);
@@ -28,7 +51,7 @@ const WindDirectionBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBas
 
     if (timeDifferenceInDays > 14) {
       setDaily(true);
-      newData = scaleAverage(props.data, 'wind_direction', 'day');
+      newData = scaleAverage(props.data, "wind_direction", "day");
     } else {
       setDaily(false);
       newData = props.data;
@@ -45,11 +68,14 @@ const WindDirectionBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBas
 
   if (loading) {
     return (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <Loading
-          description="Active loading indicator"
-          withOverlay={false}
-        />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Loading description="Active loading indicator" withOverlay={false} />
       </div>
     );
   }
@@ -65,29 +91,29 @@ const WindDirectionBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBas
         <ResponsiveLine
           data={[
             {
-              id: 'wind_direction',
-              data: data.map(item => ({
+              id: "wind_direction",
+              data: data.map((item) => ({
                 x: item.timeParsed,
-                y: item.wind_direction
-              }))
-            }
+                y: item.wind_direction,
+              })),
+            },
           ]}
           xScale={{
             type: "time",
             useUTC: true,
             format: "%Y-%m-%dT%H:%M:%S.000Z",
-            precision: 'minute'
+            precision: "minute",
           }}
           xFormat={daily ? "time:%Y/%m/%d" : "time:%Y/%m/%d %H:%M"}
           yScale={{
             type: "linear",
             min: 0,
-            max: 360
+            max: 360,
           }}
-          yFormat={value => `${value}${props.config.unit_wind_direction}`}
+          yFormat={(value) => `${value}${props.config.unit_wind_direction}`}
           margin={{ top: 20, right: 10, bottom: 20, left: 40 }}
           curve="basis"
-          colors= {['#000000']}
+          colors={["#000000"]}
           lineWidth={2}
           enableArea={true}
           areaOpacity={0.07}
@@ -98,18 +124,18 @@ const WindDirectionBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBas
           axisLeft={{
             legend: props.config.unit_wind_direction,
             legendOffset: -35,
-            legendPosition: 'middle',
+            legendPosition: "middle",
             tickSize: 0,
             tickPadding: 5,
-            format: value => degToCompass(value)
+            format: (value) => degToCompass(value),
           }}
           axisBottom={{
             ...getTimeAxisScaling(data),
             tickSize: 0,
-            tickPadding: 5
+            tickPadding: 5,
           }}
           isInteractive={true}
-          tooltip={point => <TooltipLine point={point.point} />}
+          tooltip={(point) => <TooltipLine point={point.point} />}
           useMesh={true}
           enableCrosshair={true}
         />

@@ -1,14 +1,14 @@
-import {useCallback, useState} from 'react';
+import { useCallback, useState } from "react";
 import {
   TABLE_SORT_CYCLE,
   TABLE_SORT_CYCLES,
   TABLE_SORT_DIRECTION,
-} from '../misc';
+} from "../misc";
 import { DataTableSortState } from "carbon-components-react/lib/components/DataTable/state/sorting";
 
 interface getNextSortProps {
-  sortCycle: string | undefined,
-  oldDirection: DataTableSortState
+  sortCycle: string | undefined;
+  oldDirection: DataTableSortState;
 }
 
 /**
@@ -18,11 +18,14 @@ interface getNextSortProps {
  * @returns The next sort direction.
  */
 const getNextSort = (options: getNextSortProps): DataTableSortState => {
-  const sortCycle = options.sortCycle === undefined ? TABLE_SORT_CYCLE.TRI_STATES_FROM_ASCENDING : options.sortCycle;
+  const sortCycle =
+    options.sortCycle === undefined
+      ? TABLE_SORT_CYCLE.TRI_STATES_FROM_ASCENDING
+      : options.sortCycle;
   if (!options.oldDirection) {
     throw new TypeError(
-      'Table sort direction is not defined. ' +
-        'Likely that `getNextSort()` is called with non-sorted table column, which should not happen in regular condition.'
+      "Table sort direction is not defined. " +
+        "Likely that `getNextSort()` is called with non-sorted table column, which should not happen in regular condition."
     );
   }
   const directions = TABLE_SORT_CYCLES[sortCycle];
@@ -34,7 +37,7 @@ const getNextSort = (options: getNextSortProps): DataTableSortState => {
       return directions[0];
     }
     throw new RangeError(
-      `The given sort state (${(options.oldDirection)}) is not found in the given table sort cycle: ${sortCycle}`
+      `The given sort state (${options.oldDirection}) is not found in the given table sort cycle: ${sortCycle}`
     );
   }
   return directions[(index + 1) % directions.length];
@@ -45,12 +48,22 @@ const getNextSort = (options: getNextSortProps): DataTableSortState => {
  * @returns {Array} The current table sort info and the setter for the table
  * sort info.
  */
-const useSortInfo = (initialSortInfo: { columnId: string, direction: DataTableSortState }): [{ columnId: string, direction: DataTableSortState }, ({ columnId, sortCycle, oldDirection }: getNextSortProps & { columnId: string }) => void] => {
+const useSortInfo = (initialSortInfo: {
+  columnId: string;
+  direction: DataTableSortState;
+}): [
+  { columnId: string; direction: DataTableSortState },
+  ({
+    columnId,
+    sortCycle,
+    oldDirection,
+  }: getNextSortProps & { columnId: string }) => void
+] => {
   const [sortInfo, setSortInfo] = useState(initialSortInfo);
   const invokeSetSortInfo = useCallback(
     ({ columnId, sortCycle, oldDirection }) => {
       const direction = getNextSort({ sortCycle, oldDirection });
-      if (direction === TABLE_SORT_DIRECTION.NONE && columnId !== 'name') {
+      if (direction === TABLE_SORT_DIRECTION.NONE && columnId !== "name") {
         // Resets the sorting, given non-primary sorting column has got in
         //  non-sorting state
         setSortInfo(initialSortInfo);

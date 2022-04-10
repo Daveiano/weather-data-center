@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-import {Column, Row} from "carbon-components-react";
+import { Column, Row } from "carbon-components-react";
 
-import {RootState} from "../renderer";
-import {Empty} from "../components/empty";
+import { RootState } from "../renderer";
+import { Empty } from "../components/empty";
 import TableBase from "../components/table-base/table-base";
-import {dataItem} from "../diagrams/types";
-import {TABLE_SORT_DIRECTION} from "../components/table-base/misc";
+import { dataItem } from "../diagrams/types";
+import { TABLE_SORT_DIRECTION } from "../components/table-base/misc";
 
 export const DataBasePage: React.FC = (): React.ReactElement => {
   const dataFromStore = useSelector((state: RootState) => state.appState.data);
@@ -42,80 +42,80 @@ export const DataBasePage: React.FC = (): React.ReactElement => {
               pageSizes={[50, 100, 200, 500]}
               rows={data.map((item: dataItem) => ({
                 ...item,
-                selected: false
+                selected: false,
               }))}
               columns={[
                 {
-                  title: 'Time',
-                  id: 'timeParsed',
-                  tooltip: 'Date format is YYYY/MM/DD HH:mm',
-                  sortCycle: 'tri-states-from-ascending',
+                  title: "Time",
+                  id: "timeParsed",
+                  tooltip: "Date format is YYYY/MM/DD HH:mm",
+                  sortCycle: "tri-states-from-ascending",
                 },
                 {
-                  title: 'Temperature',
+                  title: "Temperature",
                   small: `in ${config.unit_temperature}`,
-                  id: 'temperature',
-                  sortCycle: 'tri-states-from-ascending',
+                  id: "temperature",
+                  sortCycle: "tri-states-from-ascending",
                 },
                 {
-                  title: 'Felt temperature',
+                  title: "Felt temperature",
                   small: `in ${config.unit_temperature}`,
-                  id: 'felt_temperature',
-                  sortCycle: 'tri-states-from-ascending',
+                  id: "felt_temperature",
+                  sortCycle: "tri-states-from-ascending",
                 },
                 {
-                  title: 'Dew point',
+                  title: "Dew point",
                   small: `in ${config.unit_temperature}`,
-                  id: 'dew_point',
-                  sortCycle: 'tri-states-from-ascending',
+                  id: "dew_point",
+                  sortCycle: "tri-states-from-ascending",
                 },
                 {
-                  title: 'Pressure',
+                  title: "Pressure",
                   small: `in ${config.unit_pressure}`,
-                  id: 'pressure',
-                  sortCycle: 'tri-states-from-ascending',
+                  id: "pressure",
+                  sortCycle: "tri-states-from-ascending",
                 },
                 {
-                  title: 'Humidity',
+                  title: "Humidity",
                   small: `in ${config.unit_humidity}`,
-                  id: 'humidity',
-                  sortCycle: 'tri-states-from-ascending',
+                  id: "humidity",
+                  sortCycle: "tri-states-from-ascending",
                 },
                 {
-                  title: 'Rain',
+                  title: "Rain",
                   small: `in ${config.unit_rain}`,
-                  id: 'rain',
-                  tooltip: 'Accumulated during the day',
-                  sortCycle: 'tri-states-from-ascending',
+                  id: "rain",
+                  tooltip: "Accumulated during the day",
+                  sortCycle: "tri-states-from-ascending",
                 },
                 {
-                  title: 'Wind',
+                  title: "Wind",
                   small: `in ${config.unit_wind}`,
-                  id: 'wind',
-                  sortCycle: 'tri-states-from-ascending',
+                  id: "wind",
+                  sortCycle: "tri-states-from-ascending",
                 },
                 {
-                  title: 'Gust',
+                  title: "Gust",
                   small: `in ${config.unit_wind}`,
-                  id: 'gust',
-                  sortCycle: 'tri-states-from-ascending',
+                  id: "gust",
+                  sortCycle: "tri-states-from-ascending",
                 },
                 {
-                  title: 'Solar irradiation',
+                  title: "Solar irradiation",
                   small: `in ${config.unit_solar}`,
-                  id: 'solar',
-                  sortCycle: 'tri-states-from-ascending',
+                  id: "solar",
+                  sortCycle: "tri-states-from-ascending",
                 },
                 {
-                  title: 'UV Index',
-                  id: 'uvi',
-                  sortCycle: 'tri-states-from-ascending',
+                  title: "UV Index",
+                  id: "uvi",
+                  sortCycle: "tri-states-from-ascending",
                 },
               ]}
               title="All data"
               hasSelection={true}
               sortInfo={{
-                columnId: 'timeParsed',
+                columnId: "timeParsed",
                 direction: TABLE_SORT_DIRECTION.ASC,
               }}
             />
@@ -125,7 +125,5 @@ export const DataBasePage: React.FC = (): React.ReactElement => {
     );
   }
 
-  return (
-    <Empty />
-  );
+  return <Empty />;
 };

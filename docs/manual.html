@@ -4,17 +4,22 @@ title: "Manual"
 ---
 
 <script>
-    var anchors = document.querySelectorAll('.toc a');
+  var anchors = document.querySelectorAll(".toc a");
 
-    anchors.forEach(function(anchor) {
-      anchor.onclick = function(event) {
-        event.preventDefault();
+  anchors.forEach(function (anchor) {
+    anchor.onclick = function (event) {
+      event.preventDefault();
 
-        var y = document.querySelector(this.getAttribute('href')).getBoundingClientRect().top + window.pageYOffset - 185;
+      var y =
+        document
+          .querySelector(this.getAttribute("href"))
+          .getBoundingClientRect().top +
+        window.pageYOffset -
+        185;
 
-        window.scrollTo({top: y, behavior: 'smooth'});
-      };
-    });
+      window.scrollTo({ top: y, behavior: "smooth" });
+    };
+  });
 </script>
 
 <!--
@@ -33,323 +38,450 @@ title: "Manual"
   }
   ```
 -->
-<div class="relative py-16 bg-white dark:bg-gray-800 overflow-hidden">
-    <div class="hidden lg:block lg:absolute lg:inset-y-0 lg:h-full lg:w-full">
-        <div class="relative h-full text-lg max-w-prose mx-auto" aria-hidden="true">
-            <svg class="absolute top-12 left-full transform translate-x-32" width="404" height="384" fill="none" viewBox="0 0 404 384">
-                <defs>
-                    <pattern id="74b3fd99-0a6f-4271-bef2-e80eeafdf357" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                        <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
-                    </pattern>
-                </defs>
-                <rect width="404" height="384" fill="url(#74b3fd99-0a6f-4271-bef2-e80eeafdf357)" />
-            </svg>
-            <svg class="absolute top-1/2 right-full transform -translate-y-1/2 -translate-x-32" width="404" height="384" fill="none" viewBox="0 0 404 384">
-                <defs>
-                    <pattern id="f210dbf6-a58d-4871-961e-36d5016a0f49" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                        <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
-                    </pattern>
-                </defs>
-                <rect width="404" height="384" fill="url(#f210dbf6-a58d-4871-961e-36d5016a0f49)" />
-            </svg>
-            <svg class="absolute bottom-12 left-full transform translate-x-32" width="404" height="384" fill="none" viewBox="0 0 404 384">
-                <defs>
-                    <pattern id="d3eb07ae-5182-43e6-857d-35c643af9034" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                        <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
-                    </pattern>
-                </defs>
-                <rect width="404" height="384" fill="url(#d3eb07ae-5182-43e6-857d-35c643af9034)" />
-            </svg>
-        </div>
+<div class="relative overflow-hidden bg-white py-16 dark:bg-gray-800">
+  <div class="hidden lg:absolute lg:inset-y-0 lg:block lg:h-full lg:w-full">
+    <div class="relative mx-auto h-full max-w-prose text-lg" aria-hidden="true">
+      <svg
+        class="absolute top-12 left-full translate-x-32 transform"
+        width="404"
+        height="384"
+        fill="none"
+        viewBox="0 0 404 384"
+      >
+        <defs>
+          <pattern
+            id="74b3fd99-0a6f-4271-bef2-e80eeafdf357"
+            x="0"
+            y="0"
+            width="20"
+            height="20"
+            patternUnits="userSpaceOnUse"
+          >
+            <rect
+              x="0"
+              y="0"
+              width="4"
+              height="4"
+              class="text-gray-200"
+              fill="currentColor"
+            />
+          </pattern>
+        </defs>
+        <rect
+          width="404"
+          height="384"
+          fill="url(#74b3fd99-0a6f-4271-bef2-e80eeafdf357)"
+        />
+      </svg>
+      <svg
+        class="absolute top-1/2 right-full -translate-y-1/2 -translate-x-32 transform"
+        width="404"
+        height="384"
+        fill="none"
+        viewBox="0 0 404 384"
+      >
+        <defs>
+          <pattern
+            id="f210dbf6-a58d-4871-961e-36d5016a0f49"
+            x="0"
+            y="0"
+            width="20"
+            height="20"
+            patternUnits="userSpaceOnUse"
+          >
+            <rect
+              x="0"
+              y="0"
+              width="4"
+              height="4"
+              class="text-gray-200"
+              fill="currentColor"
+            />
+          </pattern>
+        </defs>
+        <rect
+          width="404"
+          height="384"
+          fill="url(#f210dbf6-a58d-4871-961e-36d5016a0f49)"
+        />
+      </svg>
+      <svg
+        class="absolute bottom-12 left-full translate-x-32 transform"
+        width="404"
+        height="384"
+        fill="none"
+        viewBox="0 0 404 384"
+      >
+        <defs>
+          <pattern
+            id="d3eb07ae-5182-43e6-857d-35c643af9034"
+            x="0"
+            y="0"
+            width="20"
+            height="20"
+            patternUnits="userSpaceOnUse"
+          >
+            <rect
+              x="0"
+              y="0"
+              width="4"
+              height="4"
+              class="text-gray-200"
+              fill="currentColor"
+            />
+          </pattern>
+        </defs>
+        <rect
+          width="404"
+          height="384"
+          fill="url(#d3eb07ae-5182-43e6-857d-35c643af9034)"
+        />
+      </svg>
     </div>
-    <div class="relative px-4 sm:px-6 lg:px-8">
-        <div class="text-lg max-w-prose mx-auto">
-            <h2 id="import" class="mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl">
-                Import data
-            </h2>
-            <p class="mt-8 text-xl text-gray-500 dark:text-gray-200 leading-8">
-                The goal of the app is to collect, organize, analyze and visualize weather data from your backyards weather station.
-            </p>
-        </div>
-        <div class="mt-6 prose dark:prose-invert prose-lg text-gray-500 dark:text-gray-200 mx-auto">
-            <p>
-                You need to export/backup the data from your weather station and import them as a .csv file into the app.
-                You can also use your handwritten Excel lists or whatever - just save them as a .csv file with named
-                headers, and you are good to go!
-            </p>
-            <p>
-                Currently, only .csv files with named headers are supported. You can manage the header names and the units within the app settings. You can also configure the input date and time format (this is important because various personal weather stations backup their data in different date formats).
-            </p>
-            <h3>Import settings</h3>
-            <p>
-                Before starting the first import, open the Import settings.
-            </p>
-        </div>
-        <div class="prose flex flex-col lg:flex-row items-start py-6 justify-center sm:mx-auto sm:max-w-7xl">
-            <figure class="mx-1 px-1 my-0 mb-6 lg:mb-0 dark:bg-gray-800">
-                <img class="m-0 w-full rounded-lg shadow-xl ring-1 ring-black dark:ring-white ring-opacity-5" src={{ "/assets/images/manual/1-open-settings.png" | relative_url }} alt="" />
-                <figcaption>
-                    Open the settings via the right Sidebar. The right sidebar can be opened with the little
-                    button in the top right.
-                </figcaption>
-            </figure>
-            <figure class="mx-1 px-1 my-0 lg:max-w-[39.75%]">
-                <img class="m-0 w-full rounded-lg shadow-xl ring-1 ring-black dark:ring-white ring-opacity-5" src={{ "/assets/images/manual/2-settings.png" | relative_url }} alt="" />
-                <figcaption>
-                    Settings modal.
-                </figcaption>
-            </figure>
-        </div>
-        <div class="prose dark:prose-invert prose-lg text-gray-500 dark:text-gray-200 mx-auto">
-            <h4>Headers</h4>
-            <p>
-                Under the heading <b>Import</b> you will find all the relevant import settings. You need to set all header
-                names according to your csv file header naming.
-                <br/>
-                <br/>
-                Consider the following csv structure (table is split for better readability):
-            </p>
-            <table>
-                <thead>
-                <tr>
-                    <th>time</th>
-                    <th>temperature</th>
-                    <th>humidity</th>
-                    <th>pressure</th>
-                    <th>rain</th>
-                    <th>solar</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>2022/11/30 17:21</td>
-                    <td>10</td>
-                    <td>80</td>
-                    <td>950</td>
-                    <td>0</td>
-                    <td>100.4</td>
-                </tr>
-                <tr>
-                    <td>2022/11/30 19:21</td>
-                    <td>15.7</td>
-                    <td>75</td>
-                    <td>951</td>
-                    <td>0.9</td>
-                    <td>124.9</td>
-                </tr>
-                <tr>
-                    <td>...</td>
-                    <td>...</td>
-                    <td>...</td>
-                    <td>...</td>
-                    <td>...</td>
-                    <td>...</td>
-                </tr>
-                </tbody>
-            </table>
-            <table>
-                <thead>
-                <tr>
-                    <th>uvi</th>
-                    <th>wind</th>
-                    <th>wind_direction</th>
-                    <th>gust</th>
-                    <th>dew_point</th>
-                    <th>felt_temperature</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>4</td>
-                    <td>15</td>
-                    <td>303</td>
-                    <td>25</td>
-                    <td>8</td>
-                    <td>10</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>5</td>
-                    <td>187</td>
-                    <td>280</td>
-                    <td>10</td>
-                    <td>10</td>
-                </tr>
-                <tr>
-                    <td>...</td>
-                    <td>...</td>
-                    <td>...</td>
-                    <td>...</td>
-                    <td>...</td>
-                    <td>...</td>
-                </tr>
-                </tbody>
-            </table>
-            <p>
-                To import this csv successful you need to set
-            </p>
-            <ul role="list">
-                <li>the option <i>Header time</i> to "<i>time</i>"</li>
-                <li>the option <i>Header Pressure</i> to "<i>pressure</i>"</li>
-                <li>the option <i>Header Rain</i> to "<i>rain</i>"</li>
-                <li>and so on...</li>
-            </ul>
-            <h4>Date format</h4>
-            <p>
-                You likely need to change the option <i>Date format</i> to match your data date and time format.
-                <br/><br/>
-                The default format is <b>YYYY/M/D k:mm</b> which translates to <b>{{ 'now' | date: "%Y/%-m/%-d %-H:%M" }}</b>.
-                Other examples would be:
-            </p>
-            <ul role="list">
-                <li><b>YYYY/MM/DD HH:mm</b> is <b>{{ 'now' | date: "%Y/%m/%d %H:%M" }}</b></li>
-                <li><b>HH:mm - YYYY/DD/MM</b> is <b>{{ 'now' | date: "%H:%M - %Y/%d/%m" }}</b></li>
-                <li><b>DD.MM.YYYY HH:mm</b> is <b>{{ 'now' | date: "%d.%m.%Y %H:%M" }}</b></li>
-            </ul>
-            <p>
-                For a full reference, please see <a target="_blank" href="https://momentjs.com/docs/#/displaying/format/">here</a>.
-            </p>
-            <h4>Units</h4>
-            <p>
-                You can change the unit for each supported characteristic. <b>Note:</b> Setting this will only change
-                the labels used within the app, there will be <b>no</b> conversion.
-            </p>
-            <h3>
-                Import
-            </h3>
-            <p>
-                If you followed the previous steps, you are now ready to hit the <b>Import from CSV</b> button and
-                choose your file.
-            </p>
-        </div>
+  </div>
+  <div class="relative px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-prose text-lg">
+      <h2
+        id="import"
+        class="mt-2 block text-center text-3xl font-extrabold leading-8 tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl"
+      >
+        Import data
+      </h2>
+      <p class="mt-8 text-xl leading-8 text-gray-500 dark:text-gray-200">
+        The goal of the app is to collect, organize, analyze and visualize
+        weather data from your backyards weather station.
+      </p>
     </div>
-    <div class="relative px-4 sm:px-6 lg:px-8 mt-24 lg:mt-36">
-        <div class="text-lg max-w-prose mx-auto">
-            <h2 id="navigate" class="mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl">
-                Navigate
-            </h2>
-            <p class="mt-8 text-xl text-gray-500 dark:text-gray-200 leading-8">
-                Choose a date range and view every possible diagram for each characteristic.
-            </p>
-        </div>
-        <div class="mt-6 prose dark:prose-invert prose-lg text-gray-500 dark:text-gray-200 mx-auto">
-            <h3>Date selection</h3>
-            <p>
-                In the top bar there is a date range widget, with that you can set a custom date range to filter
-                your data. Default value is the date of the first record and the date of the last record.
-            </p>
-            <p>
-                All tables, diagrams and stats respect the selected date range.
-            </p>
-            <figure class="dark:bg-gray-800">
-                <img class="m-0 w-full rounded-lg shadow-xl ring-1 ring-black dark:ring-white ring-opacity-5" src={{ "/assets/images/manual/3-date-select.png" | relative_url }} alt="" />
-                <figcaption>
-                    Filter per date range.
-                </figcaption>
-            </figure>
-            <h3>Pages</h3>
-            <p>
-                The app includes 7 pages:
-            </p>
-            <h4>Overview</h4>
-            <figure class="dark:bg-gray-800">
-                {% assign screenshot = site.data.screenshots | where:"name", "Overview page" | first %}
-                <img class="m-0 w-full rounded-lg shadow-xl ring-1 ring-black dark:ring-white ring-opacity-5" src={{ screenshot.url }} alt="" />
-            </figure>
-            <p>
-                This page provides a quick overview of all collected characteristics via a diagram and table view.
-            </p>
-            <h4>Temperature page</h4>
-            <h5>Diagrams</h5>
-            <ul role="list">
-                <li>Temperature with stats (Ø per day)</li>
-                <li>Combined: Temperature, Felt temperature and Dew point (Ø per day)</li>
-                <li>Combined: Felt temperature Minimum & Maximum (Min/Max per day)</li>
-                <li>Combined with selectable date range: day, month or year: Minimum, maximum and average per date</li>
-            </ul>
-            <h4>Precipitation page</h4>
-            <h5>Diagrams</h5>
-            <ul role="list">
-                <li>Annotated diagram per day with stats</li>
-                <li>Selectable date range day, week, month or year: Rain per date</li>
-                <li>Humidity (Ø per day)</li>
-            </ul>
-            <h4>Pressure page</h4>
-            <h5>Diagrams</h5>
-            <ul role="list">
-                <li>Pressure (Ø per day)</li>
-            </ul>
-            <h4>Wind page</h4>
-            <h5>Diagrams</h5>
-            <ul role="list">
-                <li>Wind (Ø/day) and Gust speed (max/day)</li>
-                <li>Wind direction (Ø per day)</li>
-            </ul>
-            <h4>Solar page</h4>
-            <h5>Diagrams</h5>
-            <ul role="list">
-                <li>Solar radiation (Ø per day)</li>
-                <li>UV Index (Max per day)</li>
-            </ul>
-            <h4>Database page</h4>
-            <p>
-                A huge sortable table of all records.
-            </p>
-        </div>
+    <div
+      class="prose prose-lg mx-auto mt-6 text-gray-500 dark:prose-invert dark:text-gray-200"
+    >
+      <p>
+        You need to export/backup the data from your weather station and import
+        them as a .csv file into the app. You can also use your handwritten
+        Excel lists or whatever - just save them as a .csv file with named
+        headers, and you are good to go!
+      </p>
+      <p>
+        Currently, only .csv files with named headers are supported. You can
+        manage the header names and the units within the app settings. You can
+        also configure the input date and time format (this is important because
+        various personal weather stations backup their data in different date
+        formats).
+      </p>
+      <h3>Import settings</h3>
+      <p>Before starting the first import, open the Import settings.</p>
     </div>
-    <div class="relative px-4 sm:px-6 lg:px-8 mt-24 lg:mt-36">
-        <div class="text-lg max-w-prose mx-auto">
-            <h2 id="delete" class="mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl">
-                Deleting records
-            </h2>
-            <p class="mt-8 text-xl text-gray-500 dark:text-gray-200 leading-8">
-                You can either remove all records form your database or you can choose and remove single records.
-            </p>
-        </div>
-        <div class="mt-6 prose dark:prose-invert prose-lg text-gray-500 dark:text-gray-200 mx-auto">
-            <p>
-                First, go to the Database page. Select either single records you want to remove or select all records
-                by clicking on the checkbox in the upper left of the table.
-            </p>
-        </div>
-        <div class="prose flex flex-col lg:flex-row items-start py-6 justify-center sm:mx-auto sm:max-w-7xl">
-            <figure class="mx-1 px-1 my-0 mb-6 lg:mb-0 dark:bg-gray-800">
-                <img class="m-0 w-full rounded-lg shadow-xl ring-1 ring-black dark:ring-white ring-opacity-5" src={{ "/assets/images/manual/4-delete.png" | relative_url }} alt="" />
-                <figcaption>
-                    Select the records you want to remove.
-                </figcaption>
-            </figure>
-            <figure class="mx-1 px-1 my-0 lg:min-w-[30%]">
-                <img class="m-0 w-full rounded-lg shadow-xl ring-1 ring-black dark:ring-white ring-opacity-5" src={{ "/assets/images/manual/5-delete.png" | relative_url }} alt="" />
-                <figcaption>
-                    Confirm and delete.
-                </figcaption>
-            </figure>
-        </div>
+    <div
+      class="prose flex flex-col items-start justify-center py-6 sm:mx-auto sm:max-w-7xl lg:flex-row"
+    >
+      <figure class="mx-1 my-0 mb-6 px-1 dark:bg-gray-800 lg:mb-0">
+        <img class="m-0 w-full rounded-lg shadow-xl ring-1 ring-black
+        dark:ring-white ring-opacity-5" src={{
+        "/assets/images/manual/1-open-settings.png" | relative_url }} alt="" />
+        <figcaption>
+          Open the settings via the right Sidebar. The right sidebar can be
+          opened with the little button in the top right.
+        </figcaption>
+      </figure>
+      <figure class="mx-1 my-0 px-1 lg:max-w-[39.75%]">
+        <img class="m-0 w-full rounded-lg shadow-xl ring-1 ring-black
+        dark:ring-white ring-opacity-5" src={{
+        "/assets/images/manual/2-settings.png" | relative_url }} alt="" />
+        <figcaption>Settings modal.</figcaption>
+      </figure>
     </div>
-    <div class="relative px-4 sm:px-6 lg:px-8 mt-24 lg:mt-36">
-        <div class="text-lg max-w-prose mx-auto">
-            <h2 id="data" class="mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl">
-                Data storage
-            </h2>
-            <p class="mt-8 text-xl text-gray-500 dark:text-gray-200 leading-8">
-                All data you upload is stored only on your local filesystem.
-            </p>
-        </div>
-        <div class="mt-6 prose dark:prose-invert prose-lg text-gray-500 dark:text-gray-200 mx-auto">
-            <p>
-                On import, the data gets transformed and saved to your local filesystem. The folder is in your user data
-                directory which is typically
-            </p>
-            <ul role="list">
-                <li>For Linux, in ~/.config/weather-data-center/nedb</li>
-                <li>For Windows, in %LOCALAPPDATA%\weather-data-center\nedb</li>
-                <li>For MacOS, in ~/Library/Application Support/weather-data-center/nedb</li>
-            </ul>
-            <p>
-                Inside that folder you will find a file called data. Simply open it with a text editor of your choice.
-                Please stop the app when editing this file directly.
-            </p>
-        </div>
+    <div
+      class="prose prose-lg mx-auto text-gray-500 dark:prose-invert dark:text-gray-200"
+    >
+      <h4>Headers</h4>
+      <p>
+        Under the heading <b>Import</b> you will find all the relevant import
+        settings. You need to set all header names according to your csv file
+        header naming.
+        <br />
+        <br />
+        Consider the following csv structure (table is split for better
+        readability):
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>time</th>
+            <th>temperature</th>
+            <th>humidity</th>
+            <th>pressure</th>
+            <th>rain</th>
+            <th>solar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2022/11/30 17:21</td>
+            <td>10</td>
+            <td>80</td>
+            <td>950</td>
+            <td>0</td>
+            <td>100.4</td>
+          </tr>
+          <tr>
+            <td>2022/11/30 19:21</td>
+            <td>15.7</td>
+            <td>75</td>
+            <td>951</td>
+            <td>0.9</td>
+            <td>124.9</td>
+          </tr>
+          <tr>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+          </tr>
+        </tbody>
+      </table>
+      <table>
+        <thead>
+          <tr>
+            <th>uvi</th>
+            <th>wind</th>
+            <th>wind_direction</th>
+            <th>gust</th>
+            <th>dew_point</th>
+            <th>felt_temperature</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>4</td>
+            <td>15</td>
+            <td>303</td>
+            <td>25</td>
+            <td>8</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>5</td>
+            <td>187</td>
+            <td>280</td>
+            <td>10</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>To import this csv successful you need to set</p>
+      <ul role="list">
+        <li>the option <i>Header time</i> to "<i>time</i>"</li>
+        <li>the option <i>Header Pressure</i> to "<i>pressure</i>"</li>
+        <li>the option <i>Header Rain</i> to "<i>rain</i>"</li>
+        <li>and so on...</li>
+      </ul>
+      <h4>Date format</h4>
+      <p>
+        You likely need to change the option <i>Date format</i> to match your
+        data date and time format. <br /><br />
+        The default format is <b>YYYY/M/D k:mm</b> which translates to
+        <b>{{ 'now' | date: "%Y/%-m/%-d %-H:%M" }}</b>. Other examples would be:
+      </p>
+      <ul role="list">
+        <li>
+          <b>YYYY/MM/DD HH:mm</b> is <b>{{ 'now' | date: "%Y/%m/%d %H:%M" }}</b>
+        </li>
+        <li>
+          <b>HH:mm - YYYY/DD/MM</b> is
+          <b>{{ 'now' | date: "%H:%M - %Y/%d/%m" }}</b>
+        </li>
+        <li>
+          <b>DD.MM.YYYY HH:mm</b> is <b>{{ 'now' | date: "%d.%m.%Y %H:%M" }}</b>
+        </li>
+      </ul>
+      <p>
+        For a full reference, please see
+        <a target="_blank" href="https://momentjs.com/docs/#/displaying/format/"
+          >here</a
+        >.
+      </p>
+      <h4>Units</h4>
+      <p>
+        You can change the unit for each supported characteristic.
+        <b>Note:</b> Setting this will only change the labels used within the
+        app, there will be <b>no</b> conversion.
+      </p>
+      <h3>Import</h3>
+      <p>
+        If you followed the previous steps, you are now ready to hit the
+        <b>Import from CSV</b> button and choose your file.
+      </p>
     </div>
+  </div>
+  <div class="relative mt-24 px-4 sm:px-6 lg:mt-36 lg:px-8">
+    <div class="mx-auto max-w-prose text-lg">
+      <h2
+        id="navigate"
+        class="mt-2 block text-center text-3xl font-extrabold leading-8 tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl"
+      >
+        Navigate
+      </h2>
+      <p class="mt-8 text-xl leading-8 text-gray-500 dark:text-gray-200">
+        Choose a date range and view every possible diagram for each
+        characteristic.
+      </p>
+    </div>
+    <div
+      class="prose prose-lg mx-auto mt-6 text-gray-500 dark:prose-invert dark:text-gray-200"
+    >
+      <h3>Date selection</h3>
+      <p>
+        In the top bar there is a date range widget, with that you can set a
+        custom date range to filter your data. Default value is the date of the
+        first record and the date of the last record.
+      </p>
+      <p>All tables, diagrams and stats respect the selected date range.</p>
+      <figure class="dark:bg-gray-800">
+        <img class="m-0 w-full rounded-lg shadow-xl ring-1 ring-black
+        dark:ring-white ring-opacity-5" src={{
+        "/assets/images/manual/3-date-select.png" | relative_url }} alt="" />
+        <figcaption>Filter per date range.</figcaption>
+      </figure>
+      <h3>Pages</h3>
+      <p>The app includes 7 pages:</p>
+      <h4>Overview</h4>
+      <figure class="dark:bg-gray-800">
+        {% assign screenshot = site.data.screenshots | where:"name", "Overview
+        page" | first %}
+        <img
+          class="m-0 w-full rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 dark:ring-white"
+          src="{{"
+          screenshot.url
+          }}
+          alt=""
+        />
+      </figure>
+      <p>
+        This page provides a quick overview of all collected characteristics via
+        a diagram and table view.
+      </p>
+      <h4>Temperature page</h4>
+      <h5>Diagrams</h5>
+      <ul role="list">
+        <li>Temperature with stats (Ø per day)</li>
+        <li>
+          Combined: Temperature, Felt temperature and Dew point (Ø per day)
+        </li>
+        <li>Combined: Felt temperature Minimum & Maximum (Min/Max per day)</li>
+        <li>
+          Combined with selectable date range: day, month or year: Minimum,
+          maximum and average per date
+        </li>
+      </ul>
+      <h4>Precipitation page</h4>
+      <h5>Diagrams</h5>
+      <ul role="list">
+        <li>Annotated diagram per day with stats</li>
+        <li>Selectable date range day, week, month or year: Rain per date</li>
+        <li>Humidity (Ø per day)</li>
+      </ul>
+      <h4>Pressure page</h4>
+      <h5>Diagrams</h5>
+      <ul role="list">
+        <li>Pressure (Ø per day)</li>
+      </ul>
+      <h4>Wind page</h4>
+      <h5>Diagrams</h5>
+      <ul role="list">
+        <li>Wind (Ø/day) and Gust speed (max/day)</li>
+        <li>Wind direction (Ø per day)</li>
+      </ul>
+      <h4>Solar page</h4>
+      <h5>Diagrams</h5>
+      <ul role="list">
+        <li>Solar radiation (Ø per day)</li>
+        <li>UV Index (Max per day)</li>
+      </ul>
+      <h4>Database page</h4>
+      <p>A huge sortable table of all records.</p>
+    </div>
+  </div>
+  <div class="relative mt-24 px-4 sm:px-6 lg:mt-36 lg:px-8">
+    <div class="mx-auto max-w-prose text-lg">
+      <h2
+        id="delete"
+        class="mt-2 block text-center text-3xl font-extrabold leading-8 tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl"
+      >
+        Deleting records
+      </h2>
+      <p class="mt-8 text-xl leading-8 text-gray-500 dark:text-gray-200">
+        You can either remove all records form your database or you can choose
+        and remove single records.
+      </p>
+    </div>
+    <div
+      class="prose prose-lg mx-auto mt-6 text-gray-500 dark:prose-invert dark:text-gray-200"
+    >
+      <p>
+        First, go to the Database page. Select either single records you want to
+        remove or select all records by clicking on the checkbox in the upper
+        left of the table.
+      </p>
+    </div>
+    <div
+      class="prose flex flex-col items-start justify-center py-6 sm:mx-auto sm:max-w-7xl lg:flex-row"
+    >
+      <figure class="mx-1 my-0 mb-6 px-1 dark:bg-gray-800 lg:mb-0">
+        <img class="m-0 w-full rounded-lg shadow-xl ring-1 ring-black
+        dark:ring-white ring-opacity-5" src={{
+        "/assets/images/manual/4-delete.png" | relative_url }} alt="" />
+        <figcaption>Select the records you want to remove.</figcaption>
+      </figure>
+      <figure class="mx-1 my-0 px-1 lg:min-w-[30%]">
+        <img class="m-0 w-full rounded-lg shadow-xl ring-1 ring-black
+        dark:ring-white ring-opacity-5" src={{
+        "/assets/images/manual/5-delete.png" | relative_url }} alt="" />
+        <figcaption>Confirm and delete.</figcaption>
+      </figure>
+    </div>
+  </div>
+  <div class="relative mt-24 px-4 sm:px-6 lg:mt-36 lg:px-8">
+    <div class="mx-auto max-w-prose text-lg">
+      <h2
+        id="data"
+        class="mt-2 block text-center text-3xl font-extrabold leading-8 tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl"
+      >
+        Data storage
+      </h2>
+      <p class="mt-8 text-xl leading-8 text-gray-500 dark:text-gray-200">
+        All data you upload is stored only on your local filesystem.
+      </p>
+    </div>
+    <div
+      class="prose prose-lg mx-auto mt-6 text-gray-500 dark:prose-invert dark:text-gray-200"
+    >
+      <p>
+        On import, the data gets transformed and saved to your local filesystem.
+        The folder is in your user data directory which is typically
+      </p>
+      <ul role="list">
+        <li>For Linux, in ~/.config/weather-data-center/nedb</li>
+        <li>For Windows, in %LOCALAPPDATA%\weather-data-center\nedb</li>
+        <li>
+          For MacOS, in ~/Library/Application Support/weather-data-center/nedb
+        </li>
+      </ul>
+      <p>
+        Inside that folder you will find a file called data. Simply open it with
+        a text editor of your choice. Please stop the app when editing this file
+        directly.
+      </p>
+    </div>
+  </div>
 </div>

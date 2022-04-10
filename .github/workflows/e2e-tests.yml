@@ -5,10 +5,10 @@ name: End-to-end tests
 on:
   push:
     paths:
-      - 'src/**'
-    branches: [ 1.x ]
+      - "src/**"
+    branches: [1.x]
   pull_request:
-    branches: [ 1.x ]
+    branches: [1.x]
 
 jobs:
   e2e-tests:
@@ -18,7 +18,7 @@ jobs:
       - name: 🔨 Setup node
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: "14"
       - name: 🔨 install yarn and dependecies
         run: |
           npm install -g yarn

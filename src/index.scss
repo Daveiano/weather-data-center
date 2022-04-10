@@ -30,20 +30,20 @@ $carbon--grid-breakpoints: (
     width: carbon--rem(1850px),
   ),
 );
-@import '~carbon-components/scss/globals/scss/styles.scss';
-@import '~@carbon/colors/scss/mixins';
+@import "~carbon-components/scss/globals/scss/styles.scss";
+@import "~@carbon/colors/scss/mixins";
 @include carbon--colors();
 
 // @see https://www.carbondesignsystem.com/guidelines/typography/code/
-@import '~@carbon/type/scss/type';
+@import "~@carbon/type/scss/type";
 
-@import '~@carbon/type/scss/font-face/mono';
-@import '~@carbon/type/scss/font-face/sans';
-@import '~@carbon/type/scss/font-face/serif';
+@import "~@carbon/type/scss/font-face/mono";
+@import "~@carbon/type/scss/font-face/sans";
+@import "~@carbon/type/scss/font-face/serif";
 
-@import '~@carbon/type/scss/classes';
+@import "~@carbon/type/scss/classes";
 @include carbon--type-classes();
-@import '~@carbon/type/scss/styles';
+@import "~@carbon/type/scss/styles";
 
 @include carbon--type-reset();
 @include carbon--font-face-mono();
@@ -55,7 +55,7 @@ $carbon--grid-breakpoints: (
 }
 
 body {
-  font-family: carbon--font-family('sans'), sans-serif;
+  font-family: carbon--font-family("sans"), sans-serif;
   margin: 0;
   padding: 0;
   width: 100%;
@@ -112,7 +112,7 @@ header.bx--header {
   h1 {
     margin-bottom: $spacing-07;
     margin-left: $spacing-07;
-    @include carbon--type-style('expressive-heading-06');
+    @include carbon--type-style("expressive-heading-06");
   }
   .tiles {
     .table-tile {
@@ -121,7 +121,7 @@ header.bx--header {
     .bx--tile {
       margin-bottom: $spacing-07;
       h3 {
-        @include carbon--type-style('expressive-heading-04');
+        @include carbon--type-style("expressive-heading-04");
         display: flex;
         align-items: center;
         svg {
@@ -140,7 +140,7 @@ header.bx--header {
       &.empty {
         h3 {
           margin-bottom: $spacing-03;
-          @include carbon--type-style('expressive-heading-02');
+          @include carbon--type-style("expressive-heading-02");
         }
         .text {
           display: flex;
@@ -168,13 +168,13 @@ header.bx--header {
           margin-left: $spacing-05;
           // @todo Why do I need to do this?
           button {
-            border-bottom: 0.0625rem solid var(--cds-border-inverse,#161616);
-            border-top: 0.0625rem solid var(--cds-border-inverse,#161616);
+            border-bottom: 0.0625rem solid var(--cds-border-inverse, #161616);
+            border-top: 0.0625rem solid var(--cds-border-inverse, #161616);
             &:first-child {
-              border-left: 0.0625rem solid var(--cds-border-inverse,#161616);
+              border-left: 0.0625rem solid var(--cds-border-inverse, #161616);
             }
             &:last-child {
-              border-right: 0.0625rem solid var(--cds-border-inverse,#161616);
+              border-right: 0.0625rem solid var(--cds-border-inverse, #161616);
             }
           }
         }
@@ -193,8 +193,9 @@ header.bx--header {
 }
 
 .diagram {
-  svg, text {
-    font-family: carbon--font-family('mono'), monospace !important;
+  svg,
+  text {
+    font-family: carbon--font-family("mono"), monospace !important;
     word-spacing: -3px;
   }
 }
@@ -206,7 +207,6 @@ header.bx--header {
       margin: $spacing-04 0;
     }
     .import-data {
-
     }
   }
 }
@@ -252,9 +252,9 @@ header.bx--header {
       margin-bottom: $spacing-06;
       .value {
         white-space: nowrap;
-        @include carbon--type-style('productive-heading-04');
+        @include carbon--type-style("productive-heading-04");
         @include carbon--breakpoint-up("max") {
-          @include carbon--type-style('productive-heading-05');
+          @include carbon--type-style("productive-heading-05");
         }
       }
       .heading {
@@ -272,5 +272,5 @@ header.bx--header {
 }
 
 .diagram-tooltip {
-  font-family: carbon--font-family('mono'), monospace;
+  font-family: carbon--font-family("mono"), monospace;
 }

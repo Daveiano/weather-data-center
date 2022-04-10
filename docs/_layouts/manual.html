@@ -1,61 +1,71 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: "en-US" }}">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta charset="utf-8">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;600&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
-        <link rel="icon" type="image/x-icon" href={{ "/assets/images/favicon.ico" | relative_url }}>
-        <script>
-            // It's best to inline this in `head` to avoid FOUC (flash of unstyled content) when changing pages or themes
-            if (
-               localStorage.getItem('color-theme') === 'dark' ||
-               (!('color-theme' in localStorage) &&
-                  window.matchMedia('(prefers-color-scheme: dark)').matches)
-            ) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
-        </script>
-        {% seo %}
-    </head>
-    <body>
-        {% include header.html %}
+<html lang='{{ site.lang | default: "en-US" }}'>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
+    <link rel="icon" type="image/x-icon" href={{ "/assets/images/favicon.ico" |
+    relative_url }}>
+    <script>
+      // It's best to inline this in `head` to avoid FOUC (flash of unstyled content) when changing pages or themes
+      if (
+        localStorage.getItem("color-theme") === "dark" ||
+        (!("color-theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    </script>
+    {% seo %}
+  </head>
+  <body>
+    {% include header.html %}
 
-        <main class="pt-[82px] lg:pt-[92px] bg-white dark:bg-gray-800">
-            <!-- This example requires Tailwind CSS v2.0+ -->
-            <div class="relative bg-gray-400">
-                <div class="absolute inset-0">
-                    <img class="w-full h-full object-cover" src={{ "/assets/images/EOS 450D_2212.jpg" | relative_url }} alt="">
-                    <div class="absolute inset-0 opacity-30 bg-blue-600 dark:opacity-70 dark:bg-blue-900 mix-blend-overlay" aria-hidden="true"></div>
-                </div>
-                <div class="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
-                    <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">Manual</h1>
-                    <p class="mt-6 text-xl text-gray-100 max-w-3xl">
-                        Read the manual.
-                    </p>
-                </div>
-            </div>
+    <main class="bg-white pt-[82px] dark:bg-gray-800 lg:pt-[92px]">
+      <!-- This example requires Tailwind CSS v2.0+ -->
+      <div class="relative bg-gray-400">
+        <div class="absolute inset-0">
+          <img class="w-full h-full object-cover" src={{ "/assets/images/EOS
+          450D_2212.jpg" | relative_url }} alt="">
+          <div
+            class="absolute inset-0 bg-blue-600 opacity-30 mix-blend-overlay dark:bg-blue-900 dark:opacity-70"
+            aria-hidden="true"
+          ></div>
+        </div>
+        <div
+          class="relative mx-auto max-w-7xl py-24 px-4 sm:py-32 sm:px-6 lg:px-8"
+        >
+          <h1
+            class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl"
+          >
+            Manual
+          </h1>
+          <p class="mt-6 max-w-3xl text-xl text-gray-100">Read the manual.</p>
+        </div>
+      </div>
 
-            <div class="hidden lg:block bg-blue-50 dark:bg-blue-600 border-b border-t border-gray-300 sticky top-[93px] z-20">
-                {%
-                include toc.html
-                html=content
-                h_min=2
-                h_max=2
-                class="toc flex justify-between space-x-10 max-w-7xl mx-auto py-6 text-lg max-w-prose"
-                item_class="text-base font-medium text-gray-500 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100"
-                %}
-            </div>
+      <div
+        class="sticky top-[93px] z-20 hidden border-b border-t border-gray-300 bg-blue-50 dark:bg-blue-600 lg:block"
+      >
+        {% include toc.html html=content h_min=2 h_max=2 class="toc flex
+        justify-between space-x-10 max-w-7xl mx-auto py-6 text-lg max-w-prose"
+        item_class="text-base font-medium text-gray-500 dark:text-gray-200
+        hover:text-gray-900 dark:hover:text-gray-100" %}
+      </div>
 
-            {{ content }}
-        </main>
+      {{ content }}
+    </main>
 
-        {% include footer.html %}
+    {% include footer.html %}
 
-        <script src="{{ "/assets/js/dark-mode.js" | relative_url }}"></script>
-    </body>
+    <script src='{{ "/assets/js/dark-mode.js" | relative_url }}'></script>
+  </body>
 </html>

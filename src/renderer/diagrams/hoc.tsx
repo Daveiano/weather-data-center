@@ -1,17 +1,24 @@
 import React from "react";
 
-import { Column, Tile } from 'carbon-components-react';
+import { Column, Tile } from "carbon-components-react";
 
-import {dataItem, DiagramBaseProps} from "./types";
-import {extendedPropertyParameter} from "./scaling";
+import { dataItem, DiagramBaseProps } from "./types";
+import { extendedPropertyParameter } from "./scaling";
 
-export const dataHasRecordsForProperty = (property: extendedPropertyParameter, data: dataItem[]): boolean => {
-  return data.filter(item => Object.prototype.hasOwnProperty.call(item, property)).length > 0;
-}
+export const dataHasRecordsForProperty = (
+  property: extendedPropertyParameter,
+  data: dataItem[]
+): boolean => {
+  return (
+    data.filter((item) => Object.prototype.hasOwnProperty.call(item, property))
+      .length > 0
+  );
+};
 
-export const withEmptyCheck = (Component: React.JSXElementConstructor<DiagramBaseProps>): React.JSXElementConstructor<DiagramBaseProps> => {
+export const withEmptyCheck = (
+  Component: React.JSXElementConstructor<DiagramBaseProps>
+): React.JSXElementConstructor<DiagramBaseProps> => {
   const WithEmptyCheckComponent = (props: DiagramBaseProps) => {
-
     if (!dataHasRecordsForProperty(props.property, props.data)) {
       return null;
     }
@@ -21,11 +28,15 @@ export const withEmptyCheck = (Component: React.JSXElementConstructor<DiagramBas
         <Tile
           id={props.tileId}
           className={props.tileClassName}
-          style={props.hideTile ? {
-            margin: 0,
-            padding: 0,
-            outline: 0
-          } : {}}
+          style={
+            props.hideTile
+              ? {
+                  margin: 0,
+                  padding: 0,
+                  outline: 0,
+                }
+              : {}
+          }
         >
           <Component
             data={props.data}
@@ -39,8 +50,8 @@ export const withEmptyCheck = (Component: React.JSXElementConstructor<DiagramBas
         </Tile>
       </Column>
     );
-  }
+  };
 
-  WithEmptyCheckComponent.displayName = 'WithEmptyCheckComponent()';
+  WithEmptyCheckComponent.displayName = "WithEmptyCheckComponent()";
   return WithEmptyCheckComponent;
-}
+};

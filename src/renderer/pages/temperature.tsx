@@ -2,15 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import { Column, Row, Tile } from "carbon-components-react";
-import { TemperatureLow } from '@carbon/pictograms-react';
+import { TemperatureLow } from "@carbon/pictograms-react";
 
 import { RootState } from "../renderer";
 import { Stats } from "../components/stats/stats";
 import { Empty } from "../components/empty";
 import TemperatureBase from "../diagrams/temperature/temperature-base";
 import TableBase from "../components/table-base/table-base";
-import {TABLE_SORT_DIRECTION} from "../components/table-base/misc";
-import {dataItem} from "../diagrams/types";
+import { TABLE_SORT_DIRECTION } from "../components/table-base/misc";
+import { dataItem } from "../diagrams/types";
 import TemperatureCombinedBase from "../diagrams/temperature/temperature-combined-base";
 import FeltTemperatureBase from "../diagrams/temperature/felt-temperature-base";
 import TemperatureMinMaxBase from "../diagrams/temperature/temperature-min-max-base";
@@ -18,8 +18,10 @@ import TemperatureMinMaxBase from "../diagrams/temperature/temperature-min-max-b
 /**
  * @see https://www.dwd.de/DE/service/lexikon/Functions/glossar.html?lv2=101334&lv3=101452
  */
-export const TemperaturePage: React.FC = (): React.ReactElement  => {
-  const dataFilteredFromStore = useSelector((state: RootState) => state.appState.dataFilteredPerTime);
+export const TemperaturePage: React.FC = (): React.ReactElement => {
+  const dataFilteredFromStore = useSelector(
+    (state: RootState) => state.appState.dataFilteredPerTime
+  );
   const loading = useSelector((state: RootState) => state.appState.loading);
   const config = useSelector((state: RootState) => state.appState.config);
 
@@ -57,73 +59,82 @@ export const TemperaturePage: React.FC = (): React.ReactElement  => {
                         size="compact"
                         stats={[
                           {
-                            property: 'temperature',
-                            direction: 'max',
-                            label: 'Maximum',
-                            unit: config.unit_temperature
-                          },
-                          {
-                            property: 'temperature',
-                            direction: 'min',
-                            label: 'Minimum',
+                            property: "temperature",
+                            direction: "max",
+                            label: "Maximum",
                             unit: config.unit_temperature,
-                            icon: <TemperatureLow />
                           },
                           {
-                            property: 'temperature',
-                            direction: 'day',
-                            extra: 'summer-days',
-                            label: 'Summer days',
-                            description: 'T<sub>max</sub> ≥ 25 °C',
-                            unit: config.unit_temperature
+                            property: "temperature",
+                            direction: "min",
+                            label: "Minimum",
+                            unit: config.unit_temperature,
+                            icon: <TemperatureLow />,
                           },
                           {
-                            property: 'temperature',
-                            direction: 'day',
-                            extra: 'frost-days',
-                            label: 'Frost days',
-                            description: 'T<sub>min</sub> < 0 °C',
-                            unit: config.unit_temperature
+                            property: "temperature",
+                            direction: "day",
+                            extra: "summer-days",
+                            label: "Summer days",
+                            description: "T<sub>max</sub> ≥ 25 °C",
+                            unit: config.unit_temperature,
                           },
                           {
-                            property: 'temperature',
-                            direction: 'day',
-                            extra: 'hot-days',
-                            label: 'Hot days',
-                            description: 'T<sub>max</sub> ≥ 30 °C',
-                            unit: config.unit_temperature
+                            property: "temperature",
+                            direction: "day",
+                            extra: "frost-days",
+                            label: "Frost days",
+                            description: "T<sub>min</sub> < 0 °C",
+                            unit: config.unit_temperature,
                           },
                           {
-                            property: 'temperature',
-                            direction: 'day',
-                            extra: 'ice-days',
-                            label: 'Ice days',
-                            description: 'T<sub>max</sub> < 0 °C',
-                            unit: config.unit_temperature
+                            property: "temperature",
+                            direction: "day",
+                            extra: "hot-days",
+                            label: "Hot days",
+                            description: "T<sub>max</sub> ≥ 30 °C",
+                            unit: config.unit_temperature,
                           },
                           {
-                            property: 'temperature',
-                            direction: 'day',
-                            extra: 'tropical-nights',
-                            label: 'Tropical nights',
-                            description: 'T<sub>min</sub> ≥ 20 °C',
-                            tooltip: '18:00 UTC - 06:00 UTC',
-                            unit: config.unit_temperature
+                            property: "temperature",
+                            direction: "day",
+                            extra: "ice-days",
+                            label: "Ice days",
+                            description: "T<sub>max</sub> < 0 °C",
+                            unit: config.unit_temperature,
                           },
                           {
-                            property: 'temperature',
-                            direction: 'day',
-                            extra: 'desert-days',
-                            label: 'Desert days',
-                            description: 'T<sub>max</sub> ≥ 35 °C',
-                            unit: config.unit_temperature
-                          }
+                            property: "temperature",
+                            direction: "day",
+                            extra: "tropical-nights",
+                            label: "Tropical nights",
+                            description: "T<sub>min</sub> ≥ 20 °C",
+                            tooltip: "18:00 UTC - 06:00 UTC",
+                            unit: config.unit_temperature,
+                          },
+                          {
+                            property: "temperature",
+                            direction: "day",
+                            extra: "desert-days",
+                            label: "Desert days",
+                            description: "T<sub>max</sub> ≥ 35 °C",
+                            unit: config.unit_temperature,
+                          },
                         ]}
                       />
                     </Column>
 
                     {/* @todo Add annotations, @see https://github.com/plouc/nivo/issues/1857 */}
-                    <TemperatureBase height="450px" data={data} property="temperature" sm={12} lg={12} max={9} hideTile={true} config={config} />
+                    <TemperatureBase
+                      height="450px"
+                      data={data}
+                      property="temperature"
+                      sm={12}
+                      lg={12}
+                      max={9}
+                      hideTile={true}
+                      config={config}
+                    />
                   </Row>
                 </Tile>
               </Column>
@@ -171,38 +182,38 @@ export const TemperaturePage: React.FC = (): React.ReactElement  => {
                   pageSize={25}
                   rows={data.map((item: dataItem) => ({
                     ...item,
-                    selected: false
+                    selected: false,
                   }))}
                   columns={[
                     {
-                      title: 'Time',
-                      id: 'timeParsed',
-                      tooltip: 'Date format is YYYY/MM/DD HH:mm',
-                      sortCycle: 'tri-states-from-ascending',
+                      title: "Time",
+                      id: "timeParsed",
+                      tooltip: "Date format is YYYY/MM/DD HH:mm",
+                      sortCycle: "tri-states-from-ascending",
                     },
                     {
-                      title: 'Temperature',
+                      title: "Temperature",
                       small: `in ${config.unit_temperature}`,
-                      id: 'temperature',
-                      sortCycle: 'tri-states-from-ascending',
+                      id: "temperature",
+                      sortCycle: "tri-states-from-ascending",
                     },
                     {
-                      title: 'Felt temperature',
+                      title: "Felt temperature",
                       small: `in ${config.unit_temperature}`,
-                      id: 'felt_temperature',
-                      sortCycle: 'tri-states-from-ascending',
+                      id: "felt_temperature",
+                      sortCycle: "tri-states-from-ascending",
                     },
                     {
-                      title: 'Dew point',
+                      title: "Dew point",
                       small: `in ${config.unit_temperature}`,
-                      id: 'dew_point',
-                      sortCycle: 'tri-states-from-ascending',
-                    }
+                      id: "dew_point",
+                      sortCycle: "tri-states-from-ascending",
+                    },
                   ]}
                   title="All data"
                   hasSelection={false}
                   sortInfo={{
-                    columnId: 'timeParsed',
+                    columnId: "timeParsed",
                     direction: TABLE_SORT_DIRECTION.ASC,
                   }}
                   size="short"
@@ -215,7 +226,5 @@ export const TemperaturePage: React.FC = (): React.ReactElement  => {
     );
   }
 
-  return (
-    <Empty />
-  );
+  return <Empty />;
 };

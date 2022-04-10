@@ -1,22 +1,30 @@
-import React, {FunctionComponent, useEffect, useMemo, useState} from 'react';
+import React, { FunctionComponent, useEffect, useMemo, useState } from "react";
 
 import { Loading } from "carbon-components-react";
-import { ResponsiveLine } from '@nivo/line'
+import { ResponsiveLine } from "@nivo/line";
 import { DewPoint32 } from "@carbon/icons-react";
 
 import { dataItem, DiagramBaseProps } from "../types";
 import { getTimeDifferenceInDays, scaleAverage } from "../scaling";
-import { TooltipLine} from "../tooltip";
+import { TooltipLine } from "../tooltip";
 import { getTemperatureLineBaseProps } from "./temperature-base";
 import { withEmptyCheck } from "../hoc";
 
-const DewPointBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
+const DewPointBase: FunctionComponent<DiagramBaseProps> = (
+  props: DiagramBaseProps
+): React.ReactElement => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [daily, setDaily] = useState(false);
 
-  const scaleData = useMemo(() => scaleAverage(props.data, 'dew_point', 'day'), [props.data]);
-  const timeDifferenceInDays = useMemo(() => getTimeDifferenceInDays(props.data), [props.data]);
+  const scaleData = useMemo(
+    () => scaleAverage(props.data, "dew_point", "day"),
+    [props.data]
+  );
+  const timeDifferenceInDays = useMemo(
+    () => getTimeDifferenceInDays(props.data),
+    [props.data]
+  );
 
   const scale = () => {
     let newData: dataItem[];
@@ -40,11 +48,14 @@ const DewPointBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProp
 
   if (loading) {
     return (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <Loading
-          description="Active loading indicator"
-          withOverlay={false}
-        />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Loading description="Active loading indicator" withOverlay={false} />
       </div>
     );
   }
@@ -58,21 +69,26 @@ const DewPointBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProp
 
       <div style={{ height: props.height }} className="diagram">
         <ResponsiveLine
-          {...getTemperatureLineBaseProps(daily ? 'daily' : '', data, 'dew_point', false, props.config.unit_temperature)}
+          {...getTemperatureLineBaseProps(
+            daily ? "daily" : "",
+            data,
+            "dew_point",
+            false,
+            props.config.unit_temperature
+          )}
           data={[
             {
-              id: 'dew_point',
-              data: data.map(item => ({
+              id: "dew_point",
+              data: data.map((item) => ({
                 x: item.timeParsed,
-                y: item.dew_point
-              }))
-            }
+                y: item.dew_point,
+              })),
+            },
           ]}
-          colors= {['#5F9EA0']}
-          tooltip={point => <TooltipLine point={point.point} />}
+          colors={["#5F9EA0"]}
+          tooltip={(point) => <TooltipLine point={point.point} />}
         />
       </div>
-
     </div>
   );
 };

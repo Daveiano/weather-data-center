@@ -1,15 +1,22 @@
-import React, {FunctionComponent, useEffect, useState} from 'react';
+import React, { FunctionComponent, useEffect, useState } from "react";
 
 import { Loading } from "carbon-components-react";
 import { Windy32 } from "@carbon/icons-react";
-import { ResponsiveLine } from '@nivo/line'
+import { ResponsiveLine } from "@nivo/line";
 
 import { dataItem, DiagramBaseProps } from "../types";
-import {getTimeAxisScaling, getTimeDifferenceInDays, scaleAverage, scaleMax} from "../scaling";
-import {sliceTooltip} from "../tooltip";
+import {
+  getTimeAxisScaling,
+  getTimeDifferenceInDays,
+  scaleAverage,
+  scaleMax,
+} from "../scaling";
+import { sliceTooltip } from "../tooltip";
 import { withEmptyCheck } from "../hoc";
 
-const WindBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
+const WindBase: FunctionComponent<DiagramBaseProps> = (
+  props: DiagramBaseProps
+): React.ReactElement => {
   const [dataWind, setDataWind] = useState(props.data);
   const [dataGust, setDataGust] = useState(props.data);
   const [loading, setLoading] = useState(false);
@@ -18,13 +25,12 @@ const WindBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): 
   const scale = () => {
     const timeDifferenceInDays = getTimeDifferenceInDays(props.data);
 
-    let newDataWind: dataItem[],
-      newDataGust: dataItem[];
+    let newDataWind: dataItem[], newDataGust: dataItem[];
 
     if (timeDifferenceInDays > 14) {
       setDaily(true);
-      newDataWind = scaleAverage(props.data, 'wind', 'day');
-      newDataGust = scaleMax(props.data, 'gust', 'day');
+      newDataWind = scaleAverage(props.data, "wind", "day");
+      newDataGust = scaleMax(props.data, "gust", "day");
     } else {
       setDaily(false);
       newDataWind = props.data;
@@ -43,57 +49,64 @@ const WindBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): 
 
   if (loading) {
     return (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <Loading
-          description="Active loading indicator"
-          withOverlay={false}
-        />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Loading description="Active loading indicator" withOverlay={false} />
       </div>
     );
   }
 
   return (
     <div data-testid="wind-diagram">
-      {props.title &&
+      {props.title && (
         <h3>
           <Windy32 />
           {props.title}
         </h3>
-      }
+      )}
 
       <div style={{ height: props.height }} className="diagram">
         <ResponsiveLine
           data={[
             {
-              id: 'Wind (Ø / day)',
-              data: dataWind.map(item => ({
+              id: "Wind (Ø / day)",
+              data: dataWind.map((item) => ({
                 x: item.timeParsed,
-                y: item.wind
-              }))
+                y: item.wind,
+              })),
             },
             {
-              id: 'Gust (Max / day)',
-              data: dataGust.map(item => ({
+              id: "Gust (Max / day)",
+              data: dataGust.map((item) => ({
                 x: item.timeParsed,
-                y: item.gust
-              }))
-            }
+                y: item.gust,
+              })),
+            },
           ]}
           xScale={{
             type: "time",
             useUTC: true,
             format: "%Y-%m-%dT%H:%M:%S.000Z",
-            precision: 'minute'
+            precision: "minute",
           }}
           xFormat={daily ? "time:%Y/%m/%d" : "time:%Y/%m/%d %H:%M"}
           yScale={{
             type: "linear",
-            max: Math.max.apply(Math, dataGust.map(item => item.gust)) + 5
+            max:
+              Math.max.apply(
+                Math,
+                dataGust.map((item) => item.gust)
+              ) + 5,
           }}
-          yFormat={value => `${value} ${props.config.unit_wind}`}
+          yFormat={(value) => `${value} ${props.config.unit_wind}`}
           margin={{ top: 20, right: 10, bottom: 20, left: 40 }}
           curve="cardinal"
-          colors= {['#ffc000', '#666666']}
+          colors={["#ffc000", "#666666"]}
           lineWidth={2}
           enableArea={true}
           areaOpacity={0.5}
@@ -105,14 +118,14 @@ const WindBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): 
           axisLeft={{
             legend: props.config.unit_wind,
             legendOffset: -35,
-            legendPosition: 'middle',
+            legendPosition: "middle",
             tickSize: 0,
-            tickPadding: 5
+            tickPadding: 5,
           }}
           axisBottom={{
             ...getTimeAxisScaling(dataWind),
             tickSize: 0,
-            tickPadding: 5
+            tickPadding: 5,
           }}
           isInteractive={true}
           enableSlices="x"
@@ -121,16 +134,15 @@ const WindBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): 
           enableCrosshair={true}
           legends={[
             {
-              anchor: 'top-right',
-              direction: 'column',
+              anchor: "top-right",
+              direction: "column",
               itemWidth: 120,
               itemHeight: 20,
-              itemsSpacing: 10
-            }
+              itemsSpacing: 10,
+            },
           ]}
         />
       </div>
-
     </div>
   );
 };

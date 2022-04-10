@@ -1,15 +1,21 @@
-import React, {FunctionComponent, useEffect, useState} from 'react';
+import React, { FunctionComponent, useEffect, useState } from "react";
 
 import { Loading } from "carbon-components-react";
 import { Pressure32 } from "@carbon/icons-react";
-import { ResponsiveLine } from '@nivo/line'
+import { ResponsiveLine } from "@nivo/line";
 
-import {dataItem, DiagramBaseProps} from "../types";
-import {getTimeAxisScaling, getTimeDifferenceInDays, scaleAverage} from "../scaling";
+import { dataItem, DiagramBaseProps } from "../types";
+import {
+  getTimeAxisScaling,
+  getTimeDifferenceInDays,
+  scaleAverage,
+} from "../scaling";
 import { TooltipLine } from "../tooltip";
 import { withEmptyCheck } from "../hoc";
 
-const PressureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProps): React.ReactElement => {
+const PressureBase: FunctionComponent<DiagramBaseProps> = (
+  props: DiagramBaseProps
+): React.ReactElement => {
   const [data, setData] = useState(props.data);
   const [loading, setLoading] = useState(false);
   const [daily, setDaily] = useState(false);
@@ -21,7 +27,7 @@ const PressureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProp
 
     if (timeDifferenceInDays > 14) {
       setDaily(true);
-      newData = scaleAverage(props.data, 'pressure', 'day');
+      newData = scaleAverage(props.data, "pressure", "day");
     } else {
       setDaily(false);
       newData = props.data;
@@ -38,55 +44,71 @@ const PressureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProp
 
   if (loading) {
     return (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <Loading
-          description="Active loading indicator"
-          withOverlay={false}
-        />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Loading description="Active loading indicator" withOverlay={false} />
       </div>
     );
   }
 
   return (
     <div data-testid="pressure-diagram">
-      {props.title &&
+      {props.title && (
         <h3>
           <Pressure32 />
           {props.title}
         </h3>
-      }
+      )}
 
       <div style={{ height: props.height }} className="diagram">
         <ResponsiveLine
           data={[
             {
-              id: 'pressure',
-              data: data.map(item => ({
+              id: "pressure",
+              data: data.map((item) => ({
                 x: item.timeParsed,
-                y: item.pressure
-              }))
-            }
+                y: item.pressure,
+              })),
+            },
           ]}
           xScale={{
             type: "time",
             useUTC: true,
             format: "%Y-%m-%dT%H:%M:%S.000Z",
-            precision: 'minute'
+            precision: "minute",
           }}
           xFormat={daily ? "time:%Y/%m/%d" : "time:%Y/%m/%d %H:%M"}
           yScale={{
             type: "linear",
-            min: Math.min.apply(Math, data.map(item => item.pressure)) - 3,
-            max: Math.max.apply(Math, data.map(item => item.pressure)) + 3
+            min:
+              Math.min.apply(
+                Math,
+                data.map((item) => item.pressure)
+              ) - 3,
+            max:
+              Math.max.apply(
+                Math,
+                data.map((item) => item.pressure)
+              ) + 3,
           }}
-          yFormat={value => `${value} ${props.config.unit_pressure}`}
+          yFormat={(value) => `${value} ${props.config.unit_pressure}`}
           margin={{ top: 20, right: 10, bottom: 20, left: 40 }}
           curve="cardinal"
-          colors= {['#666666']}
+          colors={["#666666"]}
           lineWidth={2}
           enableArea={true}
           areaOpacity={0.07}
-          areaBaselineValue={Math.min.apply(Math, data.map(item => item.pressure)) - 3}
+          areaBaselineValue={
+            Math.min.apply(
+              Math,
+              data.map((item) => item.pressure)
+            ) - 3
+          }
           enablePoints={true}
           pointSize={5}
           enablePointLabel={false}
@@ -94,22 +116,21 @@ const PressureBase:FunctionComponent<DiagramBaseProps> = (props: DiagramBaseProp
           axisLeft={{
             legend: props.config.unit_pressure,
             legendOffset: -35,
-            legendPosition: 'middle',
+            legendPosition: "middle",
             tickSize: 0,
-            tickPadding: 5
+            tickPadding: 5,
           }}
           axisBottom={{
             ...getTimeAxisScaling(data),
             tickSize: 0,
-            tickPadding: 5
+            tickPadding: 5,
           }}
           isInteractive={true}
-          tooltip={point => <TooltipLine point={point.point} />}
+          tooltip={(point) => <TooltipLine point={point.point} />}
           useMesh={true}
           enableCrosshair={true}
         />
       </div>
-
     </div>
   );
 };

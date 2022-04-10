@@ -1,55 +1,105 @@
 <script>
-    function toggleMobileMenu() {
-        let mobileMenu = document.querySelector("#mobileMenu"),
-           backgroundBlur = document.querySelector("#backgroundBlur"),
-           menuStyle = getComputedStyle(mobileMenu);
+  function toggleMobileMenu() {
+    let mobileMenu = document.querySelector("#mobileMenu"),
+      backgroundBlur = document.querySelector("#backgroundBlur"),
+      menuStyle = getComputedStyle(mobileMenu);
 
-        if (menuStyle.display === "none") {
-            mobileMenu.classList.remove('hidden');
-            backgroundBlur.classList.remove('hidden');
-        } else {
-            mobileMenu.classList.add('hidden');
-            backgroundBlur.classList.add('hidden');
-        }
+    if (menuStyle.display === "none") {
+      mobileMenu.classList.remove("hidden");
+      backgroundBlur.classList.remove("hidden");
+    } else {
+      mobileMenu.classList.add("hidden");
+      backgroundBlur.classList.add("hidden");
     }
+  }
 </script>
 
 <!-- This example requires Tailwind CSS v2.0+ -->
 <header>
-    <div class="fixed top-0 left-0 w-full z-50 bg-white dark:bg-gray-900">
-        <div class="flex justify-between items-center px-4 py-6 sm:px-6 md:justify-start md:space-x-10 border-b-2 border-gray-100">
-            <div>
-                <a href="{% link index.html %}" class="flex">
-                    <span class="sr-only">Workflow</span>
-                    <img class="h-8 w-auto sm:h-10 dark:border dark:border-white dark:rounded" src={{ "/assets/images/48x48.png" | relative_url }} alt="">
-                </a>
-            </div>
-            <div class="-mr-2 -my-2 md:hidden">
-                <button onclick="toggleMobileMenu()" type="button" class="bg-white dark:bg-gray-900 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 dark:hover:text-gray-200 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500" aria-expanded="false">
-                    <span class="sr-only">Open menu</span>
-                    <!-- Heroicon name: outline/menu -->
-                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
-            </div>
-            <div class="hidden md:flex-1 md:flex md:items-center md:justify-between">
-                <nav class="flex space-x-10">
-                    <a href="{% link manual.html %}" class="text-base font-medium text-gray-500 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100"> Manual </a>
-                    <a href="{% link screenshots.html %}" class="text-base font-medium text-gray-500 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100"> Screenshots </a>
-                    <a href="{% link about.html %}" class="text-base font-medium text-gray-500 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100"> About </a>
-                </nav>
+  <div class="fixed top-0 left-0 z-50 w-full bg-white dark:bg-gray-900">
+    <div
+      class="flex items-center justify-between border-b-2 border-gray-100 px-4 py-6 sm:px-6 md:justify-start md:space-x-10"
+    >
+      <div>
+        <a href="{% link index.html %}" class="flex">
+          <span class="sr-only">Workflow</span>
+          <img class="h-8 w-auto sm:h-10 dark:border dark:border-white
+          dark:rounded" src={{ "/assets/images/48x48.png" | relative_url }}
+          alt="">
+        </a>
+      </div>
+      <div class="-my-2 -mr-2 md:hidden">
+        <button
+          onclick="toggleMobileMenu()"
+          type="button"
+          class="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 dark:bg-gray-900 dark:hover:text-gray-200"
+          aria-expanded="false"
+        >
+          <span class="sr-only">Open menu</span>
+          <!-- Heroicon name: outline/menu -->
+          <svg
+            class="h-6 w-6"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+      </div>
+      <div class="hidden md:flex md:flex-1 md:items-center md:justify-between">
+        <nav class="flex space-x-10">
+          <a
+            href="{% link manual.html %}"
+            class="text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-200 dark:hover:text-gray-100"
+          >
+            Manual
+          </a>
+          <a
+            href="{% link screenshots.html %}"
+            class="text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-200 dark:hover:text-gray-100"
+          >
+            Screenshots
+          </a>
+          <a
+            href="{% link about.html %}"
+            class="text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-200 dark:hover:text-gray-100"
+          >
+            About
+          </a>
+        </nav>
 
-                <div class="flex items-center md:ml-12">
-                    <a href="https://github.com/Daveiano/weather-data-center" target="_blank" class="text-base font-medium text-gray-500 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100"> Source code </a>
-                    <a href="https://github.com/Daveiano/weather-data-center/releases" target="_blank" class="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700"> Download </a>
-                    <div class="flex items-center border-l border-slate-200 ml-6 pl-4 dark:border-slate-800">
-                        {% include theme-toggle.html %}
-                    </div>
-                </div>
-            </div>
+        <div class="flex items-center md:ml-12">
+          <a
+            href="https://github.com/Daveiano/weather-data-center"
+            target="_blank"
+            class="text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-200 dark:hover:text-gray-100"
+          >
+            Source code
+          </a>
+          <a
+            href="https://github.com/Daveiano/weather-data-center/releases"
+            target="_blank"
+            class="ml-8 inline-flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700"
+          >
+            Download
+          </a>
+          <div
+            class="ml-6 flex items-center border-l border-slate-200 pl-4 dark:border-slate-800"
+          >
+            {% include theme-toggle.html %}
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </header>
 
 <!--
@@ -62,56 +112,129 @@
       From: "opacity-100 scale-100"
       To: "opacity-0 scale-95"
   -->
-<div class="fixed inset-0 bg-black/20 backdrop-blur-sm dark:bg-slate-900/80 z-40 hidden" aria-hidden="true" id="backgroundBlur"></div>
-<div class="fixed top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden z-50 hidden" id="mobileMenu">
-    <div class="rounded-lg shadow-lg ring-1 ring-black dark:ring-white ring-opacity-5 bg-white dark:bg-gray-900 divide-y-2 divide-gray-50">
-        <div class="pt-5 pb-6 px-5">
-            <div class="flex items-center justify-between">
-                <div>
-                    <a href="{% link index.html %}">
-                        <img class="h-8 w-auto" src={{ "/assets/images/48x48.png" | relative_url }} alt="Home" />
-                    </a>
-                </div>
-                {% include theme-toggle.html %}
-                <div class="-mr-2">
-                    <button onclick="toggleMobileMenu()" type="button" class="bg-white dark:bg-gray-900 rounded-md p-2 inline-flex items-center justify-center text-gray-500 dark:text-gray-400 hover:text-gray-500 dark:hover:bg-gray-700 hover:bg-gray-100 dark:focus:ring-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
-                        <span class="sr-only">Close menu</span>
-                        <!-- Heroicon name: outline/x -->
-                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            <div class="mt-6">
-                <nav class="grid gap-6">
-                    <a href="{% link manual.html %}" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
-                        <div class="text-base font-medium text-gray-900 dark:text-gray-200">Manual</div>
-                    </a>
-                    <a href="{% link screenshots.html %}" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
-                        <div class="text-base font-medium text-gray-900 dark:text-gray-200">Screenshots</div>
-                    </a>
-                    <a href="{% link about.html %}" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
-                        <div class="text-base font-medium text-gray-900 dark:text-gray-200">About</div>
-                    </a>
-                </nav>
-            </div>
+<div
+  class="fixed inset-0 z-40 hidden bg-black/20 backdrop-blur-sm dark:bg-slate-900/80"
+  aria-hidden="true"
+  id="backgroundBlur"
+></div>
+<div
+  class="fixed inset-x-0 top-0 z-50 hidden origin-top-right transform p-2 transition md:hidden"
+  id="mobileMenu"
+>
+  <div
+    class="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-gray-900 dark:ring-white"
+  >
+    <div class="px-5 pt-5 pb-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <a href="{% link index.html %}">
+            <img class="h-8 w-auto" src={{ "/assets/images/48x48.png" |
+            relative_url }} alt="Home" />
+          </a>
         </div>
-        <div class="py-6 px-5">
-            <div class="grid grid-cols-2 gap-4">
-                <a target="_blank" href="https://github.com/Daveiano/weather-data-center/issues/new?assignees=&labels=&template=bug_report.md&title=%5BBUG%5D+%5BIssuetitle%5D" class="text-base font-medium text-gray-900 dark:text-gray-200 hover:text-gray-700 dark:hover:text-gray-300"> Bug report </a>
-
-                <a target="_blank" href="https://github.com/Daveiano/weather-data-center/issues/new?assignees=&labels=&template=feature_request.md&title=%5BFeature%5D+%5BIssuetitle%5D" class="text-base font-medium text-gray-900 dark:text-gray-200 hover:text-gray-700 dark:hover:text-gray-300"> Feature request </a>
-
-                <a target="_blank" href="https://github.com/Daveiano/weather-data-center/releases" class="text-base font-medium text-gray-900 dark:text-gray-200 hover:text-gray-700 dark:hover:text-gray-300"> Releases </a>
-            </div>
-            <div class="mt-6">
-                <a href="https://github.com/Daveiano/weather-data-center/releases" target="_blank" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700"> Download </a>
-                <p class="mt-2 text-center text-base font-medium text-gray-500 dark:text-gray-200">
-                    Join development?
-                    <a href="https://github.com/Daveiano/weather-data-center" target="_blank" class="text-blue-600 hover:text-blue-500"> Source code </a>
-                </p>
-            </div>
+        {% include theme-toggle.html %}
+        <div class="-mr-2">
+          <button
+            onclick="toggleMobileMenu()"
+            type="button"
+            class="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 dark:bg-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+          >
+            <span class="sr-only">Close menu</span>
+            <!-- Heroicon name: outline/x -->
+            <svg
+              class="h-6 w-6"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
         </div>
+      </div>
+      <div class="mt-6">
+        <nav class="grid gap-6">
+          <a
+            href="{% link manual.html %}"
+            class="-m-3 flex items-center rounded-lg p-3 hover:bg-gray-50 dark:hover:bg-gray-700"
+          >
+            <div class="text-base font-medium text-gray-900 dark:text-gray-200">
+              Manual
+            </div>
+          </a>
+          <a
+            href="{% link screenshots.html %}"
+            class="-m-3 flex items-center rounded-lg p-3 hover:bg-gray-50 dark:hover:bg-gray-700"
+          >
+            <div class="text-base font-medium text-gray-900 dark:text-gray-200">
+              Screenshots
+            </div>
+          </a>
+          <a
+            href="{% link about.html %}"
+            class="-m-3 flex items-center rounded-lg p-3 hover:bg-gray-50 dark:hover:bg-gray-700"
+          >
+            <div class="text-base font-medium text-gray-900 dark:text-gray-200">
+              About
+            </div>
+          </a>
+        </nav>
+      </div>
     </div>
+    <div class="py-6 px-5">
+      <div class="grid grid-cols-2 gap-4">
+        <a
+          target="_blank"
+          href="https://github.com/Daveiano/weather-data-center/issues/new?assignees=&labels=&template=bug_report.md&title=%5BBUG%5D+%5BIssuetitle%5D"
+          class="text-base font-medium text-gray-900 hover:text-gray-700 dark:text-gray-200 dark:hover:text-gray-300"
+        >
+          Bug report
+        </a>
+
+        <a
+          target="_blank"
+          href="https://github.com/Daveiano/weather-data-center/issues/new?assignees=&labels=&template=feature_request.md&title=%5BFeature%5D+%5BIssuetitle%5D"
+          class="text-base font-medium text-gray-900 hover:text-gray-700 dark:text-gray-200 dark:hover:text-gray-300"
+        >
+          Feature request
+        </a>
+
+        <a
+          target="_blank"
+          href="https://github.com/Daveiano/weather-data-center/releases"
+          class="text-base font-medium text-gray-900 hover:text-gray-700 dark:text-gray-200 dark:hover:text-gray-300"
+        >
+          Releases
+        </a>
+      </div>
+      <div class="mt-6">
+        <a
+          href="https://github.com/Daveiano/weather-data-center/releases"
+          target="_blank"
+          class="flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700"
+        >
+          Download
+        </a>
+        <p
+          class="mt-2 text-center text-base font-medium text-gray-500 dark:text-gray-200"
+        >
+          Join development?
+          <a
+            href="https://github.com/Daveiano/weather-data-center"
+            target="_blank"
+            class="text-blue-600 hover:text-blue-500"
+          >
+            Source code
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
 </div>

@@ -26,24 +26,24 @@
  * ```
  */
 
-import '../index.scss';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { combineReducers, createStore } from 'redux';
+import "../index.scss";
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { combineReducers, createStore } from "redux";
 
-import { App } from './app';
-import { appReducerDefaultState, appReducer } from './reducer-app';
-import {configAction, isLoadingAction} from "./actions-app";
+import { App } from "./app";
+import { appReducerDefaultState, appReducer } from "./reducer-app";
+import { configAction, isLoadingAction } from "./actions-app";
 import { HashRouter } from "react-router-dom";
-import {ImportSettingsFormValues} from "./components/import-settings-modal";
+import { ImportSettingsFormValues } from "./components/import-settings-modal";
 
 const store = createStore(
   combineReducers({
-    appState: appReducer
+    appState: appReducer,
   }),
   {
-    appState: appReducerDefaultState
+    appState: appReducerDefaultState,
   }
 );
 
@@ -54,12 +54,16 @@ const configListener = (arg: [ImportSettingsFormValues]): void => {
   store.dispatch(configAction(arg[0]));
 };
 
-window.electron.IpcOn('app-is-loading', (event, arg) => ipcMainLoadingListener(arg));
-window.electron.IpcOn('config', (event, arg) => configListener(arg));
+window.electron.IpcOn("app-is-loading", (event, arg) =>
+  ipcMainLoadingListener(arg)
+);
+window.electron.IpcOn("config", (event, arg) => configListener(arg));
 
-window.electron.IpcSend('config', null);
+window.electron.IpcSend("config", null);
 
-console.log('👋 This message is being logged by "renderer.js", included via webpack');
+console.log(
+  '👋 This message is being logged by "renderer.js", included via webpack'
+);
 
 ReactDOM.render(
   <Provider store={store}>
@@ -67,10 +71,10 @@ ReactDOM.render(
       <App />
     </HashRouter>
   </Provider>,
-  document.getElementById('app')
+  document.getElementById("app")
 );
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof store.getState>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch
+export type AppDispatch = typeof store.dispatch;
