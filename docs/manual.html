@@ -357,13 +357,12 @@ title: "Manual"
       <p>The app includes 7 pages:</p>
       <h4>Overview</h4>
       <figure class="dark:bg-gray-800">
-        {% assign screenshot = site.data.screenshots | where:"name", "Overview
-        page" | first %}
+        <!--prettier-ignore-->
+        {% assign screenshot = site.data.screenshots | where:"name", "Overview page" | first %}
+        <!--prettier-ignore-->
         <img
           class="m-0 w-full rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 dark:ring-white"
-          src="{{"
-          screenshot.url
-          }}
+          src={{screenshot.url}}
           alt=""
         />
       </figure>
