@@ -146,7 +146,7 @@
     "babel-jest": "^27.4.2",
     "copy-webpack-plugin": "6",
     "css-loader": "^5.1.2",
-    "electron": "13.6.6",
+    "electron": "15.5.5",
     "electron-devtools-installer": "^3.1.1",
     "electron-icon-builder": "^2.0.1",
     "eslint": "^7.6.0",
