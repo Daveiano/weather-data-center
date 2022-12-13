@@ -160,7 +160,7 @@
     "jest-playwright-preset": "^1.7.0",
     "moment-timezone": "^0.5.34",
     "node-loader": "^1.0.1",
-    "node-sass": "^5.0.0",
+    "node-sass": "^7.0.0",
     "playwright": "^1.16.3",
     "playwright-fake-dialog": "^0.1.0",
     "postcss": "^8.2.8",
