@@ -158,7 +158,7 @@
     "jest": "^27.3.1",
     "jest-image-snapshot": "4.5.1",
     "jest-playwright-preset": "^1.7.0",
-    "moment-timezone": "^0.5.34",
+    "moment-timezone": "^0.5.35",
     "node-loader": "^1.0.1",
     "node-sass": "^5.0.0",
     "playwright": "^1.16.3",
